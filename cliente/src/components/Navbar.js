@@ -5,15 +5,23 @@ import {GridDividerHeader,
     GridTitle, 
     DividerHeader,
     PaperDividerHeader,
-    SpanIconTitle } from '../App.styles'
+    SpanIconTitle,
+     } from '../App.styles'
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider,  } from '@mui/material/styles';
+import Sidebar from './Sidebar'
+import { hover } from '@testing-library/user-event/dist/hover';
 
 const tema = createTheme({
   palette: {
     primary: {
       main: '#888EA1',
+      
+    },
+   
+    '&:hover': {
+      main: '#F1F1F1',
     },
     secondary: {
       main: '#02DE82',
@@ -31,16 +39,17 @@ export default function Navbar() {
     <ThemeProvider theme={tema}>
     <PaperDividerHeader>
     <GridDividerHeader style={{}}>
-
-    <Stack spacing={4} direction="row">
+    <Sidebar/>
+    <Stack spacing={8} direction="row" >
+    
       <Button variant='text' >Início</Button>
-      <Button variant='text'   >Sobre nós</Button>
+      <Button variant='text' >Sobre nós</Button>
       <Button variant='text' >Ajuda</Button>
     </Stack>
-      
+ 
     <Stack spacing={2} direction="row">
       <Button variant='contained' color='secondary'>
-        <div style={{color:'white', fontWeight:'bold'}}>Começar</div></Button>
+        <div style={{color:'white', fontWeight:'bold'}}>Connect Wallet</div></Button>
     </Stack>
 
     </GridDividerHeader>

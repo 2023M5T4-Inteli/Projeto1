@@ -26,7 +26,7 @@ export const GridTitle = withStyles({
 
 export const PaperDividerHeader = withStyles({
     root: {
-        
+        height:'4.5rem'
     }
 })(Paper);
 
@@ -38,7 +38,18 @@ export const PaperDividerForm = withStyles({
         flexDirection: "column",
         width:"15rem",
         alignItems: "center",
-        height:"20rem"
+        height:"10rem"
+    }
+})(Paper);
+export const Papel = withStyles({
+    root: {
+      
+        display: "flex",
+     
+
+        width:"40rem",
+    
+        height:"40rem"
     }
 })(Paper);
 
@@ -46,11 +57,13 @@ export const PaperDividerForm = withStyles({
 export const GridDividerHeader = withStyles({
     root: {
         display: "flex",
-        justifyContent: "space-around",
-        padding:"20px",
+        justifyContent: "space-between",
+        padding:"13px",
+        flexDirection:"row"
 
     }
 })(Grid);
+
 
 
 
@@ -69,3 +82,32 @@ export const SpanIconTitle = styled.span`
     flex-direction: row;
     align-items: center;
 `;
+
+export const Icon = withStyles({
+    root: {
+        display: "flex",
+        justifyContent: "space-around",
+    }
+})(Grid);
+
+export const Images = withStyles({
+    root: {
+        marginLeft:'30px',
+        marginTop:'10px'
+        
+    }
+})(Grid);
+
+export const Text = withStyles({
+    root: {
+        display: "flex",
+        justifyContent: "flex-start",
+        width:'30rem',
+        marginRight:'13rem',
+        flexDirection:'column',
+        marginTop:'10px',
+        
+        
+        
+    }
+})(Grid);
