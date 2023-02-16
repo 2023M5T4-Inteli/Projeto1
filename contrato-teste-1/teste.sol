@@ -13,7 +13,7 @@ contract ContratoCoover {
     uint public maxPessoas = 50;
     uint public duracaoDias; 
     address private _admin;
-    string public usuario;
+    // string public usuario;
 
     
 
@@ -21,16 +21,16 @@ contract ContratoCoover {
         address carteiraUsuario;
     }
     
-    Carteiras[] public carteira;
+    address[] public carteira;
     
     mapping(address => bool) public termoAceito;
     uint public numAceitaram;
 
     // Construtor
-    constructor(uint _saldoTotal, uint _usuarios, uint _usuarioMinimo, uint _usuarioMaximo, uint _duracaoDias) {
+    constructor(uint _usuarios, uint _usuarioMinimo, uint _usuarioMaximo, uint _duracaoDias) {
         _admin = msg.sender;
         dataCriacao = block.timestamp; //guarda a data de criação
-        saldoContrato = _saldoTotal;
+        saldoContrato = address(this).balance;
         quantUsuario = _usuarios;
         minPessoas = _usuarioMinimo;
         maxPessoas = _usuarioMaximo;
@@ -45,82 +45,96 @@ contract ContratoCoover {
         _;
     }
 
-    function mostrarSaldo() public view returns (uint) {
-        return saldoContrato;
-    }
+    // modifier isValid(){
+    //     // require(block.timestamp => *variável de data de validade*)
+    //     _;
+    // }
 
-    function quantCarteira() public {
-        require(carteira.length < maxPessoas, "Numero maximo de carteiras atingido.");
-        Carteiras memory novaCarteira = Carteiras(msg.sender);
-        carteira.push(novaCarteira);
-        quantUsuario += 1;
-    }
-
-    function quantUsuarios() public view returns (uint) {
-        return quantUsuario;
-    }
-
-    function dataInicialCriacao() public view returns (uint) {
-        return dataCriacao;
-    }
-    
-    // Adiciona um novo usuário ao projeto
-    function adicionarUsuario() public {
-        require(quantUsuario < maxPessoas, "O numero maximo de usuarios ja foi atingido.");
-        quantUsuario++;
-    }
-
-    function viabilidadeContrato() public view returns (uint) {
+//lembrar de adicionar nas funções devidas
+    modifier viabilidade(){
         if (quantUsuario >= minPessoas && block.timestamp <= dataValidade && quantUsuario <= maxPessoas) {
-            return 1; // Contrato Ativo
-        } else if (quantUsuario < minPessoas && block.timestamp <= dataValidade) {
-            return 2; // Contrato em Progresso
-        } else if (block.timestamp > dataValidade || quantUsuario < minPessoas) {
-            return 3; // Contrato Inativo
-        } else {
-            revert("Erro ao verificar o contrato");
+                _; // Contrato Ativo
+            } else if (quantUsuario < minPessoas && block.timestamp <= dataValidade) {
+                _; // Contrato em Progresso
+            } else if (block.timestamp > dataValidade || quantUsuario < minPessoas) {
+                revert("Contrato inativo"); // Contrato Inativo
+            } else {
+                revert("Erro ao verificar o contrato");
         }
     }
 
-    function removerUsuario(address usuario) public onlyOwner {
+    // function mostrarSaldo() public view returns (uint) {
+    //     return saldoContrato;
+    // }
 
-        for (uint i = 0; i < carteira.length; i++) {
-            if (carteira[i].carteiraUsuario == usuario) {
-                // Remove o usuário da lista de carteiras
-                delete carteira[i];
-                // Atualiza o número de usuários
-                quantUsuario--;
-                // Sai do loop
-                break;
+    function quantCarteira(address novaCarteira) public onlyOwner returns(bool) {
+        require(carteira.length < maxPessoas, "Numero maximo de pessoas na carteiras foi atingido.");
+        // Carteiras memory novaCarteira = Carteiras(msg.sender);
+        carteira.push(novaCarteira);
+        quantUsuario += 1;
+        return true;
+    }
+
+    // function quantUsuarios() public view returns (uint) {
+    //     return quantUsuario;
+    // }
+
+    // function dataInicialCriacao() public view returns (uint) {
+    //     return dataCriacao;
+    // }
+    
+    // Adiciona um novo usuário ao projeto
+
+    function adicionarUsuario() public onlyOwner returns(bool) {
+        require(quantUsuario < maxPessoas, "O numero maximo de usuarios ja foi atingido.");
+        quantUsuario++;
+        return true;
+    }
+
+
+
+    function removerUsuario(address usuario) public onlyOwner returns(bool){
+
+        for (uint i = 0; i < carteira.length - 1; i++) {
+            if (carteira[i] == usuario) {
+                
+                for(uint index = i; i < carteira.length - 1; index++){
+                    carteira[index] = carteira[index + 1];
+                }
+                
             }
 
         }   
+
+        carteira.pop();
+        return true;
     }
 
-    function renovarContrato(uint _novaDataValidade) public onlyOwner {
-        require(_novaDataValidade > block.timestamp, "A nova data de validade deve ser no futuro.");
 
-        // Cria um array para armazenar os índices dos usuários que não aceitaram o novo termo
-        uint[] memory indicesRemover = new uint[](quantUsuario);
-        uint quantRemover = 0;
+    // function renovarContrato(uint _novaDataValidade) public onlyOwner {
+    //     require(_novaDataValidade > block.timestamp, "A nova data de validade deve ser no futuro.");
 
-        // Verifica se cada usuário aceitou o termo, adicionando o índice à lista de remoção, caso contrário
-        for (uint i = 0; i < quantUsuario; i++) {
-            if (!termoAceito[usuario[i]]) {
-                indicesRemover[quantRemover] = i;
-                quantRemover++;
-            }
-        }
+    //     // Cria um array para armazenar os índices dos usuários que não aceitaram o novo termo
+    //     uint[] memory indicesRemover = new uint[](quantUsuario);
+    //     uint quantRemover = 0;
 
-        // Remove os usuários que não aceitaram o novo termo
-        for (uint i = 0; i < quantRemover; i++) {
-            removerUsuario(usuario[indicesRemover[i]]);
-        }
+    //     // Verifica se cada usuário aceitou o termo, adicionando o índice à lista de remoção, caso contrário
+    //     for (uint i = 0; i < quantUsuario; i++) {
+    //         if (!termoAceito[usuario[i]]) {
+    //             indicesRemover[quantRemover] = i;
+    //             quantRemover++;
+    //         }
+    //     }
 
-        // Verifica se a quantidade de usuários é compatível com o mínimo e o máximo definidos no contrato
-        require(quantUsuario >= minPessoas && quantUsuario <= maxPessoas, "A quantidade de usuarios nao e compativel com o minimo e o maximo definidos no contrato.");
+    //     // Remove os usuários que não aceitaram o novo termo
+    //     for (uint i = 0; i < quantRemover; i++) {
+    //         removerUsuario(usuario[indicesRemover[i]]);
+    //     }
+
+    //     // Verifica se a quantidade de usuários é compatível com o mínimo e o máximo definidos no contrato
+    //     require(quantUsuario >= minPessoas && quantUsuario <= maxPessoas, "A quantidade de usuarios nao e compativel com o minimo e o maximo definidos no contrato.");
         
-        dataValidade = _novaDataValidade;
+    //     dataValidade = _novaDataValidade;
 
-    }
+    // }
 }
