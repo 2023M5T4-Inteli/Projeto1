@@ -13,47 +13,40 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import Link from '@mui/material/Link';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import { Notification1, Notification2 } from '../Notification'
 
-
-const drawerWidth = 240;
+const drawerWidth = 280;
 const tema = createTheme({
-    palette: {
-      primary: {
-       main: '#fff',
-        // main: '#888EA1',
+  palette: {
+    primary: {
+      main: '#fff',
+      // main: '#888EA1',
 
-      },
-      secondary: {
-        
-        main: '#02DE82',
-      },
     },
-  });
-  const tema2 = createTheme({
-    palette: {
-      primary: {
-       main: '#888EA1',
-        // main: '#0940B4',
+    secondary: {
 
-      },
-      secondary: {
-        
-        main: '#02DE82',
-      },
+      main: '#02DE82',
     },
-  });
+  },
+});
+const tema2 = createTheme({
+  palette: {
+    primary: {
+      main: '#888EA1',
+      // main: '#0940B4',
+
+    },
+    secondary: {
+
+      main: '#02DE82',
+    },
+  },
+});
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
+    display: 'flex',
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
@@ -74,6 +67,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
+
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -110,68 +104,77 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-    
-    <Box sx={{ display: 'flex', width:'65px'  }}>
+
+    <Box sx={{ display: 'flex', width: '35px', }}>
       {/* <CssBaseline /> */}
       <ThemeProvider theme={tema}>
-      {/* <AppBar position="fixed" open={open}> */}
-        <Toolbar sx={{ minHeight: "32px",
-        '@media (min-width: 600px)': {
-          minHeight: "32px"
-        }, }}>
+        {/* <AppBar position="fixed" open={open}> */}
+        <Toolbar sx={{paddingLeft:'5px', 
+          minHeight: "32px", width:'2px',
+          '@media (min-width: 600px)': {
+            minHeight: "32px"
+          },
+        }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{  ...(open && { display: 'none' }) }}
+            sx={{ ...(open && { display: 'none' }), display: 'flex', }}
           >
-            <MenuIcon />
+            <NotificationsIcon sx={{ color: 'white' }} />
           </IconButton>
           {/* <Typography variant="h6" noWrap component="div">
             Client
           </Typography> */}
         </Toolbar>
-      {/* </AppBar> */}
+        {/* </AppBar> */}
       </ThemeProvider>
       <ThemeProvider theme={tema2}>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
+        <Drawer
+          sx={{
             width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        
-        <List>
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: drawerWidth,
+              boxSizing: 'border-box',
+            },
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}
+        >
+          <DrawerHeader>
+            <Typography sx={{
+              padding: theme.spacing(0, 15), color: '#737373'
+            }}>
+              Notificações
+            </Typography>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </IconButton>
+
+          </DrawerHeader>
+
+
+          <Divider />
+          <Notification1 />
+          <Notification2 />
+
+          {/* <List>
           {['Início',  'Solicitação'].map((text, index) => (
             <ListItem key={text} disablePadding component={Link} to={"/" + text}>
               <ListItemButton>
                 <ListItemIcon>
                 {index === 0 && <AccountCircleIcon/>}
-                {/* {index === 2 && <AttachMoneyIcon/>} */}
                 {index === 1 && <AssignmentIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
           ))}
-        </List>
-        <Divider />
-        {/* <List>
+        </List> */}
+          {/* <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
@@ -183,30 +186,19 @@ export default function PersistentDrawerLeft() {
             </ListItem>
           ))}
         </List> */}
-      </Drawer>
+
+          {/* <Main open={open}> */}
+          {/* <DrawerHeader /> */}
+          {/* <Typography paragraph>
+
+        </Typography> */}
+          {/* <Typography paragraph>
+
+        </Typography> */}
+          {/* </Main> */}
+        </Drawer>
       </ThemeProvider>
-      {/* <Main open={open}> */}
-        {/* <DrawerHeader /> */}
-        {/* <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. 
-        </Typography> */}
-        {/* <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography> */}
-      {/* </Main> */}
     </Box>
-  
+
   );
 }

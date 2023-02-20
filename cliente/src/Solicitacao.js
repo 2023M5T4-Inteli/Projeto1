@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar'
+import React, { ReactElement, useState, createContext, useContext} from 'react';
 import Sidebar from './components/Sidebar'
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
@@ -14,104 +15,52 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import Toolbar from '@mui/material/Toolbar';
 import SetMarca from './setMarca'
-
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  // backgroundColor: alpha(theme.palette.common.white, 0.15),
-  backgroundColor: '#E7E7E7',
-  '&:hover': {
-    backgroundColor: '#F1F1F1',
-  },
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    
-    [theme.breakpoints.up('sm')]: {
-      width: '25ch',
-      '&:focus': {
-        width: '26ch',
-      },
-    },
-
-  },
-}));
+import { Box } from '@mui/system';
 
 function Solicitacao() {
   return (
     <>
+        <Navbar />
 
-      <Navbar />
- 
-      <Grid sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '30px' }}>
-      {/* <Grid sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row', }}> */}
-        {/* <Toolbar sx={{
-          minHeight: "32px",
-          '@media (min-width: 600px)': {
-            minHeight: "32px"
-          }, 
-        }}>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, }}
-          >
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Pesquisar"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
-        </Toolbar>
-         */}
-        {/* </Grid> */}
+        <Box sx={{ 
+          // background: 'rgb(250,249,233)',
+          // background: 'radial-gradient(circle, rgba(250,249,233,0.3) 41%, rgba(250,249,233,0.4) 100%)',
+          // backgroundColor: '#fffefa',
+          backgroundColor: '#002242',
+        height: '66.7rem', '@media (max-width: 450px)': {
+            width:'115%'
+          }, }}>
 
-        
-          <Typography sx={{ fontWeight: '800', fontSize: '30px', color: '#06266A'}}>
-            Escolha um plano para o seu celular
-          </Typography>
-          <Typography sx={{ fontWeight: '500', fontSize: '20px', color: '#92949C', marginTop:'0.5rem' }}>
-            Para começar, precisamos identificar o modelo do seu smartphone.
-          </Typography>
-         
-          <SetMarca/>
-     
+          <Grid sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column',}}>
 
-        {/* <Images>
-          <ImageList />
-        </Images> */}
-
-
-      </Grid>
-  
-
+            <Typography sx={{  fontSize: '30px', 
+          //  color: '#06266A', 
+          color: 'white',  fontWeight:'bold',
+            marginTop: '90px',
+          '@media (max-width: 620px)': {
+            fontSize: '24px'},
+            '@media (max-width: 500px)': {
+              fontSize: '22px'}, '@media (max-width: 400px)': {
+                fontSize: '18px'},
+                '@media (max-width: 310px)': {
+                  fontSize: '17px'}
+            }}>
+              Escolha um plano para o seu celular
+            </Typography>
+            <Typography sx={{ fontWeight: '500', fontSize: '20px', color: '#92949C', marginTop: '0.5rem',
+          '@media (max-width: 620px)': {
+            fontSize: '14px'},
+            '@media (max-width: 500px)': {
+              fontSize: '12px'}, '@media (max-width: 400px)': {
+                fontSize: '11px'},
+                '@media (max-width: 310px)': {
+                  fontSize: '9px'}
+             }}>
+              Para começar, precisamos identificar o modelo do seu smartphone.
+            </Typography>
+            <SetMarca />
+          </Grid>
+        </Box>
     </>
   );
 }

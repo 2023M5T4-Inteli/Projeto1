@@ -6,14 +6,18 @@ import Saldo from './Saldo';
 import Solicitacao from './Solicitacao'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
+import NameProvider from './Context';
 // SetAxiosConfig(Axios);
 // CheckOrCreateItemDxTheme();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Solicitacao /> 
-    {/* <div id="portalEvilCorp">
+    <NameProvider>
+
+      <Solicitacao />
+      
+      {/* <div id="portalEvilCorp">
       <SnackbarProvider>
         <StylesProvider generateClassName={CreateGenerateClassName()}>
           
@@ -21,13 +25,14 @@ root.render(
       </SnackbarProvider>
     </div> */}
 
-    {/* <BrowserRouter>
+      {/* <BrowserRouter>
       <Routes>
         <Route path="/" element={< App/>} /> 
         <Route index element={<Solicitacao />} />
       </Routes>
     </BrowserRouter> */}
 
+    </NameProvider>
   </React.StrictMode>
 );
 
