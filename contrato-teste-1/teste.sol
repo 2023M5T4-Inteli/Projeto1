@@ -5,6 +5,7 @@ pragma solidity ^0.8.0;
 
 contract ContratoCoover {
     // Variáveis globais
+    uint public id;
     uint public saldoContrato;
     uint public quantUsuario;
     uint public dataCriacao;
@@ -63,9 +64,6 @@ contract ContratoCoover {
         }
     }
 
-    // function mostrarSaldo() public view returns (uint) {
-    //     return saldoContrato;
-    // }
 
     function quantCarteira(address novaCarteira) public onlyOwner returns(bool) {
         require(carteira.length < maxPessoas, "Numero maximo de pessoas na carteiras foi atingido.");
@@ -75,13 +73,6 @@ contract ContratoCoover {
         return true;
     }
 
-    // function quantUsuarios() public view returns (uint) {
-    //     return quantUsuario;
-    // }
-
-    // function dataInicialCriacao() public view returns (uint) {
-    //     return dataCriacao;
-    // }
     
     // Adiciona um novo usuário ao projeto
 
@@ -90,6 +81,7 @@ contract ContratoCoover {
         quantUsuario++;
         return true;
     }
+
 
 
 
@@ -110,31 +102,6 @@ contract ContratoCoover {
         return true;
     }
 
+    // fallback() external payable {}
 
-    // function renovarContrato(uint _novaDataValidade) public onlyOwner {
-    //     require(_novaDataValidade > block.timestamp, "A nova data de validade deve ser no futuro.");
-
-    //     // Cria um array para armazenar os índices dos usuários que não aceitaram o novo termo
-    //     uint[] memory indicesRemover = new uint[](quantUsuario);
-    //     uint quantRemover = 0;
-
-    //     // Verifica se cada usuário aceitou o termo, adicionando o índice à lista de remoção, caso contrário
-    //     for (uint i = 0; i < quantUsuario; i++) {
-    //         if (!termoAceito[usuario[i]]) {
-    //             indicesRemover[quantRemover] = i;
-    //             quantRemover++;
-    //         }
-    //     }
-
-    //     // Remove os usuários que não aceitaram o novo termo
-    //     for (uint i = 0; i < quantRemover; i++) {
-    //         removerUsuario(usuario[indicesRemover[i]]);
-    //     }
-
-    //     // Verifica se a quantidade de usuários é compatível com o mínimo e o máximo definidos no contrato
-    //     require(quantUsuario >= minPessoas && quantUsuario <= maxPessoas, "A quantidade de usuarios nao e compativel com o minimo e o maximo definidos no contrato.");
-        
-    //     dataValidade = _novaDataValidade;
-
-    // }
 }
