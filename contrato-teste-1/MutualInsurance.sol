@@ -34,7 +34,6 @@ contract MutualInsurance {
         }
     }
 
-
     // user story 7
     // criação de um grupo a partir das carteiras
     function groupCreation(address[] memory walletsToAdd) public {
@@ -46,11 +45,6 @@ contract MutualInsurance {
         for (uint256 i = 0; i < walletsToAdd.length; i++) {
             group[i + 1] = walletsToAdd[i];
         }
-    }
-
-    // função que retorna os integrantes de um grupo de seguro
-    function getGroupMembers() public view returns (address[] memory) {
-        return group;
     }
 
     // User story 3
@@ -75,6 +69,4 @@ contract MutualInsurance {
     function getIndemnityRequest(address requestor) public view returns (uint256) {
         return indemnityRequests[requestor];
     }
-
-// teste
 }
