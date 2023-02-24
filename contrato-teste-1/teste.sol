@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-// Este código é para teste e para ser modificados pelos integrantes do Grupo 1
-
 contract ContratoCoover {
     // Variáveis globais
     uint public id; //
@@ -17,7 +15,6 @@ contract ContratoCoover {
     address[] public group;
     uint256 public totalMembers;
     address private _owner;
-    // string public user;
 
     struct Wallets {
         address userWallet;
@@ -30,6 +27,7 @@ contract ContratoCoover {
     mapping(address => uint256) private indemnityRequests;
 
     // Construtor
+    // Este constructor roda apenas no deploy e tem a função de guarda algumas informações muito importantes
     constructor(uint _users, uint _usersMin, uint _userMax, uint _plusDays) payable{
         _admin = msg.sender;
         creationDate = block.timestamp; //guarda a data de criação
@@ -40,26 +38,8 @@ contract ContratoCoover {
         dataValidade = creationDate + _plusDays * 1 days; // guarda a data de validade
     }
 
-    // Funções
 
-    // Modificador para permitir que apenas o dono do contrato acesse uma função
-
-    /* Permite que o proprietário aceite uma solicitação de indenização
-    ao final, se todas as condições forem atendidas, o valor solicitado é
-    transferido para o endereço do solicitante e a solicitação é excluída.*/
-    modifier onlyOwner() {
-        require(msg.sender == _admin, "Apenas o dono do contrato pode executar essa funcao.");
-        _;
-    }
-
-    // User story 3
-    // função que permite a solicitação de uma indenização e armazena o endereço do solicitante
-    function requestIndemnity(uint256 amount) public {
-        require(amount > 0, "Indemnity amount must be greater than zero");
-        indemnityRequests[msg.sender] = amount;
-    }
-
-    //lembrar de adicionar nas funções devidas
+    // Modificador que tem a função de checar se o contrato esta ativo ou não 
     modifier viabilidade(){
         if (userQuantity >= minPeople && block.timestamp <= dataValidade && userQuantity <= maxPeople) {
                 _; // Contrato Ativo
@@ -72,10 +52,45 @@ contract ContratoCoover {
         }
     }
 
-    // user story 7
-    // criação de um grupo a partir das Wallets
+
+
+    // Modificador para permitir que apenas o dono do contrato acesse uma função
+    modifier onlyOwner() {
+        require(msg.sender == _admin, "Apenas o dono do contrato pode executar essa funcao.");
+        _;
+    }
+
+
+
+    //User story 2 
+    //Função que permite visualizar o contrato na blockchain e poder escolher algum para participar
+    function checkGroups () public {
+    }
+
+    // User story 3
+    // função que permite a solicitação de uma indenização e armazena o endereço do solicitante
+    function requestIndemnity(uint256 amount) public {
+        require(amount > 0, "Indenizacao tem de ser maior que 0");
+        indemnityRequests[msg.sender] = amount;
+    }
+
+
+    // User story 5 
+    // Função que permite ao usuario solicitar o reembolso
+    function redeemnRefund() private{
+
+    }
+
+    // User story 6
+    // Função que permite o cliente ver os termos do contrato 
+    function checkTerms() public {
+
+    }
+
+    // User story 7
+    // Criação de um grupo a partir das Wallets
     function groupCreation(address[] memory walletsToAdd) onlyOwner public {
-        require(group.length == 0, "The group has already been created");
+        require(group.length == 0, "O grupo ja foi criado");
         totalMembers = walletsToAdd.length + 1;
         group = new address[](totalMembers);
         group[0] = _owner;
@@ -84,19 +99,33 @@ contract ContratoCoover {
         }
     }
 
+    // User story 8
+    // A Coover tem a possibilidade de visualizar o grupo criado por ela e também excluir o mesmo
+    function showDeleteGroup() private onlyOwner{
+
+    }
+
+
     // User story 9
     /* Permite que o proprietário aceite uma solicitação de indenização
     ao final, se todas as condições forem atendidas, o valor solicitado é
     transferido para o endereço do solicitante e a solicitação é excluída. */
     
-    function acceptIndemnityRequest(address requestor) public {
-        require(msg.sender == _owner,"Only owner can accept indemnity requests");
+    function acceptIndemnityRequest(address requestor) public onlyOwner {
+        require(msg.sender == _owner,"Somente o dono pode aceitar reembolsos ");
         uint256 amountToPay = indemnityRequests[requestor];
-        require(amountToPay > 0, "Indemnity request not found");
+        require(amountToPay > 0, "Pedido de reembolso nao encontrado");
         delete indemnityRequests[requestor];
         payable(requestor).transfer(amountToPay);
     }
+
+    // User story 10 
+    // O administrador consegue editar as regras do contrato 
+    function changeRules() public{
+
+    }
    
+
     // A função abaixo aparece para todos os visualizadores da Blockchain, porem, somente o dono consegue editar a função
     // Além disso, essa função delimita o numero de pessoas que podem estar dentro da carteira  
 
@@ -137,7 +166,6 @@ contract ContratoCoover {
         return true;
     }
 
-    // fallback() external payable {}
 
 }
 
