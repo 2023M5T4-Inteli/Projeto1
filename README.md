@@ -22,8 +22,7 @@
 *
 ## Licença
 *
-## Requisitos de negócio implementados (ao menos 3) e descrição da arquitetura da solução em um diagrama de blocos com uma descrição textual dos elementos da arquitetura e sua responsabilidade, comportamento esperado do smart contract descrito em um diagrama de sequência UML com uma descrição textual
-*
+
 ## Descrição de pelo menos 3 requisitos de negócio cumpridos pelo smart contract 
 - Criação de grupos 
 - Solicitação de indenização
