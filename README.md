@@ -24,13 +24,14 @@
 *
 
 ## Descrição de pelo menos 3 requisitos de negócio cumpridos pelo smart contract 
-- Criação de grupos 
-- Solicitação de indenização
-- Aprovação do pedido
-- Adicição e remoção de usuários
+- Criação de grupos: Essa aplicação permite o usuario montar um grupo de seguro mútuo.
+- Solicitação de indenização: A solicitação de indenização permite que a seguradora consegue enviar pagamentos para os membros do contrato.
+- Aprovação do pedido: Essa função permite a seguradora aprovar o pedido do seguro.
+- Adicição e remoção de usuários: Essa função permite a seguradora adicionar e remover usuarios.
 
 ## Descrição da arquitetura utilizando diagrama de blocos e clareza da explicação de cada elemento e sua responsabilidade 
 *
+
 ## Descrição da arquitetura utilizando diagrama de sequência UML
 *
 ## Clareza do comportamento esperado do smart contract na explicação textual
