@@ -13,8 +13,6 @@ contract ContratoCoover {
     uint public maxPessoas = 50;
     uint public duracaoDias; 
     address private _admin;
-    // string public usuario;
-
     
 
     struct Carteiras {
