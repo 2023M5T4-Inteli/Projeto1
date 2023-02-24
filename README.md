@@ -21,3 +21,13 @@
 ## Histórico de lançamentos
 *
 ## Licença
+
+## Requisitos de negócio implementados
+*
+## Descrição de pelo menos 3 requisitos de negócio cumpridos pelo smart contract 
+*
+## Descrição da arquitetura utilizando diagrama de blocos e clareza da explicação de cada elemento e sua responsabilidade 
+*
+## Descrição da arquitetura utilizando diagrama de sequência UML
+*
+## Clareza do comportamento esperado do smart contract na explicação textual
