@@ -21,7 +21,7 @@
 ## Histórico de lançamentos
 *
 ## Licença
-
+*
 ## Requisitos de negócio implementados
 *
 ## Descrição de pelo menos 3 requisitos de negócio cumpridos pelo smart contract 
