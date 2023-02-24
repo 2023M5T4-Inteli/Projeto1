@@ -5,7 +5,7 @@
 # Desenvolvimento de software com a utilização de blockchain
 *
 ## Etherchain
-*
+Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros.
 ## Integrantes 
 - Camila Fernanda de Lima Anacleto
 - Eduardo França Porto
