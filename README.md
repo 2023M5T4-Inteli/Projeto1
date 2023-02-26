@@ -37,7 +37,52 @@ Por fim, na aplicação dos clientes, é possível interagir e realizar transaç
 Dados sensíveis dos clientes são armazenados em um banco de dados, uma vez que a disponibilização destes na blockchain seria algo perigoso. 
 
 ## Descrição da arquitetura utilizando diagrama de sequência UML
-*
+
+                                +--------------+
+                                     Usuário    
+                                +--------------+
+                                      |
+                                      |  Acessa a aplicação
+                                      v
+                                +--------------+
+                                  Front-End   
+                                +--------------+
+                                      |
+                                      |  Faz a solicitação
+                                      v
+                                +--------------+
+                                   Back-End   
+                                +--------------+
+                                      |
+                                      |  Verifica a identidade do usuário
+                                      v
+                                +--------------+
+                                  Banco de Dados 
+                                +--------------+
+                                      |
+                                      |  Retorna a resposta ao Back-End
+                                      v
+                                +--------------+
+                                 Back-End    
+                                +--------------+
+                                      |
+                                      |  Gera o smart contract do seguro
+                                      v
+                                +--------------+
+                                  Blockchain  
+                                +--------------+
+                                      |
+                                      |  Armazena o smart contract
+                                      v
+                                +--------------+
+                                  Banco de Dados 
+                                +--------------+
+                                      |
+                                      |  Armazena dados sensíveis do usuário
+                                     
+
+
+
 ## Clareza do comportamento esperado do smart contract na explicação textual
 
 Nosso smart contract é uma aplicação que roda na blockchain e tem como objetivo fornecer seguros para celulares. Ele funciona de maneira simples e eficiente: quando um cliente adquire um seguro, ele envia uma transação para o endereço do contrato com as informações do celular e o valor do prêmio de seguro. O contrato então registra a apólice e envia de volta uma confirmação da transação.
