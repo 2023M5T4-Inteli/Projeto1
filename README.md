@@ -39,3 +39,13 @@ Dados sensíveis dos clientes são armazenados em um banco de dados, uma vez que
 ## Descrição da arquitetura utilizando diagrama de sequência UML
 *
 ## Clareza do comportamento esperado do smart contract na explicação textual
+
+Nosso smart contract é uma aplicação que roda na blockchain e tem como objetivo fornecer seguros para celulares. Ele funciona de maneira simples e eficiente: quando um cliente adquire um seguro, ele envia uma transação para o endereço do contrato com as informações do celular e o valor do prêmio de seguro. O contrato então registra a apólice e envia de volta uma confirmação da transação.
+
+Caso o celular sofra algum dano coberto pela apólice, o cliente pode solicitar o reembolso ao enviar uma nova transação para o contrato com as informações do dano e as evidências necessárias. O contrato verifica se o dano está coberto pela apólice e, se estiver, realiza o pagamento do valor acordado em criptomoedas para o cliente.
+
+Para garantir a transparência e a segurança das operações, todas as transações e informações do seguro são registradas na blockchain, tornando o processo totalmente rastreável e à prova de fraudes.
+
+Nosso smart contract também tem um conjunto de regras claras e transparentes que definem os termos e condições do seguro, e isso garante que os clientes tenham uma compreensão clara do contrato e do que é coberto por ele.
+
+Por meio dessas funções, nosso smart contract espera fornecer seguros para celulares de maneira segura, eficiente e transparente, proporcionando aos clientes uma opção inovadora e confiável de proteção para seus dispositivos móveis.
