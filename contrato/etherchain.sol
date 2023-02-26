@@ -3,18 +3,18 @@ pragma solidity ^0.8.0;
 
 contract ContratoCoover {
     // Variáveis globais
-    uint public id; //
-    uint public amountContract; // 
-    uint public userQuantity; // 
-    uint public creationDate; //  
-    uint public dataValidade; // 
-    uint public minPeople = 5; // 
-    uint public maxPeople = 50; // 
-    uint public plusDays; //
-    address private _admin; 
-    address[] public group;
-    uint256 public totalMembers;
-    address private _owner;
+    uint public id; // identificador utilizado para verificação dos administradores
+    uint public amountContract; // valor que está presente no Contrato (isso é respectivo de cada grupo)
+    uint public userQuantity; // quantidade de pessoas presente no grupo
+    uint public creationDate; // data de criação do grupo
+    uint public dataValidade; // data limite de vigência do contrato (está em PT pq provavelmente n sera utilizada)
+    uint public minPeople = 5; // mínimo de pessoas para "ativação" do grupo
+    uint public maxPeople = 500; // máximo de pessoas que o grupo pode "receber"
+    uint public plusDays; // duração de dias úteis e corridos de vigência do grupo
+    address private _admin; //variável de administrador
+    address[] public group; // variável de endereço referenciada ao grupo; ela será "modelada" 
+    uint256 public totalMembers; // membros totais do grupo (pode ser atribuído a diferentes grupos)
+    address private _owner; //
 
     struct Wallets {
         address userWallet;
@@ -22,20 +22,20 @@ contract ContratoCoover {
     
     address[] public wallet;
     
+    // referências e armazenamento dos addresses 
     mapping(address => bool) public termoAceito;
-
     mapping(address => uint256) private indemnityRequests;
 
     // Construtor
     // Este constructor roda apenas no deploy e tem a função de guarda algumas informações muito importantes
-    constructor(uint _users, uint _usersMin, uint _userMax, uint _plusDays) payable{
+    constructor(uint _users, uint _usersMin, uint _userMax) payable{
         _admin = msg.sender;
         creationDate = block.timestamp; //guarda a data de criação
         amountContract = address(this).balance;
         userQuantity = _users;
         minPeople = _usersMin;
         maxPeople = _userMax;
-        dataValidade = creationDate + _plusDays * 1 days; // guarda a data de validade
+        // dataValidade = creationDate + _plusDays * 1 days; // guarda a data de validade a partir de outras var.
     }
 
 
@@ -54,7 +54,7 @@ contract ContratoCoover {
 
 
 
-    // Modificador para permitir que apenas o dono do contrato acesse uma função
+    // Modificador para permitir que apenas o dono do contrato acesse determinada função
     modifier onlyOwner() {
         require(msg.sender == _admin, "Apenas o dono do contrato pode executar essa funcao.");
         _;
@@ -137,7 +137,7 @@ contract ContratoCoover {
     }
 
     
-    // Adiciona um novo usuário ao projeto
+    // Adiciona um novo usuário ao grupo
 
     function addUser() public onlyOwner returns(bool) {
         require(userQuantity < maxPeople, "O numero maximo de usuarios ja foi atingido.");
@@ -147,7 +147,7 @@ contract ContratoCoover {
 
 
 
-    // Remove um usuário do projeto
+    // Remove um usuário do grupo
 
     function removeUser(address user) public onlyOwner returns(bool){
 
