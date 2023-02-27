@@ -1,12 +1,12 @@
 # Projeto1
 
-# Inteli - Instituto de tecnologia e liderança
+## Inteli - Instituto de tecnologia e liderança
 *
-# Desenvolvimento de software com a utilização de blockchain
+## Desenvolvimento de software com a utilização de blockchain
 *
 ## Etherchain
 Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros.
-## Integrantes 
+### Integrantes 
 - Camila Fernanda de Lima Anacleto
 - Eduardo França Porto
 - Izabella Almeida de Faria
@@ -17,28 +17,33 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
 
 ## Descrição do projeto
 *
-## Estrutura de pastas
-*
-## Histórico de lançamentos
-*
-## Licença
-*
+### Requisitos de negócio:
+#### Requisito 1: Criação de um grupo de seguro mútuo.
 
-## Descrição dos requisitos de negócio cumpridos pelo smart contract 
 
-### Requisitos dentro das funções de Administração da Coover
+A empresa Coover, como parte interessada na criação desse smart contract, é responsável pelo controle, escolha e execução dos requisitos aqui presentes . Diante disso, a seguradora terá a possibilidade de definir, previamente, as regras que serão seguidas no processo de criação de um grupo de seguro mútuo. Portanto, características como número mínimo e máximo de participantes, tempo de duração de um contrato e momento de cobrança de taxas administrativas, devem ser definidos pela instituição no momento de confecção desse contrato inteligente. 
 
-A Coover como administradora, e "dona" do contrato, será a principal responsável em relação ao controle e execução dos requisitos do Smart Contract. Dentro das opções, as funções priormordias de gerenciamento das condições e regulamento do Smart Contract são fundamentais para a sustentabilidade do relacionamento entre seguradora e cliente.
+#### Requisito 2: Cobrança de uma taxa administrativa no momento da contratação do seguro.
 
-- Criação de grupos: Essa aplicação permite o usuário montar um grupo de seguro mútuo.
+Segundo o que foi dito no processo do entendimento do negócio, para garantia do lucro, a empresa Coover realiza a cobrança de um percentual referente à taxa administrativa. Essa cobrança é feita sobre o pagamento referente à contratação do seguro realizada pelos clientes da seguradora. Como se trata de um requisito do empreendimento em questão, é necessário que o contrato seja capaz de efetuar essa cobrança a partir do momento em que o pagamento do seguro foi concluído por parte dos clientes. 
 
-- Solicitação de indenização: A solicitação de indenização permite que a seguradora consegue enviar pagamentos para os membros do contrato. Consequentemente, a validação do usuário é feita automaticamente pelo próprio Smart Contract, assim como o grupo em questão.
+#### Requisito 3: Cobrança do valor referente ao pagamento do seguro mútuo.
 
-- Aprovação do pedido: Essa função permite a seguradora aprovar o pedido do seguro. Assim como a função de solicitação, a aprovação do pedido se dá por meio da validação automatica, e por meio de requisição na área do administrador no frontend.
+Para que possam ser assistidos pelo seguro, é preciso que os clientes da Coover paguem uma quantia referente à cobrança mensal ou anual do plano contratado. Por isso, é necessário que o contrato em questão seja capaz de realizar a cobrança única dessa taxa após sua publicação, tendo em vista que os desenvolvedores do projeto decidiram adotar a cobrança anual para fins de facilitação de processos. 
 
-- Adição e remoção de usuários: Essa função permite a seguradora adicionar e remover usuários. Isso é necessário conforme o controle da seguradora do limite de usuários, além de dar possibilidade para o usuário optar pela saída. 
+#### Requisito 4: Gerenciamento do número de clientes na plataforma.
 
-## Descrição da arquitetura utilizando diagrama de blocos e clareza da explicação de cada elemento e sua responsabilidade 
+É necessário que o contrato inteligente seja capaz de permitir a administração da quantidade de usuários em um determinado grupo de seguros. Dessa forma, é preciso que haja uma função que possibilite a exclusão de determinado cliente, que só ocorrerá mediante pedido de cancelamento do contrato, por parte do usuário, ou detecção de fraude, por parte da Coover.
+
+#### Requisito 5: Aprovação dos pedidos de indenização.
+
+Após a solicitação de indenização realizada pelo cliente, a empresa precisa ter a opção de aprová-la ou recusá-la, de acordo com regras pré estabelecidas no escopo do contrato. É preciso esclarecer que essa decisão será tomada de forma automática, a partir do que a empresa definiu como sendo os critérios necessários para a tomada de decisão acerca de determinado pedido.  
+ 
+#### Requisito 6: Reposição da reserva de risco.
+
+Após a aprovação de determinado pedido de indenização, é necessário que os participantes de um grupo se responsabilizem pela reposição da reserva de risco que foi comprometida após o pagamento em questão. Com isso, é necessário que, a cada pedido de indenização aprovado, haja a cobrança proporcional à porcentagem construída por cada membro do grupo. Logo, contribuintes responsáveis por parcelas diferentes da reserva, devem ser cobrados de modo distinto no momento da ativação dessa função.
+
+## Diagrama de blocos
 
 O usuário (cliente ou admnistrador) acessa a aplicação pelo browser com o plugin da metamask. 
 Na aplicação do administrador, pode ser feita a criação de grupos de seguro mútuo (smart contracts) em uma relação direta com a Testnet. 
@@ -48,15 +53,15 @@ Dados sensíveis dos clientes são armazenados em um banco de dados, uma vez que
 
 ![Diagrama de Blocos](https://user-images.githubusercontent.com/68927480/221452511-1435a376-d14f-45c9-a858-16bc1743ceae.png)
 
-Detalhamento do Diagrama de Blocos:
+#### Detalhamento do Diagrama de Blocos:
 
-- Cliente: É a pessoa física que deseja contratar um seguro peer-to-peer para o seu smartphone. Ele se conecta ao sistema da Coover através do navegador.
+- <b>Cliente</b>: É a pessoa física que deseja contratar um seguro peer-to-peer para o seu smartphone. Ele se conecta ao sistema da Coover através do navegador.
 
-- Adm da Coover: A Coover é a empresa que oferece o seguro peer-to-peer para smartphones usando blockchain. Ela se comunica com o browser e  com sua carteira Metamask, bem como com a sua própria aplicação. A aplicação da Coover se comunica com o banco de dados que se comunica com a testnet.
+- <b>Adm da Coover:</b> A Coover é a empresa que oferece o seguro peer-to-peer para smartphones usando blockchain. Ela se comunica com o browser e  com sua carteira Metamask, bem como com a sua própria aplicação. A aplicação da Coover se comunica com o banco de dados que se comunica com a testnet.
 
-- Metamask: É uma carteira digital que permite que o cliente interaja com aplicativos descentralizados baseados em Ethereum. No caso da Coover, o Metamask é utilizado para realizar transações com a criptomoeda Ether, que é usada como meio de pagamento do seguro.
+- <b>Metamask:</b> É uma carteira digital que permite que o cliente interaja com aplicativos descentralizados baseados em Ethereum. No caso da Coover, o Metamask é utilizado para realizar transações com a criptomoeda Ether, que é usada como meio de pagamento do seguro.
 
-- Aplicação do Cliente: É a interface do sistema da Coover que o cliente utiliza para verificar a porcentagem a ser paga pelo seguro, realizar o pagamento e acessar informações sobre o seu seguro. Essa plataforma se comunica com a testnet.
+- <b>Aplicação do Cliente:</b> É a interface do sistema da Coover que o cliente utiliza para verificar a porcentagem a ser paga pelo seguro, realizar o pagamento e acessar informações sobre o seu seguro. Essa plataforma se comunica com a testnet.
 
 - Aplicação da Coover: A aplicação da Coover gerencia e executa os contratos. Algumas das funções a ela concebidas são: Cadastro de clientes, comunicação com o smart contract, gerenciamento de pagamentos e de sinistros.
 
