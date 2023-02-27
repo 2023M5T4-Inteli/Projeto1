@@ -1,12 +1,18 @@
-# Projeto1
+# Desenvolvimento de software com a utilização de blockchain
 
 ## Inteli - Instituto de tecnologia e liderança
-*
-## Desenvolvimento de software com a utilização de blockchain
-*
+<a href= "https://www.inteli.edu.br/"><img src="https://www.inteli.edu.br/wp-content/uploads/2021/08/20172028/marca_1-2.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0" width="250px" height="100px"></a>
+
+## Coover 
+<a href= "https://coover.me/"><img src="https://theme.zdassets.com/theme_assets/10391010/252b3a482d39b630006805aa33f3768c9631e75a.png" alt="Coover" border="0" width="250px" height="70px" ></a>
+
 ## Etherchain
 Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros.
+
+#### adicionar a imagem do grupo
+
 ### Integrantes 
+#### adicionar linkedin de todos os integrantes
 - Camila Fernanda de Lima Anacleto
 - Eduardo França Porto
 - Izabella Almeida de Faria
@@ -17,7 +23,8 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
 
 ## Descrição do projeto
 *
-### Requisitos de negócio:
+
+## Requisitos de negócio:
 #### Requisito 1: Criação de um grupo de seguro mútuo.
 
 
@@ -63,18 +70,18 @@ Dados sensíveis dos clientes são armazenados em um banco de dados, uma vez que
 
 - <b>Aplicação do Cliente:</b> É a interface do sistema da Coover que o cliente utiliza para verificar a porcentagem a ser paga pelo seguro, realizar o pagamento e acessar informações sobre o seu seguro. Essa plataforma se comunica com a testnet.
 
-- Aplicação da Coover: A aplicação da Coover gerencia e executa os contratos. Algumas das funções a ela concebidas são: Cadastro de clientes, comunicação com o smart contract, gerenciamento de pagamentos e de sinistros.
+- <b>Aplicação da Coover:</b> A aplicação da Coover gerencia e executa os contratos. Algumas das funções a ela concebidas são: Cadastro de clientes, comunicação com o smart contract, gerenciamento de pagamentos e de sinistros.
 
-- Banco de Dados: O banco de dados é responsável por armazenar as informações dos clientes e das apólices de seguro, como o nome do cliente, o modelo do smartphone, o valor do prêmio do seguro, entre outros dados. Quando o cliente adquire uma apólice de seguro, as informações são registradas no banco de dados e, posteriormente, no smart contract que gerencia as transações na blockchain.
+- <b>Banco de Dados:</b> O banco de dados é responsável por armazenar as informações dos clientes e das apólices de seguro, como o nome do cliente, o modelo do smartphone, o valor do prêmio do seguro, entre outros dados. Quando o cliente adquire uma apólice de seguro, as informações são registradas no banco de dados e, posteriormente, no smart contract que gerencia as transações na blockchain.
 
-- Testnet: É uma rede de blockchain de teste que é usada para verificar a funcionalidade do sistema antes de ser lançada na rede principal. No caso da Coover, a plataforma do cliente se comunica com a testnet para realizar transações e validar os dados do seguro.
+- <b>Testnet:</b> É uma rede de blockchain de teste que é usada para verificar a funcionalidade do sistema antes de ser lançada na rede principal. No caso da Coover, a plataforma do cliente se comunica com a testnet para realizar transações e validar os dados do seguro.
 
-- Smart Contract: É executado na rede blockchain e é responsável por automatizar as transações e manter o registro das informações do seguro. No caso da Coover, o smart contract é responsável por verificar se o cliente tem direito ao seguro, validar o pagamento de acordo com a porcentagem estabelecida e se poderá receber a indenização, caso algo ocorra com o smartphone.
+- <b>Smart Contract:</b> É executado na rede blockchain e é responsável por automatizar as transações e manter o registro das informações do seguro. No caso da Coover, o smart contract é responsável por verificar se o cliente tem direito ao seguro, validar o pagamento de acordo com a porcentagem estabelecida e se poderá receber a indenização, caso algo ocorra com o smartphone.
 
-- Deploy: É o processo de disponibilizar o smart contract na rede blockchain. No caso da Coover, o deploy inclui o GitHub, que é um repositório de código-fonte, e a administração da Coover, que é responsável por gerenciar o sistema.
+- <b>Deploy:</b> É o processo de disponibilizar o smart contract na rede blockchain. No caso da Coover, o deploy inclui o GitHub, que é um repositório de código-fonte, e a administração da Coover, que é responsável por gerenciar o sistema.
 
 
-## Descrição da arquitetura utilizando diagrama de sequência UML
+## Diagrama de sequência UML
 
                                 +--------------+
                                      Usuário    
@@ -118,22 +125,56 @@ Dados sensíveis dos clientes são armazenados em um banco de dados, uma vez que
                                       |
                                       |  Armazena dados sensíveis do usuário
                                      
-![US1](https://user-images.githubusercontent.com/99282359/221448923-6e3db9ff-46fe-438c-b885-e46bd8cf7b23.png)
-![US2](https://user-images.githubusercontent.com/99282359/221448932-e37aa5db-a4c3-45bf-abf5-f222508f706c.png)
-![US3](https://user-images.githubusercontent.com/99282359/221448935-81366859-cfd9-446f-aee6-7fc4c925512d.png)
-![US4](https://user-images.githubusercontent.com/99282359/221448941-e4811354-75ec-4f97-85e2-c2fae232c0f9.png)
-![US5](https://user-images.githubusercontent.com/99282359/221448945-cdbffbd2-b99e-45eb-b261-1064485eb5de.png)
-![US6](https://user-images.githubusercontent.com/99282359/221448953-9af03c37-a221-4fe7-aa5a-dccd707ccf80.png)
-![US7](https://user-images.githubusercontent.com/99282359/221448955-4ec2d945-73d4-4594-8686-dd590837854d.png)
-![US8](https://user-images.githubusercontent.com/99282359/221448962-48b88cd6-d6ef-4526-8a2b-ef138c969887.png)
-![US9](https://user-images.githubusercontent.com/99282359/221448968-df8ef385-31e6-42bf-a47c-0848ce7fac90.png)
-![US10](https://user-images.githubusercontent.com/99282359/221448972-997779d1-eac1-4aa2-b2bd-e2ffbc565a4e.png)
+<b>User storie 1:</b> "Eu, como cliente da seguradora, quero entrar na área do usuário para ter acesso à minha conta."
+<img src="https://user-images.githubusercontent.com/99282359/221448923-6e3db9ff-46fe-438c-b885-e46bd8cf7b23.png" alt="User storie 1">
 
+<hr>
 
+<b>User storie 2:</b> "Eu, como usuário da solução, quero visualizar os grupos de seguro já criados para ter a chance de escolher algum deles."
+<img src="https://user-images.githubusercontent.com/99282359/221448932-e37aa5db-a4c3-45bf-abf5-f222508f706c.png" alt="User storie 2">
 
-## Clareza do comportamento esperado do smart contract na explicação textual
+<hr>
 
-O smart contract é uma aplicação que roda na blockchain e tem como objetivo fornecer seguros para celulares. Funcionando de maneira simples e eficiente: quando um cliente adquire um seguro, ele envia uma transação para o endereço do contrato com as informações do celular e o valor do prêmio de seguro. O contrato então registra a apólice e envia de volta uma confirmação da transação.
+<b>User storie 3:</b> "Eu, como usuário do sistema, quero ter a possibilidade de solicitar uma indenização para ressarcimento em casos de prejuízos ao meu patrimônio."
+<img src="https://user-images.githubusercontent.com/99282359/221448935-81366859-cfd9-446f-aee6-7fc4c925512d.png" alt="User storie 3">
+
+<hr>
+
+<b>User storie 4:</b> "Eu, como cliente da Coover, quero visualizar os pontos de suporte para poder entrar em contato com a empresa."
+<img src="https://user-images.githubusercontent.com/99282359/221448941-e4811354-75ec-4f97-85e2-c2fae232c0f9.png" alt="User storie 4">
+
+<hr>
+
+<b>User storie 5:</b> "Eu, como consumidor dos serviços oferecidos pela Coover, quero ter a chance de solicitar o reembolso do serviço contratado para receber o dinheiro investido em caso de insatisfação."
+<img src="https://user-images.githubusercontent.com/99282359/221448945-cdbffbd2-b99e-45eb-b261-1064485eb5de.png" alt="User storie 5">
+
+<hr>
+
+<b>User storie 6:</b> "Eu como cliente da Coover, quero poder visualizar os termos do contrato estabelecido em cada grupo"
+<img src="https://user-images.githubusercontent.com/99282359/221448953-9af03c37-a221-4fe7-aa5a-dccd707ccf80.png" alt="User storie 6">
+
+<hr>
+
+<b>User storie 7</b> "Eu, como seguradora, quero montar um grupo de seguro mútuo para adicionar os participantes que demonstraram interesse em participar dele."
+<img src="https://user-images.githubusercontent.com/99282359/221448955-4ec2d945-73d4-4594-8686-dd590837854d.png" alt="User storie 7">
+
+<hr>
+
+<b>User storie 8</b> "Eu, como seguradora, quero ter a possibilidade de gerenciar os grupos de seguro mútuo já criados e aqueles que ainda não o foram."
+<img src="https://user-images.githubusercontent.com/99282359/221448962-48b88cd6-d6ef-4526-8a2b-ef138c969887.png" alt="User storie 8">
+
+<hr>
+
+<b>User storie 9</b> "Eu, como seguradora, quero ter a chance de aprovar os pedidos de indenização."
+<img src="https://user-images.githubusercontent.com/99282359/221448968-df8ef385-31e6-42bf-a47c-0848ce7fac90.png" alt="User storie 9">
+
+<hr>
+
+<b>User storie 10</b> "Eu como seguradora quero delimitar os regulamentos para cada um dos grupos de segurados."
+<img src="https://user-images.githubusercontent.com/99282359/221448972-997779d1-eac1-4aa2-b2bd-e2ffbc565a4e.png" alt="User storie 10">
+
+## Comportamento esperado do smart contract 
+O smart contract em questão é uma aplicação que roda na blockchain e tem como objetivo fornecer seguros para celulares.´Seu funcionamento ocorre de maneira simples e eficiente: quando um cliente adquire um seguro, ele envia uma transação para o endereço do contrato com as informações do celular e o valor do prêmio de seguro. O contrato então registra a apólice e envia de volta uma confirmação da transação.
 
 Caso o celular sofra algum dano coberto pela apólice, o cliente pode solicitar o reembolso ao enviar uma nova solicitação para o contrato com as informações do dano e as evidências necessárias. O contrato verifica se o dano está coberto pela apólice e, se estiver, realiza o pagamento do valor acordado em criptomoedas para o cliente.
 
@@ -141,4 +182,4 @@ Para garantir a transparência e a segurança das operações, todas as transaç
 
 O smart contract também tem um conjunto de regras claras e transparentes que definem os termos e condições do seguro, garantindo que os clientes tenham uma compreensão clara do contrato e do que é coberto por ele.
 
-Por meio dessas funções, o contrato espera fornecer seguros para celulares de maneira segura, eficiente e transparente. Assim, proporcionando aos clientes uma opção inovadora e confiável de proteção para seus dispositivos móveis.
+Por meio dessas funções, o contrato espera fornecer seguros para celulares de maneira certeira, eficiente e transparente. Assim, proporcionará aos clientes uma opção inovadora e confiável de proteção para seus dispositivos móveis.
