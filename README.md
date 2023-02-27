@@ -48,6 +48,8 @@ Dados sensíveis dos clientes são armazenados em um banco de dados, uma vez que
 
 Detalhamento do Diagrama de Blocos:
 
+![Diagrama de Blocos](https://user-images.githubusercontent.com/68927480/221452511-1435a376-d14f-45c9-a858-16bc1743ceae.png)
+
 Cliente: É a pessoa física que deseja contratar um seguro peer-to-peer para o seu smartphone. Ele se conecta ao sistema da Coover através do navegador.
 
 Adm da Coover: A Coover é a empresa que oferece o seguro peer-to-peer para smartphones usando blockchain. Ela se comunica com o browser e  com sua carteira Metamask, bem como com a sua própria aplicação. A aplicação da Coover se comunica com o banco de dados que se comunica com a testnet.
