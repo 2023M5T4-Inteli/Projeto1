@@ -43,4 +43,27 @@ contract Owner {
     (bool sent, bytes memory data) = _to.call{value: msg.value}("");
     require(sent, "Failed to send Ether");
     }
+    
+    modifier onlyOwner() {
+        require(msg.sender == owner, "You're not the smart contract owner!");
+        _;
+    }
+
+    event Deposited(address from, uint amount);
+
+    function depositMoney() public payable {
+        emit Deposited(msg.sender, msg.value);
+    }
+
+    // Use transfer method to withdraw an amount of money and for updating automatically the balance
+    function withdrawMoney(address _to, uint _value) public onlyOwner {
+        payable(_to).transfer(_value);
+    }
+
+    // Getter smart contract Balance
+    function getSmartContractBalance() external view returns(uint) {
+        return address(this).balance;
+    }
+    
+
 }
