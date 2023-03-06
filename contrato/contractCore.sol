@@ -1,34 +1,38 @@
-// SPDX-License-Identifier: GPL-3.0
+// SPDX-License-Identifier: MIT
 pragma solidity >=0.7.0 <0.9.0;
 import "hardhat/console.sol";
-/**
- * @title Owner
- * @dev Set & change owner
- */
+
 contract Owner {
     address public owner;
+    event AddMenber (address member);
+
     // modificador para verificar se o chamador é o proprietário
     modifier isOwner() {
-     
-        require(msg.sender == owner, "Caller is not owner");
+
+        require(msg.sender == owner, "Nao eh o dono");
         _;
     }
-    receive() external payable {}
-    fallback() external payable {}
+
+
     struct Member{
         uint cash; //Dinheiro do user
         address client; //Cliente do contrato
     }
-    mapping (address => Member) public members;
+
+    // Endereço das carteiras
+    mapping (address => bool) public members;
     address [] public membersContract ;
-    /**
-     * @dev Set contract deployer as owner
-     */
+
+    // Eventos necessários
+
     constructor() {
-        console.log("Owner contract deployed by:", msg.sender);
+        console.log("Contrato deployado por :", msg.sender);
         owner = msg.sender; 
     }
- 
+
+
+
+    // Funções do contrato 
     function getOwner() external view returns (address) {
         return owner;
     }
@@ -38,9 +42,23 @@ contract Owner {
     function addMember(address user) public {
         membersContract.push(user);
     }
-    function sendViaCall(address payable _to) public payable {
-    // Retorna o valor boleano indicando sucesso ou falha
-    (bool sent, bytes memory data) = _to.call{value: msg.value}("");
-    require(sent, "Failed to send Ether");
+
+    // Função que permite que só o dono envie dinheiro 
+    function sendMoney(address members, uint amount) public{
+        require(msg.sender == owner, "So o administrador consegue enviar recursos");
+        payable(members).transfer(amount);
     }
+
+    // // Função que permita com que qualquer pessoa paga o contrato, mas pra isso o adm tem que adicionar essa pessoa primeiro 
+    // function payFee() public payable {
+    //     members[msg.sender] = true;
+    //     emit PaymenT;
+
+    // }
+
+
+    
+    
+
+
 }
