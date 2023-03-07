@@ -3,18 +3,18 @@ pragma solidity ^0.8.0;
 
 contract ContratoCoover {
     // Variáveis globais
-    uint public id; // identificador utilizado para verificação dos administradores
+
     uint public amountContract; // valor que está presente no Contrato (isso é respectivo de cada grupo)
     uint public userQuantity; // quantidade de pessoas presente no grupo
     uint public creationDate; // data de criação do grupo
-    uint public dataValidade; // data limite de vigência do contrato (está em PT pq provavelmente n sera utilizada)
+    uint public expirationDate; // data limite de vigência do contrato (está em PT pq provavelmente n sera utilizada)
     uint public minPeople = 5; // mínimo de pessoas para "ativação" do grupo
     uint public maxPeople = 500; // máximo de pessoas que o grupo pode "receber"
-    uint public plusDays; // duração de dias úteis e corridos de vigência do grupo
+
     address private _admin; //variável de administrador
     address[] public group; // variável de endereço referenciada ao grupo; ela será "modelada" 
+
     uint256 public totalMembers; // membros totais do grupo (pode ser atribuído a diferentes grupos)
-    address private _owner; //
 
     struct Wallets {
         address userWallet;
@@ -23,7 +23,7 @@ contract ContratoCoover {
     address[] public wallet;
     
     // referências e armazenamento dos addresses 
-    mapping(address => bool) public termoAceito;
+    mapping(address => bool) public acceptedTerm;
     mapping(address => uint256) private indemnityRequests;
 
     // Construtor
@@ -35,17 +35,16 @@ contract ContratoCoover {
         userQuantity = _users;
         minPeople = _usersMin;
         maxPeople = _userMax;
-        // dataValidade = creationDate + _plusDays * 1 days; // guarda a data de validade a partir de outras var.
     }
 
 
     // Modificador que tem a função de checar se o contrato esta ativo ou não 
-    modifier viabilidade(){
-        if (userQuantity >= minPeople && block.timestamp <= dataValidade && userQuantity <= maxPeople) {
+    modifier viability(){
+        if (userQuantity >= minPeople && block.timestamp <= expirationDate && userQuantity <= maxPeople) {
                 _; // Contrato Ativo
-            } else if (userQuantity < minPeople && block.timestamp <= dataValidade) {
+            } else if (userQuantity < minPeople && block.timestamp <= expirationDate) {
                 _; // Contrato em Progresso
-            } else if (block.timestamp > dataValidade || userQuantity < minPeople) {
+            } else if (block.timestamp > expirationDate || userQuantity < minPeople) {
                 revert("Contrato inativo"); // Contrato Inativo
             } else {
                 revert("Erro ao verificar o contrato");
@@ -62,10 +61,10 @@ contract ContratoCoover {
 
 
 
-    //User story 2 
-    //Função que permite visualizar o contrato na blockchain e poder escolher algum para participar
-    function checkGroups () public {
-    }
+    // //User story 2 
+    // //Função que permite visualizar o contrato na blockchain e poder escolher algum para participar
+    // function checkGroups () public {
+    // }
 
     // User story 3
     // função que permite a solicitação de uma indenização e armazena o endereço do solicitante
@@ -93,7 +92,7 @@ contract ContratoCoover {
         require(group.length == 0, "O grupo ja foi criado");
         totalMembers = walletsToAdd.length + 1;
         group = new address[](totalMembers);
-        group[0] = _owner;
+        group[0] = _admin;
         for (uint256 i = 0; i < walletsToAdd.length; i++) {
             group[i + 1] = walletsToAdd[i];
         }
@@ -112,7 +111,6 @@ contract ContratoCoover {
     transferido para o endereço do solicitante e a solicitação é excluída. */
     
     function acceptIndemnityRequest(address requestor) public onlyOwner {
-        require(msg.sender == _owner,"Somente o dono pode aceitar reembolsos ");
         uint256 amountToPay = indemnityRequests[requestor];
         require(amountToPay > 0, "Pedido de reembolso nao encontrado");
         delete indemnityRequests[requestor];
