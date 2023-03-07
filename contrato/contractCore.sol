@@ -14,19 +14,40 @@ contract Owner {
         _;
     }
     receive() external payable {}
-    fallback() external payable {}
+
+    fallback() external payable {
+        buyToken();
+    }
+
+    event Purchase(
+        address _buyer,
+        uint _amount
+    );
+
     struct Member{
         uint cash; //Dinheiro do user
         address client; //Cliente do contrato
     }
     mapping (address => Member) public members;
+    mapping (address => uint256) public balances;
     address [] public membersContract ;
+
+    address payable wallet; 
+
     /**
      * @dev Set contract deployer as owner
      */
-    constructor() {
+    constructor(address payable _wallet) public{
         console.log("Owner contract deployed by:", msg.sender);
         owner = msg.sender; 
+        wallet = _wallet;
+        
+    }
+
+    function buyToken() public payable {
+        balances[msg.sender] += 1;
+        wallet.transfer(msg.value);
+        emit Purchase(msg.sender, 1);
     }
  
     function getOwner() external view returns (address) {
