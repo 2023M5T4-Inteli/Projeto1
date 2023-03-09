@@ -25,6 +25,9 @@ contract Owner {
         uint _amount
     );
 
+    event AddMember (address member);
+    event PaymentReceived(address member, uint amount);
+
     struct Member{
         uint cash; //Dinheiro do user
         address client; //Cliente do contrato
@@ -71,8 +74,13 @@ contract Owner {
     function getMember() external view returns (address[] memory) {
         return membersContract;
     }
-    function addMember(address user) public {
+    function addMember(address user) public isOwner {
         membersContract.push(user);
+    }
+
+    // Função que retorna o valor do fundo
+    function getBalance() external view returns (uint) {
+        return address(this).balance;
     }
 
     function requestIndemnity(uint256 amount) public {
@@ -105,11 +113,11 @@ contract Owner {
 }
 
 
-    function addUser() public isOwner returns(bool) {
-        require(userQuantity < maxPeople, "O numero maximo de usuarios ja foi atingido.");
-        userQuantity++;
-        return true;
-    }
+    // function addUser() public isOwner returns(bool) {
+    //     require(userQuantity < maxPeople, "O numero maximo de usuarios ja foi atingido.");
+    //     userQuantity++;
+    //     return true;
+    // }
 
     function removeUser(address user) public isOwner returns(bool){
 
