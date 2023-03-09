@@ -8,12 +8,14 @@ import "hardhat/console.sol";
  */
 contract Owner {
     address public owner;
+
     // modificador para verificar se o chamador é o proprietário
     modifier isOwner() {
      
         require(msg.sender == owner, "Caller is not owner");
         _;
     }
+
     receive() external payable {}
 
     fallback() external payable {
@@ -32,6 +34,7 @@ contract Owner {
         uint cash; //Dinheiro do user
         address client; //Cliente do contrato
     }
+
     mapping (address => Member) public members;
     mapping (address => uint256) public balances;
     mapping(address => uint256) private indemnityRequests;
@@ -62,6 +65,17 @@ contract Owner {
         
     }
 
+    function addMoney() public payable{
+        uint admTax;
+        uint deposit = msg.value;
+        uint payUser = deposit - (deposit * admTaxa/100);
+        balances[msg.sender] += msg.value;
+
+        emit Purchase(msg.sender, 1);
+        emit PaymentReceived(msg.sender, msg.value);
+        
+    }
+
     // function buyToken() public payable {
     //     balances[msg.sender] += 1;
     //     wallet.transfer(msg.value);
@@ -76,6 +90,7 @@ contract Owner {
     }
     function addMember(address user) public isOwner {
         membersContract.push(user);
+        emit AddMember(msg.sender);
     }
 
     // Função que retorna o valor do fundo
@@ -102,7 +117,9 @@ contract Owner {
         uint256 amountToPay = indemnityRequests[requestor];
         require(amountToPay > 0, "Pedido de reembolso nao encontrado");
         delete indemnityRequests[requestor];
+        require(msg.sender.balance >= amountToPay, "Saldo insuficiente para processar pedido");
         payable(requestor).transfer(amountToPay);
+        
     }
 
     function quantWallet(address newWallet) public isOwner returns(bool success) {
@@ -110,7 +127,12 @@ contract Owner {
         wallet.push(newWallet);
         userQuantity++;
      return true;
-}
+    }
+
+    function sendMoney(address membersWallet, uint amount) public{
+        require(msg.sender == owner, "So o administrador consegue enviar recursos");
+        payable(membersWallet).transfer(amount);
+    }
 
 
     // function addUser() public isOwner returns(bool) {
