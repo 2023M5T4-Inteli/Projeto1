@@ -1,170 +1,175 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity >=0.7.0 <0.9.0;
 
-contract ContratoCoover {
-    // Variáveis globais
-    uint public id; // identificador utilizado para verificação dos administradores
-    uint public amountContract; // valor que está presente no Contrato (isso é respectivo de cada grupo)
-    uint public userQuantity; // quantidade de pessoas presente no grupo
-    uint public creationDate; // data de criação do grupo
-    uint public dataValidade; // data limite de vigência do contrato (está em PT pq provavelmente n sera utilizada)
-    uint public minPeople = 5; // mínimo de pessoas para "ativação" do grupo
-    uint public maxPeople = 500; // máximo de pessoas que o grupo pode "receber"
-    uint public plusDays; // duração de dias úteis e corridos de vigência do grupo
-    address private _admin; //variável de administrador
-    address[] public group; // variável de endereço referenciada ao grupo; ela será "modelada" 
-    uint256 public totalMembers; // membros totais do grupo (pode ser atribuído a diferentes grupos)
-    address private _owner; //
+contract Owner {
+    address public owner;
 
-    struct Wallets {
-        address userWallet;
-    }
-    
-    address[] public wallet;
-    
-    // referências e armazenamento dos addresses 
-    mapping(address => bool) public termoAceito;
-    mapping(address => uint256) private indemnityRequests;
+    // ********** Array com informações
+    // ********** Buscar entender onde que essas arrays são usadas e como atendem as user stories 
+    address [] public membersContract;
+    address [] private userRequestingRefund;
 
-    // Construtor
-    // Este constructor roda apenas no deploy e tem a função de guarda algumas informações muito importantes
-    constructor(uint _users, uint _usersMin, uint _userMax) payable{
-        _admin = msg.sender;
-        creationDate = block.timestamp; //guarda a data de criação
-        amountContract = address(this).balance;
-        userQuantity = _users;
-        minPeople = _usersMin;
-        maxPeople = _userMax;
-        // dataValidade = creationDate + _plusDays * 1 days; // guarda a data de validade a partir de outras var.
-    }
+    // Variaveis de estado
+    uint public amountContract = getBalance(); // valor que está presente no Contrato (isso é respectivo de cada grupo)
+    address payable private _admin;
+    uint public indemnity;
+    bool public statusIndemnity = false;
+    uint public reposition;
+    address[] public payers;
 
-
-    // Modificador que tem a função de checar se o contrato esta ativo ou não 
-    modifier viabilidade(){
-        if (userQuantity >= minPeople && block.timestamp <= dataValidade && userQuantity <= maxPeople) {
-                _; // Contrato Ativo
-            } else if (userQuantity < minPeople && block.timestamp <= dataValidade) {
-                _; // Contrato em Progresso
-            } else if (block.timestamp > dataValidade || userQuantity < minPeople) {
-                revert("Contrato inativo"); // Contrato Inativo
-            } else {
-                revert("Erro ao verificar o contrato");
-        }
-    }
-
-
-
-    // Modificador para permitir que apenas o dono do contrato acesse determinada função
-    modifier onlyOwner() {
-        require(msg.sender == _admin, "Apenas o dono do contrato pode executar essa funcao.");
+    // modificador para verificar se quem chamou é o proprietário
+    modifier isOwner() {
+        require(msg.sender == owner, "Caller is not owner");
         _;
     }
 
 
+    // **************** Pesquisar o que fazem essas funções e preencher
+    receive() external payable {}
 
-    //User story 2 
-    //Função que permite visualizar o contrato na blockchain e poder escolher algum para participar
-    function checkGroups () public {
-    }
-
-    // User story 3
-    // função que permite a solicitação de uma indenização e armazena o endereço do solicitante
-    function requestIndemnity(uint256 amount) public {
-        require(amount > 0, "Indenizacao tem de ser maior que 0");
-        indemnityRequests[msg.sender] = amount;
+    fallback() external payable {
     }
 
 
-    // User story 5 
-    // Função que permite ao usuario solicitar o reembolso
-    function redeemnRefund() private{
+    // ************ Explicar o que cada evento faz brevemente 
+    event Purchase(
+        address _buyer,
+        uint _amount
+    );
 
+    event AddMember (address member);
+    event PaymentReceived(address member, uint amount);
+    event FinalAmount(uint finalValue);
+
+    // **** Explicar o que é um struct e pra que serve
+    struct Member{
+        uint cash; //Dinheiro do user
+        address client; //Cliente do contrato
     }
 
-    // User story 6
-    // Função que permite o cliente ver os termos do contrato 
-    function checkTerms() public {
 
+    // ********** Pesquisar pra que serve um mapping 
+    // Mapping são tabelas hash em solidity, aqui é possivel criar uma associação chave-> valor, vai ser bem util
+    //Nenhum valor esta sendo adicionado nesse mapping
+    mapping (address => Member) public members;
+    mapping (address => uint256) public balances;
+    mapping(address => uint256) private indemnityRequests;
+    mapping(address => bool) public activeMembers;
+
+    constructor() {
+        owner = msg.sender; 
+    }   
+
+    // Função para pagar e entrar no contrato 
+    // ******** Melhorar o nome da função, variaveis e checar logíca    
+    function addMoney() public payable{
+        uint admTax = 5;
+        uint deposit = msg.value;
+        uint payUser = deposit - (deposit * admTax/100);
+        balances[msg.sender] += msg.value;
+
+        emit Purchase(msg.sender, 1);
+        emit PaymentReceived(msg.sender, msg.value);
+        emit FinalAmount (payUser);
+        
     }
 
-    // User story 7
-    // Criação de um grupo a partir das Wallets
-    function groupCreation(address[] memory walletsToAdd) onlyOwner public {
-        require(group.length == 0, "O grupo ja foi criado");
-        totalMembers = walletsToAdd.length + 1;
-        group = new address[](totalMembers);
-        group[0] = _owner;
-        for (uint256 i = 0; i < walletsToAdd.length; i++) {
-            group[i + 1] = walletsToAdd[i];
+ 
+    function getOwner() external view returns (address) {
+        return owner;
+    }
+    function showAllMembers() external view returns (address[] memory) {
+        return membersContract;
+    }
+
+    function getPendingRefunds() public isOwner view returns (address [] memory){
+        return userRequestingRefund;
+    }
+
+
+
+    function addMember(address user) public isOwner {
+        membersContract.push(user);
+        activeMembers[user] = true;
+        emit AddMember(msg.sender);
+    }
+
+    // Função que retorna o valor do fundo
+    function getBalance() public view returns (uint) {
+        return address(this).balance;
+    }
+
+    // Ver se quem pediu a indenização esta dentro ou não do grupo e adicionando sua carteira numa lista com os usuarios que pediram o pagamento
+    // **** Essa função demanda gás para ser executada
+    function userRequestingPayment (address userMakingRequest) public {
+        for( uint i = 0; i < membersContract.length; i++){
+            if (membersContract[i] == userMakingRequest){
+                userRequestingRefund.push(userMakingRequest);
+            }
+            else{
+                return ;
+            }
         }
     }
 
-    // User story 8
-    // A Coover tem a possibilidade de visualizar o grupo criado por ela e também excluir o mesmo
-    function showDeleteGroup() private onlyOwner{
 
-    }
-
-
-    // User story 9
-    /* Permite que o proprietário aceite uma solicitação de indenização
-    ao final, se todas as condições forem atendidas, o valor solicitado é
-    transferido para o endereço do solicitante e a solicitação é excluída. */
-    
-    function acceptIndemnityRequest(address requestor) public onlyOwner {
-        require(msg.sender == _owner,"Somente o dono pode aceitar reembolsos ");
-        uint256 amountToPay = indemnityRequests[requestor];
-        require(amountToPay > 0, "Pedido de reembolso nao encontrado");
-        delete indemnityRequests[requestor];
-        payable(requestor).transfer(amountToPay);
-    }
-
-    // User story 10 
-    // O administrador consegue editar as regras do contrato 
-    function changeRules() public{
-
-    }
-   
-
-    // A função abaixo aparece para todos os visualizadores da Blockchain, porem, somente o dono consegue editar a função
-    // Além disso, essa função delimita o numero de pessoas que podem estar dentro da carteira  
-
-    function quantWallet(address newWallet) public onlyOwner returns(bool) {
-        require(wallet.length < maxPeople, "Numero maximo de pessoas na Wallets foi atingido.");
-        wallet.push(newWallet);
-        userQuantity += 1;
-        return true;
-    }
-
-    
-    // Adiciona um novo usuário ao grupo
-
-    function addUser() public onlyOwner returns(bool) {
-        require(userQuantity < maxPeople, "O numero maximo de usuarios ja foi atingido.");
-        userQuantity++;
-        return true;
-    }
-
-
-
-    // Remove um usuário do grupo
-
-    function removeUser(address user) public onlyOwner returns(bool){
-
-        for (uint i = 0; i < wallet.length - 1; i++) {
-            if (wallet[i] == user) {
-                
-                for(uint index = i; i < wallet.length - 1; index++){
-                    wallet[index] = wallet[index + 1];
-                }
+    // Função que permite que só o dono envie dinheiro 
+    function payRefund(address membersWallet, uint amount) public isOwner{
+        require(amount < amountContract);
+        // Condicional para verificar se o input que requiriu o pagamento já está na lista de usuarios que pediram um reembolso
+        // ********** Convem ver se há como fazer uma função que retorne um booleano ao invés de executar vários loops 
+            for( uint i = 0; i < userRequestingRefund.length; i++){
+            if (userRequestingRefund[i] == membersWallet){
+                payable(membersWallet).transfer(amount);
+                userRequestingRefund.pop();
+                amountContract = amountContract - amount;
+                indemnity = amount;
+                statusIndemnity = true;
+            }
+            else{
                 
             }
-
-        }   
-
-        wallet.pop();
-        return true;
+        }
     }
 
+    //função que permite a reposição da reserva de risco e garante que todos os membros a paguem 
+    function riskReserve() public payable{
+        require(statusIndemnity == true, "A reserva de risco nao foi comprometida.");
+        uint totalClients = quantClientsWallet();
+        reposition = indemnity/totalClients;
+        require(msg.value == reposition, "Valor devido incorreto.");
+        payers.push(msg.sender);
+    
+        if (payers.length == totalClients) {
+            statusIndemnity = false;
+        }
+    }
+
+
+    // Função para ver quantas pessoas há na carteira 
+    // **************** Escrever melhor o nome das funções 
+    function quantClientsWallet() public view returns(uint) {
+        uint usersAmount = membersContract.length;
+        return usersAmount;
+    }
+
+
+    // ********* Função que remove os usuarios do grupo 
+    function removeUser(address userWallet) public isOwner {
+        
+        for (uint i = 0; i < membersContract.length - 1; i++ ){
+            if (membersContract[i] == userWallet){
+                for ( uint index = i; i < membersContract.length - 1; index++){
+                    membersContract[index] = membersContract[index + 1];
+                }
+            }
+
+        }
+        // Caso o usuario seja removido ele é automaticamente retirado da lista de pendencias a pagar
+        // userRequestingRefund.pop();
+        activeMembers[userWallet] = false;
+        membersContract.pop();
+        return ;
+    }
 
 }
