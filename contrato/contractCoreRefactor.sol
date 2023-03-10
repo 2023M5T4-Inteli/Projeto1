@@ -39,7 +39,9 @@ contract Owner {
 
     // ********** Pesquisar pra que serve um mapping 
     // Mapping são tabelas hash em solidity, aqui é possivel criar uma associação chave-> valor, vai ser bem util
+    //Nenhum valor esta sendo adicionado nesse mapping
     mapping (address => Member) public members;
+    
     mapping (address => uint256) public balances;
     mapping(address => uint256) private indemnityRequests;
     mapping(address => bool) public activeMembers;
@@ -49,32 +51,12 @@ contract Owner {
     // ********** Buscar entender onde que essas arrays são usadas e como atendem as user stories 
     address [] public membersContract ;
 
-    address[] public wallet;
-
-    address [] public group;
-
     address [] private userRequestingRefund;
 
 
 
     // Variaveis de estado
     uint public amountContract = getBalance(); // valor que está presente no Contrato (isso é respectivo de cada grupo)
-
-    /* ***** Para simplificar o escope creio que não precisa de minimo e máximo de users 
-    Porque, teriamos de adicionar varias condicionais para iniciar o contrato.
-    Além disso, essas variaveis públicas não estão sendo usadas em nenhuma função 
-    
-    min people
-    max people
-    contractEndtime
-    creationDate
-    */
-    uint public creationDate; // data de deploy do contrato 
-    uint public minPeople = 5; // mínimo de pessoas para "ativação" do grupo
-    uint public maxPeople = 500; // máximo de pessoas que o grupo pode "receber"
-    uint public contractEndtime;
-
-
 
 
     address payable private _admin;
@@ -85,9 +67,9 @@ contract Owner {
 
 
     // Função para pagar e entrar no contrato 
-    // ******** Melhorar o nome da função e as variaveis 
+    // ******** Melhorar o nome da função, variaveis e checar logíca    
     function addMoney() public payable{
-        uint admTax;
+        uint admTax = 5;
         uint deposit = msg.value;
         uint payUser = deposit - (deposit * admTax/100);
         balances[msg.sender] += msg.value;
@@ -124,7 +106,7 @@ contract Owner {
     }
 
     // Ver se quem pediu a indenização esta dentro ou não do grupo e adicionando sua carteira numa lista com os usuarios que pediram o pagamento
-
+    // **** Essa função demanda gás para ser executada
     function userRequestingPayment (address userMakingRequest) public {
         for( uint i = 0; i < membersContract.length; i++){
             if (membersContract[i] == userMakingRequest){
@@ -136,17 +118,6 @@ contract Owner {
         }
     }
 
-
-    // Aceitar e pagar a indenização 
-    //************** TODO 
-    // function acceptIndemnityRequest(address requestor) public isOwner {
-    //     // uint256 amountToPay = indemnityRequests[requestor];
-    //     require(amountToPay > 0, "Pedido de reembolso nao encontrado");
-    //     delete indemnityRequests[requestor];
-    //     require(msg.sender.balance >= amountToPay, "Saldo insuficiente para processar pedido");
-    //     payable(requestor).transfer(amountToPay);
-        
-    // }
 
     // Função que permite que só o dono envie dinheiro 
     function payRefund(address membersWallet, uint amount) public isOwner{
@@ -187,27 +158,10 @@ contract Owner {
 
         }
         // Caso o usuario seja removido ele é automaticamente retirado da lista de pendencias a pagar
-        userRequestingRefund.pop();
+        // userRequestingRefund.pop();
         activeMembers[userWallet] = false;
         membersContract.pop();
         return ;
     }
 
-
-
-
-// ******* Explicar como funciona a função sem comentários dentro
-    function terminateContract() public isOwner { 
-    //verifica se ainda há tempo no contrato 
-        require(block.timestamp <= contractEndtime); 
-
-    //enviar todos os fundos restantes para o proprietário 
-        if (amountContract > 0) { 
-        _admin.transfer(amountContract); 
-     } 
-
-    //desativar o contrato (Ajeitar porque sera desativado)
-        selfdestruct(_admin); 
-    }
-    
 }
