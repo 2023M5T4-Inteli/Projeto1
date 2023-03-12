@@ -21,8 +21,40 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
 - [Rafael Lupovici Moritz](https://www.linkedin.com/in/rafael-moritz/)
 - [Vinicius Oliveira Fernandes](https://www.linkedin.com/in/vinicius-oliveira-fernandes-627b68168/)
 
-## Descrição do projeto
-*
+## Descrição do objetivo do Smart Contract
+
+Este contrato tem como objetivo gerenciar um grupo de membros que contribuem com dinheiro para um fundo comum. Ele contém funções para adicionar dinheiro ao fundo, adicionar novos membros, remover membros, solicitar reembolsos e pagar reembolsos aos membros. O contrato também tem variáveis para armazenar informações sobre os membros, incluindo seus saldos e status de ativação. O evento "Purchase" é emitido quando um novo pagamento é recebido, o evento "AddMember" é emitido quando um novo membro é adicionado e o evento "PaymentReceived" é emitido quando um pagamento é recebido de um membro.
+
+## Estrutura do Smart Contract
+
+1. **Variáveis**
+      - "owner" (address public): endereço do proprietário do contrato
+      - "members" (mapping): tabela hash que associa cada endereço de usuário com um objeto Member, que contém informações sobre o dinheiro do usuário e seu endereço.
+      - "balances" (mapping): tabela hash que associa cada endereço de usuário com o saldo atual em Ether do usuário.
+      - "indemnityRequests" (mapping): tabela hash que associa cada endereço de usuário com o valor que ele solicitou em termos de reembolso.
+      - "activeMembers" (mapping): tabela hash que associa cada endereço de usuário com um valor booleano indicando se o usuário está ativo no grupo ou não.
+      - "membersContract" (address[]): array de endereços de usuários que fazem parte do grupo.
+      - "userRequestingRefund" (address[]): array de endereços de usuários que solicitaram um reembolso.
+      - "amountContract" (uint): valor atual em Ether que está presente no contrato.
+      - "_admin" (address payable): endereço do administrador do contrato, que pode receber taxas de transação.
+
+2. **Eventos**
+      - Evento "Purchase": é emitido quando um usuário faz um pagamento para entrar no contrato. Ele recebe dois parâmetros: o endereço do comprador (_buyer) e o valor pago (_amount).
+      - Evento "AddMember": é emitido quando um novo membro é adicionado ao contrato. Ele recebe um parâmetro: o endereço do novo membro (member).
+      - Evento "PaymentReceived": é emitido quando um pagamento é recebido pelo contrato. Ele recebe dois parâmetros: o endereço do membro que fez o pagamento (member) e o valor recebido (amount). 
+      - Evento "FinalAmount": é emitido quando o valor final de um pagamento é calculado após a dedução da taxa de administração. Ele recebe um parâmetro: o valor final do pagamento (finalValue).
+
+3. **Funções**
+      - addMoney(): Função que permite que os usuários adicionem dinheiro ao contrato, com uma taxa de 5% aplicada sobre o valor depositado. O saldo da carteira do usuário é atualizado e os eventos Purchase, PaymentReceived e FinalAmount são emitidos para registrar a transação.
+      - getOwner(): Função que retorna o endereço do proprietário do contrato.
+      - showAllMembers(): Função que retorna uma matriz contendo todos os endereços de membros registrados no contrato.
+      - getPendingRefunds(): Função que retorna uma matriz contendo os endereços dos membros que solicitaram reembolsos.
+      - addMember(): Função que permite que o proprietário do contrato adicione um novo membro ao contrato. O endereço do novo membro é adicionado à matriz membersContract e o status de membro ativo é definido como true. O evento AddMember é emitido para registrar a adição do novo membro.
+      - getBalance(): Função que retorna o saldo total atual do contrato.
+      - userRequestingPayment(): Função que verifica se o endereço do usuário que solicita o reembolso está registrado como membro ativo no contrato. Se o endereço for válido, ele é adicionado à matriz userRequestingRefund para ser processado posteriormente.
+      - payRefund(): Função que permite que o proprietário do contrato envie um reembolso a um membro ativo do contrato. O endereço da carteira do membro e o valor do reembolso são fornecidos como entrada, e a função verifica se o valor do reembolso é menor que o valor total disponível no contrato. Se o membro estiver registrado na matriz userRequestingRefund, o valor do reembolso é enviado à carteira do membro e removido da matriz userRequestingRefund. O valor total disponível no contrato é atualizado para refletir o reembolso.
+      - quantClientsWallet(): Função que retorna o número de membros ativos registrados no contrato.
+      - removeUser(): Função que permite que o proprietário do contrato remova um membro ativo do contrato. O endereço da carteira do membro a ser removido é fornecido como entrada e a função atualiza a matriz membersContract e o status de membro ativo para refletir a remoção do membro. Qualquer reembolso pendente solicitado pelo membro também é removido da matriz "userRequestingRefund".
 
 ## Requisitos de negócio:
 #### Requisito 1: Criação de um grupo de seguro mútuo.
