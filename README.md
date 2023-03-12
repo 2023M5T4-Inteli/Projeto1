@@ -83,11 +83,15 @@ Para que possam ser assistidos pelo seguro, é preciso que os clientes da Coover
 
 É necessário que o contrato inteligente seja capaz de permitir a administração da quantidade de usuários em um determinado grupo de seguros. Dessa forma, é preciso que haja uma função que possibilite a exclusão de determinado cliente, que só ocorrerá mediante pedido de cancelamento do contrato, por parte do usuário, ou detecção de fraude, por parte da Coover.
 
-#### Requisito 5: Aprovação dos pedidos de indenização.
+#### Requisito 5: Realização do pedido de indenização.
+# PREENCHER AQUI (IZABELLA)
+
+
+#### Requisito 6: Aprovação dos pedidos de indenização.
 
 Após a solicitação de indenização realizada pelo cliente, a empresa precisa ter a opção de aprová-la ou recusá-la, de acordo com regras pré estabelecidas no escopo do contrato. É preciso esclarecer que essa decisão será tomada de forma automática, a partir do que a empresa definiu como sendo os critérios necessários para a tomada de decisão acerca de determinado pedido.  
  
-#### Requisito 6: Reposição da reserva de risco.
+#### Requisito 7: Reposição da reserva de risco.
 
 Após a aprovação de determinado pedido de indenização, é necessário que os participantes de um grupo se responsabilizem pela reposição da reserva de risco que foi comprometida após o pagamento em questão. Com isso, é necessário que, a cada pedido de indenização aprovado, haja a cobrança proporcional à porcentagem construída por cada membro do grupo. Logo, contribuintes responsáveis por parcelas diferentes da reserva, devem ser cobrados de modo distinto no momento da ativação dessa função.
 
@@ -177,6 +181,8 @@ Dados sensíveis dos clientes são armazenados em um banco de dados, uma vez que
 ![req5](https://user-images.githubusercontent.com/99282359/224573729-834eaa0c-6072-44d9-8c17-782669705bcf.png)
 
 ![req6](https://user-images.githubusercontent.com/99282359/224573732-73960c0f-7f15-4b86-91ce-d117c9a57a5b.png)
+
+## Diagrama de implementação UML
 
 ## Comportamento esperado do smart contract 
 O smart contract em questão é uma aplicação que roda na blockchain e tem como objetivo fornecer seguros para celulares.Seu funcionamento ocorre de maneira simples e eficiente: quando um cliente adquire um seguro, ele envia uma transação para o endereço do contrato com as informações do celular e o valor do prêmio de seguro. O contrato então registra a apólice e envia de volta uma confirmação da transação.
