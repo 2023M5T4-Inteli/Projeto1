@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Navbar from './components/Navbar'
+import BottomNav from './components/BottomNav'
 import React, { ReactElement, useState, createContext, useContext} from 'react';
 import Sidebar from './components/Sidebar'
 import Avatar from '@mui/material/Avatar';
@@ -16,22 +16,24 @@ import InputBase from '@mui/material/InputBase';
 import Toolbar from '@mui/material/Toolbar';
 import SetMarca from './setMarca'
 import { Box } from '@mui/system';
+import {Notification1, Notification2} from './Notification'
 
 function Solicitacao() {
   return (
     <>
-        <Navbar />
-
+        <BottomNav />
+        <Box sx={{background:'#002242', paddingTop:'40px', paddingBottom:'100%', }}>
+        <Notification1></Notification1>
+        <Notification2></Notification2>
+        </Box>
         <Box sx={{ 
           // background: 'rgb(250,249,233)',
           // background: 'radial-gradient(circle, rgba(250,249,233,0.3) 41%, rgba(250,249,233,0.4) 100%)',
-          // backgroundColor: '#fffefa',
-          backgroundColor: '#002242',
-        height: '66.7rem', '@media (max-width: 450px)': {
-            width:'115%'
-          }, }}>
+          backgroundColor: '#fffefa',
+          // backgroundColor: '#002242',
+        height: '66.7rem', }}>
 
-          <Grid sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column',}}>
+          {/* <Grid sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column',}}>
 
             <Typography sx={{  fontSize: '30px', 
           //  color: '#06266A', 
@@ -59,7 +61,7 @@ function Solicitacao() {
               Para começar, precisamos identificar o modelo do seu smartphone.
             </Typography>
             <SetMarca />
-          </Grid>
+          </Grid> */}
         </Box>
     </>
   );
