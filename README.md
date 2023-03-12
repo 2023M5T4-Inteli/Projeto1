@@ -207,5 +207,11 @@ Wallet do MetaMask com GoerliETH proveniente do falset citado anteriormente. Ap�
 Quando tudo estava preparado para o deploy o grupo já havia preparado um “contrato core” para teste, de forma em que pudemos fazer um deploy em um momento propício para dar continuidade as outras atividades.</b>
 
 
+![1](https://user-images.githubusercontent.com/68927480/224571970-2ec67c2d-38f3-41a4-8855-8b80efda5448.jpeg)
+![2](https://user-images.githubusercontent.com/68927480/224571981-306fe2ef-42bb-4931-ad05-abb18fc5d879.jpeg)
+![3](https://user-images.githubusercontent.com/68927480/224571994-b0c62444-3716-4bed-a599-e270fda9d12b.jpeg)
+![4](https://user-images.githubusercontent.com/68927480/224572007-1513eda7-35eb-4ebc-b459-818514cca14a.jpeg)
+![5](https://user-images.githubusercontent.com/68927480/224572023-173a0c3b-b7c2-4ddd-bbf7-2d02ebf0d2df.jpeg)
+![6](https://user-images.githubusercontent.com/68927480/224572034-00bc5125-2952-48dd-8779-41131156bc30.jpeg)
 
 
