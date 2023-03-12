@@ -183,3 +183,29 @@ Para garantir a transparência e a segurança das operações, todas as transaç
 O smart contract também tem um conjunto de regras claras e transparentes que definem os termos e condições do seguro, garantindo que os clientes tenham uma compreensão clara do contrato e do que é coberto por ele.
 
 Por meio dessas funções, o contrato espera fornecer seguros para celulares de maneira certeira, eficiente e transparente. Assim, proporcionará aos clientes uma opção inovadora e confiável de proteção para seus dispositivos móveis.
+
+## Processo de deploy
+
+Um dos impedimentos foi que o Goerli não ficou disponível por um certo período durante a sprint, fazendo com que tentássemos o deploy no Ganache como alternativa. 
+O deploy no Ganache foi feito com sucesso (na rede local) com o uso da plataforma Remix.
+<hr>
+Apesar disso, uma colega compartilhou um falset do Goerli com a turma. A partir daí, seguimos o passo a passo presente no Github “InteliBlockchain” para realizar o deploy na testnet pública. Depois de um tempo o Goerli ficou novamente disponível para uso, passando a ser nossa principal alternativa para o deploy. 
+Os passos que seguimos, de forma resumida, foram:
+<hr>
+
+### 1. Instalação do Truffle e preparação do código nos arquivos
+<hr>
+
+### 2. Cadastro no Infura e uso da API Key no arquivo .env
+<hr>
+
+### 3. Preparação da Meta Mask
+Wallet do MetaMask com GoerliETH proveniente do falset citado anteriormente. Após a mineração no falset e a adição do Goerli na carteira, é assim que ela ficou. 
+<hr>
+
+### 4. Deploy do “contrato Core” feito pelo grupo
+Quando tudo estava preparado para o deploy o grupo já havia preparado um “contrato core” para teste, de forma em que pudemos fazer um deploy em um momento propício para dar continuidade as outras atividades.</b>
+
+
+
+
