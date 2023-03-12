@@ -28,6 +28,9 @@ Este contrato tem como objetivo gerenciar um grupo de membros que contribuem com
 ## Estrutura do Smart Contract
 
 1. **Variáveis**
+      
+      As Variáveis de Estado são usadas para armazenar dados que são mantidos entre chamadas de função e alterações de contrato. Eles são usados para criar um estado entre as alterações de contrato. Segue as variáveis do contrato:
+
       - "owner" (address public): endereço do proprietário do contrato
       - "members" (mapping): tabela hash que associa cada endereço de usuário com um objeto Member, que contém informações sobre o dinheiro do usuário e seu endereço.
       - "balances" (mapping): tabela hash que associa cada endereço de usuário com o saldo atual em Ether do usuário.
@@ -39,12 +42,18 @@ Este contrato tem como objetivo gerenciar um grupo de membros que contribuem com
       - "_admin" (address payable): endereço do administrador do contrato, que pode receber taxas de transação.
 
 2. **Eventos**
+      
+      Os Eventos são usados para notificar os usuários do contrato inteligente sobre mudanças de estado. Eles também são usados para informar os usuários sobre alterações no contrato, como transações executadas, mudanças no estado da conta e etc. Eventos permitem que os usuários saibam o que está acontecendo no contrato inteligente. Segue os eventos contidos no contrato:
+      
       - Evento "Purchase": é emitido quando um usuário faz um pagamento para entrar no contrato. Ele recebe dois parâmetros: o endereço do comprador (_buyer) e o valor pago (_amount).
       - Evento "AddMember": é emitido quando um novo membro é adicionado ao contrato. Ele recebe um parâmetro: o endereço do novo membro (member).
       - Evento "PaymentReceived": é emitido quando um pagamento é recebido pelo contrato. Ele recebe dois parâmetros: o endereço do membro que fez o pagamento (member) e o valor recebido (amount). 
       - Evento "FinalAmount": é emitido quando o valor final de um pagamento é calculado após a dedução da taxa de administração. Ele recebe um parâmetro: o valor final do pagamento (finalValue).
 
 3. **Funções**
+
+     As Funções são usadas para executar operações e modificar o estado do contrato. Segue as funções presentes no contrato:
+      
       - addMoney(): Função que permite que os usuários adicionem dinheiro ao contrato, com uma taxa de 5% aplicada sobre o valor depositado. O saldo da carteira do usuário é atualizado e os eventos Purchase, PaymentReceived e FinalAmount são emitidos para registrar a transação.
       - getOwner(): Função que retorna o endereço do proprietário do contrato.
       - showAllMembers(): Função que retorna uma matriz contendo todos os endereços de membros registrados no contrato.
@@ -170,11 +179,13 @@ Dados sensíveis dos clientes são armazenados em um banco de dados, uma vez que
 ![req6](https://user-images.githubusercontent.com/99282359/224573732-73960c0f-7f15-4b86-91ce-d117c9a57a5b.png)
 
 ## Comportamento esperado do smart contract 
-O smart contract em questão é uma aplicação que roda na blockchain e tem como objetivo fornecer seguros para celulares.´Seu funcionamento ocorre de maneira simples e eficiente: quando um cliente adquire um seguro, ele envia uma transação para o endereço do contrato com as informações do celular e o valor do prêmio de seguro. O contrato então registra a apólice e envia de volta uma confirmação da transação.
+O smart contract em questão é uma aplicação que roda na blockchain e tem como objetivo fornecer seguros para celulares.Seu funcionamento ocorre de maneira simples e eficiente: quando um cliente adquire um seguro, ele envia uma transação para o endereço do contrato com as informações do celular e o valor do prêmio de seguro. O contrato então registra a apólice e envia de volta uma confirmação da transação.
 
 Caso o celular sofra algum dano coberto pela apólice, o cliente pode solicitar o reembolso ao enviar uma nova solicitação para o contrato com as informações do dano e as evidências necessárias. O contrato verifica se o dano está coberto pela apólice e, se estiver, realiza o pagamento do valor acordado em criptomoedas para o cliente.
 
 Para garantir a transparência e a segurança das operações, todas as transações e informações do seguro são registradas na blockchain, tornando o processo totalmente rastreável e à prova de fraudes.
+
+A transação, após modificações pontuais, agora também cobra a taxa administrada (que pode ser modificada de acordo com a porcentagem escolhida) diretamente no pagamento feito pelo usuário. Além disso, após as atualizações, a Coover possui o controle dos grupos, com a adição e remoção de usuários, o pagamento da indenização e os registros das atividades por meio de eventos personalizados, que posicionaram melhor os clientes sobre cada uma das novas transações ocorridas.
 
 O smart contract também tem um conjunto de regras claras e transparentes que definem os termos e condições do seguro, garantindo que os clientes tenham uma compreensão clara do contrato e do que é coberto por ele.
 
