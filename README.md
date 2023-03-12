@@ -125,53 +125,17 @@ Dados sensíveis dos clientes são armazenados em um banco de dados, uma vez que
                                       |
                                       |  Armazena dados sensíveis do usuário
                                      
-<b>User storie 1:</b> "Eu, como cliente da seguradora, quero entrar na área do usuário para ter acesso à minha conta."
-<img src="https://user-images.githubusercontent.com/99282359/221448923-6e3db9ff-46fe-438c-b885-e46bd8cf7b23.png" alt="User storie 1">
+![req1](https://user-images.githubusercontent.com/99282359/224573690-d7ca21d7-3b98-44a4-a55f-2fa627710e73.png)
 
-<hr>
+![req2](https://user-images.githubusercontent.com/99282359/224573714-3645c83d-a2c6-472b-a023-6932f7839bf5.png)
 
-<b>User storie 2:</b> "Eu, como usuário da solução, quero visualizar os grupos de seguro já criados para ter a chance de escolher algum deles."
-<img src="https://user-images.githubusercontent.com/99282359/221448932-e37aa5db-a4c3-45bf-abf5-f222508f706c.png" alt="User storie 2">
+![req3](https://user-images.githubusercontent.com/99282359/224573717-a5975ed3-bde3-4496-9f4e-7840f46e9df1.png)
 
-<hr>
+![req4](https://user-images.githubusercontent.com/99282359/224573726-85bfe458-d736-49ea-ad3c-f130bd596bf7.png)
 
-<b>User storie 3:</b> "Eu, como usuário do sistema, quero ter a possibilidade de solicitar uma indenização para ressarcimento em casos de prejuízos ao meu patrimônio."
-<img src="https://user-images.githubusercontent.com/99282359/221448935-81366859-cfd9-446f-aee6-7fc4c925512d.png" alt="User storie 3">
+![req5](https://user-images.githubusercontent.com/99282359/224573729-834eaa0c-6072-44d9-8c17-782669705bcf.png)
 
-<hr>
-
-<b>User storie 4:</b> "Eu, como cliente da Coover, quero visualizar os pontos de suporte para poder entrar em contato com a empresa."
-<img src="https://user-images.githubusercontent.com/99282359/221448941-e4811354-75ec-4f97-85e2-c2fae232c0f9.png" alt="User storie 4">
-
-<hr>
-
-<b>User storie 5:</b> "Eu, como consumidor dos serviços oferecidos pela Coover, quero ter a chance de solicitar o reembolso do serviço contratado para receber o dinheiro investido em caso de insatisfação."
-<img src="https://user-images.githubusercontent.com/99282359/221448945-cdbffbd2-b99e-45eb-b261-1064485eb5de.png" alt="User storie 5">
-
-<hr>
-
-<b>User storie 6:</b> "Eu como cliente da Coover, quero poder visualizar os termos do contrato estabelecido em cada grupo"
-<img src="https://user-images.githubusercontent.com/99282359/221448953-9af03c37-a221-4fe7-aa5a-dccd707ccf80.png" alt="User storie 6">
-
-<hr>
-
-<b>User storie 7</b> "Eu, como seguradora, quero montar um grupo de seguro mútuo para adicionar os participantes que demonstraram interesse em participar dele."
-<img src="https://user-images.githubusercontent.com/99282359/221448955-4ec2d945-73d4-4594-8686-dd590837854d.png" alt="User storie 7">
-
-<hr>
-
-<b>User storie 8</b> "Eu, como seguradora, quero ter a possibilidade de gerenciar os grupos de seguro mútuo já criados e aqueles que ainda não o foram."
-<img src="https://user-images.githubusercontent.com/99282359/221448962-48b88cd6-d6ef-4526-8a2b-ef138c969887.png" alt="User storie 8">
-
-<hr>
-
-<b>User storie 9</b> "Eu, como seguradora, quero ter a chance de aprovar os pedidos de indenização."
-<img src="https://user-images.githubusercontent.com/99282359/221448968-df8ef385-31e6-42bf-a47c-0848ce7fac90.png" alt="User storie 9">
-
-<hr>
-
-<b>User storie 10</b> "Eu como seguradora quero delimitar os regulamentos para cada um dos grupos de segurados."
-<img src="https://user-images.githubusercontent.com/99282359/221448972-997779d1-eac1-4aa2-b2bd-e2ffbc565a4e.png" alt="User storie 10">
+![req6](https://user-images.githubusercontent.com/99282359/224573732-73960c0f-7f15-4b86-91ce-d117c9a57a5b.png)
 
 ## Comportamento esperado do smart contract 
 O smart contract em questão é uma aplicação que roda na blockchain e tem como objetivo fornecer seguros para celulares.´Seu funcionamento ocorre de maneira simples e eficiente: quando um cliente adquire um seguro, ele envia uma transação para o endereço do contrato com as informações do celular e o valor do prêmio de seguro. O contrato então registra a apólice e envia de volta uma confirmação da transação.
