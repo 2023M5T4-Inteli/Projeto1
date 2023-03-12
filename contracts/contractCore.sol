@@ -12,7 +12,7 @@ contract Owner {
 
 
 
-    // modificador para verificar se quem chamou é o proprietário
+    // Modificador para verificar se quem chamou é o proprietário
     modifier isOwner() {
      
         require(msg.sender == owner, "Caller is not owner");
@@ -20,35 +20,30 @@ contract Owner {
     }
 
 
-    // **************** Pesquisar o que fazem essas funções e preencher
-    receive() external payable {}
+    // Funções "receive" e "fallback" do solidity 
+    receive() external payable { // Função que é chamada quando o contrato recebe um valor sem nenhum dado de transação anexado. 
+    }
 
-    fallback() external payable {
+    fallback() external payable { // Função que é chamada quando uma função invocada não existe ou se não for válida. 
     }
 
 
-    // ************ Explicar o que cada evento faz brevemente 
-    event Purchase(
-        address _buyer,
-        uint _amount
-    );
+    // Eventos (Eventos são notificações emitidas durante a execução de um contrato para informar a ocorrência de uma determinada ação).
+    event Purchase(address _buyer, uint _amount); // Evento que registra quando o usuário fizer uma compra.
+    event AddMember (address member); // Evento que registra a adição de um novo membro no contrato. 
+    event PaymentReceived(address member, uint amount); // Evento que registra o recebimento de um pagamento. 
+    event FinalAmount(uint finalValue); // Evento que registra quando todos os pagamentos foram feitos. 
 
-    event AddMember (address member);
-    event PaymentReceived(address member, uint amount);
-    event FinalAmount(uint finalValue);
-
-    // **** Explicar o que é um struct e pra que serve
+    // Struct (Struct é um tipo de dado personalizado que permite definir uma estrutura de dados com várias propriedades e usá-la em funções e contratos).
     struct Member{
-        uint cash; //Dinheiro do user
+        uint cash; //Dinheiro do usuário
         address client; //Cliente do contrato
     }
 
 
-    // ********** Pesquisar pra que serve um mapping 
-    // Mapping são tabelas hash em solidity, aqui é possivel criar uma associação chave-> valor, vai ser bem util
-    //Nenhum valor esta sendo adicionado nesse mapping
+    //Mapping (Mapping é uma estrutura de dados que associa uma chave única a um valor). 
+    //Nenhum valor esta sendo adicionado nesse mapping.
     mapping (address => Member) public members;
-    
     mapping (address => uint256) public balances;
     mapping(address => uint256) private indemnityRequests;
     mapping(address => bool) public activeMembers;
@@ -64,7 +59,7 @@ contract Owner {
 
 
     // Variaveis de estado
-    uint public amountContract = getBalance(); // valor que está presente no Contrato (isso é respectivo de cada grupo)
+    uint public amountContract = getBalance(); // Valor que está presente no Contrato (isso é respectivo de cada grupo)
 
 
     address payable private _admin;
@@ -77,33 +72,36 @@ contract Owner {
     // Função para pagar e entrar no contrato 
     // ******** Melhorar o nome da função, variaveis e checar logíca    
     function addMoney() public payable{
-        uint admTax = 5;
-        uint deposit = msg.value;
-        uint payUser = deposit - (deposit * admTax/100);
-        balances[msg.sender] += msg.value;
+        uint admTax = 5; // Define a taxa administrativa como 5%.
+        uint deposit = msg.value; // Armazena o valor do depósito na variável "deposit".
+        uint payUser = deposit - (deposit * admTax/100); // Calcula o valor a ser pago pelo usuário, descontando a taxa administrativa.
+        balances[msg.sender] += msg.value; // Adiciona o valor do depósito ao saldo do usuário.
 
-        emit Purchase(msg.sender, 1);
-        emit PaymentReceived(msg.sender, msg.value);
-        emit FinalAmount (payUser);
+        emit Purchase(msg.sender, 1); 
+        emit PaymentReceived(msg.sender, msg.value); // Emite o evento "PaymentReceived", indicando que o pagamento foi recebido
+        emit FinalAmount (payUser); // Emite o evento indicando o valor final a ser pago pelo usuário.
         
     }
 
- 
+    // Função que retorna o proprietário.
     function getOwner() external view returns (address) {
         return owner;
     }
-    function showAllMembers() external view returns (address[] memory) {
+    
+    // Função para exibir todos os membros.
+    function showAllMembers() external view returns (address[] memory) { 
         return membersContract;
     }
 
+    // Função para obter os reembolsos pendentes de usuários.
     function getPendingRefunds() public isOwner view returns (address [] memory){
         return userRequestingRefund;
     }
 
 
-
-    function addMember(address user) public isOwner {
-        membersContract.push(user);
+    // Função que adiciona um membro a lista de membros do contrato
+    function addMember(address user) public isOwner { 
+        membersContract.push(user); 
         activeMembers[user] = true;
         emit AddMember(msg.sender);
     }
@@ -147,8 +145,7 @@ contract Owner {
 
 
     // Função para ver quantas pessoas há na carteira 
-    // **************** Escrever melhor o nome das funções 
-    function quantClientsWallet() public view returns(uint) {
+    function getTotalWalletClients() public view returns(uint) {
         uint usersAmount = membersContract.length;
         return usersAmount;
     }
