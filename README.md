@@ -13,13 +13,13 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
 
 ### Integrantes 
 #### adicionar linkedin de todos os integrantes
-- Camila Fernanda de Lima Anacleto
-- Eduardo França Porto
-- Izabella Almeida de Faria
-- Lucas Conti Pereira
-- Michel Mansur
-- Rafael Lupovici Moritz
-- Vinicius Oliveira Fernandes
+- [Camila Fernanda de Lima Anacleto](https://www.linkedin.com/in/camilaanacleto/)
+- [Eduardo França Porto](https://www.linkedin.com/in/eduardo-franca-porto/)
+- [Izabella Almeida de Faria](https://www.linkedin.com/in/izabellaalmeida/)
+- [Lucas Conti Pereira](https://www.linkedin.com/in/lucas-conti-pereira-3410b1233/)
+- [Michel Mansur](https://www.linkedin.com/in/michel-mansur-26006a219/)
+- [Rafael Lupovici Moritz](https://www.linkedin.com/in/rafael-moritz/)
+- [Vinicius Oliveira Fernandes](https://www.linkedin.com/in/vinicius-oliveira-fernandes-627b68168/)
 
 ## Descrição do projeto
 *
