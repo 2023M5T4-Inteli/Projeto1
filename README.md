@@ -12,7 +12,7 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
 #### adicionar a imagem do grupo
 
 ### Integrantes 
-#### adicionar linkedin de todos os integrantes
+
 - [Camila Fernanda de Lima Anacleto](https://www.linkedin.com/in/camilaanacleto/)
 - [Eduardo França Porto](https://www.linkedin.com/in/eduardo-franca-porto/)
 - [Izabella Almeida de Faria](https://www.linkedin.com/in/izabellaalmeida/)
@@ -58,7 +58,7 @@ O deploy destes contratos é feito no github por administradores da Coover, para
 Por fim, na aplicação dos clientes, é possível interagir e realizar transações com esses smart contracts. 
 Dados sensíveis dos clientes são armazenados em um banco de dados, uma vez que a disponibilização destes na blockchain seria algo perigoso. 
 
-![Diagrama de Blocos](https://user-images.githubusercontent.com/68927480/221452511-1435a376-d14f-45c9-a858-16bc1743ceae.png)
+![Diagrama de Blocos](https://user-images.githubusercontent.com/68927480/224556813-8265128f-83fe-4c46-aad9-ca0556fab7b6.png)
 
 #### Detalhamento do Diagrama de Blocos:
 
