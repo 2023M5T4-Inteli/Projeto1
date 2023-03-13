@@ -179,17 +179,17 @@ Dados sensíveis dos clientes são armazenados em um banco de dados, uma vez que
                                       |
                                       |  Armazena dados sensíveis do usuário
                                      
-![req1](https://user-images.githubusercontent.com/99282359/224573690-d7ca21d7-3b98-44a4-a55f-2fa627710e73.png)
+<img src="https://user-images.githubusercontent.com/99282359/224573690-d7ca21d7-3b98-44a4-a55f-2fa627710e73.png" width="475" height="500" />
 
-![req2](https://user-images.githubusercontent.com/99282359/224573714-3645c83d-a2c6-472b-a023-6932f7839bf5.png)
+<img src="https://user-images.githubusercontent.com/99282359/224573714-3645c83d-a2c6-472b-a023-6932f7839bf5.png" width="475" height="500" />
 
-![req3](https://user-images.githubusercontent.com/99282359/224573717-a5975ed3-bde3-4496-9f4e-7840f46e9df1.png)
+<img src="https://user-images.githubusercontent.com/99282359/224573717-a5975ed3-bde3-4496-9f4e-7840f46e9df1.png" width="475" height="500" />
 
-![req4](https://user-images.githubusercontent.com/99282359/224573726-85bfe458-d736-49ea-ad3c-f130bd596bf7.png)
+<img src="https://user-images.githubusercontent.com/99282359/224573726-85bfe458-d736-49ea-ad3c-f130bd596bf7.png" width="475" height="500" />
 
-![req5](https://user-images.githubusercontent.com/99282359/224573729-834eaa0c-6072-44d9-8c17-782669705bcf.png)
+<img src="https://user-images.githubusercontent.com/99282359/224573729-834eaa0c-6072-44d9-8c17-782669705bcf.png" width="475" height="500" />
 
-![req6](https://user-images.githubusercontent.com/99282359/224573732-73960c0f-7f15-4b86-91ce-d117c9a57a5b.png)
+<img src="https://user-images.githubusercontent.com/99282359/224573732-73960c0f-7f15-4b86-91ce-d117c9a57a5b.png" width="475" height="500" />
 
 ## Diagrama de implementação UML
 
