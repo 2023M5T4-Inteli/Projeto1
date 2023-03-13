@@ -56,16 +56,16 @@ A estrutura do nosso contrato é diretamente relacionada aos requisitos de negó
 
      As Funções são usadas para executar operações e modificar o estado do contrato. Segue as funções presentes no contrato:
       
-      - **addMoney()**: Função que permite que os usuários adicionem dinheiro ao contrato, com uma taxa de 5% aplicada sobre o valor depositado. O saldo da carteira do usuário é atualizado e os eventos Purchase, PaymentReceived e FinalAmount são emitidos para registrar a transação.
+      - **contractPayment()**: Função que permite que os usuários adicionem dinheiro ao contrato, com uma taxa de 5% aplicada sobre o valor depositado. O saldo da carteira do usuário é atualizado e os eventos Purchase, PaymentReceived e FinalAmount são emitidos para registrar a transação.
       - **getOwner()**: Função que retorna o endereço do proprietário do contrato.
       - **showAllMembers()**: Função que retorna uma matriz contendo todos os endereços de membros registrados no contrato.
-      - **getPendingRefunds()**: Função que retorna uma matriz contendo os endereços dos membros que solicitaram reembolsos.
+      - **getPendingIndemnities()**: Função que retorna uma matriz contendo os endereços dos membros que solicitaram reembolsos.
       - **addMember()**: Função que permite que o proprietário do contrato adicione um novo membro ao contrato. O endereço do novo membro é adicionado à matriz membersContract e o status de membro ativo é definido como true. O evento AddMember é emitido para registrar a adição do novo membro.
       - **getBalance()**: Função que retorna o saldo total atual do contrato.
-      - **userRequestingPayment()**: Função que verifica se o endereço do usuário que solicita o reembolso está registrado como membro ativo no contrato. Se o endereço for válido, ele é adicionado à matriz userRequestingRefund para ser processado posteriormente.
-      - **payRefund()**: Função que permite que o proprietário do contrato envie um reembolso a um membro ativo do contrato. O endereço da carteira do membro e o valor do reembolso são fornecidos como entrada, e a função verifica se o valor do reembolso é menor que o valor total disponível no contrato. Se o membro estiver registrado na matriz userRequestingRefund, o valor do reembolso é enviado à carteira do membro e removido da matriz userRequestingRefund. O valor total disponível no contrato é atualizado para refletir o reembolso.
+      - **RequestIndemnity()**: Função que verifica se o endereço do usuário que solicita o reembolso está registrado como membro ativo no contrato. Se o endereço for válido, ele é adicionado à matriz userRequestingIndemnity para ser processado posteriormente.
+      - **paymentOfIndemnity()**: Função que permite que o proprietário do contrato envie um reembolso a um membro ativo do contrato. O endereço da carteira do membro e o valor do reembolso são fornecidos como entrada, e a função verifica se o valor do reembolso é menor que o valor total disponível no contrato. Se o membro estiver registrado na matriz userRequestingIndemnity, o valor do reembolso é enviado à carteira do membro e removido da matriz userRequestingIndemnity. O valor total disponível no contrato é atualizado para refletir o reembolso.
       - **quantClientsWallet()**: Função que retorna o número de membros ativos registrados no contrato.
-      - **removeUser()**: Função que permite que o proprietário do contrato remova um membro ativo do contrato. O endereço da carteira do membro a ser removido é fornecido como entrada e a função atualiza a matriz membersContract e o status de membro ativo para refletir a remoção do membro. Qualquer reembolso pendente solicitado pelo membro também é removido da matriz na variável: "userRequestingRefund".
+      - **removeUser()**: Função que permite que o proprietário do contrato remova um membro ativo do contrato. O endereço da carteira do membro a ser removido é fornecido como entrada e a função atualiza a matriz membersContract e o status de membro ativo para refletir a remoção do membro. Qualquer reembolso pendente solicitado pelo membro também é removido da matriz na variável: "userRequestingIndemnity".
 
       Além disso, o contrato possui outras funcionalidades e propriedades que definem os requisitos de negócios: os Structs, Mappings e Modifier. 
 
@@ -93,7 +93,7 @@ Para que possam ser assistidos pelo seguro, é preciso que os clientes da Coover
 É necessário que o contrato inteligente seja capaz de permitir a administração da quantidade de usuários em um determinado grupo de seguros. Dessa forma, é preciso que haja uma função que possibilite a exclusão de determinado cliente, que só ocorrerá mediante pedido de cancelamento do contrato, por parte do usuário, ou detecção de fraude, por parte da Coover.
 
 #### Requisito 5: Realização do pedido de indenização.
-# PREENCHER AQUI (IZABELLA)
+O contrato deve ser capaz de permitir que os participantes do grupo de seguro mútuo realizem o pedido de indenização em caso de ocorrência de um sinistro. Para isso, é necessário que exista uma função que permita que o segurado notifique a Coover sobre a ocorrência do sinistro e solicite a indenização devida. Essa solicitação deve ser verificada automaticamente pelo contrato, que verificará se o segurado tem direito à indenização com base nas regras estabelecidas por ele.
 
 
 #### Requisito 6: Aprovação dos pedidos de indenização.
@@ -191,7 +191,18 @@ Dados sensíveis dos clientes são armazenados em um banco de dados, uma vez que
 
 <img src="https://user-images.githubusercontent.com/99282359/224573732-73960c0f-7f15-4b86-91ce-d117c9a57a5b.png" width="475" height="500" />
 
-## Diagrama de implementação UML
+## Diagrama de implantação UML
+Um diagrama de implantação é uma representação visual da arquitetura de implantação de um sistema de software.
+
+O objetivo principal do diagrama de implantação é fornecer uma visão geral da infraestrutura de hardware em que o sistema é implantado, identificando os nós de hardware, as conexões de rede e os componentes de software implantados em cada nó. Com o diagrama de implantação, é possível visualizar como o sistema é distribuído em diferentes servidores, dispositivos de armazenamento, entre outros, e como os componentes de software se comunicam através da rede.
+
+O diagrama de implantação é usado para ilustrar como os componentes de um sistema são implantados em diferentes nós de hardware, como servidores, desktops ou dispositivos móveis. Ele mostra as conexões de rede entre esses nós e como os componentes de software se comunicam por meio dessas conexões.
+
+<img src="https://github.com/2023M5T4-Inteli/Projeto1/blob/main/imagens/Diagrama%20de%20implanta%C3%A7%C3%A3o.png"/>
+
+O diagrama apresenta as relações entre os módulos da solução criada. Na parte de Hardware, estão representados os elementos físicos necessários para utilizar o programa, além dos softwares que precisam estar presentes nas máquinas para garantir o funcionamento adequado. Já na parte de software, é essencial ter a aplicação web2 para hospedar a interface da solução. Por meio dessa interface, todas as etapas descritas no diagrama de sequência (requisitos 1 a 6) podem ser realizadas, sem que os usuários finais tenham interação direta com o smart contract.
+
+Para estabelecer a comunicação entre a solução e a testnet pública, na qual o smart contract foi desenvolvido, é preciso utilizar uma API para web 3. Dessa forma, a partir da interface web, a solução pode se conectar à testnet pública e ao smart contract desenvolvido pelo time.
 
 ## Comportamento esperado do smart contract 
 O smart contract em questão é uma aplicação que roda na blockchain e tem como objetivo fornecer seguros para celulares.Seu funcionamento ocorre de maneira simples e eficiente: quando um cliente adquire um seguro, ele envia uma transação para o endereço do contrato com as informações do celular e o valor do prêmio de seguro. O contrato então registra a apólice e envia de volta uma confirmação da transação.
