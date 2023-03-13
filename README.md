@@ -27,7 +27,7 @@ Este contrato tem como objetivo gerenciar um grupo de membros que contribuem com
 
 ## Estrutura do Smart Contract
 
-      A estrutura do nosso contrato é diretamente relacionada aos requisitos de negócios necessários. Isso é definido mediante as variáveis de estado, eventos e funções de execução que complementam nosso código. Sendo assim, destacamos a funcionalidade e descrição de cada uma dessas propriedades dentro do nosso contrato:
+A estrutura do nosso contrato é diretamente relacionada aos requisitos de negócios necessários. Isso é definido mediante as variáveis de estado, eventos e funções de execução que complementam nosso código. Sendo assim, destacamos a funcionalidade e descrição de cada uma dessas propriedades dentro do nosso contrato:
 
 1. **Variáveis**
       
@@ -67,7 +67,7 @@ Este contrato tem como objetivo gerenciar um grupo de membros que contribuem com
       - **quantClientsWallet()**: Função que retorna o número de membros ativos registrados no contrato.
       - **removeUser()**: Função que permite que o proprietário do contrato remova um membro ativo do contrato. O endereço da carteira do membro a ser removido é fornecido como entrada e a função atualiza a matriz membersContract e o status de membro ativo para refletir a remoção do membro. Qualquer reembolso pendente solicitado pelo membro também é removido da matriz na variável: "userRequestingRefund".
 
-      Além disso, o contrato possui outras funcionalidades e propriedades que definem os requisitos de negócios, os Structs, Mappings e Modifier. 
+      Além disso, o contrato possui outras funcionalidades e propriedades que definem os requisitos de negócios: os Structs, Mappings e Modifier. 
 
       Neste contrato, os Structs são usados para definir uma estrutura de dados personalizada que inclui as propriedades "cash" (representando o dinheiro do usuário) e "client" (representando o endereço do cliente) para cada membro. Isso permite que o contrato organize as informações dos usuários em uma forma mais compreensível e possam usar essas informações em funções e em outros lugares do contrato.
       
@@ -208,48 +208,82 @@ Por meio dessas funções, o contrato espera fornecer seguros para celulares de 
 
 ## Processo de deploy
 
-Um dos impedimentos foi que o Goerli não ficou disponível por um certo período durante a sprint, fazendo com que tentássemos o deploy no Ganache como alternativa. 
-O deploy no Ganache foi feito com sucesso (na rede local) com o uso da plataforma Remix.
+O processo de deploy de um contrato inteligente na testnet pública envolve algumas etapas importantes. Em primeiro lugar, é necessário escolher uma testnet adequada, que neste caso foi o Goerli e configurar as ferramentas necessárias, como uma carteira criptográfica, neste caso a Metamask, e um ambiente de desenvolvimento integrado, que para testes e finalização, foi o Remix. Em seguida, o contrato inteligente deve ser desenvolvido e testado em um ambiente de teste local (ganache) antes de ser implantado na testnet pública.
 
+Ao implantar o contrato inteligente na testnet pública, é importante lembrar-se de configurar as propriedades corretamente.
+
+### Processo de desenvolvimento pelo grupo
+
+Ao levar em conta os requisitos e funcionalidades, podemos descrever um pouco do processo de desenvolvimento do grupo.
+
+Um dos primeiros impedimentos foi que o Goerli não ficou disponível por um certo período durante a sprint, fazendo com que tentássemos o deploy no Ganache como alternativa. 
+
+O deploy no Ganache foi feito com sucesso (na rede local) com o uso da plataforma Remix.
 
 ![1](https://user-images.githubusercontent.com/68927480/224571970-2ec67c2d-38f3-41a4-8855-8b80efda5448.jpeg)
 ![2](https://user-images.githubusercontent.com/68927480/224571981-306fe2ef-42bb-4931-ad05-abb18fc5d879.jpeg)
-
 
 Apesar disso, uma colega compartilhou um falset do Goerli com a turma. A partir daí, seguimos o passo a passo presente no Github “InteliBlockchain” para realizar o deploy na testnet pública. Depois de um tempo o Goerli ficou novamente disponível para uso, passando a ser nossa principal alternativa para o deploy. 
 Os passos que seguimos, de forma resumida, foram:
 <hr>
 
-### 1. Instalação do Truffle e preparação do código nos arquivos
-Deve-se, primeiramente, definir uma pasta para digitar, no terminal, o comando ‘npm install -g truffle’.
-Abaixo está o output printado após o comando “Truffle –version” no nosso projeto. 
+### 1. **Instalação do Truffle e preparação do código nos arquivos**
+
+- Deve-se, primeiramente, definir uma pasta para digitar, no terminal, o comando ‘npm install -g truffle’.
+
+ ```
+  npm install -g truffle
+ ```
+
+- Abaixo está o output printado após o comando “Truffle –version” no nosso projeto. 
 
 ![3](https://user-images.githubusercontent.com/68927480/224571994-b0c62444-3716-4bed-a599-e270fda9d12b.jpeg)
 <hr>
 
-Outro comando que deve ser digitado no terminal é o ‘truffle init’, que inicializa o truffle no repositório. 
-Posteriormente, inserimos os seguintes comandos para preparar a pasta e seus arquivos: ‘npm init -y’ e ‘npm install @openzeppelin/contracts’. 
-Após esta preparação, deve-se inserir o comando ‘truffle compile’ e informar qual o contrato no arquivo da pasta ‘migrations’ e a rede na pasta ‘truffle-config’ (o tutorial completo festá disponível na documentação do truffle).
+- Outro comando que deve ser digitado no terminal é o ‘truffle init’, que inicializa o truffle no repositório. 
 
-### 2. Cadastro no Infura e uso da API Key no arquivo .env
+ ```
+truffle init
+```
 
-O arquivo .env deve ser criado para guardar a ‘Seed phrase’ da Meta mask e a ‘API Key’ do Infura, site no qual deve ser feita a conta para se realizar um deploy.
+- Posteriormente, inserimos os seguintes comandos para preparar a pasta e seus arquivos: ‘npm init -y’ e ‘npm install @openzeppelin/contracts’. 
+
+ ```
+npm init -y
+npm install @openzeppelin/contracts
+```
+
+- Após esta preparação, deve-se inserir o comando ‘truffle compile’ e informar qual o contrato no arquivo da pasta ‘migrations’ e a rede na pasta ‘truffle-config’ (o tutorial completo festá disponível na documentação do truffle).
+
+ ```
+truffle compile
+truffle-config
+```
+
+### 2. **Cadastro no Infura e uso da API Key no arquivo .env**
+
+- O arquivo .env deve ser criado para guardar a ‘Seed phrase’ da Meta mask e a ‘API Key’ do Infura, site no qual deve ser feita a conta para se realizar um deploy.
 
 ![4](https://user-images.githubusercontent.com/68927480/224572007-1513eda7-35eb-4ebc-b459-818514cca14a.jpeg)
 <hr>
 
 
-### 3. Preparação da Meta Mask
-Wallet do MetaMask com GoerliETH proveniente do falset citado anteriormente. Após a mineração no falset e a adição do Goerli na carteira, é assim que ela ficou.<b/>
+### 3. **Preparação da Meta Mask**
+
+- Wallet do MetaMask com GoerliETH proveniente do falset citado anteriormente. Após a mineração no falset e a adição do Goerli na carteira, é assim que ela ficou.
 
 
 ![5](https://user-images.githubusercontent.com/68927480/224572023-173a0c3b-b7c2-4ddd-bbf7-2d02ebf0d2df.jpeg)
 <hr>
 
 
-### 4. Deploy do “contrato Core” feito pelo grupo
-Quando tudo estava preparado para o deploy o grupo já havia preparado um “contrato core” para teste. Com o input ‘truffle deploy –network goerli’ é possível finalizar o deploy na testnet pública e se recebe um output com os dados do deploy, como o custo final e o hash da transação. </b>
+### 4. **Deploy do “contrato Core” feito pelo grupo**
+
+- Quando tudo estava preparado para o deploy o grupo já havia preparado um “contrato core” para teste. 
+- Com o input ‘truffle deploy –network goerli’ é possível finalizar o deploy na testnet pública e se recebe um output com os dados do deploy, como o custo final e o hash da transação. 
+
+ ```
+truffle deploy –network goerli
+```
 
 ![6](https://user-images.githubusercontent.com/68927480/224572034-00bc5125-2952-48dd-8779-41131156bc30.jpeg)
-
-
