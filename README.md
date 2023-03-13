@@ -27,7 +27,7 @@ Este contrato tem como objetivo gerenciar um grupo de membros que contribuem com
 
 ## Estrutura do Smart Contract
 
-      A estrutura do nosso contrato é diretamente relacionada aos requisitos de negócios necessários. Isso é definido mediante as variáveis de estado, eventos e funções de execução que complementam nosso código. Sendo assim, destacamos a funcionalidade e descrição de cada uma dessas propriedades dentro do nosso contrato:
+A estrutura do nosso contrato é diretamente relacionada aos requisitos de negócios necessários. Isso é definido mediante as variáveis de estado, eventos e funções de execução que complementam nosso código. Sendo assim, destacamos a funcionalidade e descrição de cada uma dessas propriedades dentro do nosso contrato:
 
 1. **Variáveis**
       
@@ -67,7 +67,7 @@ Este contrato tem como objetivo gerenciar um grupo de membros que contribuem com
       - **quantClientsWallet()**: Função que retorna o número de membros ativos registrados no contrato.
       - **removeUser()**: Função que permite que o proprietário do contrato remova um membro ativo do contrato. O endereço da carteira do membro a ser removido é fornecido como entrada e a função atualiza a matriz membersContract e o status de membro ativo para refletir a remoção do membro. Qualquer reembolso pendente solicitado pelo membro também é removido da matriz na variável: "userRequestingRefund".
 
-      Além disso, o contrato possui outras funcionalidades e propriedades que definem os requisitos de negócios, os Structs, Mappings e Modifier. 
+      Além disso, o contrato possui outras funcionalidades e propriedades que definem os requisitos de negócios: os Structs, Mappings e Modifier. 
 
       Neste contrato, os Structs são usados para definir uma estrutura de dados personalizada que inclui as propriedades "cash" (representando o dinheiro do usuário) e "client" (representando o endereço do cliente) para cada membro. Isso permite que o contrato organize as informações dos usuários em uma forma mais compreensível e possam usar essas informações em funções e em outros lugares do contrato.
       
