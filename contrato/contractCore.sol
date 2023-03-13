@@ -190,9 +190,8 @@ contract Owner {
     // Função voltada para o pagamento do reebolso solicitado 
     // essa função atende ao seguinte requisito: 
     // requisito 6: aprovação dos pedidos de indenização
-    function paymentOfIndemnity(address membersWallet, uint amount) public isOwner returns (bool){
+    function paymentOfIndemnity(address membersWallet, uint amount) public isOwner  (){
         require(amount < amountContract);
-        // ******** Convem ver se há como fazer uma função que retorne um booleano ao invés de executar vários loops 
             for( uint i = 0; i < userRequestingIndemnity.length; i++){
              // Condicional para verificar se o input que requiriu o pagamento já está na lista de usuarios que pediram um reembolso
                 if (userRequestingIndemnity[i] == membersWallet){
