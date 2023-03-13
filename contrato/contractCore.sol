@@ -1,121 +1,110 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.7.0 <0.9.0;
 
-
 contract Owner {
+    // Variaveis de estado
     address public owner;
+    // status da indenização. False = não solicitada, true = solicitada
+    bool public statusIndemnity = false;
+    // valor a ser reposto da reserva de risco
+    uint public reposition;
+    // quantidade de usuários
+    uint public userQuantity; 
+    // valor da indenização solicitada;
+    uint public indemnity;
+    //Valor que está presente no Contrato (isso é respectivo de cada grupo)
+    uint public amountContract = getBalance();
+    // array contendo as carteiras de todos os membros do contrato
+    address [] public membersContract ;
+    /* array contendo as carteiras dos membros
+     do contrato que realizaram o pagamento da reserva de risco */
+    address[] public payers;
+    /*array contendo as carteiras dos membros
+     que solicitaram pagamento de reembolso */
+    address [] private userRequestingIndemnity;
 
-    // modificador para verificar se quem chamou é o proprietário
+    // Modificador para verificar se quem chamou é o proprietário
     modifier isOwner() {
-     
         require(msg.sender == owner, "Caller is not owner");
         _;
     }
 
+    // Funções "receive" e "fallback" do solidity 
+    /*Função que é chamada quando o contrato 
+    recebe um valor sem nenhum dado de transação anexado.*/
+    receive() external payable { 
+    }
 
-    // **************** Pesquisar o que fazem essas funções e preencher
-    receive() external payable {}
-
-    fallback() external payable {
+    /* Função que é chamada quando uma função
+     invocada não existe ou se não for válida. */
+    fallback() external payable { 
     }
 
 
-    // ************ Explicar o que cada evento faz brevemente 
-    event Purchase(
-        address _buyer,
-        uint _amount
-    );
+    // Eventos 
+    /*(Eventos são notificações emitidas durante
+     a execução de um contrato para informar a 
+     ocorrência de uma determinada ação).*/
+    // Evento que registra quando o usuário fizer uma compra.
+    event Purchase(address _buyer, uint _amount); 
+    // Evento que registra a adição de um novo membro no contrato. 
 
-    event AddMember (address member);
+    event AddMember (address member); 
+
+    // Evento que registra o recebimento de um pagamento. 
     event PaymentReceived(address member, uint amount);
-    event FinalAmount(uint finalValue);
 
-    // **** Explicar o que é um struct e pra que serve
+    // Evento que registra quando todos os pagamentos foram feitos. 
+    event FinalAmount(uint finalValue); 
+
+    // Struct 
+    /*(Struct é um tipo de dado personalizado 
+    que permite definir uma estrutura de dados
+    com várias propriedades e usá-la em funções e contratos).*/
     struct Member{
-        uint cash; //Dinheiro do user
-        address client; //Cliente do contrato
+         //Dinheiro do usuário
+        uint cash;
+        //Cliente do contrato
+        address client; 
     }
 
 
-    // ********** Pesquisar pra que serve um mapping 
-    // Mapping são tabelas hash em solidity, aqui é possivel criar uma associação chave-> valor, vai ser bem util
+    //Mapping 
+    /*(Mapping é uma estrutura de
+    dados que associa uma chave
+    única a um valor). */
+    //Nenhum valor esta sendo adicionado nesse mapping.
     mapping (address => Member) public members;
+    /*esse maping associa uma carteira a um valor
+     inteiro e representa o saldo de cada carteira*/
     mapping (address => uint256) public balances;
+    /*esse mamping associa uma carteira a um valor
+    inteiro e representa o valor solicitado em uma indenização*/
     mapping(address => uint256) private indemnityRequests;
+    /* esse mapping associa uma carteira a um valor booleano 
+    e representa os membros ativos do contrato */
     mapping(address => bool) public activeMembers;
 
-
-    // ********** Array com informações
-    // ********** Buscar entender onde que essas arrays são usadas e como atendem as user stories 
-    address [] public membersContract ;
-
-    address[] public wallet;
-
-    address [] public group;
-
-    address [] private userRequestingRefund;
-
-
-
-    // Variaveis de estado
-    uint public amountContract = getBalance(); // valor que está presente no Contrato (isso é respectivo de cada grupo)
-
-    /* ***** Para simplificar o escope creio que não precisa de minimo e máximo de users 
-    Porque, teriamos de adicionar varias condicionais para iniciar o contrato.
-    Além disso, essas variaveis públicas não estão sendo usadas em nenhuma função 
-    
-    min people
-    max people
-    contractEndtime
-    creationDate
-    */
-    uint public creationDate; // data de deploy do contrato 
-    uint public minPeople = 5; // mínimo de pessoas para "ativação" do grupo
-    uint public maxPeople = 500; // máximo de pessoas que o grupo pode "receber"
-    uint public contractEndtime;
-
-
-
-
-    address payable private _admin;
-
+    /*Função especial que é executada apenas uma vez 
+    quando o contrato é implantado na rede ethereum*/
+    // define que o administrador do contrato é quem fez deploy 
     constructor() {
         owner = msg.sender; 
     }   
 
-
-    // Função para pagar e entrar no contrato 
-    // ******** Melhorar o nome da função e as variaveis 
-    function addMoney() public payable{
-        uint admTax;
-        uint deposit = msg.value;
-        uint payUser = deposit - (deposit * admTax/100);
-        balances[msg.sender] += msg.value;
-
-        emit Purchase(msg.sender, 1);
-        emit PaymentReceived(msg.sender, msg.value);
-        emit FinalAmount (payUser);
-        
-    }
-
- 
+    // Função que retorna a carteira do proprietário.
     function getOwner() external view returns (address) {
         return owner;
     }
-    function showAllMembers() external view returns (address[] memory) {
+    
+    // Função para exibir todos os membros.
+    function showAllMembers() external view returns (address[] memory) { 
         return membersContract;
     }
 
-    function getPendingRefunds() public isOwner view returns (address [] memory){
-        return userRequestingRefund;
-    }
-
-
-
-    function addMember(address user) public isOwner {
-        membersContract.push(user);
-        activeMembers[user] = true;
-        emit AddMember(msg.sender);
+    // Função para obter os reembolsos pendentes de usuários.
+    function getPendingIndemnities() public isOwner view returns (address [] memory){
+        return userRequestingIndemnity;
     }
 
     // Função que retorna o valor do fundo
@@ -123,61 +112,27 @@ contract Owner {
         return address(this).balance;
     }
 
-    // Ver se quem pediu a indenização esta dentro ou não do grupo e adicionando sua carteira numa lista com os usuarios que pediram o pagamento
-
-    function userRequestingPayment (address userMakingRequest) public {
-        for( uint i = 0; i < membersContract.length; i++){
-            if (membersContract[i] == userMakingRequest){
-                userRequestingRefund.push(userMakingRequest);
-            }
-            else{
-                return ;
-            }
-        }
-    }
-
-
-    // Aceitar e pagar a indenização 
-    //************** TODO 
-    // function acceptIndemnityRequest(address requestor) public isOwner {
-    //     // uint256 amountToPay = indemnityRequests[requestor];
-    //     require(amountToPay > 0, "Pedido de reembolso nao encontrado");
-    //     delete indemnityRequests[requestor];
-    //     require(msg.sender.balance >= amountToPay, "Saldo insuficiente para processar pedido");
-    //     payable(requestor).transfer(amountToPay);
-        
-    // }
-
-    // Função que permite que só o dono envie dinheiro 
-    function payRefund(address membersWallet, uint amount) public isOwner{
-        require(amount < amountContract);
-        // Condicional para verificar se o input que requiriu o pagamento já está na lista de usuarios que pediram um reembolso
-        // ********** Convem ver se há como fazer uma função que retorne um booleano ao invés de executar vários loops 
-            for( uint i = 0; i < userRequestingRefund.length; i++){
-            if (userRequestingRefund[i] == membersWallet){
-                payable(membersWallet).transfer(amount);
-                userRequestingRefund.pop();
-                amountContract = amountContract - amount ;
-            }
-            else{
-                
-            }
-        }
-    }
-
-
-
     // Função para ver quantas pessoas há na carteira 
-    // **************** Escrever melhor o nome das funções 
-    function quantClientsWallet() public view returns(uint) {
+    function getTotalWalletClients() public view returns(uint) {
         uint usersAmount = membersContract.length;
         return usersAmount;
     }
 
 
-    // ********* Função que remove os usuarios do grupo 
-    function removeUser(address userWallet) public isOwner {
-        
+    // Função que adiciona um membro a lista de membros do contrato
+    // Essa função atende aos seguintes requisitos:
+    // requisito 1: criação de um grupo de seguro mútuo
+    // requisito 4: gerenciamento do número de clientes na plataforma
+    function addMember(address user) public isOwner { 
+        membersContract.push(user); 
+        activeMembers[user] = true;
+        emit AddMember(msg.sender);
+    }
+
+    //Função que remove um membro do grupo 
+    // essa função atende ao seguinte requisito:
+    // requisito 4: gerenciamento do número de clientes na plataforma
+    function removeMember(address userWallet) public isOwner {
         for (uint i = 0; i < membersContract.length - 1; i++ ){
             if (membersContract[i] == userWallet){
                 for ( uint index = i; i < membersContract.length - 1; index++){
@@ -186,28 +141,84 @@ contract Owner {
             }
 
         }
-        // Caso o usuario seja removido ele é automaticamente retirado da lista de pendencias a pagar
-        userRequestingRefund.pop();
+        // Caso o usuario seja removido ele é retirado da lista de pendencias a pagar
+        // userRequestingIndemnity.pop();
         activeMembers[userWallet] = false;
         membersContract.pop();
         return ;
     }
 
 
+    // Função para realizar o pagamento do contrato de seguro  
+    // Essa função atende aos seguintes requisitos:
+    // requisito 2: cobrança de uma taxa administrativa no momento da contratação do seguro
+    // requisito 3: cobrança do valor referente ao pagamento do seguro mútuo.
+    function contractPayment() public payable{
+        // Define a taxa administrativa como 5%.
+        uint admTax = 5; 
+        // Armazena o valor do depósito na variável "deposit".
+        uint deposit = msg.value; 
+        // Calcula o valor a ser pago pelo usuário, descontando a taxa administrativa.
+        uint payUser = deposit - (deposit * admTax/100); 
+        // Adiciona o valor do depósito ao saldo do usuário.
+        balances[msg.sender] += msg.value; 
 
-
-// ******* Explicar como funciona a função sem comentários dentro
-    function terminateContract() public isOwner { 
-    //verifica se ainda há tempo no contrato 
-        require(block.timestamp <= contractEndtime); 
-
-    //enviar todos os fundos restantes para o proprietário 
-        if (amountContract > 0) { 
-        _admin.transfer(amountContract); 
-     } 
-
-    //desativar o contrato (Ajeitar porque sera desativado)
-        selfdestruct(_admin); 
+        emit Purchase(msg.sender, 1);  
+        // Emite o evento "PaymentReceived", indicando que o pagamento foi recebido
+        emit PaymentReceived(msg.sender, msg.value);
+        // Emite o evento indicando o valor final a ser pago pelo usuário.
+        emit FinalAmount (payUser); 
+        
     }
     
+    
+    /* Essa função verifica de quem solicitou a indenização está no contrato
+    e adiciona sua carteira a uma lista de solicitantes */
+    // **** Essa função demanda gás para ser executada
+    //Essa função atende ao seguinte requisito:
+    //Requisito 5: realização de um pedido de indenização
+    function RequestIndemnity (address userMakingRequest) public {
+        for( uint i = 0; i < membersContract.length; i++){
+            // essa parte verifica se quem pediu indenização está no contrato
+            if (membersContract[i] == userMakingRequest){
+                userRequestingIndemnity.push(userMakingRequest);
+            }
+        }
+    }
+
+
+    // Função voltada para o pagamento do reebolso solicitado 
+    // essa função atende ao seguinte requisito: 
+    // requisito 6: aprovação dos pedidos de indenização
+    function paymentOfIndemnity(address membersWallet, uint amount) public isOwner returns (bool){
+        require(amount < amountContract);
+        // ******** Convem ver se há como fazer uma função que retorne um booleano ao invés de executar vários loops 
+            for( uint i = 0; i < userRequestingIndemnity.length; i++){
+             // Condicional para verificar se o input que requiriu o pagamento já está na lista de usuarios que pediram um reembolso
+                if (userRequestingIndemnity[i] == membersWallet){
+                    payable(membersWallet).transfer(amount);
+                    userRequestingIndemnity.pop();
+                    amountContract = amountContract - amount ;
+                }
+        }
+    }
+
+
+    /*Função que verifica a integridade da reserva de risco e
+    em caso de comprometimento dessa, solicita sua reposição aos 
+    membros do contrato */
+    // essa função atende ao seguinte requisito
+    // requisito 7: reposição da reserva de risco
+    function riskReserveRefund() public payable{
+        reposition = indemnity/userQuantity;
+        //função que permite a reposição da reserva de risco e garante que todos os membros a paguem 
+        require(msg.value == reposition, "Valor devido incorreto.");
+        // adiciona as carteiras dos membros que pagaram a um array de pagantes
+        payers.push(msg.sender);
+        // verifica se todos pagaram e muda o status da variavel de solicitação da indenização em caso positivo
+        if (payers.length == userQuantity) {
+            statusIndemnity = false;
+        }
+    }
+
 }
