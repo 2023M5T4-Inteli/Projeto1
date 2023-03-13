@@ -27,7 +27,7 @@ Este contrato tem como objetivo gerenciar um grupo de membros que contribuem com
 
 ## Estrutura do Smart Contract
 
-A estrutura do nosso contrato é diretamente relacionada aos requisitos de negócios necessários. Isso é definido mediante as variáveis de estado, eventos e funções de execução que complementam nosso código. Sendo assim, destacamos a funcionalidade e descrição de cada uma dessas propriedades dentro do nosso contrato:
+      A estrutura do nosso contrato é diretamente relacionada aos requisitos de negócios necessários. Isso é definido mediante as variáveis de estado, eventos e funções de execução que complementam nosso código. Sendo assim, destacamos a funcionalidade e descrição de cada uma dessas propriedades dentro do nosso contrato:
 
 1. **Variáveis**
       
@@ -67,7 +67,7 @@ A estrutura do nosso contrato é diretamente relacionada aos requisitos de negó
       - **quantClientsWallet()**: Função que retorna o número de membros ativos registrados no contrato.
       - **removeUser()**: Função que permite que o proprietário do contrato remova um membro ativo do contrato. O endereço da carteira do membro a ser removido é fornecido como entrada e a função atualiza a matriz membersContract e o status de membro ativo para refletir a remoção do membro. Qualquer reembolso pendente solicitado pelo membro também é removido da matriz na variável: "userRequestingRefund".
 
-      Além disso, o contrato possui outras funcionalidades e propriedades que definem os requisitos de negócios: os Structs, Mappings e Modifier. 
+      Além disso, o contrato possui outras funcionalidades e propriedades que definem os requisitos de negócios, os Structs, Mappings e Modifier. 
 
       Neste contrato, os Structs são usados para definir uma estrutura de dados personalizada que inclui as propriedades "cash" (representando o dinheiro do usuário) e "client" (representando o endereço do cliente) para cada membro. Isso permite que o contrato organize as informações dos usuários em uma forma mais compreensível e possam usar essas informações em funções e em outros lugares do contrato.
       
@@ -221,12 +221,20 @@ Os passos que seguimos, de forma resumida, foram:
 <hr>
 
 ### 1. Instalação do Truffle e preparação do código nos arquivos
-Abaixo está o output após o comando “Truffle –version”.
+Deve-se, primeiramente, definir uma pasta para digitar, no terminal, o comando ‘npm install -g truffle’.
+Abaixo está o output printado após o comando “Truffle –version” no nosso projeto. 
+
 ![3](https://user-images.githubusercontent.com/68927480/224571994-b0c62444-3716-4bed-a599-e270fda9d12b.jpeg)
 <hr>
 
+Outro comando que deve ser digitado no terminal é o ‘truffle init’, que inicializa o truffle no repositório. 
+Posteriormente, inserimos os seguintes comandos para preparar a pasta e seus arquivos: ‘npm init -y’ e ‘npm install @openzeppelin/contracts’. 
+Após esta preparação, deve-se inserir o comando ‘truffle compile’ e informar qual o contrato no arquivo da pasta ‘migrations’ e a rede na pasta ‘truffle-config’ (o tutorial completo festá disponível na documentação do truffle).
 
 ### 2. Cadastro no Infura e uso da API Key no arquivo .env
+
+O arquivo .env deve ser criado para guardar a ‘Seed phrase’ da Meta mask e a ‘API Key’ do Infura, site no qual deve ser feita a conta para se realizar um deploy.
+
 ![4](https://user-images.githubusercontent.com/68927480/224572007-1513eda7-35eb-4ebc-b459-818514cca14a.jpeg)
 <hr>
 
@@ -240,7 +248,8 @@ Wallet do MetaMask com GoerliETH proveniente do falset citado anteriormente. Ap�
 
 
 ### 4. Deploy do “contrato Core” feito pelo grupo
-Quando tudo estava preparado para o deploy o grupo já havia preparado um “contrato core” para teste, de forma em que pudemos fazer um deploy em um momento propício para dar continuidade as outras atividades.</b>
+Quando tudo estava preparado para o deploy o grupo já havia preparado um “contrato core” para teste. Com o input ‘truffle deploy –network goerli’ é possível finalizar o deploy na testnet pública e se recebe um output com os dados do deploy, como o custo final e o hash da transação. </b>
+
 ![6](https://user-images.githubusercontent.com/68927480/224572034-00bc5125-2952-48dd-8779-41131156bc30.jpeg)
 
 
