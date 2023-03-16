@@ -6,10 +6,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
-import CommentIcon from '@mui/icons-material/Comment';
+import AssessmentIcon from '@mui/icons-material/Assessment';
 
 export default function CheckboxList() {
-  const [checked, setChecked] = React.useState([0]);
+
+    const [checked, setChecked] = React.useState([0]);
 
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -26,15 +27,23 @@ export default function CheckboxList() {
 
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+    <div>
+        <h1>Grupo X, Y</h1>
+        <p>Solicitação para entrar</p>
+  </div>
       {[0, 1, 2, 3].map((value) => {
         const labelId = `checkbox-list-label-${value}`;
+  
 
         return (
+        <div>
+           
+
           <ListItem
             key={value}
             secondaryAction={
               <IconButton edge="end" aria-label="comments">
-                <CommentIcon />
+            
               </IconButton>
             }
             disablePadding
@@ -49,11 +58,14 @@ export default function CheckboxList() {
                   inputProps={{ 'aria-labelledby': labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+              <ListItemText id={labelId} primary={`0x5EaaAb0F75C41A4314FFa90fdadE8e2a33054544`} />
             </ListItemButton>
           </ListItem>
+
+        </div>
         );
       })}
     </List>
   );
 }
+

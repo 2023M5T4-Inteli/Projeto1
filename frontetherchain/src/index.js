@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import visual from './pages/visualizar_Grupos'
+import CheckboxList from './pages/solicitacaoEntrar';
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import Meta from './pages/MetamaskPlugin'
 
@@ -13,15 +13,11 @@ const router = createBrowserRouter ([
     element: <Meta/>
   },
   {
-    path: "/visual",
-    element: <visual/>,
+    path: "/CheckboxList",
+    element: <CheckboxList/>,
   }
 
-
-
-])
-
-
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
