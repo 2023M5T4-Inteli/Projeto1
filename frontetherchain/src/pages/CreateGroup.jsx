@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid'; // Grid version 1
+import Navbar from '../components/FloatingAction';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,7 +41,7 @@ function CreateGroups() {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     // Aqui você pode adicionar o código para enviar os dados do formulário para o servidor
-    const novoGrupo = { nome: nomeGrupo, quantidadeMinima, taxaAdm, porcentagemCelular, cobertura};
+    const novoGrupo = { nome: nomeGrupo, quantidadeMinima, taxaAdm, porcentagemCelular, cobertura };
     setGrupos([...grupos, novoGrupo]);
     setShowModal(false);
     setNomeGrupo('');
@@ -52,9 +54,12 @@ function CreateGroups() {
 
   return (
     <>
+      <Navbar />
+      <Grid sx={{marginTop:11}}>
       <Button variant="contained" color="primary" onClick={handleButtonClick}>
         Criar novos grupos
       </Button>
+      </Grid>
 
       <Modal open={showModal} onClose={handleCloseModal}>
         <div className={classes.paper}>

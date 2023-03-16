@@ -3,20 +3,23 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import CheckboxList from './pages/solicitacaoEntrar';
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
-import Meta from './pages/MetamaskPlugin'
+import MetamaskPlugin from './pages/MetamaskPlugin'
+import OutlinedCard from './pages/Notifications';
 
 
 const router = createBrowserRouter ([
-
   {
     path: "/",
-    element: <Meta/>
+    element: <MetamaskPlugin/>
   },
   {
     path: "/CheckboxList",
     element: <CheckboxList/>,
+  },
+  {
+    path: "/notifications",
+    element: <OutlinedCard/>,
   }
-
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
