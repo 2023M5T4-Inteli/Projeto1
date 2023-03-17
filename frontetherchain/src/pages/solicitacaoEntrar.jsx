@@ -6,7 +6,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
-import AssessmentIcon from '@mui/icons-material/Assessment';
+// import AssessmentIcon from '@mui/icons-material/Assessment';
+import ApproveDecline from '../components/approve_decline';
+import { Button } from '@material-ui/core';
+
+
 
 export default function CheckboxList() {
 
@@ -25,42 +29,68 @@ export default function CheckboxList() {
     setChecked(newChecked);
   };
 
+  const wallet_List = [
+    {
+      address:"0x5EaaAb0F75C41A4314FFa90fdadE8e2a33054544",
+      label_Adress:"1"
+    },
+    
+    {
+      address:"0xFf27a22195b74b06Af498FC5E63f0A3b0F3Ed9Bd",
+      label_Adress: "2"
+    },
+
+    {
+      address:"0xf8094b52b1Bad1361aBC90993EAe757FFc91C5e3",
+      label_Adress:"3",
+    }
+  ];
+
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-    <div>
-        <h1>Grupo X, Y</h1>
-        <p>Solicitação para entrar</p>
-  </div>
-      {[0, 1, 2, 3].map((value) => {
-        const labelId = `checkbox-list-label-${value}`;
+    <div >
+        <h1>Grupo X</h1>
+        <h3>Solicitações de entrada no grupo</h3>
+    </div>
+    <Button variant="contained" color="success" onClick={""}>
+      Aprovar Tudo
+    </Button>
+    <br></br>
+    <br></br>
+
+      {wallet_List.map((wallet, index) => {
+        const labelId = `checkbox-list-label-${index}`;
   
 
         return (
-        <div>
-           
+        
+        <div alignItems="center" display="flex">
 
           <ListItem
-            key={value}
+            key={index}
             secondaryAction={
-              <IconButton edge="end" aria-label="comments">
-            
-              </IconButton>
+              <h6>
+                  {/* Data de solicitação */}
+              </h6>
             }
             disablePadding
           >
-            <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
+            <ListItemButton role={undefined} onClick={handleToggle(index)} dense>
               <ListItemIcon>
                 <Checkbox
                   edge="start"
-                  checked={checked.indexOf(value) !== -1}
+                  checked={checked.indexOf(index) !== -1}
                   tabIndex={-1}
                   disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
+                  inputProps={{ 'aria-labelledby': labelId}}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`0x5EaaAb0F75C41A4314FFa90fdadE8e2a33054544`} />
+              <ListItemText id={labelId} primary= {wallet.address} 
+              
+              />
             </ListItemButton>
           </ListItem>
+          <ApproveDecline />
 
         </div>
         );
@@ -68,4 +98,3 @@ export default function CheckboxList() {
     </List>
   );
 }
-
