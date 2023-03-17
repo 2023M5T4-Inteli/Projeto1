@@ -5,6 +5,7 @@ import CheckboxList from './pages/solicitacaoEntrar';
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import MetamaskPlugin from './pages/MetamaskPlugin'
 import OutlinedCard from './pages/Notifications';
+import Grupos from './pages/visualizarGrupo';
 
 
 const router = createBrowserRouter ([
@@ -19,6 +20,10 @@ const router = createBrowserRouter ([
   {
     path: "/notifications",
     element: <OutlinedCard/>,
+  },
+  {
+    path:"/Grupos",
+    element:<Grupos />,
   }
 ]);
 
