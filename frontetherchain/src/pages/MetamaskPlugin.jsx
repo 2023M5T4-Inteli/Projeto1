@@ -10,27 +10,21 @@ function MetamaskPlugin() {
   const [web3, setWeb3] = useState(null);
   const [account, setAccount] = useState(null);
   const [displayClient, setDisplayClient] = useState(null);
+  
+  /* Definindo a carteira do administrador.
+  Se atentar que na hora de colocar o endereço tudo tem de estar minusculo */
+  const cooverWalletAdrress = "0xff27a22195b74b06af498fc5e63f0a3b0f3ed9bd"
 
-  // let accountMessage;
-  // if (account === '0xa930575a2cca74cc4db44edd260a4eb489709a79') {
-  //   accountMessage = 'Coover';
-  // } else {
-  //   accountMessage = account;
-  // }
-  // if (accountMessage === account) {
-  //   setDisplayClient(() => <CreateGroups/>);
-  // } else {
-  //   setDisplayClient(() => <CheckboxList/>);
-  // }
 
   // O código abaixo realiza todos os comandos acima de forma efetiva
   function handleDisplayChange(account) {
-    if (account !== '0xa930575a2cca74cc4db44edd260a4eb489709a79') {
-      setDisplayClient(() => <CheckboxList />);
-      // setDisplayClient(() => <Link to="/about">Checkbox List</Link>);
-
-    } else if (account === '0xa930575a2cca74cc4db44edd260a4eb489709a79'){
+    if (account === cooverWalletAdrress) {
       setDisplayClient(() => <CreateGroups />);
+      console.log("Está como coover")
+
+    } else {
+      setDisplayClient(() => {<CheckboxList />});
+      console.log("Não é a coover", account)
       
     }
   }
