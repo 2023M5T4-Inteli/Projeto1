@@ -13,7 +13,7 @@ function MetamaskPlugin() {
   
   /* Definindo a carteira do administrador.
   Se atentar que na hora de colocar o endereço tudo tem de estar minusculo */
-  const cooverWalletAdrress = "0xff27a22195b74b06af498fc5e63f0a3b0f3ed9bd"
+  const cooverWalletAdrress = "0xa930575a2cca74cc4db44edd260a4eb489709a79"
 
 
   // O código abaixo realiza todos os comandos acima de forma efetiva
@@ -25,7 +25,6 @@ function MetamaskPlugin() {
     } else {
       setDisplayClient(() => {<CheckboxList />});
       console.log("Não é a coover", account)
-      
     }
   }
   // resolve um erro de renderização
