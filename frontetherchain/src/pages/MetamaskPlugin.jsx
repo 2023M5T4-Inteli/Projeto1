@@ -3,30 +3,31 @@ import Web3 from "web3";
 import CreateGroups from "./CreateGroup";
 import { Grid, Button, Typography } from '@mui/material';
 import CheckboxList from "./solicitacaoEntrar";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
 
 function MetamaskPlugin() {
   const [web3, setWeb3] = useState(null);
   const [account, setAccount] = useState(null);
   const [displayClient, setDisplayClient] = useState(null);
+  const navigate = useNavigate();
   
   /* Definindo a carteira do administrador.
   Se atentar que na hora de colocar o endereço tudo tem de estar minusculo */
   const cooverWalletAdrress = "0xa930575a2cca74cc4db44edd260a4eb489709a79"
 
-
-  // O código abaixo realiza todos os comandos acima de forma efetiva
   function handleDisplayChange(account) {
     if (account === cooverWalletAdrress) {
       setDisplayClient(() => <CreateGroups />);
-      console.log("Está como coover")
-
+      // return navigate('/CheckboxList')
+      console.log("Está como coover");
     } else {
-      setDisplayClient(() => {<CheckboxList />});
-      console.log("Não é a coover", account)
+      // return navigate('/')
+      setDisplayClient(() => <CheckboxList />);
+      console.log("Não é a coover", account);
     }
   }
+  
   // resolve um erro de renderização
   useEffect(() => {
     handleDisplayChange(account);

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useContext} from 'react'
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
@@ -8,13 +8,20 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import Badge from '@mui/material/Badge';
 import TemporaryDrawer from './Drawer';
 import BasicMenu from './Menu';
+import { MyContextProvider } from '../Contextt';
+import { NotificationsProvider, NotificationsContext } from '../Context';
+
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 export default function Navbar() {
-  const [notificationsCount, setNotificationsCount] = React.useState(0);
+// Essa constante define o número de notificações.
+// Se esse número for maior que 0, o ícone se altera
+// para alertar o usuário. 
+// const value = useContext(NotificationsContext);
 
   return (
     <>
+    <NotificationsProvider>
       <Paper
         sx={{
           borderRadius: 0,
@@ -39,27 +46,32 @@ export default function Navbar() {
         >
           <Fab sx={{   '&:hover': {
       backgroundColor: 'rgba(2, 222, 130, 1)',
-    },}} size="small" color="secondary" aria-label="add">
+    }, }} 
+    size="small" color="secondary" aria-label="add">
             <BasicMenu/>
             <MenuOpenIcon sx={{ fill: 'black', position:'absolute', backgroundColor: 'rgba(2, 222, 130, 0.4)', borderRadius:10,padding:1}} />
           </Fab>
 
           <Fab sx={{}} size="small" color="secondary" aria-label="add">
             {/* <Link to={'/notifications'} style={{ textDecoration: 'none', lineHeight: 0, fill: 'black' }}> */}
+           
             <TemporaryDrawer />
+           
+
             <Badge
               color="success"
-              variant="dot"
+              variant="standard"
               showZero={false}
               sx={{}}
-              badgeContent={notificationsCount}
+              // badgeContent={value.notificationsCount}
             >
-              <NotificationsNoneIcon sx={{ fill: 'black', top:0, backgroundColor: 'rgba(2, 222, 130, 0.4)', borderRadius:10,padding:1 }}  />
+              <NotificationsNoneIcon sx={{ fill: 'black', backgroundColor: 'rgba(2, 222, 130, 0.4)', borderRadius:10,padding:1 }}  />
             </Badge>
             {/* </Link> */}
           </Fab>
         </Box>
       </Paper>
+      </NotificationsProvider>
     </>
   );
 }

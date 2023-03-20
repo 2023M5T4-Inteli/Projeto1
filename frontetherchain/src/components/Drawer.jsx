@@ -10,6 +10,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
+import { useContext } from 'react';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import Badge from '@mui/material/Badge';
@@ -20,13 +21,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-
+import { MyContext } from '../Contextt';
 
 export default function TemporaryDrawer() {
     const anchor = 'right';
     const [state, setState] = React.useState({
         [anchor]: false
     });
+
+    const myContext = useContext(MyContext);
+        
 
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -37,6 +41,7 @@ export default function TemporaryDrawer() {
     };
 
     const list = () => (
+
         <Box
             sx={{ width: 300 }}
             role="presentation"
@@ -62,47 +67,23 @@ export default function TemporaryDrawer() {
                 </IconButton>
 
             </Box>
-            <Divider sx={{mt:1, }}/>
+            <Divider sx={{ mt: 1, }} />
 
-            <Card sx={{ maxWidth: 300, ml:2, mt:3, mr:2}}>
-                <CardActionArea>
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            Lizard
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Você foi aceito no grupo...
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
+            {myContext.showCards && (
+                <Card sx={{ maxWidth: 300, ml: 2, mt: 3, mr: 2 }}>
+                    <CardActionArea>
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Lizard
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Você foi aceito no grupo...
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            )}
 
-            <Card sx={{ maxWidth: 300, ml:2, mt:3, mr:2}}>
-                <CardActionArea>
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            Lizard
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Você foi aceito no grupo...
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
-
-            <Card sx={{ maxWidth: 300, ml:2, mt:3, mr:2}}>
-                <CardActionArea>
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            Lizard
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Você foi aceito no grupo...
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
-            
         </Box>
     );
 

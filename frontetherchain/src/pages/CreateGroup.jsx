@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@mui/material/Grid'; // Grid version 1
 import Navbar from '../components/FloatingAction';
+import CheckboxList from './solicitacaoEntrar';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -115,8 +116,6 @@ function CreateGroups() {
           <p>Taxa adm: {grupo.taxaAdm}%</p>
           <p>Porcentagem do celular: {grupo.porcentagemCelular}%</p>
           <p>Cobertura: {grupo.cobertura}%</p>
-
-
         </div>
       ))}
     </>

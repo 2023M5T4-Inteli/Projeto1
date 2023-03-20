@@ -41,7 +41,6 @@ export default function Grupos() {
           </Item>
           <Item>
             Pedidos de Indenização
-            
           </Item>
         </Grid>
       </Grid>
