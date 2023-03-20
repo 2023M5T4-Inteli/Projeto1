@@ -4,6 +4,8 @@ import CreateGroups from "./CreateGroup";
 import { Grid, Button, Typography } from '@mui/material';
 import CheckboxList from "./solicitacaoEntrar";
 import { Link, useNavigate } from 'react-router-dom';
+import CheckboxList from "./enterRequest";
+import { Link } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
 
 function MetamaskPlugin() {
