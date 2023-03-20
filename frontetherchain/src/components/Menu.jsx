@@ -4,7 +4,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { createTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
-import CheckboxList from '../pages/solicitacaoEntrar';
+import CheckboxList from '../pages/enterRequest';
 
 const theme = createTheme({
     components: {

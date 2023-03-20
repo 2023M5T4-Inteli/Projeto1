@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import CheckboxList from './pages/solicitacaoEntrar';
+import CheckboxList from './pages/enterRequest';
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import { MyContextProvider } from './Contextt';
 import MetamaskPlugin from './pages/MetamaskPlugin'
 import OutlinedCard from './pages/Notifications';
-import Grupos from './pages/visualizarGrupo';
+import Grupos from './pages/groupView';
 
 const router = createBrowserRouter ([
   {
