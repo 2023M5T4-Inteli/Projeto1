@@ -60,7 +60,7 @@ export default function TemporaryDrawer() {
             >
 
                 <IconButton
-                    sx={{ position: 'absolute', right: 0, top: 8, padding: 0.5, }}
+                    sx={{ position: 'absolute', right: 0, top: 8, padding: 0.5, color:'rgba(0, 0, 0, 1)' }}
                     onClick={toggleDrawer(false)}
                 >
                     <CloseIcon sx={{ padding: 0.5, backgroundColor: 'rgba(229, 35, 35, 0.4)', borderRadius: 10 }} />
@@ -68,7 +68,7 @@ export default function TemporaryDrawer() {
 
             </Box>
             <Divider sx={{ mt: 1, }} />
-
+            
             {myContext.showCards && (
                 <Card sx={{ maxWidth: 300, ml: 2, mt: 3, mr: 2 }}>
                     <CardActionArea>

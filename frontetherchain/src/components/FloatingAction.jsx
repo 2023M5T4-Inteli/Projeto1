@@ -10,7 +10,6 @@ import TemporaryDrawer from './Drawer';
 import BasicMenu from './Menu';
 import { MyContextProvider } from '../Contextt';
 import { NotificationsProvider, NotificationsContext } from '../Context';
-
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 export default function Navbar() {
@@ -40,19 +39,18 @@ export default function Navbar() {
             '& > :not(style)': {
               m: 2,
               borderRadius: 10,
-             
             },
           }}
         >
           <Fab sx={{   '&:hover': {
       backgroundColor: 'rgba(2, 222, 130, 1)',
-    }, }} 
+    },backgroundColor: 'rgba(2, 222, 130, 0.4)' }} 
     size="small" color="secondary" aria-label="add">
             <BasicMenu/>
             <MenuOpenIcon sx={{ fill: 'black', position:'absolute', backgroundColor: 'rgba(2, 222, 130, 0.4)', borderRadius:10,padding:1}} />
           </Fab>
 
-          <Fab sx={{}} size="small" color="secondary" aria-label="add">
+          <Fab sx={{backgroundColor: 'rgba(2, 222, 130, 0.4)'}} size="small" color="secondary" aria-label="add">
             {/* <Link to={'/notifications'} style={{ textDecoration: 'none', lineHeight: 0, fill: 'black' }}> */}
            
             <TemporaryDrawer />
