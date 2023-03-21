@@ -23,8 +23,8 @@ function MetamaskPlugin() {
       return navigate('/grupos');
       console.log("Está como coover");
     } else {
-      // return navigate('/')
-      setDisplayClient(() => <CheckboxList />);
+      return navigate('/')
+      // setDisplayClient(() => <CheckboxList />);
       console.log("Não é a coover", account);
     }
   }
@@ -64,6 +64,7 @@ function MetamaskPlugin() {
        {/* <Typography variant="body1">
           Conectado a conta {accountMessage}
         </Typography> */}
+
           {displayClient}
         </div>
       ) : (

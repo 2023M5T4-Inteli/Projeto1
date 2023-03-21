@@ -4,13 +4,9 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Paper from '@mui/material/Paper';
 import { Link } from 'react-router-dom';
-import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import Badge from '@mui/material/Badge';
-import TemporaryDrawer from '../Drawer';
-import BasicMenu from '../Menu';
+
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { MyContextProvider } from '../../Contextt';
-import { NotificationsProvider, NotificationsContext } from '../../Context';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 export default function BackNavbar() {
@@ -21,7 +17,7 @@ export default function BackNavbar() {
 
   return (
     <>
-    <NotificationsProvider>
+
       <Paper
         sx={{
           borderRadius: 0,
@@ -56,7 +52,6 @@ export default function BackNavbar() {
 
         </Box>
       </Paper>
-      </NotificationsProvider>
     </>
   );
 }

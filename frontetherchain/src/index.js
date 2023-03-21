@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import CheckboxList from './pages/enterRequest';
+import CheckboxList from './cooverpages/enterRequest';
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import { MyContextProvider } from './Contextt';
 import MetamaskPlugin from './MetamaskPlugin'
-import Grupos from './pages/groupView';
-import IndRequest from './pages/indRequest';
-import ViewGroups from './pages/ViewGroups';
+import Grupos from './cooverpages/groupView';
+import IndRequest from './cooverpages/indRequest';
+import ViewGroups from './cooverpages/ViewGroups';
 
 const router = createBrowserRouter ([
   {
@@ -15,6 +15,7 @@ const router = createBrowserRouter ([
   },
 
   // Páginas da Coover
+
   {
     path: "/grupos",
     element: <MyContextProvider><ViewGroups/></MyContextProvider>
@@ -33,6 +34,19 @@ const router = createBrowserRouter ([
   },
 
   // Páginas do cliente
+
+  // {
+  //   path: "/grupos",
+  //   element: <MyContextProvider><ViewGroups/></MyContextProvider>
+  // },
+  // {
+  //   path: "/group1",
+  //   element: <MyContextProvider><Grupos/></MyContextProvider>
+  // },
+  // {
+  //   path: "/indrequest",
+  //   element: <MyContextProvider><IndRequest/></MyContextProvider>,
+  // },
 
 
 ]);

@@ -10,7 +10,6 @@ import TemporaryDrawer from '../Drawer';
 import BasicMenu from '../Menu';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { MyContextProvider } from '../../Contextt';
-import { NotificationsProvider, NotificationsContext } from '../../Context';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 export default function Navbar() {
@@ -21,7 +20,6 @@ export default function Navbar() {
 
   return (
     <>
-    <NotificationsProvider>
       <Paper
         sx={{
           borderRadius: 0,
@@ -73,7 +71,6 @@ export default function Navbar() {
           </Fab>
         </Box>
       </Paper>
-      </NotificationsProvider>
     </>
   );
 }
