@@ -10,6 +10,8 @@ import ViewGroups from './cooverpages/ViewGroups';
 import GruposClient from './clientpages/groupViewClient';
 import ViewGroupsClient from './clientpages/ViewGroupsClient';
 import IndRequestClient from './clientpages/indRequestClient';
+import ViewGroupsClient2 from './clientpages/ViewGroupsClient2';
+import IndemnityForm from './clientpages/IndemnityRequest';
 
 const router = createBrowserRouter ([
   {
@@ -44,6 +46,14 @@ const router = createBrowserRouter ([
   {
     path: "/group1client",
     element: <MyContextProvider><GruposClient/></MyContextProvider>
+  },
+  {
+    path: "/gruposclient2",
+    element: <MyContextProvider><ViewGroupsClient2/></MyContextProvider>,
+  },
+  {
+    path: "/idemnityreq",
+    element: <MyContextProvider><IndemnityForm/></MyContextProvider>,
   },
   {
     path: "/indrequestclient",

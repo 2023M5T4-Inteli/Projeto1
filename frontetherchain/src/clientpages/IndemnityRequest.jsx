@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const IndemnityForm = () => {
+export const IndemnityForm = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [imei, setImei] = useState('');

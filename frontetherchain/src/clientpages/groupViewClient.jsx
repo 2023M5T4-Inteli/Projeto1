@@ -17,7 +17,7 @@ const modalContent = (
       Nosso time irá analisá-la e você receberá o resultado na aba de notificações.
     </Typography>
     <Button >
-      <Link to='/gruposclient' style={{ textDecoration: 'none', color: 'black' }}>
+      <Link to='/gruposclient2' style={{ textDecoration: 'none', color: 'black' }}>
         Entendi
       </Link>
     </Button>
