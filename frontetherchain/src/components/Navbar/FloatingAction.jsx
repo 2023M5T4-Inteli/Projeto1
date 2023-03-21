@@ -37,6 +37,7 @@ export default function Navbar() {
           sx={{
             display: 'flex',
             justifyContent: 'space-between', 
+            
             '& > :not(style)': {
               m: 2,
               borderRadius: 10,

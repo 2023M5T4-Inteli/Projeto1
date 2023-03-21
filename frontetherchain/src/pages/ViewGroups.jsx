@@ -24,12 +24,8 @@ export default function ViewGroups() {
         <>
 
             <Navbar />
-            <Box sx={{ paddingTop: 7, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                <div>
-                    <h2>Visualizar Grupos:</h2>
-                </div>
+            <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                 <ComboBox />
-
                 <Card sx={{ minWidth: 275, marginTop:5 }}>
                     <CardContent>
                         <Typography sx={{ fontSize: 14 }} color="black" gutterBottom>

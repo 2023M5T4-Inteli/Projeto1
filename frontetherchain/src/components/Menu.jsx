@@ -62,10 +62,11 @@ export default function BasicMenu() {
         }}
         theme={theme}
       >
-        <MenuItem sx={{width:'110px', left:-5, fontSize:'10px',
+        <MenuItem sx={{width:'110px', left:-5, 
         '& .MuiButtonBase-root':{alignItems:'flex-start',}}}
-        ><Link to='http://localhost:3000/grupos' style={{textDecoration:'none'}}>Todos os grupos</Link></MenuItem>
-        <MenuItem  onClick={() => window.location.reload()} sx={{width:'110px', left:-5}} >Logout</MenuItem>
+        >
+          Saiba mais</MenuItem>
+        <MenuItem sx={{width:'110px', left:-5}} ><Link to='/' style={{textDecoration:'none'}}>Logout</Link></MenuItem>
       </Menu>
  
     </div>

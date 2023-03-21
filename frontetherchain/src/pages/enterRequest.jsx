@@ -7,9 +7,10 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 import styled from '@mui/system/styled'
 import ApproveDecline from '../components/approve_decline';
-import { Button } from '@material-ui/core';
+import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import Navbar from '../components/Navbar/FloatingAction';
+import BackNavbarReq from '../components/Navbar/BackNavbarReq';
 
 
 export default function CheckboxList() {
@@ -70,7 +71,7 @@ export default function CheckboxList() {
 
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', padding:'20px 0 0 50px'}}>
-    <Navbar></Navbar>
+    <BackNavbarReq/>
     <br></br>
     <br></br>
     <br></br>

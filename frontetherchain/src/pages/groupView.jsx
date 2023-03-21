@@ -5,8 +5,32 @@ import Box from '@mui/system/Box';
 import Navbar from '../components/Navbar/FloatingAction';
 import BackNavbar from '../components/Navbar/BackNavbar';
 import { Link } from 'react-router-dom';
-import { Divider } from '@mui/material';
+import { Divider, Button } from '@mui/material';
+import Badge from '@mui/material/Badge';
 
+const button = {
+  border: '1px solid',
+  borderColor:'rgb(1, 1, 1, 0.5)',
+  padding: 1.5,
+  paddingLeft:2,
+  borderRadius: '40px',
+  width:'22rem',
+  display:'flex', 
+  justifyContent:'flex-start',
+
+}
+const button2 = {
+  border: '1px solid',
+  borderColor:'rgb(1, 1, 1, 0.5)',
+  padding: 1.5,
+  paddingLeft:2,
+  borderRadius: '40px',
+  width:'22rem',
+  textAlign: 'left',
+  mt:2,
+  display:'flex', 
+  justifyContent:'flex-start',
+}
 const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ffffff',
   border: '1px solid',
@@ -36,16 +60,12 @@ const Item = styled('div')(({ theme }) => ({
 
 export default function Grupos() {
   return (
-    <Box sx={{ width: '100%', padding:'20px 0 0 50px' }}>
+    <Box sx={{ width: '100%', padding:'60px 0 0 10px' }}>
       <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
-        <BackNavbar />
+        <BackNavbar/>
         <Grid item xs={12} md={6}>
-          <br />
-          <br />
-          <br />
-          <br />
-            <h1>Grupo 1</h1>
-            <Divider sx={{mb:'30px'}}/>
+            <h1 style={{justifyContent:'center', display:'flex', zIndex:1, position:'relative'}}>Grupo 1</h1>
+            <Divider sx={{mb:'15px'}}/>
             <Item>
             <p>
               Mínimo de membros: 35
@@ -81,24 +101,20 @@ export default function Grupos() {
             </Item>
             <br>
             </br>
-            <Item>
-            <p>
-              <Link to='/requisicoes'>Solicitações para entrar:</Link>
-                <button style={{ marginLeft: '10px' }}>
-                  0
-                </button>
-            </p>
-            </Item>
-            <br>
-            </br>
-            <Item>
-            <p>
-            <Link to='/indrequest'>Solicitações para entrar:</Link>
-               <button style={{ marginLeft: '10px' }}>
-                    4
-                </button>
-            </p>
-            </Item>
+
+            <Button sx={button}>
+            <Link to='/requisicoes' style={{textDecoration:'none'}}>Solicitações de entrada</Link>
+            <Badge color="success" overlap="circular" badgeContent="1" sx={{ml:'100px', scale:'1.2'}}/>
+            </Button>
+         
+            <Button sx={button2}>
+            
+            <Link to='/indrequest' style={{textDecoration:'none'}}>Solicitações de indenização</Link>
+            <Badge color="error" overlap="circular" badgeContent="5" sx={{ml:'70px', scale:'1.2',}}/>
+            </Button>
+           
+   
+
         </Grid>
       </Grid>
     </Box>
