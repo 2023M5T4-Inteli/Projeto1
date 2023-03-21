@@ -5,6 +5,7 @@ import Box from '@mui/system/Box';
 import Navbar from '../components/Navbar/FloatingAction';
 import BackNavbar from '../components/Navbar/BackNavbar';
 import { Link } from 'react-router-dom';
+import { Divider } from '@mui/material';
 
 const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ffffff',
@@ -35,34 +36,62 @@ const Item = styled('div')(({ theme }) => ({
 
 export default function Grupos() {
   return (
-    <Box sx={{ width: '100%' }}>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
+    <Box sx={{ width: '100%', padding:'20px 0 0 50px' }}>
+      <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
         <BackNavbar />
         <Grid item xs={12} md={6}>
           <br />
           <br />
           <br />
           <br />
-          <Item>
-            <h2>Grupo 1</h2>
+            <h1>Grupo 1</h1>
+            <Divider sx={{mb:'30px'}}/>
+            <Item>
             <p>
               Mínimo de membros: 35
             </p>
+            </Item>
+            <br>
+            </br>
+            <Item>
             <p>
               Taxa Administrativa: 10%
             </p>
+            </Item>
+            <br>
+            </br>
+            <Item>
             <p>
               Valor do seguro: R$ 10,00
             </p>
+            </Item>
+            <br>
+            </br>
+            <Item>
             <p>
                Cobertura do seguro: 10%
             </p>
+            </Item>
+            <br>
+            </br>
+            <Item>
             <p>
               Membros do Seguro: 
             </p>
+            </Item>
+            <br>
+            </br>
+            <Item>
             <p>
               <Link to='/requisicoes'>Solicitações para entrar:</Link>
+                <button style={{ marginLeft: '10px' }}>
+                  0
+                </button>
             </p>
+            </Item>
+            <br>
+            </br>
+            <Item>
             <p>
             <Link to='/indrequest'>Solicitações para entrar:</Link>
                <button style={{ marginLeft: '10px' }}>

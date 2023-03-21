@@ -5,19 +5,18 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-// import AssessmentIcon from '@mui/icons-material/Assessment';
+import styled from '@mui/system/styled'
 import ApproveDecline from '../components/approve_decline';
-// import { Button } from '@material-ui/core';
-import Button from '@mui/material/Button';
+import { Button } from '@material-ui/core';
+import SearchIcon from '@mui/icons-material/Search';
 import Navbar from '../components/Navbar/FloatingAction';
-import BackNavbarReq from '../components/Navbar/BackNavbarReq';
+
 
 export default function CheckboxList() {
 
     const [checked, setChecked] = React.useState([0]);
 
-  const handleToggle = (value) => () => {
+    const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -47,16 +46,44 @@ export default function CheckboxList() {
     }
   ];
 
+  const searching_Icon = styled('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+
+  const Search = styled('div')(({ theme }) => ({
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: 'grey',
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
+    },
+  }));
+
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-    <BackNavbarReq/>
+    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', padding:'20px 0 0 50px'}}>
+    <Navbar></Navbar>
     <br></br>
     <br></br>
     <br></br>
 
     <div >
+      <br>
+      </br>
+      <Search>
+        <SearchIcon />
+        <searching_Icon></searching_Icon>
+      </Search>
         <h1>Grupo 1</h1>
-        <h3>Solicitações de entrada no grupo</h3>
+        <p style={{ fontSize: '20px' }}>Solicitações de entrada no grupo: </p>
     </div>
     <Button variant="contained" onClick={""} style={{ backgroundColor: "rgba(2, 222, 130, 0.1)" }} >
       Aprovar Tudo
