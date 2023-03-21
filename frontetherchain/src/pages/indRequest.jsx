@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import Navbar from '../components/Navbar/FloatingAction';
 import BackNavbarReq from '../components/Navbar/BackNavbarReq';
 
-export default function CheckboxList() {
+export default function IndRequest() {
 
     const [checked, setChecked] = React.useState([0]);
 
@@ -56,7 +56,7 @@ export default function CheckboxList() {
 
     <div >
         <h1>Grupo 1</h1>
-        <h3>Solicitações de entrada no grupo</h3>
+        <h3>Solicitações de indenização do grupo</h3>
     </div>
     <Button variant="contained" onClick={""} style={{ backgroundColor: "rgba(2, 222, 130, 0.1)" }} >
       Aprovar Tudo

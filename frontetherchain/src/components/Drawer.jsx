@@ -2,23 +2,12 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
-import Fab from '@mui/material/Fab';
-import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
 import { useContext } from 'react';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import Badge from '@mui/material/Badge';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { MyContext } from '../Contextt';
@@ -60,14 +49,15 @@ export default function TemporaryDrawer() {
             >
 
                 <IconButton
-                    sx={{ position: 'absolute', right: 0, top: 8, padding: 0.5, color:'rgba(0, 0, 0, 1)' }}
+                    sx={{ position: 'absolute', right: 0, top: 0, padding: 0.5, color:'rgba(0, 0, 0, 1)' }}
                     onClick={toggleDrawer(false)}
                 >
                     <CloseIcon sx={{ padding: 0.5, backgroundColor: 'rgba(229, 35, 35, 0.4)', borderRadius: 10 }} />
                 </IconButton>
 
             </Box>
-            <Divider sx={{ mt: 1, }} />
+            
+            <Divider sx={{ mt: 9,  }} />
             
             {myContext.showCards && (
                 <Card sx={{ maxWidth: 300, ml: 2, mt: 3, mr: 2 }}>

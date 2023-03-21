@@ -6,6 +6,8 @@ import { MyContextProvider } from './Contextt';
 import MetamaskPlugin from './pages/MetamaskPlugin'
 import OutlinedCard from './pages/Notifications';
 import Grupos from './pages/groupView';
+import IndRequest from './pages/indRequest';
+import ViewGroups from './pages/ViewGroups';
 
 const router = createBrowserRouter ([
   {
@@ -13,8 +15,20 @@ const router = createBrowserRouter ([
     element: <MyContextProvider><MetamaskPlugin/></MyContextProvider>
   },
   {
-    path: "/CheckboxList",
+    path: "/grupos",
+    element: <MyContextProvider><ViewGroups/></MyContextProvider>
+  },
+  {
+    path: "/group1",
+    element: <MyContextProvider><Grupos/></MyContextProvider>
+  },
+  {
+    path: "/requisicoes",
     element: <MyContextProvider><CheckboxList/></MyContextProvider>,
+  },
+  {
+    path: "/indrequest",
+    element: <MyContextProvider><IndRequest/></MyContextProvider>,
   },
   {
     path: "/notifications",

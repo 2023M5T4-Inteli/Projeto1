@@ -5,6 +5,7 @@ import { Grid, Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CheckboxList from "./enterRequest";
 import Divider from '@mui/material/Divider';
+import Grupos from "./groupView";
 
 function MetamaskPlugin() {
   const [web3, setWeb3] = useState(null);
@@ -18,8 +19,8 @@ function MetamaskPlugin() {
 
   function handleDisplayChange(account) {
     if (account === cooverWalletAdrress) {
-      setDisplayClient(() => <CreateGroups />);
-      // return navigate('/CheckboxList')
+      // setDisplayClient(() => <Grupos />);
+      return navigate('/grupos');
       console.log("Está como coover");
     } else {
       // return navigate('/')

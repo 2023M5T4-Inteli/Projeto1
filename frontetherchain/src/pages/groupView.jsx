@@ -2,7 +2,9 @@ import * as React from 'react';
 import styled from '@mui/system/styled';
 import Grid from '@mui/system/Unstable_Grid';
 import Box from '@mui/system/Box';
-import Navbar from '../components/FloatingAction';
+import Navbar from '../components/Navbar/FloatingAction';
+import BackNavbar from '../components/Navbar/BackNavbar';
+import { Link } from 'react-router-dom';
 
 const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ffffff',
@@ -35,14 +37,14 @@ export default function Grupos() {
   return (
     <Box sx={{ width: '100%' }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
-        <Navbar />
+        <BackNavbar />
         <Grid item xs={12} md={6}>
           <br />
           <br />
           <br />
           <br />
           <Item>
-            <h2>Grupo Y</h2>
+            <h2>Grupo 1</h2>
             <p>
               Mínimo de membros: 35
             </p>
@@ -59,10 +61,10 @@ export default function Grupos() {
               Membros do Seguro: 
             </p>
             <p>
-              Solicitações para entrar:
+              <Link to='/requisicoes'>Solicitações para entrar:</Link>
             </p>
             <p>
-              Pedidos de Indenização:  
+            <Link to='/indrequest'>Solicitações para entrar:</Link>
                <button style={{ marginLeft: '10px' }}>
                     4
                 </button>

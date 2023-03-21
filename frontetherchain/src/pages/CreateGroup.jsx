@@ -4,7 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@mui/material/Grid'; // Grid version 1
-import Navbar from '../components/FloatingAction';
+import Navbar from '../components/Navbar/FloatingAction';
 import CheckboxList from './enterRequest';
 
 const useStyles = makeStyles((theme) => ({
