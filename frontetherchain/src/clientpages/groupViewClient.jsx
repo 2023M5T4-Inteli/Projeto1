@@ -5,31 +5,37 @@ import Box from '@mui/system/Box';
 import Navbar from '../components/Navbar/FloatingAction';
 import BackNavbarClient from '../components/Navbar/BackNavbarClient';
 import { Link } from 'react-router-dom';
-import { Divider, Button } from '@mui/material';
+import { Divider, Button, Modal, Typography } from '@mui/material';
 import Badge from '@mui/material/Badge';
 
-const button = {
-  border: '1px solid',
-  borderColor:'rgb(1, 1, 1, 0.5)',
-  padding: 1.5,
-  paddingLeft:2,
-  borderRadius: '40px',
-  width:'22rem',
-  display:'flex', 
-  justifyContent:'flex-start',
+const modalContent = (
+  <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', boxShadow: 24, padding: '20px', width: '300px', borderRadius: '24px', background: 'white', display:'flex', justifyContent:'center', flexDirection:'column', }}>
+    <Typography variant="h6" component="h2" gutterBottom>
+      Sua solicitação foi enviada com sucesso!
+    </Typography>
+    <Typography variant="body1" sx={{ mb: 2 }}>
+      Nosso time irá analisá-la e você receberá o resultado na aba de notificações.
+    </Typography>
+    <Button >
+      <Link to='/gruposclient' style={{ textDecoration: 'none', color: 'black' }}>
+        Entendi
+      </Link>
+    </Button>
+  </Box>
+);
 
-}
 const button2 = {
   border: '1px solid',
-  borderColor:'rgb(1, 1, 1, 0.5)',
+  borderColor: 'rgba(2, 222, 130, 0.6)',
+  backgroundColor: 'rgba(2, 222, 130, 0.1)',
   padding: 1.5,
-  paddingLeft:2,
+  paddingLeft: 2,
   borderRadius: '40px',
-  width:'22rem',
-  textAlign: 'left',
-  mt:2,
-  display:'flex', 
-  justifyContent:'flex-start',
+  width: '17rem',
+  ml: 5,
+  mt: 2,
+  display: 'flex',
+  justifyContent: 'center',
 }
 const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ffffff',
@@ -59,58 +65,70 @@ const Item = styled('div')(({ theme }) => ({
 }));
 
 export default function GruposClient() {
+  const [openModal, setOpenModal] = React.useState(false);
   return (
-    <Box sx={{ width: '100%', padding:'60px 0 0 10px' }}>
-      <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
-        <BackNavbarClient/>
-        <Grid item xs={12} md={6}>
-            <h1 style={{justifyContent:'center', display:'flex', zIndex:1, position:'relative'}}>Grupo 1</h1>
-            <Divider sx={{mb:'15px'}}/>
+    <>
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
+        {modalContent}
+      </Modal>
+      <Box sx={{ width: '100%', padding: '60px 0 0 10px' }}>
+        <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
+          <BackNavbarClient />
+          <Grid item xs={12} md={6}>
+            <h1 style={{ justifyContent: 'center', display: 'flex', zIndex: 1, position: 'relative' }}>Grupo 1</h1>
+            <Divider sx={{ mb: '15px' }} />
             <Item>
-            <p>
-              Mínimo de membros: 35
-            </p>
+              <p>
+                Mínimo de membros: 35
+              </p>
             </Item>
             <br>
             </br>
             <Item>
-            <p>
-              Taxa Administrativa: 10%
-            </p>
+              <p>
+                Taxa Administrativa: 10%
+              </p>
             </Item>
             <br>
             </br>
             <Item>
-            <p>
-              Valor do seguro: R$ 10,00
-            </p>
+              <p>
+                Valor do seguro: R$ 10,00
+              </p>
             </Item>
             <br>
             </br>
             <Item>
-            <p>
-               Cobertura do seguro: 10%
-            </p>
+              <p>
+                Cobertura do seguro: 10%
+              </p>
             </Item>
             <br>
             </br>
             <Item>
-            <p>
-              Membros do Seguro: 
-            </p>
+              <p>
+                Membros do Seguro:
+              </p>
             </Item>
             <br>
             </br>
-         
-            <Button sx={button2}>
-            <Link to='/indrequestclient' style={{textDecoration:'none'}}>Solicitações de indenização</Link>
-            <Badge color="error" overlap="circular" badgeContent="5" sx={{ml:'70px', scale:'1.2',}}/>
-            </Button>
-           
-   
 
+            <Button sx={button2} onClick={() => setOpenModal(true)}>
+              {/* <Link to='/indrequestclient' style={{textDecoration:'none', color:'black'}}> */}
+              Solicitar entrada
+              {/* </Link> */}
+            </Button>
+
+
+
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </>
   );
 }
