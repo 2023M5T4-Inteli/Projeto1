@@ -52,7 +52,9 @@ export default function Navbar() {
             <MenuOpenIcon sx={{ fill: 'black', position:'absolute', backgroundColor: 'transparent', borderRadius:10,padding:1}} />
           </Fab>
 
-          <Fab sx={{backgroundColor: 'rgba(2, 222, 130, 0.4)'}} size="small" color="secondary" aria-label="add">
+          <Fab sx={{backgroundColor: 'rgba(2, 222, 130, 0.4)', '&:hover': {
+      backgroundColor: 'rgba(2, 222, 130, 1)',
+    },}} size="small" color="secondary" aria-label="add">
             {/* <Link to={'/notifications'} style={{ textDecoration: 'none', lineHeight: 0, fill: 'black' }}> */}
            
             <TemporaryDrawer />

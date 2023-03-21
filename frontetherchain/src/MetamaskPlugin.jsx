@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Web3 from "web3";
-import CreateGroups from "./CreateGroup";
+import CreateGroups from "./cooverpages/CreateGroup";
 import { Grid, Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import CheckboxList from "./enterRequest";
+import CheckboxList from "./cooverpages/enterRequest";
 import Divider from '@mui/material/Divider';
-import Grupos from "./groupView";
+import Grupos from "./cooverpages/groupView";
 
 function MetamaskPlugin() {
   const [web3, setWeb3] = useState(null);

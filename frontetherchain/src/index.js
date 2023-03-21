@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client';
 import CheckboxList from './pages/enterRequest';
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import { MyContextProvider } from './Contextt';
-import MetamaskPlugin from './pages/MetamaskPlugin'
-import OutlinedCard from './pages/Notifications';
+import MetamaskPlugin from './MetamaskPlugin'
 import Grupos from './pages/groupView';
 import IndRequest from './pages/indRequest';
 import ViewGroups from './pages/ViewGroups';
@@ -14,6 +13,8 @@ const router = createBrowserRouter ([
     path: "/",
     element: <MyContextProvider><MetamaskPlugin/></MyContextProvider>
   },
+
+  // Páginas da Coover
   {
     path: "/grupos",
     element: <MyContextProvider><ViewGroups/></MyContextProvider>
@@ -30,14 +31,10 @@ const router = createBrowserRouter ([
     path: "/indrequest",
     element: <MyContextProvider><IndRequest/></MyContextProvider>,
   },
-  {
-    path: "/notifications",
-    element: <MyContextProvider><OutlinedCard/></MyContextProvider>,
-  },
-  {
-    path:"/Grupos",
-    element:<MyContextProvider><Grupos /></MyContextProvider>,
-  }
+
+  // Páginas do cliente
+
+
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

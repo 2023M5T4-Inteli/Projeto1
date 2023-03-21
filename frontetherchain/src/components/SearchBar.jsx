@@ -53,9 +53,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar() {
   return (
-    <Box sx={{ flexGrow: 1,  }}>
+    <Box sx={{ flexGrow: 1, }}>
       <AppBar position="static" sx={{background:'transparent'}}>
-        <Toolbar sx={{background:'rgba(2, 222, 130, 0.6)'}}>
+        <Toolbar sx={{background:'rgba(2, 222, 130, 0.2)'}}>
           <Typography
             variant="h6"
             noWrap
@@ -64,14 +64,13 @@ export default function SearchAppBar() {
           >
     
           </Typography>
-          <Search>
+          <Search sx={{backgroundColor:'transparent', color:'black'}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-            sx={{}}
               placeholder="Nome do grupo"
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ 'aria-label': 'search',  }}
             />
           </Search>
         </Toolbar>
