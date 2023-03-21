@@ -109,7 +109,7 @@ export default function GruposClient() {
          
             <Button sx={button2}>
             
-            <Link to='/indrequest' style={{textDecoration:'none'}}>Solicitações de indenização</Link>
+            <Link to='/indrequestclient' style={{textDecoration:'none'}}>Solicitações de indenização</Link>
             <Badge color="error" overlap="circular" badgeContent="5" sx={{ml:'70px', scale:'1.2',}}/>
             </Button>
            

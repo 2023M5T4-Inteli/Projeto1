@@ -42,7 +42,7 @@ export default function ViewGroupsClient() {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small"><Link to='/group1'>Ver grupo</Link></Button>
+                        <Button size="small"><Link to='/group1client'>Ver grupo</Link></Button>
                     </CardActions>
                 </Card>
 

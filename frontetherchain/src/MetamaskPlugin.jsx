@@ -27,7 +27,7 @@ function MetamaskPlugin() {
       navigate('/')
     }
     else {
-      return navigate('/')
+      return navigate('/gruposclient')
       console.log("Não é a coover", account);
     }
   }
