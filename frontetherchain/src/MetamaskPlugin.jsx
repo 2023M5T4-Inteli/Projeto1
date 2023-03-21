@@ -19,12 +19,15 @@ function MetamaskPlugin() {
 
   function handleDisplayChange(account) {
     if (account === cooverWalletAdrress) {
-      // setDisplayClient(() => <Grupos />);
       return navigate('/grupos');
       console.log("Está como coover");
-    } else {
+    } 
+    else if (account === null) {
+      console.log("Não é a coover", account);
+      navigate('/')
+    }
+    else {
       return navigate('/')
-      // setDisplayClient(() => <CheckboxList />);
       console.log("Não é a coover", account);
     }
   }
@@ -64,7 +67,6 @@ function MetamaskPlugin() {
        {/* <Typography variant="body1">
           Conectado a conta {accountMessage}
         </Typography> */}
-
           {displayClient}
         </div>
       ) : (

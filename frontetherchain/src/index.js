@@ -7,6 +7,9 @@ import MetamaskPlugin from './MetamaskPlugin'
 import Grupos from './cooverpages/groupView';
 import IndRequest from './cooverpages/indRequest';
 import ViewGroups from './cooverpages/ViewGroups';
+import GruposClient from './clientpages/groupViewClient';
+import ViewGroupsClient from './clientpages/ViewGroupsClient';
+import IndRequestClient from './clientpages/indRequestClient';
 
 const router = createBrowserRouter ([
   {
@@ -34,19 +37,18 @@ const router = createBrowserRouter ([
   },
 
   // Páginas do cliente
-
-  // {
-  //   path: "/grupos",
-  //   element: <MyContextProvider><ViewGroups/></MyContextProvider>
-  // },
-  // {
-  //   path: "/group1",
-  //   element: <MyContextProvider><Grupos/></MyContextProvider>
-  // },
-  // {
-  //   path: "/indrequest",
-  //   element: <MyContextProvider><IndRequest/></MyContextProvider>,
-  // },
+  {
+    path: "/gruposclient",
+    element: <MyContextProvider><ViewGroupsClient/></MyContextProvider>
+  },
+  {
+    path: "/group1client",
+    element: <MyContextProvider><GruposClient/></MyContextProvider>
+  },
+  {
+    path: "/indrequestclient",
+    element: <MyContextProvider><IndRequestClient/></MyContextProvider>,
+  },
 
 
 ]);
