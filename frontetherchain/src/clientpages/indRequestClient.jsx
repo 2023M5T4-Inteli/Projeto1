@@ -11,7 +11,7 @@ import ApproveDecline from '../components/approve_decline';
 // import { Button } from '@material-ui/core';
 import Button from '@mui/material/Button';
 import Navbar from '../components/Navbar/FloatingAction';
-import BackNavbarReq from '../components/Navbar/BackNavbarReq';
+import BackNavbarReqClient from '../components/Navbar/BackNavbarReqClient';
 
 export default function IndRequestClient() {
 
@@ -49,7 +49,7 @@ export default function IndRequestClient() {
 
   return (
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-    <BackNavbarReq/>
+    <BackNavbarReqClient/>
     <br></br>
     <br></br>
     <br></br>

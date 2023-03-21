@@ -3,7 +3,7 @@ import styled from '@mui/system/styled';
 import Grid from '@mui/system/Unstable_Grid';
 import Box from '@mui/system/Box';
 import Navbar from '../components/Navbar/FloatingAction';
-import BackNavbar from '../components/Navbar/BackNavbar';
+import BackNavbarClient from '../components/Navbar/BackNavbarClient';
 import { Link } from 'react-router-dom';
 import { Divider, Button } from '@mui/material';
 import Badge from '@mui/material/Badge';
@@ -62,7 +62,7 @@ export default function GruposClient() {
   return (
     <Box sx={{ width: '100%', padding:'60px 0 0 10px' }}>
       <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
-        <BackNavbar/>
+        <BackNavbarClient/>
         <Grid item xs={12} md={6}>
             <h1 style={{justifyContent:'center', display:'flex', zIndex:1, position:'relative'}}>Grupo 1</h1>
             <Divider sx={{mb:'15px'}}/>
@@ -101,14 +101,8 @@ export default function GruposClient() {
             </Item>
             <br>
             </br>
-
-            <Button sx={button}>
-            <Link to='/requisicoes' style={{textDecoration:'none'}}>Solicitações de entrada</Link>
-            <Badge color="success" overlap="circular" badgeContent="1" sx={{ml:'100px', scale:'1.2'}}/>
-            </Button>
          
             <Button sx={button2}>
-            
             <Link to='/indrequestclient' style={{textDecoration:'none'}}>Solicitações de indenização</Link>
             <Badge color="error" overlap="circular" badgeContent="5" sx={{ml:'70px', scale:'1.2',}}/>
             </Button>
