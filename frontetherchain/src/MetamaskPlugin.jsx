@@ -95,3 +95,4 @@ function MetamaskPlugin() {
 }
 
 export default MetamaskPlugin;
+
