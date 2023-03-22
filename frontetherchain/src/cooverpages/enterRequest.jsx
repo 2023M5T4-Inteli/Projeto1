@@ -11,25 +11,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import Navbar from "../components/Navbar/FloatingAction";
 import BackNavbarReq from "../components/Navbar/BackNavbarReq";
 import Modal from "@mui/material/Modal";
+import { Divider, Grid } from "@mui/material";
 import Box from "@mui/material/Box";
-
-const navbar = {
-  marginTop: "10%",
-};
-
-const text = {
-  position: "flex",
-  width: "",
-  height: "24px",
-  left: "26px",
-  top: "148px",
-  fontFamily: "Rubik",
-  fontStyle: "normal",
-  fontWeight: "700",
-  fontSize: "30px",
-  lineHeight: "24px",
-  margin: '40%'
-};
 
 const styleModal = {
   transform: "translate(50%, 50%)",
@@ -76,7 +59,7 @@ const buttonAccept = {
   position: "flex",
   width: "50%",
   height: "40%",
-  left: "50%",
+  left:'25%',
   top: "100%",
   background: "rgba(133, 251, 202, 0.88)",
   borderRadius: "22px",
@@ -160,18 +143,18 @@ export default function CheckboxList() {
         }}
       >
         {/* Navbar da página */}
-        <div>
-          <BackNavbarReq />
-        </div>
-
-        <div>
-          <h1>Grupo 1</h1>
+        <BackNavbarReq />
+        <Box sx={{marginTop:8, marginLeft:-5, }}>
+        <Grid style={{display:'flex', alignItems:'center', flexDirection:'column'}}>
+          <h1 style={{marginBottom:-1}}>Grupo 1</h1>
+          _____________________________________________
           <p style={{fontSize: '150%'}}> Solicitações de entrada </p>
-        </div>
+        </Grid>
+        <Divider sx={{}}/>
 
         {wallet_List.map((wallet, index) => {
           const labelId = `checkbox-list-label-${index}`;
-
+          
           return (
             <div alignItems="center" display="flex">
               <ListItem
@@ -184,7 +167,7 @@ export default function CheckboxList() {
                   onClick={handleToggle(index)}
                   dense
                 >
-                  <ListItemIcon>
+                  <ListItemIcon sx={{marginLeft:-2.5}}>
                     <Checkbox
                       edge="start"
                       checked={checked.indexOf(index) !== -1}
@@ -201,11 +184,13 @@ export default function CheckboxList() {
             </div>
           );
         })}
+        <Divider sx={{}}/>
         <div>
           <Button variant="contained" onClick={handleOpen} sx={buttonAccept}>
             Aprovar
           </Button>
         </div>
+        </Box>
       </List>
     </>
   );

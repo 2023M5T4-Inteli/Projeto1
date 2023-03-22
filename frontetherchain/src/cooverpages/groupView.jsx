@@ -14,7 +14,8 @@ const button = {
   padding: 1.5,
   paddingLeft:2,
   borderRadius: '40px',
-  width:'46.5rem',
+  // width:'46.5rem',
+  width:'22rem',
   display:'flex', 
   justifyContent:'flex-start',
 
@@ -26,7 +27,8 @@ const button2 = {
   paddingLeft:2,
   paddingRight:1,
   borderRadius: '40px',
-  width:'46.5rem',
+  // width:'46.5rem',
+  width:'22rem',
   textAlign: 'left',
   mt:2,
   display:'flex', 
@@ -105,13 +107,17 @@ export default function Grupos() {
 
             <Button sx={button}>
             <Link to='/requisicoes' style={{textDecoration:'none'}}>Solicitações de entrada</Link>
-            <Badge color="success" overlap="circular" badgeContent="1" sx={{ml:'100px', scale:'1.2', paddingRight:51}}/>
+            <Badge color="success" overlap="circular" badgeContent="1" sx={{ml:'100px', scale:'1.2',
+            //  paddingRight:51
+             }}/>
             </Button>
          
             <Button sx={button2}>
             
             <Link to='/indrequest' style={{textDecoration:'none'}}>Solicitações de indenização</Link>
-            <Badge color="error" overlap="circular" badgeContent="5" sx={{ml:'70px', scale:'1.2', paddingRight:51}}/>
+            <Badge color="error" overlap="circular" badgeContent="5" sx={{ml:'70px', scale:'1.2', 
+            // paddingRight:51
+            }}/>
             </Button>
            
    

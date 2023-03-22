@@ -7,6 +7,7 @@ import CheckboxList from "./cooverpages/enterRequest";
 import Divider from '@mui/material/Divider';
 import Grupos from "./cooverpages/groupView";
 import CooverHome from '../src/img/coover_img.png';
+import { Box } from "@mui/system";
 
 function MetamaskPlugin() {
   const [web3, setWeb3] = useState(null);
@@ -73,24 +74,25 @@ function MetamaskPlugin() {
       ) : (
         
         // Output gerado antes da conexão
-        <div>
+        <Box sx={{width:'30rem'}}>
           
           <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 5 }}>
             <img src={CooverHome} alt="CooverLogo"  />
           </Grid>
-          <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 12 }}>
+          <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 15, }}>
             <Button variant="contained" onClick={handleConnect} size='large' sx={{ borderRadius: '15px', backgroundColor: '#EAEAEA', color: 'black' }}>
               <strong>Conecte sua carteira</strong>
             </Button>
             <div>
           </div>
           </Grid>
+          <Divider sx={{paddingTop:5}}/>
           <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 5, }}>
             <Button sx={{ borderRadius: '15px', backgroundColor: '#02DE82' }} variant="contained" size='large' >
               <strong>Crie sua MetaMask</strong>
             </Button>
           </Grid>
-        </div>
+        </Box>
 
       )}
 

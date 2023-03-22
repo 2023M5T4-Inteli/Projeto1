@@ -10,7 +10,8 @@ import {
   Select,
   MenuItem, Box, Grid, Divider, Link
 } from '@mui/material';
-import makeStyles from '@mui/system/style'
+// import makeStyles from '@mui/system/style'
+import {makeStyles} from '@mui/styles'
 import { Navigate, useNavigate } from 'react-router-dom';
 import BackNavbarReqClient from '../components/Navbar/BackNavbarReqClient';
 
@@ -170,8 +171,7 @@ export const IndemnityForm = () => {
     Solicitar Indenização
   </Button>
   </Grid>
-
-
+  
       <Modal
         open={open}
         onClose={handleClose}
