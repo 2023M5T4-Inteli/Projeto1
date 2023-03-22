@@ -15,7 +15,7 @@ const button = {
   paddingLeft:2,
   borderRadius: '40px',
   // width:'46.5rem',
-  width:'22rem',
+  width:'46.5rem',
   display:'flex', 
   justifyContent:'flex-start',
 
@@ -28,7 +28,7 @@ const button2 = {
   paddingRight:1,
   borderRadius: '40px',
   // width:'46.5rem',
-  width:'22rem',
+  width:'46.5rem',
   textAlign: 'left',
   mt:2,
   display:'flex', 
@@ -48,7 +48,7 @@ const Item = styled('div')(({ theme }) => ({
   '& p': {
     margin: 0,
     color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
-    fontSize: '20px'
+    fontSize: '20px',
   },
   '& button': {
     backgroundColor: '#1976d2',
@@ -67,7 +67,7 @@ export default function Grupos() {
       <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
         <BackNavbar/>
         <Grid item xs={12} md={6}>
-            <h1 style={{justifyContent:'center', display:'flex', zIndex:1, position:'relative'}}>Grupo 1</h1>
+            <h1 style={{justifyContent:'left', display:'flex', zIndex:1, position:'relative'}}>Grupo 1</h1>
             <Divider sx={{mb:'15px'}}/>
             <Item>
             <p>
@@ -108,7 +108,7 @@ export default function Grupos() {
             <Button sx={button}>
             <Link to='/requisicoes' style={{textDecoration:'none'}}>Solicitações de entrada</Link>
             <Badge color="success" overlap="circular" badgeContent="1" sx={{ml:'100px', scale:'1.2',
-            //  paddingRight:51
+            paddingRight:51
              }}/>
             </Button>
          
@@ -116,7 +116,7 @@ export default function Grupos() {
             
             <Link to='/indrequest' style={{textDecoration:'none'}}>Solicitações de indenização</Link>
             <Badge color="error" overlap="circular" badgeContent="5" sx={{ml:'70px', scale:'1.2', 
-            // paddingRight:51
+            paddingRight:51
             }}/>
             </Button>
            

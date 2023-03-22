@@ -21,6 +21,7 @@ const Search = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(1),
     width: 'auto',
+    borderRadius:'24px'
   },
 }));
 
@@ -32,6 +33,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  borderRadius:'24px'
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -40,12 +42,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    borderRadius:'24px',
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       width: '12ch',
       '&:focus': {
         width: '20ch',
+        
       },
     },
   },
@@ -53,9 +57,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar() {
   return (
-    <Box sx={{ flexGrow: 1, }}>
-      <AppBar position="static" sx={{background:'transparent'}}>
-        <Toolbar sx={{background:'rgba(2, 222, 130, 0.2)'}}>
+    <Box sx={{flexGrow: 1, borderRadius:'24px'}}>
+      <AppBar position="static" sx={{background:'transparent', borderRadius:'24px'}}>
+        <Toolbar sx={{background:'rgba(2, 222, 130, 0.2)', borderRadius:'24px'}}>
           <Typography
             variant="h6"
             noWrap

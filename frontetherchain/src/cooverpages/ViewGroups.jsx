@@ -24,12 +24,12 @@ export default function ViewGroups() {
         <>
 
             <Navbar />
-            <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                <ComboBox />
-                <Card sx={{ minWidth: 275, marginTop:5 }}>
+            <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'center', flexDirection: 'column', borderRadius:'24px' }}>
+                <ComboBox sx={{borderRadius:'24px'}} />
+                <Card sx={{ minWidth: 275, marginTop:5, borderRadius:'24px' }}>
                     <CardContent>
                         <Typography sx={{ fontSize: 14 }} color="black" gutterBottom>
-                            Grupo 1
+                            <strong> Grupo 1</strong>
                         </Typography>
                         <Typography sx={{ mb: 1.5 }} color="text.secondary">
                         Mínimo de membros: 10 

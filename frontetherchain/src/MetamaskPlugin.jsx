@@ -79,7 +79,7 @@ function MetamaskPlugin() {
           <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 5 }}>
             <img src={CooverHome} alt="CooverLogo"  />
           </Grid>
-          <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 15, }}>
+          <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 12, }}>
             <Button variant="contained" onClick={handleConnect} size='large' sx={{ borderRadius: '15px', backgroundColor: '#EAEAEA', color: 'black' }}>
               <strong>Conecte sua carteira</strong>
             </Button>
