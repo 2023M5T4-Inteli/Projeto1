@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import CheckboxList from "./cooverpages/enterRequest";
 import Divider from '@mui/material/Divider';
 import Grupos from "./cooverpages/groupView";
+import CooverHome from '../src/img/coover_img.png';
 
 function MetamaskPlugin() {
   const [web3, setWeb3] = useState(null);
@@ -70,19 +71,23 @@ function MetamaskPlugin() {
           {displayClient}
         </div>
       ) : (
-
+        
         // Output gerado antes da conexão
         <div>
-          <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 45 }}>
-            <Button variant="contained" onClick={handleConnect} size='large' sx={{ borderRadius: '15px', backgroundColor: '#EAEAEA', color: 'black' }}>
-              Conecte sua carteira
-            </Button>
+          
+          <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 5 }}>
+            <img src={CooverHome} alt="CooverLogo"  />
           </Grid>
-          <br /><br />
-          <Divider variant="middle" textAlign="center">ou</Divider>
+          <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 12 }}>
+            <Button variant="contained" onClick={handleConnect} size='large' sx={{ borderRadius: '15px', backgroundColor: '#EAEAEA', color: 'black' }}>
+              <strong>Conecte sua carteira</strong>
+            </Button>
+            <div>
+          </div>
+          </Grid>
           <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 5, }}>
             <Button sx={{ borderRadius: '15px', backgroundColor: '#02DE82' }} variant="contained" size='large' >
-              Crie sua MetaMask
+              <strong>Crie sua MetaMask</strong>
             </Button>
           </Grid>
         </div>
