@@ -7,6 +7,7 @@ import BackNavbar from '../components/Navbar/BackNavbar';
 import { Link } from 'react-router-dom';
 import { Divider, Button } from '@mui/material';
 import Badge from '@mui/material/Badge';
+import '../components/App.css';
 
 const button = {
   border: '1px solid',
@@ -48,7 +49,7 @@ const Item = styled('div')(({ theme }) => ({
   '& p': {
     margin: 0,
     color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
-    fontSize: '20px',
+    fontSize: '20px'
   },
   '& button': {
     backgroundColor: '#1976d2',
@@ -67,38 +68,38 @@ export default function Grupos() {
       <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
         <BackNavbar/>
         <Grid item xs={12} md={6}>
-            <h1 style={{justifyContent:'left', display:'flex', zIndex:1, position:'relative'}}>Grupo 1</h1>
+            <h1 style={{justifyContent:'left', display:'flex', zIndex:1, position:'relative', fontFamily: 'Rubik'}}>Grupo 1</h1>
             <Divider sx={{mb:'15px'}}/>
             <Item>
-            <p>
+            <p style={{ fontFamily: 'Rubik' }}>
               Mínimo de membros: 35
             </p>
             </Item>
             <br>
             </br>
             <Item>
-            <p>
+            <p style={{ fontFamily: 'Rubik' }}>
               Taxa Administrativa: 10%
             </p>
             </Item>
             <br>
             </br>
             <Item>
-            <p>
+            <p style={{ fontFamily: 'Rubik' }}>
               Valor do seguro: R$ 10,00
             </p>
             </Item>
             <br>
             </br>
             <Item>
-            <p>
+            <p style={{ fontFamily: 'Rubik' }}>
                Cobertura do seguro: 10%
             </p>
             </Item>
             <br>
             </br>
             <Item>
-            <p>
+            <p style={{ fontFamily: 'Rubik' }}>
               Membros do Seguro: 
             </p>
             </Item>
@@ -106,7 +107,7 @@ export default function Grupos() {
             </br>
 
             <Button sx={button}>
-            <Link to='/requisicoes' style={{textDecoration:'none'}}>Solicitações de entrada</Link>
+            <Link to='/requisicoes' style={{textDecoration:'none', fontFamily: 'Rubik'}}>Solicitações de entrada</Link>
             <Badge color="success" overlap="circular" badgeContent="1" sx={{ml:'100px', scale:'1.2',
             paddingRight:51
              }}/>
@@ -114,7 +115,7 @@ export default function Grupos() {
          
             <Button sx={button2}>
             
-            <Link to='/indrequest' style={{textDecoration:'none'}}>Solicitações de indenização</Link>
+            <Link to='/indrequest' style={{textDecoration:'none', fontFamily: 'Rubik'}}>Solicitações de indenização</Link>
             <Badge color="error" overlap="circular" badgeContent="5" sx={{ml:'70px', scale:'1.2', 
             paddingRight:51
             }}/>

@@ -55,10 +55,10 @@ export default function IndRequestClient() {
     <br></br>
 
     <div >
-        <h1>Grupo 1</h1>
-        <h3>Solicitações de indenização do grupo</h3>
+        <h1 style={{fontFamily: 'Rubik'}}>Grupo 1</h1>
+        <h3 style={{fontFamily: 'Rubik'}}>Solicitações de indenização do grupo</h3>
     </div>
-    <Button variant="contained" onClick={""} style={{ backgroundColor: "rgba(2, 222, 130, 0.1)" }} >
+    <Button variant="contained" onClick={""} style={{fontFamily: 'Rubik', backgroundColor: "rgba(2, 222, 130, 0.1)" }} >
       Aprovar Tudo
     </Button>
     <br></br>

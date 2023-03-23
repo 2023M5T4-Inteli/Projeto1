@@ -39,11 +39,13 @@ const Item = styled('div')(({ theme }) => ({
   '& h3': {
     marginBottom: theme.spacing(2),
     color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
+    fontFamily: 'Rubik',
   },
   '& p': {
     margin: 0,
     color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
-    fontSize: '20px'
+    fontSize: '20px',
+    fontFamily: 'Rubik',
   },
   '& button': {
     backgroundColor: '#1976d2',
@@ -53,6 +55,7 @@ const Item = styled('div')(({ theme }) => ({
     padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
     cursor: 'pointer',
     marginTop: theme.spacing(2),
+    fontFamily: 'Rubik',
   },
 }));
 
@@ -68,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+    fontFamily: 'Rubik',
   },
   formControl: {
     marginTop: 5, // Espaçamento acima do componente

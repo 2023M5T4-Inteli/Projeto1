@@ -81,7 +81,7 @@ function MetamaskPlugin() {
           </Grid>
           <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 12, }}>
             <Button variant="contained" onClick={handleConnect} size='large' sx={{ borderRadius: '15px', backgroundColor: '#EAEAEA', color: 'black' }}>
-              <strong>Conecte sua carteira</strong>
+              <strong style={{ fontFamily: 'Rubik' }} >Conecte sua carteira</strong>
             </Button>
             <div>
           </div>
@@ -89,7 +89,7 @@ function MetamaskPlugin() {
           <Divider sx={{paddingTop:5}}/>
           <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 5, }}>
             <Button sx={{ borderRadius: '15px', backgroundColor: '#02DE82' }} variant="contained" size='large' >
-              <strong>Crie sua MetaMask</strong>
+              <strong style={{ fontFamily: 'Rubik' }} >Crie sua MetaMask</strong>
             </Button>
           </Grid>
         </Box>

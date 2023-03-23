@@ -26,12 +26,12 @@ export default function ViewGroups() {
             <Navbar />
             <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'center', flexDirection: 'column', borderRadius:'24px' }}>
                 <ComboBox sx={{borderRadius:'24px'}} />
-                <Card sx={{ minWidth: 275, marginTop:5, borderRadius:'24px' }}>
+                <Card sx={{ minWidth: 275, marginTop:5, borderRadius:'24px' }} style={{ fontFamily: 'Rubik' }}>
                     <CardContent>
-                        <Typography sx={{ fontSize: 14 }} color="black" gutterBottom>
+                        <Typography sx={{ fontSize: 14 }} style={{ fontFamily: 'Rubik' }} color="black" gutterBottom>
                             <strong> Grupo 1</strong>
                         </Typography>
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        <Typography sx={{ mb: 1.5 }} style={{ fontFamily: 'Rubik' }} color="text.secondary">
                         Mínimo de membros: 10 
                         <br />
                         Taxa administrativa: 10%
@@ -42,7 +42,7 @@ export default function ViewGroups() {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small"><Link to='/group1'>Ver grupo</Link></Button>
+                        <Button size="small"><Link to='/group1'style={{ fontFamily: 'Rubik' }}>Ver grupo</Link></Button>
                     </CardActions>
                 </Card>
 

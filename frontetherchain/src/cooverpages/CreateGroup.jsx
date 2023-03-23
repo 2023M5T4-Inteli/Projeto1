@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+    
   },
 }));
 
@@ -57,29 +58,29 @@ function CreateGroups() {
     <>
       <Navbar />
       <Grid sx={{marginTop:11}}>
-      <Button variant="contained" color="primary" onClick={handleButtonClick}>
+      <Button style={{ fontFamily: 'Rubik' }} variant="contained" color="primary" onClick={handleButtonClick}>
         Criar novos grupos
       </Button>
       </Grid>
 
       <Modal open={showModal} onClose={handleCloseModal}>
         <div className={classes.paper}>
-          <h2>Criar novo grupo</h2>
+          <h2 style={{ fontFamily: 'Rubik' }}>Criar novo grupo</h2>
           <form onSubmit={handleFormSubmit}>
             <TextField
               label="Nome do grupo"
               value={nomeGrupo}
               onChange={(event) => setNomeGrupo(event.target.value)}
-              fullWidth
+              fullWidth style={{ fontFamily: 'Rubik' }}
             />
-            <TextField
+            <TextField style={{ fontFamily: 'Rubik' }}
               label="Quantidade mínima"
               type="number"
               value={quantidadeMinima}
               onChange={(event) => setQuantidadeMinima(event.target.value)}
               fullWidth
             />
-            <TextField
+            <TextField style={{ fontFamily: 'Rubik' }}
               label="Taxa adm (5% do celular)"
               type="number"
               value={taxaAdm}
@@ -87,7 +88,7 @@ function CreateGroups() {
               fullWidth
             />
 
-            <TextField
+            <TextField style={{ fontFamily: 'Rubik' }}
               label="Porcentagem do celular = 100%"
               type="number"
               value={porcentagemCelular}
@@ -95,14 +96,14 @@ function CreateGroups() {
               fullWidth
             />
 
-            <TextField
+            <TextField style={{ fontFamily: 'Rubik' }}
               label="Cobertura = 100%"
               type="number"
               value={cobertura}
               onChange={(event) => setCobertura(event.target.value)}
               fullWidth
             />
-            <Button variant="contained" color="primary" type="submit">
+            <Button style={{ fontFamily: 'Rubik' }} variant="contained" color="primary" type="submit">
               Criar
             </Button>
           </form>

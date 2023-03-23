@@ -119,12 +119,12 @@ export default function CheckboxList() {
       >
         <Box sx={styleModal}>
           <h2 id="child-modal-title">Solicitação de entrada</h2>
-          <p id="child-modal-description">
+          <p style={{ fontFamily: 'Rubik' }} id="child-modal-description">
             Deseja mesmo permitir a entrada desses integrantes no grupo em
             questão?
           </p>
           {/*Conectar a esse botão uma função que adiciona integrantes no grupo */}
-          <Button variant="contained" onClick={handleClose} sx={buttonModalYes}>
+          <Button style={{ fontFamily: 'Rubik' }} variant="contained" onClick={handleClose} sx={buttonModalYes}>
             Sim
           </Button>
           {/* Conectar a esse botão uma função que apaga a solicitação e envia uma notificação ao respectivo integrante negado */}

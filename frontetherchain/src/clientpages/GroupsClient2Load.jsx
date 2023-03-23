@@ -14,7 +14,7 @@ export default function ViewGroupsClient2Load() {
         <>
 
             <Navbar />
-            <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+            <Box style={{ fontFamily: 'Rubik' }} sx={{ paddingTop: 10, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                 <ComboBox />
                 
             </Box>

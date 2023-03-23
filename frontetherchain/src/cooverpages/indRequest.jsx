@@ -27,6 +27,7 @@ const styleModal = {
   borderRadius: "20px",
   padding: "5%",
   fontSize: "100%",
+  fontFamily: 'Rubik'
 };
 
 const buttonModalNo = {
@@ -40,6 +41,7 @@ const buttonModalNo = {
   fontSize: "100%",
   padding: "5%",
   color: "black",
+  fontFamily: 'Rubik',
 };
 
 const buttonModalYes = {
@@ -53,6 +55,7 @@ const buttonModalYes = {
   fontSize: "100%",
   padding: "5%",
   color: "black",
+  fontFamily: 'Rubik',
 };
 
 const buttonAccept = {
@@ -65,6 +68,7 @@ const buttonAccept = {
   borderRadius: "22px",
   color: "black",
   marginTop: "10%",
+  fontFamily: 'Rubik'
 };
 
 export default function CheckboxList() {
@@ -118,16 +122,16 @@ export default function CheckboxList() {
         sx={{}}
       >
         <Box sx={styleModal}>
-          <h2 id="child-modal-title">Solicitação de indenização</h2>
-          <p id="child-modal-description">
+          <h2 style={{ fontFamily: 'Rubik' }} id="child-modal-title">Solicitação de indenização</h2>
+          <p style={{ fontFamily: 'Rubik' }} id="child-modal-description">
             Deseja mesmo permitir o pagamento de indenização a estes participantes?
           </p>
           {/*Conectar a esse botão uma função que adiciona integrantes no grupo */}
-          <Button variant="contained" onClick={handleClose} sx={buttonModalYes}>
+          <Button style={{ fontFamily: 'Rubik' }} variant="contained" onClick={handleClose} sx={buttonModalYes}>
             Sim
           </Button>
           {/* Conectar a esse botão uma função que apaga a solicitação e envia uma notificação ao respectivo integrante negado */}
-          <Button variant="contained" onClick={handleClose} sx={buttonModalNo}>
+          <Button style={{ fontFamily: 'Rubik' }} variant="contained" onClick={handleClose} sx={buttonModalNo}>
             Não
           </Button>
         </Box>
@@ -145,9 +149,9 @@ export default function CheckboxList() {
         <BackNavbarReq />
         <Box sx={{marginTop:8, marginLeft:-5, }}>
         <Grid style={{display:'flex', alignItems:'center', flexDirection:'column'}}>
-          <h1 style={{marginBottom:-1}}>Grupo 1</h1>
+          <h1 style={{marginBottom:-1, fontFamily: 'Rubik'}}>Grupo 1</h1>
           _____________________________________________
-          <p style={{fontSize: '150%'}}> Solicitações de indenização </p>
+          <p style={{fontSize: '150%', fontFamily: 'Rubik'}}> Solicitações de indenização </p>
         </Grid>
         <Divider sx={{}}/>
 

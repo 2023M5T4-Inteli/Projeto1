@@ -28,10 +28,10 @@ export default function ViewGroupsClient() {
                 <ComboBox />
                 <Card sx={{ minWidth: 275, marginTop:5 }}>
                     <CardContent>
-                        <Typography sx={{ fontSize: 14 }} color="black" gutterBottom>
+                        <Typography style={{fontFamily: 'Rubik'}} sx={{ fontSize: 14 }} color="black" gutterBottom>
                             Grupo 1
                         </Typography>
-                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        <Typography style={{fontFamily: 'Rubik'}} sx={{ mb: 1.5 }} color="text.secondary">
                         Mínimo de membros: 10 
                         <br />
                         Taxa administrativa: 10%
@@ -42,7 +42,7 @@ export default function ViewGroupsClient() {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small"><Link to='/group1client'>Ver grupo</Link></Button>
+                        <Button style={{fontFamily: 'Rubik'}} size="small"><Link to='/group1client'>Ver grupo</Link></Button>
                     </CardActions>
                 </Card>
 

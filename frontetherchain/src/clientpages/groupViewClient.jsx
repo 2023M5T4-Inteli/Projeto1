@@ -10,14 +10,14 @@ import Badge from '@mui/material/Badge';
 
 const modalContent = (
   <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', boxShadow: 24, padding: '20px', width: '300px', borderRadius: '24px', background: 'white', display:'flex', justifyContent:'center', flexDirection:'column', }}>
-    <Typography variant="h6" component="h2" gutterBottom>
+    <Typography style={{ fontFamily: 'Rubik' }} variant="h6" component="h2" gutterBottom>
       Sua solicitação foi enviada com sucesso!
     </Typography>
-    <Typography variant="body1" sx={{ mb: 2 }}>
+    <Typography style={{ fontFamily: 'Rubik' }} variant="body1" sx={{ mb: 2 }}>
       Nosso time irá analisá-la e você receberá o resultado na aba de notificações.
     </Typography>
     <Button >
-      <Link to='/gruposclient2' style={{ textDecoration: 'none', color: 'black' }}>
+      <Link to='/gruposclient2' style={{fontFamily: 'Rubik', textDecoration: 'none', color: 'black' }}>
         Entendi
       </Link>
     </Button>
@@ -44,14 +44,17 @@ const Item = styled('div')(({ theme }) => ({
   padding: theme.spacing(2),
   borderRadius: '24px',
   textAlign: 'left',
+  fontFamily: 'Rubik',
   '& h3': {
     marginBottom: theme.spacing(2),
     color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
+    fontFamily: 'Rubik',
   },
   '& p': {
     margin: 0,
     color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
-    fontSize: '20px'
+    fontSize: '20px',
+    fontFamily: 'Rubik'
   },
   '& button': {
     backgroundColor: '#1976d2',
@@ -61,6 +64,7 @@ const Item = styled('div')(({ theme }) => ({
     padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
     cursor: 'pointer',
     marginTop: theme.spacing(2),
+    fontFamily: 'Rubik',
   },
 }));
 
@@ -80,7 +84,7 @@ export default function GruposClient() {
         <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
           <BackNavbarClient />
           <Grid item xs={12} md={6}>
-            <h1 style={{ justifyContent: 'center', display: 'flex', zIndex: 1, position: 'relative' }}>Grupo 1</h1>
+            <h1 style={{fontFamily: 'Rubik', justifyContent: 'center', display: 'flex', zIndex: 1, position: 'relative' }}>Grupo 1</h1>
             <Divider sx={{ mb: '15px' }} />
             <Item>
               <p>
