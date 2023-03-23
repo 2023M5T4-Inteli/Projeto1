@@ -23,7 +23,7 @@ export default function Navbar() {
       <Paper
         sx={{
           borderRadius: 0,
-          backgroundColor: 'rgba(2, 222, 130, 0.1)',
+          backgroundColor: 'white',
           position: 'fixed',
           top: 0,
           left: 0,
@@ -35,6 +35,8 @@ export default function Navbar() {
           sx={{
             display: 'flex',
             justifyContent: 'space-between', 
+            backgroundColor: 'rgba(2, 222, 130, 0.3)',
+
             
             '& > :not(style)': {
               m: 2,
