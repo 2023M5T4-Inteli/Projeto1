@@ -58,8 +58,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAppBar() {
   return (
     <Box sx={{flexGrow: 1, borderRadius:'24px'}}>
-      <AppBar position="static" sx={{background:'transparent', borderRadius:'24px', width:'20rem'}}>
-        <Toolbar sx={{background:'rgba(2, 222, 130, 0.2)', borderRadius:'24px', paddingRight:1, paddingLeft:1, }}>
+      <AppBar position="static" sx={{background:'transparent', borderRadius:'24px', width:'18rem'}}>
+        <Toolbar sx={{background:'rgba(2, 222, 130, 0.2)', borderRadius:'24px', paddingRight:1, paddingLeft:1, 
+      '@media (min-width: 600px)':{paddingLeft:0, minHeight:0}
+      }}>
           <Typography
             variant="h6"
             noWrap
@@ -68,13 +70,15 @@ export default function SearchAppBar() {
           >
     
           </Typography>
-          <Search sx={{backgroundColor:'transparent', color:'black', '&:hover': {borderRadius:'24px',backgroundColor:'rgba(2, 222, 130, 0.15)'}}}>
+          <Search sx={{backgroundColor:'transparent', color:'black', '&:hover': {borderRadius:'24px',backgroundColor:'rgba(2, 222, 130, 0.15)'},
+        '@media (min-width: 600px)':{width:'100%', marginLeft:0}}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+            sx={{'@media (min-width: 600px)':{width:'20ch ', marginLeft:0}, width:'20ch',marginLeft:0}}
               placeholder="Nome do grupo"
-              inputProps={{ 'aria-label': 'search',  }}
+              inputProps={{   }}
             />
           </Search>
         </Toolbar>

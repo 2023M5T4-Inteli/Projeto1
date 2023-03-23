@@ -21,8 +21,9 @@ export default function ViewGroupsClient2() {
         <>
 
             <Navbar />
-            <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                <ComboBox />
+            <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'flex-start', flexDirection: 'column', borderRadius:'24px', paddingLeft:2 }}>
+                <ComboBox sx={{borderRadius:'24px'}} />
+                {/* <Box></Box> */}
                 <Card sx={{ minWidth: 275, marginTop:5, borderRadius:'24px' }}>
                     <CardActionArea onClick={handleLink}>
                     <CardContent>
@@ -43,9 +44,6 @@ export default function ViewGroupsClient2() {
                     </CardActionArea>
                 </Card>
             </Box>
-              {/* <CardActions>
-                        <Button size="small"><Link to='/idemnityreq'>Ver grupo</Link></Button>
-                    </CardActions> */}
         </>
     )
 }

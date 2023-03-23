@@ -64,11 +64,12 @@ const Item = styled('div')(({ theme }) => ({
 
 export default function Grupos() {
   return (
+    <>
+    <BackNavbar/>
     <Box sx={{ width: '100%', padding:'60px 0 0 10px' }}>
       <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
-        <BackNavbar/>
         <Grid item xs={12} md={12} >
-            <h1 style={{justifyContent:'left', display:'flex', zIndex:1, position:'relative', fontFamily: 'Rubik'}}>Grupo 1</h1>
+            <h1 style={{justifyContent:'center', display:'flex', zIndex:1, position:'relative', fontFamily: 'Rubik'}}>Grupo 1</h1>
             <Divider sx={{mb:'15px'}}/>
             <Item>
             <p style={{ fontFamily: 'Rubik' }}>
@@ -133,5 +134,6 @@ export default function Grupos() {
         </Grid>
       </Grid>
     </Box>
+    </>
   );
 }
