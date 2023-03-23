@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import styled from '@mui/system/styled';
 import Grid from '@mui/system/Unstable_Grid';
 import Box from '@mui/system/Box';
@@ -7,6 +8,8 @@ import BackNavbar from '../components/Navbar/BackNavbar';
 import { Link } from 'react-router-dom';
 import { Divider, Button, Typography } from '@mui/material';
 import Badge from '@mui/material/Badge';
+import erc20ABI from "../erc20ABI.json"
+import Web3 from 'web3';
 import '../components/App.css';
 
 const button = {
@@ -63,6 +66,15 @@ const Item = styled('div')(({ theme }) => ({
 }));
 
 export default function Grupos() {
+  const [numberUsers, setnumberUsers] = useState ()
+  useEffect(() =>{
+    activeMembers().then(number => {
+      setnumberUsers(number);
+    });
+
+  },[]);
+
+
   return (
     <>
     <BackNavbar/>
@@ -94,14 +106,14 @@ export default function Grupos() {
             </br>
             <Item>
             <p style={{ fontFamily: 'Rubik' }}>
-               Cobertura do seguro: 10%
+               Cobertura do seguro: 100%
             </p>
             </Item>
             <br>
             </br>
             <Item>
             <p style={{ fontFamily: 'Rubik' }}>
-              Membros do Seguro: 
+              Membros do Seguro: {numberUsers}
             </p>
             </Item>
             
@@ -136,4 +148,23 @@ export default function Grupos() {
     </Box>
     </>
   );
+}
+
+// Definindo o endereço do contrato 
+const contractAddress = "0x1B0b42d9c38C98C22377A622Cf3227a920E8CC7C"
+// Pegando o json com informações sobre o contrato 
+const abi = erc20ABI
+
+// Essa função conecta ao contrato e executa a função de checar quantos usuarios tem no contrato 
+async function activeMembers() {
+  const web3 = new Web3(window.ethereum);
+  try {
+    const contract = new web3.eth.Contract(abi, contractAddress);
+    // Aqui é onde está sendo executada a função definida no contrato
+    const numberMembers = await contract.methods.showAllMembers().call();
+    var totalUsers = Object.keys(numberMembers).length
+  } catch (err) {
+    console.log(err.message);
+  }
+  return (totalUsers)
 }
