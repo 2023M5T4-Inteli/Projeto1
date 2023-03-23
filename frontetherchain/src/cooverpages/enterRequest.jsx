@@ -13,6 +13,9 @@ import BackNavbarReq from "../components/Navbar/BackNavbarReq";
 import Modal from "@mui/material/Modal";
 import { Divider, Grid } from "@mui/material";
 import Box from "@mui/material/Box";
+import Web3 from "web3";
+import erc20ABI from "../erc20ABI.json"
+
 
 const styleModal = {
   transform: "translate(50%, 50%)",
@@ -186,6 +189,8 @@ export default function CheckboxList() {
         })}
         <Divider sx={{}}/>
         <div>
+          <Button onClick={doSave}>Teste input</Button>
+          <Button onClick={getWallets} >Teste Função view</Button>
           <Button variant="contained" onClick={handleOpen} sx={buttonAccept}>
             Aprovar
           </Button>
@@ -194,4 +199,44 @@ export default function CheckboxList() {
       </List>
     </>
   );
+}
+
+
+
+// Definindo o endereço do contrato 
+const contractAddress = "0x1B0b42d9c38C98C22377A622Cf3227a920E8CC7C"
+// Pegando o json com informações sobre o contrato 
+const abi = erc20ABI
+
+
+async function getContract() {
+  if (!window.ethereum) return console.log(`No MetaMask found!`);
+ 
+  const web3 = new Web3(window.ethereum);
+  const accounts = await web3.eth.requestAccounts();
+  if (!accounts || !accounts.length) return console.log('Wallet not found/allowed!');
+ 
+  return new web3.eth.Contract(abi, contractAddress, { from: accounts[0] });
+}
+ 
+async function doSave() {
+  const walletizinha = "0xf8094b52b1Bad1361aBC90993EAe757FFc91C5e3"
+  try {
+    const contract = await getContract();
+    const tx = await contract.methods.addMember(walletizinha).send();
+    alert(JSON.stringify(tx));
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+async function getWallets() {
+  try {
+    const contract = await getContract();
+    const tx = await contract.methods.showAllMembers().call();
+    let lenghtUsers = tx.length
+    alert(JSON.stringify(lenghtUsers));
+  } catch (err) {
+    alert(err.message);
+  }
 }

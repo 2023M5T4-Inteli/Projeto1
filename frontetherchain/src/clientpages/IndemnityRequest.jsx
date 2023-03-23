@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import erc20ABI from "../erc20ABI.json"
+import Web3 from 'web3';
 import styled from '@mui/system/styled';
 import {
   Button,
@@ -122,6 +124,14 @@ export const IndemnityForm = () => {
     handleClose();
   };
 
+  const [numberUsers, setnumberUsers] = useState ()
+  useEffect(() =>{
+    activeMembers().then(number => {
+      setnumberUsers(number);
+    });
+
+  },[]);
+
   return (
    <>
   <BackNavbarReqClient />
@@ -161,7 +171,7 @@ export const IndemnityForm = () => {
             </br>
             <Item>
               <p>
-                Membros do Seguro:
+                Membros do Seguro : { numberUsers}
               </p>
             </Item>
             <br>
@@ -233,5 +243,25 @@ export const IndemnityForm = () => {
     </>
   );
 };
+
+// Definindo o endereço do contrato 
+const contractAddress = "0x1B0b42d9c38C98C22377A622Cf3227a920E8CC7C"
+// Pegando o json com informações sobre o contrato 
+const abi = erc20ABI
+
+// Essa função conecta ao contrato e executa a função de checar quantos usuarios tem no contrato 
+async function activeMembers() {
+  const web3 = new Web3(window.ethereum);
+  try {
+    const contract = new web3.eth.Contract(abi, contractAddress);
+    // Aqui é onde está sendo executada a função definida no contrato
+    const numberMembers = await contract.methods.showAllMembers().call();
+    var totalUsers = Object.keys(numberMembers).length
+  } catch (err) {
+    console.log(err.message);
+  }
+  return (totalUsers)
+}
+
 
 export default IndemnityForm;

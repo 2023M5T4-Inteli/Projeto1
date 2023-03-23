@@ -34,7 +34,7 @@ export default function ViewGroupsClient() {
                         <br />
                         Taxa administrativa: 10%
                         <br />  
-                        Valor do seguro: R$10,00
+                        Valor do seguro: R$120,00
                         <br />
                         Cobertura do seguro: 100%
                         </Typography>
