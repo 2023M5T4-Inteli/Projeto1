@@ -5,35 +5,35 @@ import Box from '@mui/system/Box';
 import Navbar from '../components/Navbar/FloatingAction';
 import BackNavbar from '../components/Navbar/BackNavbar';
 import { Link } from 'react-router-dom';
-import { Divider, Button } from '@mui/material';
+import { Divider, Button, Typography } from '@mui/material';
 import Badge from '@mui/material/Badge';
 import '../components/App.css';
 
 const button = {
-  border: '1px solid',
-  borderColor:'rgb(1, 1, 1, 0.5)',
-  padding: 1.5,
-  paddingLeft:2,
-  borderRadius: '40px',
-  // width:'46.5rem',
-  width:'46.5rem',
-  display:'flex', 
-  justifyContent:'flex-start',
-
+  // border: '1px solid',
+  // borderColor:'rgb(1, 1, 1, 0.5)',
+  // padding: 1.5,
+  // paddingLeft:2,
+  // borderRadius: '40px',
+  // // width:'46.5rem',
+  // width:'22.5rem',
+  // display:'flex', 
+  // justifyContent:'flex-start',
+  marginTop:'0 !important',
+  backgroundColor:'white !important'
 }
 const button2 = {
-  border: '1px solid',
-  borderColor:'rgb(1, 1, 1, 0.5)',
-  padding: 1.5,
-  paddingLeft:2,
-  paddingRight:1,
-  borderRadius: '40px',
-  // width:'46.5rem',
-  width:'46.5rem',
-  textAlign: 'left',
-  mt:2,
-  display:'flex', 
-  justifyContent:'flex-start',
+  // border: '1px solid',
+  // borderColor:'rgb(1, 1, 1, 0.5)',
+  // padding: 1.5,
+  // paddingLeft:2,
+  // borderRadius: '40px',
+  // // width:'46.5rem',
+  // width:'22.5rem',
+  // display:'flex', 
+  // justifyContent:'flex-start',
+  marginTop:'0 !important',
+  backgroundColor:'white !important'
 }
 const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ffffff',
@@ -65,9 +65,9 @@ const Item = styled('div')(({ theme }) => ({
 export default function Grupos() {
   return (
     <Box sx={{ width: '100%', padding:'60px 0 0 10px' }}>
-      <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
+      <Grid container >
         <BackNavbar/>
-        <Grid item xs={12} md={6}>
+        <Grid item >
             <h1 style={{justifyContent:'left', display:'flex', zIndex:1, position:'relative', fontFamily: 'Rubik'}}>Grupo 1</h1>
             <Divider sx={{mb:'15px'}}/>
             <Item>
@@ -103,25 +103,32 @@ export default function Grupos() {
               Membros do Seguro: 
             </p>
             </Item>
+            
             <br>
             </br>
 
+            <Item sx={{padding:0.7,display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:2}}>
             <Button sx={button}>
-            <Link to='/requisicoes' style={{textDecoration:'none', fontFamily: 'Rubik'}}>Solicitações de entrada</Link>
-            <Badge color="success" overlap="circular" badgeContent="1" sx={{ml:'100px', scale:'1.2',
-            paddingRight:51
+            <Link to='/requisicoes' style={{textDecoration:'none', fontFamily: 'Rubik',}}>
+            <Typography style={{width:'400px', marginLeft:'200px'}}> Solicitações de entrada
+            </Typography>
+            </Link>
+            </Button>
+            <Badge color="success" overlap="circular" badgeContent="1" sx={{ scale:'1.2', paddingRight:'25rem'
              }}/>
-            </Button>
-         
+            </Item>
+
+            <Item sx={{padding:0.7,display:'flex', justifyContent:'space-between', alignItems:'center'}}>
             <Button sx={button2}>
-            
-            <Link to='/indrequest' style={{textDecoration:'none', fontFamily: 'Rubik'}}>Solicitações de indenização</Link>
-            <Badge color="error" overlap="circular" badgeContent="5" sx={{ml:'70px', scale:'1.2', 
-            paddingRight:51
-            }}/>
+            <Link to='/indrequest' style={{textDecoration:'none', fontFamily: 'Rubik'}}>
+              <Typography style={{width:'400px', marginLeft:'14rem'}}> 
+                 Solicitações de indenização 
+                 </Typography>
+              </Link>
             </Button>
-           
-   
+            <Badge color="error" overlap="circular" badgeContent="5" sx={{ scale:'1.2', paddingRight:'25rem'
+            }}/>
+            </Item>
 
         </Grid>
       </Grid>
