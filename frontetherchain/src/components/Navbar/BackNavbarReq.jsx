@@ -29,7 +29,7 @@ export default function BackNavbarReq() {
           top: 0,
           left: 0,
           width: '100%',
-          zIndex: 1,
+          zIndex: 1000,
         }}
       >
         <Box
