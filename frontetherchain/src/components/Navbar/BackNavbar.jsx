@@ -21,17 +21,18 @@ export default function BackNavbar() {
       <Paper
         sx={{
           borderRadius: 0,
-          backgroundColor: 'rgba(2, 222, 130, 0.1)',
+          backgroundColor: 'white',
           position: 'fixed',
           top: 0,
           left: 0,
           width: '100%',
-          zIndex: 1,
+          zIndex: 1000,
         }}
       >
         <Box
           sx={{
             display: 'flex',
+            backgroundColor: 'rgba(2, 222, 130, 0.3)',
             justifyContent: 'space-between', 
             '& > :not(style)': {
               m: 2,
