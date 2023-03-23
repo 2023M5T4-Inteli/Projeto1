@@ -137,7 +137,7 @@ export default function CheckboxList() {
       <List
         sx={{
           width: "100%",
-          maxWidth: 360,
+          maxWidth:2000,
           bgcolor: "background.paper",
           padding: "20px 0 0 50px",
         }}
