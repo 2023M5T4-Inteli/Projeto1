@@ -11,7 +11,7 @@ import {
   MenuItem, Box, Grid, Divider, Link
 } from '@mui/material';
 // import makeStyles from '@mui/system/style'
-import  makeStyles from '@mui/system/style';
+import {makeStyles} from '@mui/styles';
 import { Navigate, useNavigate } from 'react-router-dom';
 import BackNavbarReqClient from '../components/Navbar/BackNavbarReqClient';
 
@@ -128,7 +128,7 @@ export const IndemnityForm = () => {
   <Box sx={{ width: '100%', padding: '60px 0 0 10px', }}>
         <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
           
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={12} >
             <h1 style={{ justifyContent: 'center', display: 'flex', zIndex: 1, position: 'relative', marginTop:'3rem' }}>Grupo 1</h1>
             <Divider sx={{  }} />
             <Item sx={{marginTop:2}}>

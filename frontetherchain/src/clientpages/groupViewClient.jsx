@@ -83,7 +83,7 @@ export default function GruposClient() {
       <Box sx={{ width: '100%', padding: '60px 0 0 10px' }}>
         <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
           <BackNavbarClient />
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={12}>
             <h1 style={{fontFamily: 'Rubik', justifyContent: 'center', display: 'flex', zIndex: 1, position: 'relative' }}>Grupo 1</h1>
             <Divider sx={{ mb: '15px' }} />
             <Item>

@@ -65,9 +65,9 @@ const Item = styled('div')(({ theme }) => ({
 export default function Grupos() {
   return (
     <Box sx={{ width: '100%', padding:'60px 0 0 10px' }}>
-      <Grid container >
+      <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
         <BackNavbar/>
-        <Grid item >
+        <Grid item xs={12} md={12} >
             <h1 style={{justifyContent:'left', display:'flex', zIndex:1, position:'relative', fontFamily: 'Rubik'}}>Grupo 1</h1>
             <Divider sx={{mb:'15px'}}/>
             <Item>
@@ -108,25 +108,25 @@ export default function Grupos() {
             </br>
 
             <Item sx={{padding:0.7,display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:2}}>
-            <Button sx={button}>
+            {/* <Button sx={button}> */}
             <Link to='/requisicoes' style={{textDecoration:'none', fontFamily: 'Rubik',}}>
-            <Typography style={{width:'400px', marginLeft:'200px'}}> Solicitações de entrada
+            <Typography style={{marginLeft:'10px'}}> Solicitações de entrada
             </Typography>
             </Link>
-            </Button>
-            <Badge color="success" overlap="circular" badgeContent="1" sx={{ scale:'1.2', paddingRight:'25rem'
+            {/* </Button> */}
+            <Badge color="success" overlap="circular" badgeContent="1" sx={{ scale:'1.2', paddingRight:'40%'
              }}/>
             </Item>
 
             <Item sx={{padding:0.7,display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-            <Button sx={button2}>
+            {/* <Button sx={button2}> */}
             <Link to='/indrequest' style={{textDecoration:'none', fontFamily: 'Rubik'}}>
-              <Typography style={{width:'400px', marginLeft:'14rem'}}> 
+              <Typography style={{marginLeft:'10px'}}> 
                  Solicitações de indenização 
                  </Typography>
               </Link>
-            </Button>
-            <Badge color="error" overlap="circular" badgeContent="5" sx={{ scale:'1.2', paddingRight:'25rem'
+            {/* </Button> */}
+            <Badge color="error" overlap="circular" badgeContent="5" sx={{ scale:'1.2', paddingRight:'40%'
             }}/>
             </Item>
 
