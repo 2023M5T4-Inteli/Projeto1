@@ -31,9 +31,10 @@ const button2 = {
   padding: 1.5,
   paddingLeft: 2,
   borderRadius: '40px',
+  color:'black',
+  fontWeight:'bold',
   width: '17rem',
-  ml: 5,
-  mt: 2,
+  // mt: 2,
   display: 'flex',
   justifyContent: 'center',
 }
@@ -80,8 +81,8 @@ export default function GruposClient() {
       >
         {modalContent}
       </Modal>
-      <Box sx={{ width: '100%', padding: '60px 0 0 10px' }}>
-        <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
+      <Box sx={{ width: '100%', padding: '60px 0 0 10px', }}>
+        <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }} sx={{}}>
           <BackNavbarClient />
           <Grid item xs={12} md={12}>
             <h1 style={{fontFamily: 'Rubik', justifyContent: 'center', display: 'flex', zIndex: 1, position: 'relative' }}>Grupo 1</h1>
@@ -121,14 +122,13 @@ export default function GruposClient() {
             </Item>
             <br>
             </br>
-
-            <Button sx={button2} onClick={() => setOpenModal(true)}>
+            <Box sx={{display:'flex', justifyContent:'center', marginTop:2}}>
+            <Button sx={button2} onClick={() => setOpenModal(true)} >
               {/* <Link to='/indrequestclient' style={{textDecoration:'none', color:'black'}}> */}
               Solicitar entrada
               {/* </Link> */}
             </Button>
-
-
+            </Box>
 
           </Grid>
         </Grid>
