@@ -60,10 +60,6 @@ const router = createBrowserRouter ([
     path: "/indrequestclient",
     element: <MyContextProvider><IndRequestClient/></MyContextProvider>,
   },
-  {
-    path: "/gruposclient2load",
-    element: <MyContextProvider><ViewGroupsClient2Load/></MyContextProvider>,
-  },
 
 
 ]);

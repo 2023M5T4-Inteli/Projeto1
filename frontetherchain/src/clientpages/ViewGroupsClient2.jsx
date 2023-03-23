@@ -7,21 +7,30 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {Divider} from "@mui/material";
+import { CardActionArea } from '@mui/material';
 
 export default function ViewGroupsClient2() {
+  const navigate = useNavigate();
+  function handleLink() {
+    return navigate('/idemnityreq');
+ }
+    
     return (
         <>
 
             <Navbar />
             <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
                 <ComboBox />
-                <Card sx={{ minWidth: 275, marginTop:5 }}>
+                <Card sx={{ minWidth: 275, marginTop:5, borderRadius:'24px' }}>
+                    <CardActionArea onClick={handleLink}>
                     <CardContent>
-                        <Typography style={{fontFamily: 'Rubik'}} sx={{ fontSize: 14 }} color="black" gutterBottom>
+                        <Typography style={{fontFamily: 'Rubik'}} sx={{ fontSize: 16, fontWeight:600 }} color="black" gutterBottom>
                             Grupo 1
                         </Typography>
-                        <Typography style={{fontFamily: 'Rubik'}} sx={{ mb: 1.5 }} color="text.secondary">
+                        <Divider sx={{mb:1}}/>
+                        <Typography style={{fontFamily: 'Rubik'}} sx={{ mb: 0 }} color="text.secondary">
                         Mínimo de membros: 10 
                         <br />
                         Taxa administrativa: 10%
@@ -31,11 +40,12 @@ export default function ViewGroupsClient2() {
                         Cobertura do seguro: 100%
                         </Typography>
                     </CardContent>
-                    <CardActions>
-                        <Button size="small"><Link to='/idemnityreq'>Ver grupo</Link></Button>
-                    </CardActions>
+                    </CardActionArea>
                 </Card>
             </Box>
+              {/* <CardActions>
+                        <Button size="small"><Link to='/idemnityreq'>Ver grupo</Link></Button>
+                    </CardActions> */}
         </>
     )
 }

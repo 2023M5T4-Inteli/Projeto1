@@ -58,8 +58,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAppBar() {
   return (
     <Box sx={{flexGrow: 1, borderRadius:'24px'}}>
-      <AppBar position="static" sx={{background:'transparent', borderRadius:'24px'}}>
-        <Toolbar sx={{background:'rgba(2, 222, 130, 0.2)', borderRadius:'24px'}}>
+      <AppBar position="static" sx={{background:'transparent', borderRadius:'24px', width:'20rem'}}>
+        <Toolbar sx={{background:'rgba(2, 222, 130, 0.2)', borderRadius:'24px', paddingRight:1, paddingLeft:1, }}>
           <Typography
             variant="h6"
             noWrap
@@ -68,7 +68,7 @@ export default function SearchAppBar() {
           >
     
           </Typography>
-          <Search sx={{backgroundColor:'transparent', color:'black'}}>
+          <Search sx={{backgroundColor:'transparent', color:'black', '&:hover': {borderRadius:'24px',backgroundColor:'rgba(2, 222, 130, 0.15)'}}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
