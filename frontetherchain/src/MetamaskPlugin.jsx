@@ -17,21 +17,20 @@ function MetamaskPlugin() {
   
   /* Definindo a carteira do administrador.
   Se atentar que na hora de colocar o endereço tudo tem de estar minusculo */
-  // 0xff27a22195b74b06af498fc5e63f0a3b0f3ed9bd
-  const cooverWalletAdrress = "0xff27a22195b74b06af498fc5e63f0a3b0f3ed9bd"
+  const cooverWalletAdrress = "0xa930575a2cca74cc4db44edd260a4eb489709a79"
 
   function handleDisplayChange(account) {
     if (account === cooverWalletAdrress) {
+      return navigate('/grupos');
       console.log("Está como coover");
-      return navigate('/grupos')
     } 
     else if (account === null) {
-      console.log("Faça uma carteira", account);
+      console.log("Não é a coover", account);
       navigate('/')
     }
     else {
-      console.log("Não é a coover", account);
       return navigate('/gruposclient')
+      console.log("Não é a coover", account);
     }
   }
   
@@ -93,6 +92,13 @@ function MetamaskPlugin() {
               <strong style={{ fontFamily: 'Rubik' }} >Crie sua MetaMask</strong>
             </Button>
           </Grid>
+          <br></br>
+          {/* <Grid style={{ display: 'flex', justifyContent: 'center', fontFamily: 'Rubik'}}>
+            <h3>
+              Plataforma de seguros mútuos, feita para você!
+            </h3>
+          </Grid> */}
+
         </Box>
 
       )}

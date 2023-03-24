@@ -13,6 +13,7 @@ import IndRequestClient from './clientpages/indRequestClient';
 import ViewGroupsClient2 from './clientpages/ViewGroupsClient2';
 import IndemnityForm from './clientpages/IndemnityRequest';
 import ViewGroupsClient2Load from './clientpages/GroupsClient2Load';
+import CellphoneInsurance from './clientpages/infoPage';
 
 const router = createBrowserRouter ([
   {
@@ -60,6 +61,11 @@ const router = createBrowserRouter ([
     path: "/indrequestclient",
     element: <MyContextProvider><IndRequestClient/></MyContextProvider>,
   },
+
+  {
+    path:"/CellphoneInsurance",
+    element: <CellphoneInsurance></CellphoneInsurance>,
+  }
 
 
 ]);

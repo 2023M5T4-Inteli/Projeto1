@@ -22,6 +22,11 @@ export default function ViewGroupsClient() {
             <Navbar />
             <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'flex-start', flexDirection: 'column', borderRadius:'24px', paddingLeft:2 }}>
                 <ComboBox sx={{borderRadius:'24px'}} />
+                <br></br>
+                <br></br>
+                <Typography style={{fontFamily: 'Rubik'}} sx={{ fontSize: 16, fontWeight:600 }} color="black" gutterBottom>
+                    Selecione os grupos de seguro mútuo que deseja entrar:
+                </Typography>
                 <Card sx={{ minWidth: 275, marginTop:5, borderRadius:'24px' }}>
                     <CardActionArea onClick={handleLink}>
                     <CardContent>
@@ -41,6 +46,27 @@ export default function ViewGroupsClient() {
                     </CardContent>
                     </CardActionArea>
                 </Card>
+
+                <Card sx={{ minWidth: 275, marginTop:5, borderRadius:'24px' }}>
+                    <CardActionArea onClick={handleLink}>
+                    <CardContent>
+                        <Typography style={{fontFamily: 'Rubik'}} sx={{ fontSize: 16, fontWeight:600 }} color="black" gutterBottom>
+                            Grupo 2
+                        </Typography>
+                        <Divider sx={{mb:1}}/>
+                        <Typography style={{fontFamily: 'Rubik'}} sx={{ mb: 0 }} color="text.secondary">
+                        Mínimo de membros: 70 
+                        <br />
+                        Taxa administrativa: 5%
+                        <br />  
+                        Valor do seguro: R$400,00
+                        <br />
+                        Cobertura do seguro: 75%
+                        </Typography>
+                    </CardContent>
+                    </CardActionArea>
+                </Card>
+
             </Box>
         </>
 

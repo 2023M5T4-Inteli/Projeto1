@@ -22,6 +22,11 @@ export default function ViewGroups() {
             <Navbar />
             <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'flex-start', flexDirection: 'column', borderRadius:'24px', paddingLeft:2 }}>
                 <ComboBox sx={{borderRadius:'24px'}} />
+                <br></br>
+                <br></br>
+                <Typography style={{fontFamily: 'Rubik'}} sx={{ fontSize: 16, fontWeight:600 }} color="black" gutterBottom>
+                    Selecione os grupos de seguro mútuo que deseja visualizar:
+                </Typography>
                 <Card sx={{ minWidth: 275, marginTop:5, borderRadius:'24px' }}>
                     <CardActionArea onClick={handleLink}>
                     <CardContent>
