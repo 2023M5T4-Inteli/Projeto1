@@ -4,18 +4,20 @@ pragma solidity >=0.7.0 <0.9.0;
 contract Owner {
     // Variaveis de estado
     address public owner;
+    // taxa administrativa que deve ser paga pelo usuário no momento da entrada em um grupo de seguro
+    uint32 public administrativeFee = 5;
     // status da indenização. False = não solicitada, true = solicitada
     bool public statusIndemnity = false;
     // valor a ser reposto da reserva de risco
     uint public reposition;
     // quantidade de usuários
-    uint public userQuantity; 
+    uint public userQuantity = 0; 
     // valor da indenização solicitada;
     uint public indemnity;
     //Valor que está presente no Contrato (isso é respectivo de cada grupo)
     uint public amountContract = getBalance();
     // array contendo as carteiras de todos os membros do contrato
-    address [] public membersContract ;
+    address [] public membersContract;
     /* array contendo as carteiras dos membros
      do contrato que realizaram o pagamento da reserva de risco */
     address[] public payers;
@@ -68,7 +70,6 @@ contract Owner {
         address client; 
     }
 
-
     //Mapping 
     /*(Mapping é uma estrutura de
     dados que associa uma chave
@@ -84,6 +85,9 @@ contract Owner {
     /* esse mapping associa uma carteira a um valor booleano 
     e representa os membros ativos do contrato */
     mapping(address => bool) public activeMembers;
+    /* esse mapping associa uma carteira ao valor 
+    referente ao pagamento da taxa administrativa */
+    mapping(address => uint256) public administrativeFees;
 
     /*Função especial que é executada apenas uma vez 
     quando o contrato é implantado na rede ethereum*/
@@ -113,9 +117,8 @@ contract Owner {
     }
 
     // Função para ver quantas pessoas há na carteira 
-    function getTotalWalletClients() public view returns(uint) {
-        uint usersAmount = membersContract.length;
-        return usersAmount;
+    function getTotalWalletClients() public view returns (uint) {
+        return userQuantity;
     }
 
 
@@ -126,6 +129,7 @@ contract Owner {
     function addMember(address user) public isOwner { 
         membersContract.push(user); 
         activeMembers[user] = true;
+        userQuantity = userQuantity + 1;
         emit AddMember(msg.sender);
     }
 
@@ -133,19 +137,23 @@ contract Owner {
     // essa função atende ao seguinte requisito:
     // requisito 4: gerenciamento do número de clientes na plataforma
     function removeMember(address userWallet) public isOwner {
-        for (uint i = 0; i < membersContract.length - 1; i++ ){
-            if (membersContract[i] == userWallet){
-                for ( uint index = i; i < membersContract.length - 1; index++){
-                    membersContract[index] = membersContract[index + 1];
-                }
+    for (uint i = 0; i < membersContract.length; i++) {
+        if (membersContract[i] == userWallet) {
+            for (uint index = i; index < membersContract.length - 1; index++) {
+                membersContract[index] = membersContract[index + 1];
             }
-
+            membersContract.pop();
+            userQuantity = userQuantity - 1;
+            activeMembers[userWallet] = false;
+            return;
         }
-        // Caso o usuario seja removido ele é retirado da lista de pendencias a pagar
-        // userRequestingIndemnity.pop();
-        activeMembers[userWallet] = false;
-        membersContract.pop();
-        return ;
+    }
+}
+
+    //função responsável pela cobrança da taxa administrativa
+    // Essa função ainda precisa ser terminada, NÃO está completa
+    function administrativePayment(uint32 fee) public payable{
+        fee = administrativeFee/100;  
     }
 
 
