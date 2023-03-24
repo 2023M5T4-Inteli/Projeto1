@@ -163,6 +163,7 @@ async function activeMembers() {
     // Aqui é onde está sendo executada a função definida no contrato
     const numberMembers = await contract.methods.showAllMembers().call();
     var totalUsers = Object.keys(numberMembers).length
+    console.log(totalUsers)
   } catch (err) {
     console.log(err.message);
   }

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -7,6 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import styled from "@mui/system/styled";
 import Button from "@mui/material/Button";
+import TextField from '@mui/material/TextField';
 import SearchIcon from "@mui/icons-material/Search";
 import Navbar from "../components/Navbar/FloatingAction";
 import BackNavbarReq from "../components/Navbar/BackNavbarReq";
@@ -15,6 +17,7 @@ import { Divider, Grid } from "@mui/material";
 import Box from "@mui/material/Box";
 import Web3 from "web3";
 import erc20ABI from "../erc20ABI.json"
+import { values } from "lodash";
 
 
 const styleModal = {
@@ -67,7 +70,18 @@ const buttonAccept = {
   background: "rgba(133, 251, 202, 0.88)",
   borderRadius: "22px",
   color: "black",
-  marginTop: "10%",
+  marginTop: "1%",
+};
+const buttonRemove = {
+  position: "flex",
+  width: "50%",
+  height: "5%",
+  left:'25%',
+  top: "100%",
+  background: "rgba(255, 0, 0, 0.35)",
+  borderRadius: "22px",
+  color: "black",
+  marginTop: "1%",
 };
 
 export default function CheckboxList() {
@@ -97,17 +111,7 @@ export default function CheckboxList() {
     {
       address: "0x5EaaAb0F75C41A4314FFa90fdadE8e2a33054544",
       label_Adress: "1",
-    },
-
-    {
-      address: "0xFf27a22195b74b06Af498FC5E63f0A3b0F3Ed9Bd",
-      label_Adress: "2",
-    },
-
-    {
-      address: "0xf8094b52b1Bad1361aBC90993EAe757FFc91C5e3",
-      label_Adress: "3",
-    },
+    }
   ];
 
   return (
@@ -189,14 +193,17 @@ export default function CheckboxList() {
         })}
         <Divider sx={{}}/>
         <div>
-          <Button onClick={doSave}>Teste input</Button>
-          <Button onClick={getWallets} >Teste Função view</Button>
-          <Button variant="contained" onClick={handleOpen} sx={buttonAccept}>
+          {/* <Button onClick={doSave}>Teste input</Button> */}
+          {/* <Button onClick={getWallets} >Teste Função view</Button> */}
+          {/* <Button variant="contained" onClick={handleOpen} sx={buttonAccept}>
             Aprovar
-          </Button>
+          </Button> */}
         </div>
         </Box>
+
       </List>
+      <AddNewMembersByWallet></AddNewMembersByWallet>
+      <RemoveMembersByWallet></RemoveMembersByWallet>
     </>
   );
 }
@@ -219,24 +226,73 @@ async function getContract() {
   return new web3.eth.Contract(abi, contractAddress, { from: accounts[0] });
 }
  
-async function doSave() {
-  const walletizinha = "0xf8094b52b1Bad1361aBC90993EAe757FFc91C5e3"
-  try {
-    const contract = await getContract();
-    const tx = await contract.methods.addMember(walletizinha).send();
-    alert(JSON.stringify(tx));
-  } catch (err) {
-    alert(err.message);
+
+function AddNewMembersByWallet() {
+  const[addressValue, setaddressValue] = useState('')
+
+  async function doSave2() {
+    var walletizinha = addressValue
+    var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
+
+    try {
+      const contract = await getContract();
+      const tx = await contract.methods.addMember(fixAddress).send();
+      console.log(fixAddress)
+      alert(JSON.stringify(tx));
+    } catch (err) {
+      alert(err.message);
+    }
   }
+
+  function handleInputChange(event){
+    setaddressValue(event.target.value)
+  }
+
+  return(
+    <>
+    <div>
+
+    <TextField fullWidth label="Adicionar uma carteira" id="fullWidth"  value={addressValue} onChange={handleInputChange}/>
+    <Button variant="contained" onClick={doSave2} sx={buttonAccept}>
+    Adicionar
+    </Button>
+    </div>  
+  </>
+  )
 }
 
-async function getWallets() {
-  try {
-    const contract = await getContract();
-    const tx = await contract.methods.showAllMembers().call();
-    let lenghtUsers = tx.length
-    alert(JSON.stringify(lenghtUsers));
-  } catch (err) {
-    alert(err.message);
+
+function RemoveMembersByWallet() {
+  const[addressValue, setaddressValue] = useState('')
+
+  async function doRemove() {
+    var walletizinha = addressValue
+    var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
+
+    try {
+      const contract = await getContract();
+      const tx = await contract.methods.removeMember(fixAddress).send();
+      console.log(fixAddress)
+      alert(JSON.stringify(tx));
+    } catch (err) {
+      alert(err.message);
+    }
   }
+
+  function handleInputChange(event){
+    setaddressValue(event.target.value)
+  }
+
+  return(
+    <>
+    <div>
+    <Box>
+    <TextField fullWidth label="Remover uma carteira" id="fullWidth"  value={addressValue} onChange={handleInputChange}/>
+    </Box>
+    <Button variant="contained" onClick={doRemove} sx={buttonRemove}>
+    Remover
+    </Button>
+    </div>  
+  </>
+  )
 }
