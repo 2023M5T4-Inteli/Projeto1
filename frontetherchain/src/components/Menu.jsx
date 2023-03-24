@@ -65,7 +65,7 @@ export default function BasicMenu() {
         <MenuItem sx={{width:'110px', left:-5, 
         '& .MuiButtonBase-root':{alignItems:'flex-start',}}}
         >
-          Saiba mais</MenuItem>
+         <Link to='/CellphoneInsurance' style={{textDecoration:'none'}}>Saiba mais</Link> </MenuItem>
         <MenuItem sx={{width:'110px', left:-5}} ><Link to='/' style={{textDecoration:'none'}}>Logout</Link></MenuItem>
       </Menu>
  

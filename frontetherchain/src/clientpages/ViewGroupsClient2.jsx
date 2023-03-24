@@ -37,7 +37,7 @@ export default function ViewGroupsClient2() {
                         </Typography>
                         <Divider sx={{mb:1}}/>
                         <Typography style={{fontFamily: 'Rubik'}} sx={{ mb: 0 }} color="text.secondary">
-                        Mínimo de membros: 10 
+                        Mínimo de membros: 10
                         <br />
                         Taxa administrativa: 10%
                         <br />  

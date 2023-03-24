@@ -33,17 +33,23 @@ export default function IndRequestClient() {
   const wallet_List = [
     {
       address:"0x5EaaAb0F75C41A4314FFa90fdadE8e2a33054544",
-      label_Adress:"1"
+      label_Adress:"1",
+      IMEI:"938922962861" ,
+      Aparelho: "Iphone X" ,
     },
     
     {
       address:"0xFf27a22195b74b06Af498FC5E63f0A3b0F3Ed9Bd",
-      label_Adress: "2"
+      label_Adress: "2",
+      IMEI:"938922952161" ,
+      Aparelho: "Iphone X" ,
     },
 
     {
       address:"0xf8094b52b1Bad1361aBC90993EAe757FFc91C5e3",
       label_Adress:"3",
+      IMEI:"9389229628625" ,
+      Aparelho: "Iphone X" ,
     }
   ];
 
