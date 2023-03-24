@@ -13,11 +13,10 @@ import {
   MenuItem, Box, Grid, Divider, Link
 } from '@mui/material';
 
-import makeStyles from '@mui/system/style';
-// import {makeStyles} from '@mui/styles';
+// import makeStyles from '@mui/system/style';
+import {makeStyles} from '@mui/styles';
 import { Navigate, useNavigate } from 'react-router-dom';
 import BackNavbarReqClient from '../components/Navbar/BackNavbarReqClient';
-
 
 const button2 = {
   border: '1px solid',
@@ -26,9 +25,10 @@ const button2 = {
   padding: 1.5,
   paddingLeft: 2,
   borderRadius: '40px',
+  color:'black',
+  fontWeight:'bold',
   width: '17rem',
-  ml: 5,
-  mt: 2,
+  // mt: 2,
   display: 'flex',
   justifyContent: 'center',
 }
@@ -172,7 +172,7 @@ export const IndemnityForm = () => {
             </br>
             <Item>
               <p>
-                Membros do Seguro : { numberUsers}
+                Membros do Seguro : {numberUsers}
               </p>
             </Item>
             <br>
@@ -181,12 +181,15 @@ export const IndemnityForm = () => {
           </Grid>
         </Grid>
       </Box>
-   <Grid style={{display:'flex', justifyContent:'center'}}>
-  <Button variant="contained" color="primary" onClick={handleOpen} style={{ backgroundColor: '#02DE82', color: 'inherit', display:'flex', justifyContent:'center', marginTop:'20px' }}>
+   <Grid style={{display:'flex', justifyContent:'center', marginTop:10}}>
+  <Button variant="contained" color="primary" onClick={handleOpen}
+  sx={button2}
+  //  style={{ backgroundColor: '#02DE82', color: 'inherit', display:'flex', justifyContent:'center', marginTop:'20px' }}
+   >
     Solicitar Indenização
   </Button>
   </Grid>
-  
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -194,8 +197,10 @@ export const IndemnityForm = () => {
         aria-describedby="modal-description"
       >
         {/* <div className={classes.paper}> */}
-        <Grid style={{background:'white', padding:10, paddingBottom:30, marginTop:'25%' }}>
+        <Grid style={{background:'white', padding:10, paddingBottom:30, marginTop:'25%', display:'flex', justifyContent:'center', flexDirection:'column' }}>
+          <Grid style={{display:'flex', justifyContent:'center'}}>
           <h2 id="modal-title">PEDIDO DE INDENIZAÇÃO</h2>
+          </Grid>
           <FormControl className={classes.formControl}>
             <InputLabel id="imei-label" shrink>Imei do celular</InputLabel>
             <TextField
@@ -234,7 +239,7 @@ export const IndemnityForm = () => {
 
           </FormControl>
           <Grid style={{display:'flex', justifyContent:'center'}}>
-          <Button onClick={handleLink} variant="contained" color="primary" style={{ backgroundColor: '#02DE82', color: 'inherit' }}>
+          <Button onClick={handleLink} variant="contained" color="primary" style={button2}>
           Realizar pedido
           </Button>
           </Grid>
