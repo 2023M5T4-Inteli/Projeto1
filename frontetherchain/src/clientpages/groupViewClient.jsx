@@ -6,10 +6,11 @@ import Box from '@mui/system/Box';
 import Navbar from '../components/Navbar/FloatingAction';
 import BackNavbarClient from '../components/Navbar/BackNavbarClient';
 import { Link } from 'react-router-dom';
-import { Divider, Button, Modal, Typography } from '@mui/material';
+import { Divider, Button, Modal, Typography, Paper } from '@mui/material';
 import Badge from '@mui/material/Badge';
 import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
+
 
 const modalContent = (
   <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', boxShadow: 24, padding: '20px', width: '300px', borderRadius: '24px', background: 'white', display:'flex', justifyContent:'center', flexDirection:'column', }}>
@@ -41,7 +42,7 @@ const button2 = {
   display: 'flex',
   justifyContent: 'center',
 }
-const Item = styled('div')(({ theme }) => ({
+export const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ffffff',
   border: '1px solid',
   borderColor: theme.palette.mode === 'dark' ? '#444d58' : '#ced7e0',
@@ -82,6 +83,16 @@ export default function GruposClient() {
     });
 
   },[]);
+
+  const [isHover, setIsHover] = useState(false);
+
+  const handleMouseEnter = () => {
+     setIsHover(true);
+  };
+
+  const handleMouseLeave = () => {
+     setIsHover(false);
+  };
   return (
     <>
       <Modal
@@ -92,12 +103,21 @@ export default function GruposClient() {
       >
         {modalContent}
       </Modal>
+      <BackNavbarClient />
       <Box sx={{ width: '100%', padding: '60px 0 0 10px', }}>
-        <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }} sx={{}}>
-          <BackNavbarClient />
+        <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }} sx={{marginTop:-1}}>
           <Grid item xs={12} md={12}>
-            <h1 style={{fontFamily: 'Rubik', justifyContent: 'center', display: 'flex', zIndex: 1, position: 'relative' }}>Grupo 1</h1>
-            <Divider sx={{ mb: '15px' }} />
+
+
+            <Box sx={{display:'flex', justifyContent:'center'}}>
+            <Paper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} sx={{backgroundColor: isHover ? 'rgba(2, 222, 130, 0.8)' : 'rgba(2, 222, 130, 0.2)', width:'125px', marginTop:2, borderRadius:3 }}>
+            <Typography style={{fontFamily: 'Rubik', fontSize:20, 
+            display:'flex', justifyContent:'center', fontWeight:500
+            }}>Grupo 1</Typography> 
+            </Paper>
+            </Box>
+
+            <Divider sx={{ mb: '10px', mt:'10px' }} />
             <Item>
               <p>
                 Mínimo de membros: {}
@@ -128,12 +148,12 @@ export default function GruposClient() {
             </br>
             <Item>
               <p>
-                Membros do Seguro:{numberUsers}
+                Membros do Seguro: {numberUsers}
               </p>
             </Item>
             <br>
             </br>
-            <Box sx={{display:'flex', justifyContent:'center', marginTop:2}}>
+            <Box sx={{display:'flex', justifyContent:'center'}}>
             <Button sx={button2} onClick={() => setOpenModal(true)} >
               {/* <Link to='/indrequestclient' style={{textDecoration:'none', color:'black'}}> */}
               Solicitar entrada

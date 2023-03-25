@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import { Item } from '../clientpages/groupViewClient';
 
 const Search = styled('div')(({ theme }) => ({ 
   position: 'relative',
@@ -58,8 +59,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function SearchAppBar() {
   return (
     <Box sx={{flexGrow: 1, borderRadius:'24px'}}>
-      <AppBar position="static" sx={{background:'transparent', borderRadius:'24px', width:'18rem'}}>
-        <Toolbar sx={{background:'rgba(2, 222, 130, 0.2)', borderRadius:'24px', paddingRight:1, paddingLeft:1, 
+   
+      <AppBar position="static" sx={{background:'transparent', borderRadius:'8px', width:'18rem', marginLeft:0 }}>
+        <Toolbar sx={{background:'rgba(146, 148, 156, 0.1)', borderRadius:'8px', paddingRight:0.2,paddingLeft:0.2, minHeight:0,
       '@media (min-width: 600px)':{paddingLeft:0, minHeight:0}
       }}>
           <Typography
@@ -70,7 +72,7 @@ export default function SearchAppBar() {
           >
     
           </Typography>
-          <Search sx={{backgroundColor:'transparent', color:'black', '&:hover': {borderRadius:'24px',backgroundColor:'rgba(2, 222, 130, 0.15)'},
+          <Search sx={{backgroundColor:'transparent', color:'black', '&:hover': {borderRadius:'8px',backgroundColor:'rgba(146, 148, 156, 0.125)'},
         '@media (min-width: 600px)':{width:'100%', marginLeft:0}}}>
             <SearchIconWrapper>
               <SearchIcon />
@@ -83,6 +85,7 @@ export default function SearchAppBar() {
           </Search>
         </Toolbar>
       </AppBar>
+
     </Box>
   );
 }

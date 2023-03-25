@@ -7,7 +7,8 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {Divider} from "@mui/material";
+import {Divider, Grid} from "@mui/material";
+
 import { Link, useNavigate } from "react-router-dom";
 import { CardActionArea } from '@mui/material';
 
@@ -21,13 +22,16 @@ export default function ViewGroupsClient() {
 
             <Navbar />
             <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'flex-start', flexDirection: 'column', borderRadius:'24px', paddingLeft:2 }}>
-                <ComboBox sx={{borderRadius:'24px'}} />
-                <br></br>
-                <br></br>
-                <Typography style={{fontFamily: 'Rubik'}} sx={{ fontSize: 16, fontWeight:600 }} color="black" gutterBottom>
-                    Selecione os grupos de seguro mútuo que deseja entrar:
+            <Typography style={{fontFamily: 'Rubik'}} sx={{ marginBottom:1, fontSize: 16, fontWeight:600, color:'black' }} color="black" gutterBottom>
+                    Selecione o grupo de seguro mútuo em que deseja participar.
                 </Typography>
-                <Card sx={{ minWidth: 275, marginTop:5, borderRadius:'24px' }}>
+               <Divider sx={{marginBottom:2, width:'100%'}}/>
+                <ComboBox/>
+                
+                {/* <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }} sx={{marginTop:-1}}> */}
+
+                <Grid container rowSpacing={2} sx={{marginTop:2, marginLeft:2}} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
+                <Card sx={{ minWidth: 275, marginTop:2, borderRadius:'24px',  marginLeft:2 }}>
                     <CardActionArea onClick={handleLink}>
                     <CardContent>
                         <Typography style={{fontFamily: 'Rubik'}} sx={{ fontSize: 16, fontWeight:600 }} color="black" gutterBottom>
@@ -47,7 +51,7 @@ export default function ViewGroupsClient() {
                     </CardActionArea>
                 </Card>
 
-                <Card sx={{ minWidth: 275, marginTop:5, borderRadius:'24px' }}>
+                <Card sx={{ minWidth: 275, marginTop:2, marginLeft:2, borderRadius:'24px',  }}>
                     <CardActionArea onClick={handleLink}>
                     <CardContent>
                         <Typography style={{fontFamily: 'Rubik'}} sx={{ fontSize: 16, fontWeight:600 }} color="black" gutterBottom>
@@ -66,6 +70,7 @@ export default function ViewGroupsClient() {
                     </CardContent>
                     </CardActionArea>
                 </Card>
+                </Grid>
 
             </Box>
         </>
