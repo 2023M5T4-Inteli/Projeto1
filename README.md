@@ -74,6 +74,29 @@ A estrutura do nosso contrato é diretamente relacionada aos requisitos de negó
       Possuímos, também, quatro mappings diferentes. O primeiro é o "members" que mapeia o endereço do usuário para sua estrutura de dados "Member". O segundo é o "balances" que mapeia o endereço do usuário para o saldo da sua conta no contrato. No terceiro o "indemnityRequests" mapeia o endereço do usuário para o valor que ele está solicitando em uma indenização. Por fim, o quarto é o "activeMembers" que mapeia o endereço do usuário para um valor booleano indicando se ele é um membro ativo do contrato.
 
       Neste contrato, possuímos um modifier chamado "isOwner" que verifica se a pessoa que chamou a função é o proprietário do contrato. Se a pessoa que chamou a função não for o dono, a função não será executada e uma mensagem de erro será gerada. Isso permite que o proprietário restrinja o acesso a certas funções no contrato, garantindo que apenas ele possa executá-las.
+      
+## Casos de Teste:
+
+#### Teste de função "addMember":
+Pré-condição: O proprietário do contrato está autenticado no sistema administrativo da Coover.
+Procedimento de teste: A função "addMember" é executada com o endereço de um usuário a ser adicionado como parâmetro.
+Resultado esperado: O endereço do usuário é adicionado ao array "membersContract". O valor booleano correspondente ao endereço do usuário no mapping "activeMembers" é definido como verdadeiro. O evento "AddMember" é emitido com o endereço do chamador como parâmetro.
+Pós-condição: O endereço do usuário é adicionado à lista de membros do smart contract.
+
+#### Teste de função "OnlyOwnerCanRemoveMember":
+Pré-condição: O proprietário do contrato está autenticado no sistema administrativo da Coover e há um usuário ativo existente no contrato.
+1° Procedimento de teste: Chamar a função "removeMember" com o endereço do usuário a ser removido como parâmetro, usando uma conta que não seja do proprietário do contrato.
+1° Resultado esperado: A transação falha com a mensagem "Caller is not owner".
+2° Procedimento de teste: Chamar a função "removeMember" com o endereço do usuário como parâmetro, usando a conta do proprietário do contrato.
+2° Resultado esperado: O endereço do usuário é removido do array "membersContract". O valor booleano correspondente ao endereço do usuário no mapping "activeMembers" é definido como falso.
+Pós-condição: O endereço do usuário é removido da lista de membros do contrato.
+
+#### Teste de função "GetTotalWalletClients":
+Pré-condição: Um contrato com pelo menos um membro ativo.
+Procedimento de teste: Chamar a função "getTotalWalletClients".
+Resultado esperado: O número de membros atualmente no array "membersContract" é retornado.
+Pós-condição: O número de membros no contrato é exibido.
+
 
 ## Requisitos de negócio:
 #### Requisito 1: Criação de um grupo de seguro mútuo.
