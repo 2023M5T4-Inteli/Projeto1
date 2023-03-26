@@ -78,24 +78,24 @@ A estrutura do nosso contrato é diretamente relacionada aos requisitos de negó
 ## Casos de Teste:
 
 #### Teste de função "addMember":
-Pré-condição: O proprietário do contrato está autenticado no sistema administrativo da Coover.
-Procedimento de teste: A função "addMember" é executada com o endereço de um usuário a ser adicionado como parâmetro.
-Resultado esperado: O endereço do usuário é adicionado ao array "membersContract". O valor booleano correspondente ao endereço do usuário no mapping "activeMembers" é definido como verdadeiro. O evento "AddMember" é emitido com o endereço do chamador como parâmetro.
-Pós-condição: O endereço do usuário é adicionado à lista de membros do smart contract.
+- **Pré-condição:** O proprietário do contrato está autenticado no sistema administrativo da Coover.
+- **Procedimento de teste:** A função "addMember" é executada com o endereço de um usuário a ser adicionado como parâmetro.
+- **Resultado esperado:** O endereço do usuário é adicionado ao array "membersContract". O valor booleano correspondente ao endereço do usuário no mapping "activeMembers" é definido como verdadeiro. O evento "AddMember" é emitido com o endereço do chamador como parâmetro.
+- **Pós-condição:** O endereço do usuário é adicionado à lista de membros do smart contract.
 
 #### Teste de função "OnlyOwnerCanRemoveMember":
-Pré-condição: O proprietário do contrato está autenticado no sistema administrativo da Coover e há um usuário ativo existente no contrato.
-1° Procedimento de teste: Chamar a função "removeMember" com o endereço do usuário a ser removido como parâmetro, usando uma conta que não seja do proprietário do contrato.
-1° Resultado esperado: A transação falha com a mensagem "Caller is not owner".
-2° Procedimento de teste: Chamar a função "removeMember" com o endereço do usuário como parâmetro, usando a conta do proprietário do contrato.
-2° Resultado esperado: O endereço do usuário é removido do array "membersContract". O valor booleano correspondente ao endereço do usuário no mapping "activeMembers" é definido como falso.
-Pós-condição: O endereço do usuário é removido da lista de membros do contrato.
+- **Pré-condição:** O proprietário do contrato está autenticado no sistema administrativo da Coover e há um usuário ativo existente no contrato.
+- **1° Procedimento de teste:** Chamar a função "removeMember" com o endereço do usuário a ser removido como parâmetro, usando uma conta que não seja do proprietário do contrato.
+- **1° Resultado esperado:** A transação falha com a mensagem "Caller is not owner".
+- **2° Procedimento de teste:** Chamar a função "removeMember" com o endereço do usuário como parâmetro, usando a conta do proprietário do contrato.
+- **2° Resultado esperado:** O endereço do usuário é removido do array "membersContract". O valor booleano correspondente ao endereço do usuário no mapping "activeMembers" é definido como falso.
+- **Pós-condição:** O endereço do usuário é removido da lista de membros do contrato.
 
 #### Teste de função "GetTotalWalletClients":
-Pré-condição: Um contrato com pelo menos um membro ativo.
-Procedimento de teste: Chamar a função "getTotalWalletClients".
-Resultado esperado: O número de membros atualmente no array "membersContract" é retornado.
-Pós-condição: O número de membros no contrato é exibido.
+- **Pré-condição:** Um contrato com pelo menos um membro ativo.
+- **Procedimento de teste:** Chamar a função "getTotalWalletClients".
+- **Resultado esperado:** O número de membros atualmente no array "membersContract" é retornado.
+- **Pós-condição:** O número de membros no contrato é exibido.
 
 
 ## Requisitos de negócio:
