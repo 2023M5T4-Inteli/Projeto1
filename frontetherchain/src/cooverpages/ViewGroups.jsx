@@ -3,15 +3,14 @@ import ComboBox from "../components/SearchBar";
 import Navbar from "../components/Navbar/FloatingAction";
 import { Box } from "@mui/system";
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Link, useNavigate } from "react-router-dom";
-import { CardActionArea } from '@mui/material';
+import {useNavigate } from "react-router-dom";
+import {CardActionArea } from '@mui/material';
 import {Divider} from "@mui/material";
-import { Item } from "../clientpages/groupViewClient";
 
+
+/* Tela que mostra os grupos disponiveis*/
 export default function ViewGroups() {
     const navigate = useNavigate();
     function handleLink() {

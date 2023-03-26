@@ -2,6 +2,7 @@ import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
+// Função que renderiza ser aprovado ou não em um grupo
 export default function ApproveDecline() {
   return (
     <Stack direction="row" spacing={2}>

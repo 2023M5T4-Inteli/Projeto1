@@ -3,12 +3,12 @@ import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { Item } from '../clientpages/groupViewClient';
+
+
+// Constantes que tem o estilo dos componentes utilizados no frontend 
 
 const Search = styled('div')(({ theme }) => ({ 
   position: 'relative',
@@ -41,7 +41,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     borderRadius:'24px',
     transition: theme.transitions.create('width'),
@@ -56,6 +55,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
+// Função que gera a barra de pesquisa no frontend
 export default function SearchAppBar() {
   return (
     <Box sx={{flexGrow: 1, borderRadius:'24px'}}>

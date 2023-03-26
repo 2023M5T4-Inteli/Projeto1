@@ -3,14 +3,14 @@ import ComboBox from "../components/SearchBar";
 import Navbar from "../components/Navbar/FloatingAction";
 import { Box } from "@mui/system";
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {Divider, Grid} from "@mui/material";
 
 import { Link, useNavigate } from "react-router-dom";
 import { CardActionArea } from '@mui/material';
+
+// Tela que permite ao usuário escolher qual grupo ele gostaria de fazer parte 
 
 export default function ViewGroupsClient() {
     const navigate = useNavigate();
@@ -28,7 +28,6 @@ export default function ViewGroupsClient() {
                <Divider sx={{marginBottom:2, width:'100%'}}/>
                 <ComboBox/>
                 
-                {/* <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }} sx={{marginTop:-1}}> */}
 
                 <Grid container rowSpacing={2} sx={{marginTop:2, marginLeft:2}} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
                 <Card sx={{ minWidth: 275, marginTop:2, borderRadius:'24px',  marginLeft:2 }}>

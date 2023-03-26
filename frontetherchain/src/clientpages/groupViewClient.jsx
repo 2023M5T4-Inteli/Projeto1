@@ -7,11 +7,10 @@ import Navbar from '../components/Navbar/FloatingAction';
 import BackNavbarClient from '../components/Navbar/BackNavbarClient';
 import { Link } from 'react-router-dom';
 import { Divider, Button, Modal, Typography, Paper } from '@mui/material';
-import Badge from '@mui/material/Badge';
 import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
 
-
+// Pop up avisando que a solicitação foi realizada com sucesso
 const modalContent = (
   <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', boxShadow: 24, padding: '20px', width: '300px', borderRadius: '24px', background: 'white', display:'flex', justifyContent:'center', flexDirection:'column', }}>
     <Typography style={{ fontFamily: 'Rubik' }} variant="h6" component="h2" gutterBottom>
@@ -28,6 +27,8 @@ const modalContent = (
   </Box>
 );
 
+// Constantes que tem o estilo dos componentes utilizados no frontend 
+
 const button2 = {
   border: '1px solid',
   borderColor: 'rgba(2, 222, 130, 0.6)',
@@ -38,7 +39,6 @@ const button2 = {
   color:'black',
   fontWeight:'bold',
   width: '17rem',
-  // mt: 2,
   display: 'flex',
   justifyContent: 'center',
 }
@@ -74,6 +74,8 @@ export const Item = styled('div')(({ theme }) => ({
 }));
 
 
+
+// Tela que permite solicitar uma entrada no grupo 
 export default function GruposClient() {
   const [openModal, setOpenModal] = React.useState(false);
   const [numberUsers, setnumberUsers] = useState ()

@@ -5,14 +5,13 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-// import AssessmentIcon from '@mui/icons-material/Assessment';
 import ApproveDecline from '../components/approve_decline';
-// import { Button } from '@material-ui/core';
 import Button from '@mui/material/Button';
-import Navbar from '../components/Navbar/FloatingAction';
 import BackNavbarReqClient from '../components/Navbar/BackNavbarReqClient';
 
+
+
+// Tela que permite ao administrador aceitar um pedido de indenização 
 export default function IndRequestClient() {
 
     const [checked, setChecked] = React.useState([0]);

@@ -3,13 +3,14 @@ import ComboBox from "../components/SearchBar";
 import Navbar from "../components/Navbar/FloatingAction";
 import { Box } from "@mui/system";
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link, useNavigate } from "react-router-dom";
 import {Divider} from "@mui/material";
 import { CardActionArea } from '@mui/material';
+
+
+// Tela que permite ao usuário visualizar mais detalhes sobre seu atual grupo
 
 export default function ViewGroupsClient2() {
   const navigate = useNavigate();

@@ -5,14 +5,14 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
-import styled from "@mui/system/styled";
 import Button from "@mui/material/Button";
-import SearchIcon from "@mui/icons-material/Search";
-import Navbar from "../components/Navbar/FloatingAction";
 import BackNavbarReq from "../components/Navbar/BackNavbarReq";
 import Modal from "@mui/material/Modal";
 import { Divider, Grid } from "@mui/material";
 import Box from "@mui/material/Box";
+
+
+// Constantes que tem o estilo dos componentes utilizados no frontend 
 
 const styleModal = {
   transform: "translate(50%, 50%)",
@@ -71,6 +71,8 @@ const buttonAccept = {
   fontFamily: 'Rubik'
 };
 
+
+// Função que permite aceitar ou não membros para fazerem parte do contrato 
 export default function CheckboxList() {
   const [checked, setChecked] = React.useState([0]);
   const [open, setOpen] = React.useState(false);
@@ -94,6 +96,7 @@ export default function CheckboxList() {
     setChecked(newChecked);
   };
 
+  // Aqui sera a array com os dados enviados pelo backend
   const wallet_List = [
     {
       address: "0x5EaaAb0F75C41A4314FFa90fdadE8e2a33054544",
@@ -184,7 +187,6 @@ export default function CheckboxList() {
                 </ListItemButton>
               </ListItem>
 
-              {/* <ApproveDecline /> */}
             </div>
           );
         })}

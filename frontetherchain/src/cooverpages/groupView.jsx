@@ -12,32 +12,17 @@ import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
 import '../components/App.css';
 
+
+// Constantes que tem o estilo dos componentes utilizados no frontend 
 const button = {
-  // border: '1px solid',
-  // borderColor:'rgb(1, 1, 1, 0.5)',
-  // padding: 1.5,
-  // paddingLeft:2,
-  // borderRadius: '40px',
-  // // width:'46.5rem',
-  // width:'22.5rem',
-  // display:'flex', 
-  // justifyContent:'flex-start',
   marginTop:'0 !important',
   backgroundColor:'white !important'
 }
 const button2 = {
-  // border: '1px solid',
-  // borderColor:'rgb(1, 1, 1, 0.5)',
-  // padding: 1.5,
-  // paddingLeft:2,
-  // borderRadius: '40px',
-  // // width:'46.5rem',
-  // width:'22.5rem',
-  // display:'flex', 
-  // justifyContent:'flex-start',
   marginTop:'0 !important',
   backgroundColor:'white !important'
 }
+
 const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ffffff',
   border: '1px solid',
@@ -65,6 +50,7 @@ const Item = styled('div')(({ theme }) => ({
   },
 }));
 
+// Tela que permite com que o administrador veja dados sobre o grupo e permite aceitar ou não membros para esse contrato 
 export default function Grupos() {
   const [numberUsers, setnumberUsers] = useState ()
   useEffect(() =>{
@@ -121,24 +107,20 @@ export default function Grupos() {
             </br>
 
             <Item sx={{padding:0.7,display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:2}}>
-            {/* <Button sx={button}> */}
             <Link to='/requisicoes' style={{textDecoration:'none', fontFamily: 'Rubik',}}>
             <Typography style={{marginLeft:'10px'}}> Solicitações de entrada
             </Typography>
             </Link>
-            {/* </Button> */}
             <Badge color="success" overlap="circular" badgeContent="1" sx={{ scale:'1.2', paddingRight:'40%'
              }}/>
             </Item>
 
             <Item sx={{padding:0.7,display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-            {/* <Button sx={button2}> */}
             <Link to='/indrequest' style={{textDecoration:'none', fontFamily: 'Rubik'}}>
               <Typography style={{marginLeft:'10px'}}> 
                  Solicitações de indenização 
                  </Typography>
               </Link>
-            {/* </Button> */}
             <Badge color="error" overlap="circular" badgeContent="5" sx={{ scale:'1.2', paddingRight:'40%'
             }}/>
             </Item>

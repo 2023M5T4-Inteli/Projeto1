@@ -6,6 +6,8 @@ import { createTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import CheckboxList from '../cooverpages/enterRequest';
 
+// Constantes que tem o estilo dos componentes utilizados no frontend 
+
 const theme = createTheme({
     components: {
       MuiMenu: {
@@ -25,6 +27,8 @@ const theme = createTheme({
     },
   });
 
+
+ // Função que gera o menu  
 export default function BasicMenu() {
  
   const [anchorEl, setAnchorEl] = React.useState(null);

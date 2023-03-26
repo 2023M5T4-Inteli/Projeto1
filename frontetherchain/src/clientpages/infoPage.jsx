@@ -2,8 +2,8 @@ import React from 'react';
 import { Grid, Typography, Button } from '@mui/material';
 import { Box } from '@mui/system';
 import BackNavbar from "../components/Navbar/BackNavbar"
-// import CooverLogo from '../img/coover_img.png';
 
+// Tela com mais informações sobre a solução desenvolvida 
 const CellphoneInsurance = () => {
   return (
 

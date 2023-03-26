@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Web3 from "web3";
-import CreateGroups from "./cooverpages/CreateGroup";
 import { Grid, Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import CheckboxList from "./cooverpages/enterRequest";
 import Divider from '@mui/material/Divider';
-import Grupos from "./cooverpages/groupView";
 import CooverHome from '../src/img/coover_img.png';
 import { Box } from "@mui/system";
+
+
+/* Função que permite o login com a metamask e também checa se a carteira logada é a da Coover. Por fim renderiza os componentes */
 
 function MetamaskPlugin() {
   const [web3, setWeb3] = useState(null);
@@ -17,20 +17,20 @@ function MetamaskPlugin() {
   
   /* Definindo a carteira do administrador.
   Se atentar que na hora de colocar o endereço tudo tem de estar minusculo */
-  const cooverWalletAdrress = "0xa930575a2cca74cc4db44edd260a4eb489709a79"
+  const cooverWalletAdrress = "0x5038C990be642DB89B590DA8Ae938e1738d73E15"
 
   function handleDisplayChange(account) {
     if (account === cooverWalletAdrress) {
-      return navigate('/grupos');
       console.log("Está como coover");
+      return navigate('/grupos');
     } 
     else if (account === null) {
       console.log("Não é a coover", account);
       navigate('/')
     }
     else {
-      return navigate('/gruposclient')
       console.log("Não é a coover", account);
+      return navigate('/gruposclient')
     }
   }
   
@@ -66,9 +66,7 @@ function MetamaskPlugin() {
 
       {account ? (
         <div>
-       {/* <Typography variant="body1">
-          Conectado a conta {accountMessage}
-        </Typography> */}
+
           {displayClient}
         </div>
       ) : (
@@ -93,12 +91,6 @@ function MetamaskPlugin() {
             </Button>
           </Grid>
           <br></br>
-          {/* <Grid style={{ display: 'flex', justifyContent: 'center', fontFamily: 'Rubik'}}>
-            <h3>
-              Plataforma de seguros mútuos, feita para você!
-            </h3>
-          </Grid> */}
-
         </Box>
 
       )}

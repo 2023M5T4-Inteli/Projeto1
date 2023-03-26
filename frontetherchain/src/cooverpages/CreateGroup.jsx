@@ -5,7 +5,9 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@mui/material/Grid'; // Grid version 1
 import Navbar from '../components/Navbar/FloatingAction';
-import CheckboxList from './enterRequest';
+
+
+// Constantes que tem o estilo dos componentes utilizados no frontend 
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -22,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+// Tela que permite definir as variaveis para construir um novo contrato
 function CreateGroups() {
   const classes = useStyles();
   const [showModal, setShowModal] = useState(false);

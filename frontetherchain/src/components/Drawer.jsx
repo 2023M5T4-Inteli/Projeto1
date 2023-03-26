@@ -12,6 +12,8 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { MyContext } from '../Contextt';
 
+
+// Função que mostra ao usuario caso tenha sido aceito no grupo 
 export default function TemporaryDrawer() {
     const anchor = 'right';
     const [state, setState] = React.useState({
@@ -63,9 +65,6 @@ export default function TemporaryDrawer() {
                 <Card sx={{ maxWidth: 300, ml: 2, mt: 3, mr: 2 }}>
                     <CardActionArea>
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
-                                Lizard
-                            </Typography>
                             <Typography variant="body2" color="text.secondary">
                                 Você foi aceito no grupo...
                             </Typography>

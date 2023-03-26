@@ -2,21 +2,12 @@ import React, { useState, useEffect } from 'react';
 import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
 import styled from '@mui/system/styled';
-import {
-  Button,
-  Modal,
-  TextField,
-  
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem, Box, Grid, Divider, Link
-} from '@mui/material';
-
-// import makeStyles from '@mui/system/style';
+import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Link} from '@mui/material';
 import {makeStyles} from '@mui/styles';
-import { Navigate, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import BackNavbarReqClient from '../components/Navbar/BackNavbarReqClient';
+
+// Constantes que tem o estilo dos componentes utilizados no frontend 
 
 const button2 = {
   border: '1px solid',
@@ -28,7 +19,6 @@ const button2 = {
   color:'black',
   fontWeight:'bold',
   width: '17rem',
-  // mt: 2,
   display: 'flex',
   justifyContent: 'center',
 }
@@ -83,6 +73,9 @@ const useStyles = makeStyles((theme) => ({
     margin: '10px', // Espaçamento em todas as direções
   },
 }));
+
+
+// Tela que permite ao cliente fazer um pedido de indenização 
 
 export const IndemnityForm = () => {
   const navigate = useNavigate();
