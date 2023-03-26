@@ -76,6 +76,7 @@ A estrutura do nosso contrato é diretamente relacionada aos requisitos de negó
       Neste contrato, possuímos um modifier chamado "isOwner" que verifica se a pessoa que chamou a função é o proprietário do contrato. Se a pessoa que chamou a função não for o dono, a função não será executada e uma mensagem de erro será gerada. Isso permite que o proprietário restrinja o acesso a certas funções no contrato, garantindo que apenas ele possa executá-las.
       
 ## Casos de Teste:
+Os casos de teste abaixo se referem ao contrato "contractCore", que pode ser acessado por meio do seguinte link: [acesse aqui](https://github.com/2023M5T4-Inteli/Projeto1/blob/main/contrato/contractCore.sol). Foram realizados testes em três funções do smart contract, a saber: "addMembers", "OnlyOwnerCanRemoveMember" e "GetTotalWalletClients". Para cada função, foram descritos a pré-condição, o procedimento de teste, o resultado esperado e a pós-condição, como segue:
 
 #### Teste de função "addMember":
 - **Pré-condição:** O proprietário do contrato está autenticado no sistema administrativo da Coover.
