@@ -1,7 +1,6 @@
 // Esse código corresponde aos casos de teste do "contractCore" que foi commitado dia 13/03/2023.
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
-
 import "remix_tests.sol";
 import "hardhat/console.sol";
 import "../contracts/contractCore.sol";
@@ -46,7 +45,11 @@ contract OwnerTest {
         // Verifica se o número total de clientes de carteira é igual a 2
         uint expected = 2;
         uint actual = contractCore.getTotalWalletClients();
-        Assert.equal(actual, expected, "O numero total de clientes de carteira nao foi calculado corretamente");
+        Assert.equal(
+            actual,
+            expected,
+            "O numero total de clientes de carteira nao foi calculado corretamente"
+        );
     }
 
     // 3° Caso: Teste para verificar se apenas o proprietário pode remover um membro
@@ -63,6 +66,10 @@ contract OwnerTest {
         // Verifica se o membro foi removido com sucesso
         bool expected = false;
         bool actual = contractCore.activeMembers(existingMember);
-        Assert.equal(actual, expected, "O membro existente nao foi removido com sucesso");
+        Assert.equal(
+            actual,
+            expected,
+            "O membro existente nao foi removido com sucesso"
+        );
     }
 }
