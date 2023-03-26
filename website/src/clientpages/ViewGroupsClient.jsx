@@ -10,7 +10,7 @@ import {Divider, Grid} from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { CardActionArea } from '@mui/material';
 
-// Tela que permite ao usuário escolher qual grupo ele gostaria de fazer parte 
+// Tela que permite ao usuá\rio escolher qual grupo ele gostaria de fazer parte 
 
 export default function ViewGroupsClient() {
     const navigate = useNavigate();
