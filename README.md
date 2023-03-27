@@ -58,24 +58,25 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
 
 <b>website:</b> aqui estarão todos os códigos do frontend comentados do projeto. 
 Há a seguinte estrutura de pastas dentro desse projeto 
-      - clientpages : todas as páginas relacionadas a interação do cliente
-      - components : componentes utilizados em todo front
-      - cooverpages : todas as páginas relacionadas a interação do administrador da cover
-      - font : fonte customizado do site
-      - img : imagens utilizadas no site 
+
+   - clientpages : todas as páginas relacionadas a interação do cliente  
+   - components : componentes utilizados em todo front
+   - cooverpages : todas as páginas relacionadas a interação do administrador da cover
+   - font : fonte customizado do site
+   - img : imagens utilizadas no site 
 
 Também existem os arquivos 
-      - index.js : arquivo que contem todas as rotas do site e utiliza o react DOM
-      - MetamaskPlugin.jsx : tela inicial onde contém o login e define se é administrador ou
+   - index.js : arquivo que contem todas as rotas do site e utiliza o react DOM
+   - MetamaskPlugin.jsx : tela inicial onde contém o login e define se é administrador ou
  cliente
 
 <b>readme:</b> arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
 
-## Descrição do objetivo do Smart Contract
+## :jigsaw: Descrição do objetivo do Smart Contract
 
 Este contrato tem como objetivo gerenciar um grupo de membros que contribuem com dinheiro para um fundo comum. Ele contém funções para adicionar dinheiro ao fundo, adicionar novos membros, remover membros, solicitar reembolsos e pagar reembolsos aos membros. O contrato também tem variáveis para armazenar informações sobre os membros, incluindo seus saldos e status de ativação. O evento "Purchase" é emitido quando um novo pagamento é recebido, o evento "AddMember" é emitido quando um novo membro é adicionado e o evento "PaymentReceived" é emitido quando um pagamento é recebido de um membro.
 
-## Estrutura do Smart Contract
+## :page_with_curl:	 Estrutura do Smart Contract
 
 A estrutura do nosso contrato é diretamente relacionada aos requisitos de negócios necessários. Isso é definido mediante as variáveis de estado, eventos e funções de execução que complementam nosso código. Sendo assim, destacamos a funcionalidade e descrição de cada uma dessas propriedades dentro do nosso contrato:
 
@@ -125,7 +126,7 @@ A estrutura do nosso contrato é diretamente relacionada aos requisitos de negó
 
       Neste contrato, possuímos um modifier chamado "isOwner" que verifica se a pessoa que chamou a função é o proprietário do contrato. Se a pessoa que chamou a função não for o dono, a função não será executada e uma mensagem de erro será gerada. Isso permite que o proprietário restrinja o acesso a certas funções no contrato, garantindo que apenas ele possa executá-las.
       
-## Casos de Teste:
+## :white_check_mark:	 Casos de Teste:
 Os casos de teste realizados se referem ao contrato ["contractCore"](https://github.com/2023M5T4-Inteli/Projeto1/blob/main/contrato/contractCore.sol), e podem ser acessados por meio [deste link](https://github.com/2023M5T4-Inteli/Projeto1/blob/main/contrato/caseTests). Foram realizados testes em três funções do smart contract, a saber: "addMembers", "OnlyOwnerCanRemoveMember" e "GetTotalWalletClients". Para cada função, foram descritos a pré-condição, o procedimento de teste, o resultado esperado e a pós-condição, como segue:
 
 #### Teste de função "addMember":
@@ -149,7 +150,7 @@ Os casos de teste realizados se referem ao contrato ["contractCore"](https://git
 - **Pós-condição:** O número de membros no contrato é exibido.
 
 
-## Requisitos de negócio:
+## :chart_with_upwards_trend:	 Requisitos de negócio:
 #### Requisito 1: Criação de um grupo de seguro mútuo.
 
 A empresa Coover, como parte interessada na criação desse smart contract, é responsável pelo controle, escolha e execução dos requisitos aqui presentes . Diante disso, a seguradora terá a possibilidade de definir, previamente, as regras que serão seguidas no processo de criação de um grupo de seguro mútuo. Portanto, características como número mínimo e máximo de participantes, tempo de duração de um contrato e momento de cobrança de taxas administrativas, devem ser definidos pela instituição no momento de confecção desse contrato inteligente. 
