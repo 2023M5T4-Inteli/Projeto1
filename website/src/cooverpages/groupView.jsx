@@ -72,8 +72,8 @@ export default function Grupos() {
             // onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
             sx={{backgroundColor:
             // isHover ? 'rgba(2, 222, 130, 0.8)' :
-            'rgba(2, 222, 130, 0.2)', width:'125px', marginTop:2, borderRadius:3 }}>
-            <Typography style={{fontFamily: 'Rubik', fontSize:20,
+            'rgba(2, 222, 130, 0.6)', width:'125px', marginTop:3, borderRadius:3,marginBottom:2,  }}>
+            <Typography style={{fontFamily: 'Rubik', fontSize:25,
             display:'flex', justifyContent:'center', fontWeight:500
             }}>Grupo 1</Typography>
             </Paper>
