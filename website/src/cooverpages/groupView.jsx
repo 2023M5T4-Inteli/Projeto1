@@ -6,7 +6,7 @@ import Box from '@mui/system/Box';
 import Navbar from '../components/Navbar/FloatingAction';
 import BackNavbar from '../components/Navbar/BackNavbar';
 import { Link } from 'react-router-dom';
-import { Divider, Button, Typography } from '@mui/material';
+import { Divider, Button, Typography, Paper } from '@mui/material';
 import Badge from '@mui/material/Badge';
 import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
@@ -67,8 +67,18 @@ export default function Grupos() {
     <Box sx={{ width: '100%', padding:'60px 0 0 10px' }}>
       <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
         <Grid item xs={12} md={12} >
-            <h1 style={{justifyContent:'center', display:'flex', zIndex:1, position:'relative', fontFamily: 'Rubik'}}>Grupo 1</h1>
-            <Divider sx={{mb:'15px'}}/>
+        <Box sx={{display:'flex', justifyContent:'center'}}>
+            <Paper
+            // onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+            sx={{backgroundColor:
+            // isHover ? 'rgba(2, 222, 130, 0.8)' :
+            'rgba(2, 222, 130, 0.2)', width:'125px', marginTop:2, borderRadius:3 }}>
+            <Typography style={{fontFamily: 'Rubik', fontSize:20,
+            display:'flex', justifyContent:'center', fontWeight:500
+            }}>Grupo 1</Typography>
+            </Paper>
+            </Box>
+              <Divider sx={{mb:'15px'}}/>
             <Item>
             <p style={{ fontFamily: 'Rubik' }}>
               Mínimo de membros: 35
