@@ -13,7 +13,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Navbar from "../components/Navbar/FloatingAction";
 import BackNavbarReq from "../components/Navbar/BackNavbarReq";
 import Modal from "@mui/material/Modal";
-import { Divider, Grid } from "@mui/material";
+import { Divider, Grid, Paper, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Web3 from "web3";
 import erc20ABI from "../erc20ABI.json"
@@ -153,7 +153,17 @@ export default function CheckboxList() {
         <BackNavbarReq />
         <Box sx={{marginTop:8, marginLeft:-5, }}>
         <Grid style={{display:'flex', alignItems:'center', flexDirection:'column'}}>
-          <h1 style={{marginBottom:-1}}>Grupo 1</h1>
+        <Box sx={{display:'flex', justifyContent:'center'}}>
+            <Paper
+            // onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+            sx={{backgroundColor:
+            // isHover ? 'rgba(2, 222, 130, 0.8)' :
+            'rgba(2, 222, 130, 0.6)', width:'125px', marginTop:3, borderRadius:3,marginBottom:2,  }}>
+            <Typography style={{fontFamily: 'Rubik', fontSize:25,
+            display:'flex', justifyContent:'center', fontWeight:500
+            }}>Grupo 1</Typography>
+            </Paper>
+            </Box>
           _____________________________________________
           <p style={{fontSize: '150%'}}> Solicitações de entrada </p>
         </Grid>

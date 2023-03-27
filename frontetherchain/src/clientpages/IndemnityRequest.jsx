@@ -16,7 +16,7 @@ const button2 = {
   paddingLeft: 2,
   borderRadius: '40px',
   color:'black',
-  fontWeight:'bold',
+  fontWeight:700,
   width: '17rem',
   display: 'flex',
   justifyContent: 'center',
@@ -137,8 +137,8 @@ export const IndemnityForm = () => {
             // onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
             sx={{backgroundColor:
             // isHover ? 'rgba(2, 222, 130, 0.8)' :
-            'rgba(2, 222, 130, 0.2)', width:'125px', marginTop:2, borderRadius:3 }}>
-            <Typography style={{fontFamily: 'Rubik', fontSize:20,
+            'rgba(2, 222, 130, 0.6)', width:'125px', marginTop:3, marginBottom:2, borderRadius:3 }}>
+            <Typography style={{fontFamily: 'Rubik', fontSize:25,
             display:'flex', justifyContent:'center', fontWeight:500
             }}>Grupo 1</Typography>
             </Paper>
@@ -199,9 +199,9 @@ export const IndemnityForm = () => {
         aria-describedby="modal-description"
       >
         {/* <div className={classes.paper}> */}
-        <Grid style={{background:'white', padding:10, paddingBottom:30, marginTop:'25%', display:'flex', justifyContent:'center', flexDirection:'column' }}>
+        <Grid style={{background:'white', padding:30, paddingBottom:30, marginTop:'15%', display:'flex', justifyContent:'center', flexDirection:'column', marginLeft:'30px', marginRight:'30px'  }}>
           <Grid style={{display:'flex', justifyContent:'center'}}>
-          <h2 id="modal-title">PEDIDO DE INDENIZAÇÃO</h2>
+          <Typography sx={{fontWeight:700, fontSize:18, marginBottom:2}}>PEDIDO DE INDENIZAÇÃO</Typography>
           </Grid>
           <FormControl className={classes.formControl}>
             <InputLabel id="imei-label" shrink>Imei do celular</InputLabel>
@@ -240,7 +240,7 @@ export const IndemnityForm = () => {
             />
 
           </FormControl>
-          <Grid style={{display:'flex', justifyContent:'center'}}>
+          <Grid style={{display:'flex', justifyContent:'center', marginTop:10}}>
           <Button onClick={handleLink} variant="contained" color="primary" style={button2}>
           Realizar pedido
           </Button>

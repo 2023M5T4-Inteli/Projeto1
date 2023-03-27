@@ -8,7 +8,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import BackNavbarReq from "../components/Navbar/BackNavbarReq";
 import Modal from "@mui/material/Modal";
-import { Divider, Grid } from "@mui/material";
+import { Divider, Grid, Typography, Paper } from "@mui/material";
 import Box from "@mui/material/Box";
 
 
@@ -152,7 +152,17 @@ export default function CheckboxList() {
         <BackNavbarReq />
         <Box sx={{marginTop:8, marginLeft:-5, }}>
         <Grid style={{display:'flex', alignItems:'center', flexDirection:'column'}}>
-          <h1 style={{marginBottom:-1, fontFamily: 'Rubik'}}>Grupo 1</h1>
+        <Box sx={{display:'flex', justifyContent:'center'}}>
+            <Paper
+            // onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+            sx={{backgroundColor:
+            // isHover ? 'rgba(2, 222, 130, 0.8)' :
+            'rgba(2, 222, 130, 0.6)', width:'125px', marginTop:3, borderRadius:3,marginBottom:2,  }}>
+            <Typography style={{fontFamily: 'Rubik', fontSize:25,
+            display:'flex', justifyContent:'center', fontWeight:500
+            }}>Grupo 1</Typography>
+            </Paper>
+            </Box>
           _____________________________________________
           <p style={{fontSize: '150%', fontFamily: 'Rubik'}}> Solicitações de indenização </p>
         </Grid>
