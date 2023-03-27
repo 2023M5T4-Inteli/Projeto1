@@ -36,11 +36,11 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
 |--> website <br>
   &emsp;| --> public <br>
   &emsp;|--> src<br>
-    &emsp;|--> clientpages<br>
-    &emsp;|--> components<br>
-    &emsp;|--> cooverpages<br>
-    &emsp;|--> font<br>
-    &emsp;|--> img<br>
+    &emsp; &emsp;|--> clientpages<br>
+    &emsp; &emsp;|--> components<br>
+    &emsp; &emsp;|--> cooverpages<br>
+    &emsp; &emsp;|--> font<br>
+    &emsp; &emsp;|--> img<br>
   &emsp;|--> index.js<br>
   &emsp;|--> MetamaskPlugin.jsx<br>
 
