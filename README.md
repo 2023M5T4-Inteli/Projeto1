@@ -21,6 +21,56 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
 - [Rafael Lupovici Moritz](https://www.linkedin.com/in/rafael-moritz/)
 - [Vinicius Oliveira Fernandes](https://www.linkedin.com/in/vinicius-oliveira-fernandes-627b68168/)
 
+
+## 📁 Estrutura de pastas
+|--> contrato<br>
+  &emsp;|--> caseTests.sol<br>
+  &emsp;|--> contractCore.sol<br>
+
+|--> documentação<br>
+  &emsp;|--> Etherchain Documentação - Grupo 1 - Módulo 5.pdf<br>
+  
+|--> imagens<br>
+  &emsp;|--> Diagrama de implantação.png<br>
+  
+|--> website <br>
+  &emsp;| --> public <br>
+  &emsp;|--> src<br>
+    &emsp;|--> clientpages<br>
+    &emsp;|--> components<br>
+    &emsp;|--> cooverpages<br>
+    &emsp;|--> font<br>
+    &emsp;|--> img<br>
+  &emsp;|--> index.js<br>
+  &emsp;|--> MetamaskPlugin.jsx<br>
+
+
+| readme.md<br>
+
+
+<b>Dentre os arquivos presentes na raiz do projeto, definem-se:</b>
+
+<b>contrato:</b> pasta que contêm os smart contracts e também arquivo para teste automatizado.
+
+<b>documentação:</b> aqui estarão todos os documentos do projeto.
+
+<b>imagens:</b> aqui esta o diagrama de implantação.
+
+<b>website:</b> aqui estarão todos os códigos do frontend comentados do projeto. 
+Há a seguinte estrutura de pastas dentro desse projeto 
+      - clientpages : todas as páginas relacionadas a interação do cliente
+      - components : componentes utilizados em todo front
+      - cooverpages : todas as páginas relacionadas a interação do administrador da cover
+      - font : fonte customizado do site
+      - img : imagens utilizadas no site 
+
+Também existem os arquivos 
+      - index.js : arquivo que contem todas as rotas do site e utiliza o react DOM
+      - MetamaskPlugin.jsx : tela inicial onde contém o login e define se é administrador ou
+ cliente
+
+<b>readme:</b> arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
+
 ## Descrição do objetivo do Smart Contract
 
 Este contrato tem como objetivo gerenciar um grupo de membros que contribuem com dinheiro para um fundo comum. Ele contém funções para adicionar dinheiro ao fundo, adicionar novos membros, remover membros, solicitar reembolsos e pagar reembolsos aos membros. O contrato também tem variáveis para armazenar informações sobre os membros, incluindo seus saldos e status de ativação. O evento "Purchase" é emitido quando um novo pagamento é recebido, o evento "AddMember" é emitido quando um novo membro é adicionado e o evento "PaymentReceived" é emitido quando um pagamento é recebido de um membro.
