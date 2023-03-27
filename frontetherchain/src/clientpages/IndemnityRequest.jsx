@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
 import styled from '@mui/system/styled';
-import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Link} from '@mui/material';
+import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Link, Paper, Typography} from '@mui/material';
 import {makeStyles} from '@mui/styles';
 import {  useNavigate } from 'react-router-dom';
 import BackNavbarReqClient from '../components/Navbar/BackNavbarReqClient';
-
 // Constantes que tem o estilo dos componentes utilizados no frontend 
 
 const button2 = {
@@ -133,8 +132,18 @@ export const IndemnityForm = () => {
         <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
           
           <Grid item xs={12} md={12} >
-            <h1 style={{ justifyContent: 'center', display: 'flex', zIndex: 1, position: 'relative', marginTop:'3rem' }}>Grupo 1</h1>
-            <Divider sx={{  }} />
+          <Box sx={{display:'flex', justifyContent:'center'}}>
+            <Paper
+            // onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+            sx={{backgroundColor:
+            // isHover ? 'rgba(2, 222, 130, 0.8)' :
+            'rgba(2, 222, 130, 0.2)', width:'125px', marginTop:2, borderRadius:3 }}>
+            <Typography style={{fontFamily: 'Rubik', fontSize:20,
+            display:'flex', justifyContent:'center', fontWeight:500
+            }}>Grupo 1</Typography>
+            </Paper>
+            </Box> 
+           <Divider sx={{  }} />
             <Item sx={{marginTop:2}}>
               <p>
                 Mínimo de membros: 35
