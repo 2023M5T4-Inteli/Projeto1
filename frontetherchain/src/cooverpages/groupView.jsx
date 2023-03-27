@@ -115,8 +115,8 @@ export default function Grupos() {
             
             <br>
             </br>
-
-            <Item sx={{padding:0.7,display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:2}}>
+<Grid sx= {{display: 'flex', flexDirection:'row', justifyContent: 'space-between'}}> 
+<Item sx={{padding:0.7,display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:2, width: '350px'}}>
             <Link to='/requisicoes' style={{textDecoration:'none', fontFamily: 'Rubik',}}>
             <Typography style={{marginLeft:'10px'}}> Solicitações de entrada
             </Typography>
@@ -125,7 +125,7 @@ export default function Grupos() {
              }}/>
             </Item>
 
-            <Item sx={{padding:0.7,display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+            <Item sx={{padding:0.7,display:'flex', justifyContent:'space-between', alignItems:'center',  width: '350px'}}>
             <Link to='/indrequest' style={{textDecoration:'none', fontFamily: 'Rubik'}}>
               <Typography style={{marginLeft:'10px'}}> 
                  Solicitações de indenização 
@@ -134,6 +134,8 @@ export default function Grupos() {
             <Badge color="error" overlap="circular" badgeContent="5" sx={{ scale:'1.2', paddingRight:'40%'
             }}/>
             </Item>
+</Grid>
+
 
         </Grid>
       </Grid>
