@@ -115,25 +115,20 @@ export default function Grupos() {
             
             <br>
             </br>
-<Grid sx= {{display: 'flex', flexDirection:'row', justifyContent: 'space-between', marginTop:2, padding:2}}> 
-<Button sx={{padding:2,display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:5,marginLeft:2, border:1, borderRadius:10, }}>
-            <Link to='/requisicoes' style={{textDecoration:'none', }}>
-            <Typography style={{fontFamily: 'Rubik',}}> Solicitações de entrada
-            </Typography>
-            </Link>
-            {/* <Badge color="success" overlap="circular" badgeContent="1" sx={{ scale:'1.2', paddingRight:'40%'
-             }}/> */}
-            </Button>
-
-            <Button sx={{display:'flex', justifyContent:'space-between', alignItems:'center',marginBottom:5, marginRight:2,border:1, borderRadius:10, paddingRight:2, paddingLeft:2 }}>
-            <Link to='/indrequest' style={{textDecoration:'none'}}>
-              <Typography style={{fontFamily: 'Rubik'}}> 
-                 Solicitações de indenização 
-                 </Typography>
-              </Link>
-            {/* <Badge color="error" overlap="circular" badgeContent="5" sx={{ scale:'1.2', paddingRight:'40%'
-            }}/> */}
-            </Button>
+  
+ <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: 2, padding: 2 }}>
+  <Button sx={{ padding: 2, display: 'flex', alignItems: 'center', marginBottom: 5, marginLeft: 2, border: 1, borderRadius: 10 }}>
+          <Link to='/requisicoes' style={{ textDecoration: 'none' }}>
+            <Typography style={{ fontFamily: 'Rubik' }}>Solicitações de entrada</Typography>
+          </Link>
+          {/* <Badge color="success" overlap="circular" badgeContent="1" sx={{ scale: '1.2', paddingRight: '40%' }}/> */}
+        </Button>
+        <Button sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginBottom: 5, marginRight: 2, border: 1, borderRadius: 10, paddingRight: 2, paddingLeft: 2 }}>
+          <Link to='/indrequest' style={{ textDecoration: 'none' }}>
+            <Typography style={{ fontFamily: 'Rubik' }}>Solicitações de indenização</Typography>
+          </Link>
+          {/* <Badge color="error" overlap="circular" badgeContent="5" sx={{ scale: '1.2', paddingRight: '40%' }}/> */}
+        </Button>
 </Grid>
 
 
