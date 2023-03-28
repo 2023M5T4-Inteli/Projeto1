@@ -21,11 +21,11 @@ export default function ViewGroups() {
 
             <Navbar />
             <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'flex-start', flexDirection: 'column', borderRadius:'24px', paddingLeft:2 }}>
-            <Typography style={{fontFamily: 'Rubik'}} sx={{ marginBottom:1, fontSize: 16, fontWeight:600, color:'black' }} color="black" gutterBottom>
-                    Selecione o grupo de seguro mútuo em que deseja participar.
+            <Typography style={{fontFamily: 'Rubik'}} sx={{ marginBottom:1, fontSize: 20, fontWeight:600, color:'black' }} color="black" gutterBottom>
+                    Selecione abaixo o grupo que deseja visualizar ou interagir.
                 </Typography>
                <Divider sx={{marginBottom:2, width:'100%'}}/>
-                <ComboBox sx={{borderRadius:'24px', }} />
+                {/* <ComboBox sx={{borderRadius:'24px', }} /> */}
          
                 <Card sx={{ minWidth: 275, marginTop:3, borderRadius:'24px' }}>
                     <CardActionArea onClick={handleLink}>

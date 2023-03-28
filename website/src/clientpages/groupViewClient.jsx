@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import styled from '@mui/system/styled';
-import Grid from '@mui/system/Unstable_Grid';
-import Box from '@mui/system/Box';
 import Navbar from '../components/Navbar/FloatingAction';
 import BackNavbarClient from '../components/Navbar/BackNavbarClient';
 import { Link } from 'react-router-dom';
-import { Divider, Button, Modal, Typography, Paper } from '@mui/material';
+// import { makeStyles } from '@mui/styles'
+import makeStyles from '@mui/system/style';
+
+import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Paper, Typography} from '@mui/material';
 import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
 import axios from 'axios';
@@ -44,14 +45,37 @@ const button2 = {
   display: 'flex',
   justifyContent: 'center',
 }
-export const Item = styled('div')(({ theme }) => ({
+
+
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    position: 'absolute',
+    width: 500,
+    backgroundColor: 'blue',
+    border: '2px solid #000',
+    boxShadow: '5px',
+    padding: 10,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    fontFamily: 'Rubik',
+  },
+  formControl: {
+    marginTop: 5, // Espaçamento acima do componente
+    marginBottom: 20, // Espaçamento abaixo do componente
+    minWidth: 100,
+    margin: '10px', // Espaçamento em todas as direções
+  },
+}));
+
+const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ffffff',
   border: '1px solid',
   borderColor: theme.palette.mode === 'dark' ? '#444d58' : '#ced7e0',
   padding: theme.spacing(2),
   borderRadius: '24px',
   textAlign: 'left',
-  fontFamily: 'Rubik',
   '& h3': {
     marginBottom: theme.spacing(2),
     color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
@@ -61,7 +85,7 @@ export const Item = styled('div')(({ theme }) => ({
     margin: 0,
     color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
     fontSize: '20px',
-    fontFamily: 'Rubik'
+    fontFamily: 'Rubik',
   },
   '& button': {
     backgroundColor: '#1976d2',
@@ -77,10 +101,38 @@ export const Item = styled('div')(({ theme }) => ({
 
 
 
+
 // Tela que permite solicitar uma entrada no grupo 
 export default function GruposClient() {
   const [openModal, setOpenModal] = React.useState(false);
   const [numberUsers, setnumberUsers] = useState ()
+  const [open, setOpen] = useState(false);
+  const [imei, setImei] = useState('');
+  const [coverage, setCoverage] = useState('');
+  const classes = useStyles();
+  const [reason, setReason] = useState('');
+
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleImeiChange = (event) => {
+    setImei(event.target.value);
+  };
+
+  const handleCoverageChange = (event) => {
+    setCoverage(event.target.value);
+  };
+
+  const handleReasonChange = (event) => {
+    setReason(event.target.value);
+  };
+
   useEffect(() =>{
     activeMembers().then(number => {
       setnumberUsers(number);
@@ -107,6 +159,64 @@ export default function GruposClient() {
       >
         {modalContent}
       </Modal>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
+        {/* <div className={classes.paper}> */}
+        <Grid style={{background:'white', padding:30, paddingBottom:30, marginTop:'15%', display:'flex', justifyContent:'center', flexDirection:'column', marginLeft:'30px', marginRight:'30px'  }}>
+          <Grid style={{display:'flex', justifyContent:'center'}}>
+          <Typography sx={{fontWeight:700, fontSize:18, marginBottom:2}}>PEDIDO DE ENTRADA</Typography>
+          </Grid>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="imei-label" shrink>ID da carteira</InputLabel>
+            <TextField
+              id="imei"
+              labelId="imei-label"
+              value={imei}
+              onChange={handleImeiChange}
+            />
+          </FormControl>
+          <FormControl className={classes.formControl}>
+
+
+            <InputLabel id="coverage-label">IMEI</InputLabel>
+            <Select
+              labelId="coverage-label"
+              id="coverage"
+              value={coverage}
+              onChange={handleCoverageChange}
+            >
+              <MenuItem value="option1">5%</MenuItem>
+              <MenuItem value="option2">10%</MenuItem>
+              <MenuItem value="option3">15%</MenuItem>
+              <MenuItem value="option4">20%</MenuItem>
+
+
+            </Select>
+          </FormControl>
+          <FormControl className={classes.formControl}>
+          <InputLabel id="reason-label" shrink>Valor do celular</InputLabel>
+            <TextField
+              id="reason"
+              labelId="reason-label"
+              value={reason}
+              onChange={handleReasonChange}
+            />
+
+          </FormControl>
+          <Grid style={{display:'flex', justifyContent:'center', marginTop:10}}>
+          <Button onClick={() => setOpenModal(true)} variant="contained" color="primary" style={{button2, fontFamily: 'Rubik'}}>
+          Realizar pedido
+          </Button>
+          </Grid>
+      
+        </Grid>
+      </Modal>
+
       <BackNavbarClient />
       <Box sx={{ width: '100%', padding: '60px 0 0 10px', }}>
         <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }} sx={{marginTop:-1}}>
@@ -158,7 +268,7 @@ export default function GruposClient() {
             <br>
             </br>
             <Box sx={{display:'flex', justifyContent:'center'}}>
-            <Button sx={button2} onClick={() => setOpenModal(true)} >
+            <Button sx={button2} onClick={handleOpen} >
               {/* <Link to='/indrequestclient' style={{textDecoration:'none', color:'black'}}> */}
               Solicitar entrada
               {/* </Link> */}

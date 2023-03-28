@@ -23,7 +23,11 @@ export default function ViewGroupsClient2() {
 
             <Navbar />
             <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'flex-start', flexDirection: 'column', borderRadius:'24px', paddingLeft:2 }}>
-                <ComboBox sx={{borderRadius:'24px'}} />
+            <Typography style={{fontFamily: 'Rubik'}} sx={{ marginBottom:2, fontSize: 20, fontWeight:600, color:'black' }} color="black" gutterBottom>
+                    Selecione um dos seus grupos para visualizar ou interagir. 
+                </Typography>
+               <Divider sx={{ width:'100%'}}/>
+                {/* <ComboBox sx={{borderRadius:'24px'}} /> */}
                 {/* <Box></Box> */}
                 <br></br>
                 <br></br>
