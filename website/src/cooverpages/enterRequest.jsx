@@ -18,6 +18,7 @@ import Box from "@mui/material/Box";
 import Web3 from "web3";
 import erc20ABI from "../erc20ABI.json"
 import { values } from "lodash";
+import { any } from "bluebird";
 
 
 const styleModal = {
@@ -164,7 +165,7 @@ export default function CheckboxList() {
             }}>Grupo 1</Typography>
             </Paper>
             </Box>
-          _____________________________________________
+            <Divider sx={{width: '100%'}}/>
           <p style={{fontSize: '150%', fontFamily: 'Rubik' }}> Solicitações de entrada </p>
         </Grid>
         <Divider sx={{}}/>
@@ -297,9 +298,10 @@ function RemoveMembersByWallet() {
   return(
     <>
     <div>
-    <Box>
-    <TextField fullWidth label="Remover uma carteira" id="fullWidth"  value={addressValue} onChange={handleInputChange}/>
-    </Box>
+    <Box sx={{ marginTop: '1rem' }}>
+  <TextField fullWidth label="Remover uma carteira" id="fullWidth" value={addressValue} onChange={handleInputChange} />
+</Box>
+
     <Button variant="contained" onClick={doRemove} sx={buttonRemove} style={{fontFamily: 'Rubik'}}>
     Remover
     </Button>
