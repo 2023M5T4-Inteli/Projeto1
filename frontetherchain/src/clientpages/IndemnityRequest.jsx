@@ -3,7 +3,8 @@ import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
 import styled from '@mui/system/styled';
 import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Link, Paper, Typography} from '@mui/material';
-import {makeStyles} from '@mui/styles';
+import makeStyles from '@mui/system/style';
+//import { makeStyles } from '@mui/style'
 import {  useNavigate } from 'react-router-dom';
 import BackNavbarReqClient from '../components/Navbar/BackNavbarReqClient';
 // Constantes que tem o estilo dos componentes utilizados no frontend 
@@ -241,7 +242,7 @@ export const IndemnityForm = () => {
 
           </FormControl>
           <Grid style={{display:'flex', justifyContent:'center', marginTop:10}}>
-          <Button onClick={handleLink} variant="contained" color="primary" style={button2}>
+          <Button onClick={handleLink} variant="contained" color="primary" style={{button2, fontFamily: 'Rubik'}}>
           Realizar pedido
           </Button>
           </Grid>

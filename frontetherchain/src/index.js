@@ -57,10 +57,10 @@ const router = createBrowserRouter ([
     path: "/idemnityreq",
     element: <MyContextProvider><IndemnityForm/></MyContextProvider>,
   },
-  {
-    path: "/indrequestclient",
-    element: <MyContextProvider><IndRequestClient/></MyContextProvider>,
-  },
+  // {
+  //   path: "/indrequestclient",
+  //   element: <MyContextProvider><IndRequestClient/></MyContextProvider>,
+  // },
 
   {
     path:"/CellphoneInsurance",

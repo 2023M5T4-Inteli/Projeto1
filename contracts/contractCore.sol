@@ -11,7 +11,7 @@ contract Owner {
     // valor a ser reposto da reserva de risco
     uint public reposition;
     // quantidade de usuários
-    uint public userQuantity = 0; 
+    uint public userQuantity; 
     // valor da indenização solicitada;
     uint public indemnity;
     //Valor que está presente no Contrato (isso é respectivo de cada grupo)
@@ -25,41 +25,7 @@ contract Owner {
      que solicitaram pagamento de reembolso */
     address [] private userRequestingIndemnity;
 
-    // Modificador para verificar se quem chamou é o proprietário
-    modifier isOwner() {
-        require(msg.sender == owner, "Caller is not owner");
-        _;
-    }
-
-    // Funções "receive" e "fallback" do solidity 
-    /*Função que é chamada quando o contrato 
-    recebe um valor sem nenhum dado de transação anexado.*/
-    receive() external payable { 
-    }
-
-    /* Função que é chamada quando uma função
-     invocada não existe ou se não for válida. */
-    fallback() external payable { 
-    }
-
-
-    // Eventos 
-    /*(Eventos são notificações emitidas durante
-     a execução de um contrato para informar a 
-     ocorrência de uma determinada ação).*/
-    // Evento que registra quando o usuário fizer uma compra.
-    event Purchase(address _buyer, uint _amount); 
-    // Evento que registra a adição de um novo membro no contrato. 
-
-    event AddMember (address member); 
-
-    // Evento que registra o recebimento de um pagamento. 
-    event PaymentReceived(address member, uint amount);
-
-    // Evento que registra quando todos os pagamentos foram feitos. 
-    event FinalAmount(uint finalValue); 
-
-    // Struct 
+        // Struct 
     /*(Struct é um tipo de dado personalizado 
     que permite definir uma estrutura de dados
     com várias propriedades e usá-la em funções e contratos).*/
@@ -70,6 +36,7 @@ contract Owner {
         address client; 
     }
 
+    
     //Mapping 
     /*(Mapping é uma estrutura de
     dados que associa uma chave
@@ -88,6 +55,40 @@ contract Owner {
     /* esse mapping associa uma carteira ao valor 
     referente ao pagamento da taxa administrativa */
     mapping(address => uint256) public administrativeFees;
+
+
+    // Eventos 
+    /*(Eventos são notificações emitidas durante
+     a execução de um contrato para informar a 
+     ocorrência de uma determinada ação).*/
+    // Evento que registra quando o usuário fizer uma compra.
+    event Purchase(address _buyer, uint _amount); 
+    // Evento que registra a adição de um novo membro no contrato. 
+
+    event AddMember (address member); 
+
+    // Evento que registra o recebimento de um pagamento. 
+    event PaymentReceived(address member, uint amount);
+
+    // Evento que registra quando todos os pagamentos foram feitos. 
+    event FinalAmount(uint finalValue); 
+
+        // Modificador para verificar se quem chamou é o proprietário
+    modifier isOwner() {
+        require(msg.sender == owner, "Caller is not owner");
+        _;
+    }
+
+    // Funções "receive" e "fallback" do solidity 
+    /*Função que é chamada quando o contrato 
+    recebe um valor sem nenhum dado de transação anexado.*/
+    receive() external payable { 
+    }
+
+    /* Função que é chamada quando uma função
+     invocada não existe ou se não for válida. */
+    fallback() external payable { 
+    }
 
     /*Função especial que é executada apenas uma vez 
     quando o contrato é implantado na rede ethereum*/
@@ -163,11 +164,11 @@ contract Owner {
     // requisito 3: cobrança do valor referente ao pagamento do seguro mútuo.
     function contractPayment() public payable{
         // Define a taxa administrativa como 5%.
-        uint admTax = 5; 
+        // uint admTax = 5; 
         // Armazena o valor do depósito na variável "deposit".
         uint deposit = msg.value; 
         // Calcula o valor a ser pago pelo usuário, descontando a taxa administrativa.
-        uint payUser = deposit - (deposit * admTax/100); 
+        uint payUser = deposit - (deposit * administrativeFee/100); 
         // Adiciona o valor do depósito ao saldo do usuário.
         balances[msg.sender] += msg.value; 
 

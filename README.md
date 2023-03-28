@@ -1,10 +1,10 @@
 # Desenvolvimento de software com a utilização de blockchain
 
 ## Inteli - Instituto de tecnologia e liderança
-<a href= "https://www.inteli.edu.br/"><img src="https://www.inteli.edu.br/wp-content/uploads/2021/08/20172028/marca_1-2.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0" width="250px" height="100px"></a>
+<a href= "https://www.inteli.edu.br/"><img src="https://www.inteli.edu.br/wp-content/uploads/2021/08/20172028/marca_1-2.png" alt="Inteli - Instituto de Tecnologia e Liderança" width="250px" height="100px"></a>
 
 ## Coover 
-<a href= "https://coover.me/"><img src="https://theme.zdassets.com/theme_assets/10391010/252b3a482d39b630006805aa33f3768c9631e75a.png" alt="Coover" border="0" width="250px" height="70px" ></a>
+<a href= "https://coover.me/"><img src="https://theme.zdassets.com/theme_assets/10391010/252b3a482d39b630006805aa33f3768c9631e75a.png" alt="Coover" width="250px" height="70px" ></a>
 
 ## Etherchain
 Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros.
@@ -322,3 +322,44 @@ truffle deploy –network goerli
 ```
 
 ![6](https://user-images.githubusercontent.com/68927480/224572034-00bc5125-2952-48dd-8779-41131156bc30.jpeg)
+
+## Documentação Front-end
+
+- Home 
+
+<img src="">
+
+### Páginas Coover
+
+- CreateGroup
+
+      Essa página permite ao Administrador Coover criar grupos com informações agregadas como nome do grupo, quantidade mínima de membros, taxa administrativa, porcentagem do celular e cobertura. A página tem um botão que, quando clicado, abre um modal que permite a criação do grupo em questão.
+
+- enterRequest
+
+      Essa página permite que o Administrador possa adicionar ou remover carteiras em algum respectivo grupo, que será diretamente relacionado a um contato. A visualização deste contrato é automaticamente adicionada acima para facilitar adição pelo Administrador
+
+- groupView
+      
+      Nesta página possuímos a visualização bruta de um contrato (grupo) ativo em nossa plataforma. É importante salientar que as informações, como taxa administrativa, total de membros e entre outras, serão visíveis para o Administrador da Coover, para facilitar sua navegação.
+
+- indRequest
+
+      Nesta página é possível visualizar todas as solicitções de indenização feitas. Há priorização das informações descritivas de cada uma dessas solicitações, como neste exemplo, a carteira e o IMEI do dispositivo em questão. 
+
+- ViewGroups
+
+      Nesta página possuímos a visualização de grupos ativos em nossa plataforma.
+
+### Páginas do Cliente
+
+- infoPage
+      Página com um guia completo de funcionamento do seguro mútuo para Celular. A ideia, é transmitir o maior nível possível de transparência ao cliente, conforme a utiização da nossa plataforma, e contratação do Seguro.
+
+- groupViewClient
+      
+      Nesta página possuímos a visualização de um contrato (grupo) ativo em nossa plataforma. É importante salientar que as informações, como taxa administrativa, total de membros e entre outras, também serão visíveis para o usuário. Além disso, o usuário pode fazer a solicitação de entrada no grupo, em questão, a partir de um clique.
+
+- ViewGroupsClient
+
+      Esta página permite a visualização dos grupos que poderão receber solicitação de entrada pelo cliente. A intenção é que ele possua ver, também, informações pontuais sobre o grupo para facilitar sua usabilidade.
