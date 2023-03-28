@@ -382,35 +382,36 @@ truffle deploy –network goerli
 
 ### Páginas Coover
 
-- CreateGroup
+- ### CreateGroup
 
-      Essa página permite ao Administrador Coover criar grupos com informações agregadas como nome do grupo, quantidade mínima de membros, taxa administrativa, porcentagem do celular e cobertura. A página tem um botão que, quando clicado, abre um modal que permite a criação do grupo em questão.
+Essa página permite ao Administrador Coover criar grupos com informações agregadas como nome do grupo, quantidade mínima de membros, taxa administrativa, porcentagem do celular e cobertura. A página tem um botão que, quando clicado, abre um modal que permite a criação do grupo em questão.
 
-- enterRequest
+- ### enterRequest
 
-      Essa página permite que o Administrador possa adicionar ou remover carteiras em algum respectivo grupo, que será diretamente relacionado a um contato. A visualização deste contrato é automaticamente adicionada acima para facilitar adição pelo Administrador
+Essa página permite que o Administrador possa adicionar ou remover carteiras em algum respectivo grupo, que será diretamente relacionado a um contato. A visualização deste contrato é automaticamente adicionada acima para facilitar adição pelo Administrador
 
-- groupView
+- ### groupView
       
-      Nesta página possuímos a visualização bruta de um contrato (grupo) ativo em nossa plataforma. É importante salientar que as informações, como taxa administrativa, total de membros e entre outras, serão visíveis para o Administrador da Coover, para facilitar sua navegação.
+ Nesta página possuímos a visualização bruta de um contrato (grupo) ativo em nossa plataforma. É importante salientar que as informações, como taxa administrativa, total de membros e entre outras, serão visíveis para o Administrador da Coover, para facilitar sua navegação.
 
-- indRequest
+- ### indRequest
 
-      Nesta página é possível visualizar todas as solicitções de indenização feitas. Há priorização das informações descritivas de cada uma dessas solicitações, como neste exemplo, a carteira e o IMEI do dispositivo em questão. 
+Nesta página é possível visualizar todas as solicitções de indenização feitas. Há priorização das informações descritivas de cada uma dessas solicitações, como neste exemplo, a carteira e o IMEI do dispositivo em questão. 
 
-- ViewGroups
+- ### ViewGroups
 
-      Nesta página possuímos a visualização de grupos ativos em nossa plataforma.
+Nesta página possuímos a visualização de grupos ativos em nossa plataforma.
 
 ### Páginas do Cliente
 
 - infoPage
-      Página com um guia completo de funcionamento do seguro mútuo para Celular. A ideia, é transmitir o maior nível possível de transparência ao cliente, conforme a utiização da nossa plataforma, e contratação do Seguro.
 
-- groupViewClient
+Página com um guia completo de funcionamento do seguro mútuo para Celular. A ideia, é transmitir o maior nível possível de transparência ao cliente, conforme a utiização da nossa plataforma, e contratação do Seguro.
+
+- ### groupViewClient
       
-      Nesta página possuímos a visualização de um contrato (grupo) ativo em nossa plataforma. É importante salientar que as informações, como taxa administrativa, total de membros e entre outras, também serão visíveis para o usuário. Além disso, o usuário pode fazer a solicitação de entrada no grupo, em questão, a partir de um clique.
+Nesta página possuímos a visualização de um contrato (grupo) ativo em nossa plataforma. É importante salientar que as informações, como taxa administrativa, total de membros e entre outras, também serão visíveis para o usuário. Além disso, o usuário pode fazer a solicitação de entrada no grupo, em questão, a partir de um clique.
 
-- ViewGroupsClient
+- ### ViewGroupsClient
 
-      Esta página permite a visualização dos grupos que poderão receber solicitação de entrada pelo cliente. A intenção é que ele possua ver, também, informações pontuais sobre o grupo para facilitar sua usabilidade.
+Esta página permite a visualização dos grupos que poderão receber solicitação de entrada pelo cliente. A intenção é que ele possua ver, também, informações pontuais sobre o grupo para facilitar sua usabilidade.
