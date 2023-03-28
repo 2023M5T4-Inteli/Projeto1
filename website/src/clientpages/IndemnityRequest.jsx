@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
+import Axios from 'axios'
 import styled from '@mui/system/styled';
+import Input from '@mui/material/Input';
 import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Link} from '@mui/material';
 import {makeStyles} from '@mui/styles';
 import {  useNavigate } from 'react-router-dom';
@@ -137,7 +139,7 @@ export const IndemnityForm = () => {
             <Divider sx={{  }} />
             <Item sx={{marginTop:2}}>
               <p>
-                Mínimo de membros: 35
+                Mínimo de membros: 3
               </p>
             </Item>
             <br>
@@ -181,6 +183,7 @@ export const IndemnityForm = () => {
    >
     Solicitar Indenização
   </Button>
+  <GetWallet></GetWallet>
   </Grid>
 
       <Modal
@@ -242,6 +245,39 @@ export const IndemnityForm = () => {
     </>
   );
 };
+
+// Componente para criar um input no BD
+
+const GetWallet = () => {
+  const [walletAddress, setwalletAddress] = useState("")
+
+  const postData = () => {
+    Axios.post('http://localhost:3001/insertData', {
+      userWallet : walletAddress}
+      )
+ 
+  }
+
+  const getData = () => {
+    Axios.get("http://localhost:3001/getData").then((response) => {
+      console.log(response)
+    })
+  }
+
+
+  return(
+    <>
+    <Input onChange={(event) => {setwalletAddress(event.target.value)}} placeholder="Coloque a carteira" type="text" variant="solid" />
+    <Button onClick={postData} >Enviar dados </Button>
+    <Button onClick={getData} >Receber dados </Button>
+    </>
+  )
+
+}
+
+
+
+
 
 // Definindo o endereço do contrato 
 const contractAddress = "0x1B0b42d9c38C98C22377A622Cf3227a920E8CC7C"

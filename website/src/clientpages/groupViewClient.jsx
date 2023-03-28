@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import { Divider, Button, Modal, Typography, Paper } from '@mui/material';
 import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
+import axios from 'axios';
+
 
 // Pop up avisando que a solicitação foi realizada com sucesso
 const modalContent = (
@@ -169,6 +171,7 @@ export default function GruposClient() {
     </>
   );
 }
+
 
 
 // Definindo o endereço do contrato 
