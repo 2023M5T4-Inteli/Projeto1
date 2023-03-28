@@ -8,41 +8,45 @@ contract Owner {
     uint32 public administrativeFee = 5;
     // status da indenização. False = não solicitada, true = solicitada
     bool public statusIndemnity = false;
-    // valor a ser reposto da reserva de risco
-    uint public reposition;
     // quantidade de usuários
     uint public userQuantity; 
+    //Valor que está presente no Contrato 
+    uint public amountContract = getBalance();
+    // valor a ser reposto da reserva de risco
+    uint public reposition;
     // valor da indenização solicitada;
     uint public indemnity;
-    //Valor que está presente no Contrato (isso é respectivo de cada grupo)
-    uint public amountContract = getBalance();
+    
     // array contendo as carteiras de todos os membros do contrato
     address [] public membersContract;
     /* array contendo as carteiras dos membros
-     do contrato que realizaram o pagamento da reserva de risco */
+     do contrato que realizaram o pagamento */
     address[] public payers;
     /*array contendo as carteiras dos membros
      que solicitaram pagamento de reembolso */
     address [] private userRequestingIndemnity;
+
+    Approve [] public approve;
 
         // Struct 
     /*(Struct é um tipo de dado personalizado 
     que permite definir uma estrutura de dados
     com várias propriedades e usá-la em funções e contratos).*/
     struct Member{
+        // carteira do cliente do contrato
+        address client; 
+        //Imei do usuário tratado por hash
+        string _imei;
          //Dinheiro do usuário
         uint cash;
-        //Cliente do contrato
-        address client; 
-    }
 
+        uint pricePhone;
+    }
     
     //Mapping 
     /*(Mapping é uma estrutura de
     dados que associa uma chave
     única a um valor). */
-    //Nenhum valor esta sendo adicionado nesse mapping.
-    mapping (address => Member) public members;
     /*esse maping associa uma carteira a um valor
      inteiro e representa o saldo de cada carteira*/
     mapping (address => uint256) public balances;
@@ -123,6 +127,18 @@ contract Owner {
     }
 
 
+//Código retornando o hash do IMEI fornecido pelo cliente
+
+function hashImei(_imei) private returns (bytes32) {
+    return Crypto.sha256(abi.encodePacked(_imei));
+  }
+  
+function hashReturn() public pure returns (bytes32) {
+    return hashImei(_imei);
+  }
+}
+
+
     // Função que adiciona um membro a lista de membros do contrato
     // Essa função atende aos seguintes requisitos:
     // requisito 1: criação de um grupo de seguro mútuo
@@ -162,24 +178,34 @@ contract Owner {
     // Essa função atende aos seguintes requisitos:
     // requisito 2: cobrança de uma taxa administrativa no momento da contratação do seguro
     // requisito 3: cobrança do valor referente ao pagamento do seguro mútuo.
-    function contractPayment() public payable{
-        // Define a taxa administrativa como 5%.
-        // uint admTax = 5; 
+    function contractPayment(uint256 deposit) public payable{
+        uint256 payUser;
         // Armazena o valor do depósito na variável "deposit".
-        uint deposit = msg.value; 
+        require(msg.value == deposit, "Valor diferente do deposito");
+        require(deposit > 0, "Valor precisa ser maio que zero");
         // Calcula o valor a ser pago pelo usuário, descontando a taxa administrativa.
-        uint payUser = deposit - (deposit * administrativeFee/100); 
+        payUser = deposit - (deposit * administrativeFee/100); 
+        payers.push(msg.sender);
         // Adiciona o valor do depósito ao saldo do usuário.
-        balances[msg.sender] += msg.value; 
+        //balances[msg.sender] += msg.value; 
 
         emit Purchase(msg.sender, 1);  
         // Emite o evento "PaymentReceived", indicando que o pagamento foi recebido
         emit PaymentReceived(msg.sender, msg.value);
         // Emite o evento indicando o valor final a ser pago pelo usuário.
         emit FinalAmount (payUser); 
-        
     }
     
+    function initialPayment(string memory imeiValue, address userWallet, uint insuredValue) public{
+        Member memory members = Member(userWallet, imeiValue, insuredValue);
+        insuredValue = msg.value;
+        payUser = insuredValue + ((insuredValue * administrativeFee)/100);
+        payers.push(msg.sender);
+        emit Purchase(msg.sender, insuredValue);
+        emit PaymentReceived(msg.sender, msg.value);
+        emit FinalAmount(payUser);
+    }
+
     
     /* Essa função verifica de quem solicitou a indenização está no contrato
     e adiciona sua carteira a uma lista de solicitantes */
@@ -194,6 +220,14 @@ contract Owner {
             }
         }
     }
+
+
+    function ApproveIndemnity(pricePhone, _imei) public {
+    // Adiciona o usuário à lista de carteiras com seu saldo e valor do aparelho celular
+
+        approve.push(Approve(msg.sender, pricePhone, -imei));  
+ }   
+
 
 
     // Função voltada para o pagamento do reebolso solicitado 
