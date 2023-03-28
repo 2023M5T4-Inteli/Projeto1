@@ -4,8 +4,8 @@ import Web3 from 'web3';
 import styled from '@mui/system/styled';
 import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Link, Paper, Typography} from '@mui/material';
 import makeStyles from '@mui/system/style';
-//import { makeStyles } from '@mui/style'
-import {  useNavigate } from 'react-router-dom';
+// import { makeStyles } from '@mui/styles'
+import { useNavigate } from 'react-router-dom';
 import BackNavbarReqClient from '../components/Navbar/BackNavbarReqClient';
 // Constantes que tem o estilo dos componentes utilizados no frontend 
 
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     marginTop: 5, // Espaçamento acima do componente
     marginBottom: 20, // Espaçamento abaixo do componente
-    minWidth: 350,
+    minWidth: 100,
     margin: '10px', // Espaçamento em todas as direções
   },
 }));

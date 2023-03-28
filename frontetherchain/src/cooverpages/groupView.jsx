@@ -115,25 +115,25 @@ export default function Grupos() {
             
             <br>
             </br>
-<Grid sx= {{display: 'flex', flexDirection:'row', justifyContent: 'space-between'}}> 
-<Item sx={{padding:0.7,display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:2, width: '350px'}}>
-            <Link to='/requisicoes' style={{textDecoration:'none', fontFamily: 'Rubik',}}>
-            <Typography style={{marginLeft:'10px'}}> Solicitações de entrada
+<Grid sx= {{display: 'flex', flexDirection:'row', justifyContent: 'space-between', marginTop:2, padding:2}}> 
+<Button sx={{padding:2,display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:5,marginLeft:2, border:1, borderRadius:10, }}>
+            <Link to='/requisicoes' style={{textDecoration:'none', }}>
+            <Typography style={{fontFamily: 'Rubik',}}> Solicitações de entrada
             </Typography>
             </Link>
-            <Badge color="success" overlap="circular" badgeContent="1" sx={{ scale:'1.2', paddingRight:'40%'
-             }}/>
-            </Item>
+            {/* <Badge color="success" overlap="circular" badgeContent="1" sx={{ scale:'1.2', paddingRight:'40%'
+             }}/> */}
+            </Button>
 
-            <Item sx={{padding:0.7,display:'flex', justifyContent:'space-between', alignItems:'center',  width: '350px'}}>
-            <Link to='/indrequest' style={{textDecoration:'none', fontFamily: 'Rubik'}}>
-              <Typography style={{marginLeft:'10px'}}> 
+            <Button sx={{display:'flex', justifyContent:'space-between', alignItems:'center',marginBottom:5, marginRight:2,border:1, borderRadius:10, paddingRight:2, paddingLeft:2 }}>
+            <Link to='/indrequest' style={{textDecoration:'none'}}>
+              <Typography style={{fontFamily: 'Rubik'}}> 
                  Solicitações de indenização 
                  </Typography>
               </Link>
-            <Badge color="error" overlap="circular" badgeContent="5" sx={{ scale:'1.2', paddingRight:'40%'
-            }}/>
-            </Item>
+            {/* <Badge color="error" overlap="circular" badgeContent="5" sx={{ scale:'1.2', paddingRight:'40%'
+            }}/> */}
+            </Button>
 </Grid>
 
 
