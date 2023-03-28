@@ -165,7 +165,7 @@ export default function CheckboxList() {
             </Paper>
             </Box>
           _____________________________________________
-          <p style={{fontSize: '150%'}}> Solicitações de entrada </p>
+          <p style={{fontSize: '150%', fontFamily: 'Rubik' }}> Solicitações de entrada </p>
         </Grid>
         <Divider sx={{}}/>
 
@@ -184,7 +184,7 @@ export default function CheckboxList() {
                   onClick={handleToggle(index)}
                   dense
                 >
-                  <ListItemIcon sx={{marginLeft:-2.5}}>
+                  <ListItemIcon sx={{marginLeft:-2.5}} style={{fontFamily: 'Rubik'}}>
                     <Checkbox
                       edge="start"
                       checked={checked.indexOf(index) !== -1}
@@ -263,7 +263,7 @@ function AddNewMembersByWallet() {
     <div>
 
     <TextField fullWidth label="Adicionar uma carteira" id="fullWidth"  value={addressValue} onChange={handleInputChange}/>
-    <Button variant="contained" onClick={doSave2} sx={buttonAccept}>
+    <Button variant="contained" onClick={doSave2} sx={buttonAccept} style={{fontFamily: 'Rubik'}}>
     Adicionar
     </Button>
     </div>  
@@ -300,7 +300,7 @@ function RemoveMembersByWallet() {
     <Box>
     <TextField fullWidth label="Remover uma carteira" id="fullWidth"  value={addressValue} onChange={handleInputChange}/>
     </Box>
-    <Button variant="contained" onClick={doRemove} sx={buttonRemove}>
+    <Button variant="contained" onClick={doRemove} sx={buttonRemove} style={{fontFamily: 'Rubik'}}>
     Remover
     </Button>
     </div>  
