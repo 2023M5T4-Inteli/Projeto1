@@ -15,59 +15,47 @@ import Box from "@mui/material/Box";
 // Constantes que tem o estilo dos componentes utilizados no frontend 
 
 const styleModal = {
-  transform: "translate(50%, 50%)",
-  position: "flex",
-  width: "50%",
-  height: "50%",
-  left: "50%",
-  top: "50%",
+  position:"relative",
+  width: "40rem",
+  height: "12rem",
+  left: "20%",
+  top: "20rem",
   boxSizing: "border-box",
   background: "#FFFFFF",
   border: "1px solid #C8C8C8",
   borderRadius: "20px",
-  padding: "5%",
+  padding: "5px",
   fontSize: "100%",
   fontFamily: 'Rubik'
 };
 
 const buttonModalNo = {
-  position: "flex",
-  width: "50%",
-  height: "13.5%",
-  left: "5%",
-  top: "35%",
+  width: "50px",
+  height: "30px",
   background: "rgba(255, 0, 0, 0.35)",
   borderRadius: "22px",
-  fontSize: "100%",
-  padding: "5%",
+  marginRight:5,
   color: "black",
   fontFamily: 'Rubik',
 };
 
 const buttonModalYes = {
-  position: "flex",
-  width: "50%",
-  height: "13.5%",
-  left: "-5%",
-  top: "35%",
+  marginLeft:5,
   background: "rgba(2, 222, 130, 0.35)",
+  width: "50px",
+  height: "30px",
   borderRadius: "22px",
-  fontSize: "100%",
-  padding: "5%",
   color: "black",
   fontFamily: 'Rubik',
 };
 
 const buttonAccept = {
-  position: "flex",
-  width: "50%",
-  height: "40%",
-  left:'25%',
-  top: "100%",
+  width: "100px",
+  height: "40px",
+  top: "100px",
   background: "rgba(133, 251, 202, 0.88)",
   borderRadius: "22px",
   color: "black",
-  marginTop: "10%",
   fontFamily: 'Rubik'
 };
 
@@ -125,11 +113,14 @@ export default function CheckboxList() {
         sx={{}}
       >
         <Box sx={styleModal}>
+          <Box sx={{marginLeft:3}}>
           <h2 style={{ fontFamily: 'Rubik' }} id="child-modal-title">Solicitação de indenização</h2>
           <p style={{ fontFamily: 'Rubik' }} id="child-modal-description">
             Deseja mesmo permitir o pagamento de indenização a estes participantes?
           </p>
+          </Box>
           {/*Conectar a esse botão uma função que adiciona integrantes no grupo */}
+          <Grid sx={{display:'flex', justifyContent:'space-between', marginTop:4}}>
           <Button style={{ fontFamily: 'Rubik' }} variant="contained" onClick={handleClose} sx={buttonModalYes}>
             Sim
           </Button>
@@ -137,6 +128,7 @@ export default function CheckboxList() {
           <Button style={{ fontFamily: 'Rubik' }} variant="contained" onClick={handleClose} sx={buttonModalNo}>
             Não
           </Button>
+          </Grid>
         </Box>
       </Modal>
 
@@ -163,7 +155,7 @@ export default function CheckboxList() {
             }}>Grupo 1</Typography>
             </Paper>
             </Box>
-          _____________________________________________
+         <Divider sx={{width:'100%'}}/>
           <p style={{fontSize: '150%', fontFamily: 'Rubik'}}> Solicitações de indenização </p>
         </Grid>
         <Divider sx={{}}/>
@@ -201,11 +193,11 @@ export default function CheckboxList() {
           );
         })}
         <Divider sx={{}}/>
-        <div>
+        <Grid sx={{display:'flex', justifyContent:'center'}}>
           <Button variant="contained" onClick={handleOpen} sx={buttonAccept}>
             Aprovar
           </Button>
-        </div>
+        </Grid>
         </Box>
       </List>
     </>

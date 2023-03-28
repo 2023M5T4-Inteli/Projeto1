@@ -63,26 +63,22 @@ const buttonModalYes = {
 };
 
 const buttonAccept = {
-  position: "flex",
-  width: "50%",
-  height: "40%",
-  left:'25%',
-  top: "100%",
-  background: "rgba(133, 251, 202, 0.88)",
+  background: "rgba(2, 222, 130, 0.35)",
+  width: "150px",
+  height: "30px",
   borderRadius: "22px",
   color: "black",
-  marginTop: "1%",
+  fontFamily: 'Rubik',
+  marginTop:2
 };
 const buttonRemove = {
-  position: "flex",
-  width: "50%",
-  height: "5%",
-  left:'25%',
-  top: "100%",
+  width: "150px",
+  height: "30px",
+  marginTop:2,
   background: "rgba(255, 0, 0, 0.35)",
   borderRadius: "22px",
   color: "black",
-  marginTop: "1%",
+  fontFamily: 'Rubik',
 };
 
 export default function CheckboxList() {
@@ -202,7 +198,7 @@ export default function CheckboxList() {
             </div>
           );
         })}
-        <Divider sx={{}}/>
+
         <div>
           {/* <Button onClick={doSave}>Teste input</Button> */}
           {/* <Button onClick={getWallets} >Teste Função view</Button> */}
@@ -213,8 +209,11 @@ export default function CheckboxList() {
         </Box>
 
       </List>
+      <Grid style={{display:'flex',  flexDirection:'column'}}>
+      
       <AddNewMembersByWallet></AddNewMembersByWallet>
       <RemoveMembersByWallet></RemoveMembersByWallet>
+      </Grid>
     </>
   );
 }
@@ -264,9 +263,11 @@ function AddNewMembersByWallet() {
     <div>
 
     <TextField fullWidth label="Adicionar uma carteira" id="fullWidth"  value={addressValue} onChange={handleInputChange}/>
+    <Grid sx={{display:"flex", justifyContent:"center"}}>
     <Button variant="contained" onClick={doSave2} sx={buttonAccept} style={{fontFamily: 'Rubik'}}>
     Adicionar
     </Button>
+    </Grid>
     </div>  
   </>
   )
@@ -298,13 +299,14 @@ function RemoveMembersByWallet() {
   return(
     <>
     <div>
-    <Box sx={{ marginTop: '1rem' }}>
+    <Box sx={{ marginTop: '2rem' }}>
   <TextField fullWidth label="Remover uma carteira" id="fullWidth" value={addressValue} onChange={handleInputChange} />
 </Box>
-
+<Grid sx={{display:"flex", justifyContent:"center"}}>
     <Button variant="contained" onClick={doRemove} sx={buttonRemove} style={{fontFamily: 'Rubik'}}>
     Remover
     </Button>
+    </Grid>
     </div>  
   </>
   )
