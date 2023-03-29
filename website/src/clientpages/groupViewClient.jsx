@@ -4,8 +4,8 @@ import styled from '@mui/system/styled';
 import Navbar from '../components/Navbar/FloatingAction';
 import BackNavbarClient from '../components/Navbar/BackNavbarClient';
 import { Link } from 'react-router-dom';
-// import { makeStyles } from '@mui/styles'
-import makeStyles from '@mui/system/style';
+import { makeStyles } from '@mui/styles'
+// import makeStyles from '@mui/system/style';
 
 import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Paper, Typography} from '@mui/material';
 import erc20ABI from "../erc20ABI.json"
@@ -223,7 +223,9 @@ export default function GruposClient() {
 
 
             <Box sx={{display:'flex', justifyContent:'center'}}>
-            <Paper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} sx={{backgroundColor: isHover ? 'rgba(2, 222, 130, 0.8)' : 'rgba(2, 222, 130, 0.6)', width:'125px', marginTop:3,borderRadius:3 }}>
+            <Paper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} sx={{backgroundColor: 
+            // isHover ? 'rgba(2, 222, 130, 0.8)' : 
+            'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:3,borderRadius:3 }}>
             <Typography style={{fontFamily: 'Rubik', fontSize:25, 
             display:'flex', justifyContent:'center', fontWeight:500
             }}>Grupo 1</Typography> 
