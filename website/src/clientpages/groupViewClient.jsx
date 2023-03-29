@@ -10,7 +10,6 @@ import makeStyles from '@mui/system/style';
 import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Paper, Typography} from '@mui/material';
 import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
-import axios from 'axios';
 
 
 // Pop up avisando que a solicitação foi realizada com sucesso
