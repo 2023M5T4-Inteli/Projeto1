@@ -4,7 +4,7 @@ import Web3 from 'web3';
 import Axios from 'axios'
 import styled from '@mui/system/styled';
 import Input from '@mui/material/Input';
-import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Link} from '@mui/material';
+import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Link, Paper, Typography} from '@mui/material';
 import {makeStyles} from '@mui/styles';
 import {  useNavigate } from 'react-router-dom';
 import BackNavbarReqClient from '../components/Navbar/BackNavbarReqClient';
@@ -135,7 +135,15 @@ export const IndemnityForm = () => {
         <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
           
           <Grid item xs={12} md={12} >
-            <h1 style={{ justifyContent: 'center', display: 'flex', zIndex: 1, position: 'relative', marginTop:'3rem' }}>Grupo 1</h1>
+          <Box sx={{display:'flex', justifyContent:'center', marginBottom:3, marginTop:1}}>
+            <Paper sx={{backgroundColor: 
+            // isHover ? 'rgba(2, 222, 130, 0.8)' : 
+            'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:3,borderRadius:3 }}>
+            <Typography style={{fontFamily: 'Rubik', fontSize:25, 
+            display:'flex', justifyContent:'center', fontWeight:500
+            }}>Grupo 1</Typography> 
+            </Paper>
+            </Box>
             <Divider sx={{  }} />
             <Item sx={{marginTop:2}}>
               <p>

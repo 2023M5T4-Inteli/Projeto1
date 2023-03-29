@@ -15,18 +15,18 @@ import '../components/App.css';
 
 // Constantes que tem o estilo dos componentes utilizados no frontend 
 const button = {
-  marginTop:'0 !important',
-  backgroundColor:'white !important'
+  marginTop: '0 !important',
+  backgroundColor: 'white !important'
 }
 const button2 = {
-  marginTop:'0 !important',
-  backgroundColor:'white !important'
+  marginTop: '0 !important',
+  backgroundColor: 'white !important'
 }
 
 const Item = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#ffffff',
   border: '1px solid',
-  borderColor:'rgb(1, 1, 1, 0.5)',
+  borderColor: 'rgb(1, 1, 1, 0.5)',
   padding: theme.spacing(1.5),
   borderRadius: '24px',
   textAlign: 'left',
@@ -52,89 +52,97 @@ const Item = styled('div')(({ theme }) => ({
 
 // Tela que permite com que o administrador veja dados sobre o grupo e permite aceitar ou não membros para esse contrato 
 export default function Grupos() {
-  const [numberUsers, setnumberUsers] = useState ()
-  useEffect(() =>{
+  const [numberUsers, setnumberUsers] = useState()
+  useEffect(() => {
     activeMembers().then(number => {
       setnumberUsers(number);
     });
 
-  },[]);
+  }, []);
 
 
   return (
     <>
-    <BackNavbar/>
-    <Box sx={{ width: '100%', padding:'60px 0 0 10px' }}>
-      <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
-        <Grid item xs={12} md={12} >
-        <Box sx={{display:'flex', justifyContent:'center'}}>
-            <Paper
-            // onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
-            sx={{backgroundColor:
-            // isHover ? 'rgba(2, 222, 130, 0.8)' :
-            'rgba(2, 222, 130, 0.6)', width:'125px', marginTop:3, borderRadius:3,marginBottom:2,  }}>
-            <Typography style={{fontFamily: 'Rubik', fontSize:25,
+      <BackNavbar />
+      <Box sx={{ width: '100%', padding: '60px 0 0 10px' }}>
+        <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
+          <Grid item xs={12} md={12} >
+          <Box sx={{display:'flex', justifyContent:'center', marginBottom:3, marginTop:1}}>
+            <Paper sx={{backgroundColor: 
+            // isHover ? 'rgba(2, 222, 130, 0.8)' : 
+            'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:3,borderRadius:3 }}>
+            <Typography style={{fontFamily: 'Rubik', fontSize:25, 
             display:'flex', justifyContent:'center', fontWeight:500
-            }}>Grupo 1</Typography>
+            }}>Grupo 1</Typography> 
             </Paper>
             </Box>
-              <Divider sx={{mb:'15px'}}/>
+            <Divider sx={{ mb: '15px' }} />
             <Item>
-            <p style={{ fontFamily: 'Rubik' }}>
-              Mínimo de membros: 35
-            </p>
+              <p style={{ fontFamily: 'Rubik' }}>
+                Mínimo de membros: 35
+              </p>
             </Item>
             <br>
             </br>
             <Item>
-            <p style={{ fontFamily: 'Rubik' }}>
-              Taxa Administrativa: 10%
-            </p>
+              <p style={{ fontFamily: 'Rubik' }}>
+                Taxa Administrativa: 10%
+              </p>
             </Item>
             <br>
             </br>
             <Item>
-            <p style={{ fontFamily: 'Rubik' }}>
-              Valor do seguro: R$ 10,00
-            </p>
+              <p style={{ fontFamily: 'Rubik' }}>
+                Valor do seguro: R$ 10,00
+              </p>
             </Item>
             <br>
             </br>
             <Item>
-            <p style={{ fontFamily: 'Rubik' }}>
-               Cobertura do seguro: 100%
-            </p>
+              <p style={{ fontFamily: 'Rubik' }}>
+                Cobertura do seguro: 100%
+              </p>
             </Item>
             <br>
             </br>
             <Item>
-            <p style={{ fontFamily: 'Rubik' }}>
-              Membros do Seguro: {numberUsers}
-            </p>
+              <p style={{ fontFamily: 'Rubik' }}>
+                Membros do Seguro: {numberUsers}
+              </p>
             </Item>
-            
+
             <br>
             </br>
-  
- <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: 2, padding: 2 }}>
-  <Button sx={{ padding: 2, display: 'flex', alignItems: 'center', marginBottom: 5, marginLeft: 2, border: 1, borderRadius: 10 }}>
-          <Link to='/requisicoes' style={{ textDecoration: 'none' }}>
-            <Typography style={{ fontFamily: 'Rubik' }}>Solicitações de entrada</Typography>
-          </Link>
-          {/* <Badge color="success" overlap="circular" badgeContent="1" sx={{ scale: '1.2', paddingRight: '40%' }}/> */}
-        </Button>
-        <Button sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginBottom: 5, marginRight: 2, border: 1, borderRadius: 10, paddingRight: 2, paddingLeft: 2 }}>
-          <Link to='/indrequest' style={{ textDecoration: 'none' }}>
-            <Typography style={{ fontFamily: 'Rubik' }}>Solicitações de indenização</Typography>
-          </Link>
-          {/* <Badge color="error" overlap="circular" badgeContent="5" sx={{ scale: '1.2', paddingRight: '40%' }}/> */}
-        </Button>
-</Grid>
+
+            <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: 2, padding: 2, 
+          '@media (max-width: 650px)': {
+            flexDirection:'column'
+          }, }}>
+              <Button sx={{ padding: 2, display: 'flex', alignItems: 'center', marginBottom: 5, marginLeft: 2, border: 1, borderRadius: 10,
+            '@media (max-width: 650px)': {
+              marginLeft:0, 
+            }, }}>
+                <Link to='/requisicoes' style={{ textDecoration: 'none' }}>
+                  <Typography style={{ fontFamily: 'Rubik' }}>Solicitações de entrada</Typography>
+                </Link>
+                {/* <Badge color="success" overlap="circular" badgeContent="1" sx={{ scale: '1.2', paddingRight: '40%' }}/> */}
+              </Button>
+
+              <Button sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginBottom: 5, marginRight: 2, border: 1, borderRadius: 10, paddingRight: 2, paddingLeft: 2,
+            '@media (max-width: 650px)': {
+             padding:2, marginRight:0
+            }, }}>
+                <Link to='/indrequest' style={{ textDecoration: 'none' }}>
+                  <Typography style={{ fontFamily: 'Rubik' }}>Solicitações de indenização</Typography>
+                </Link>
+                {/* <Badge color="error" overlap="circular" badgeContent="5" sx={{ scale: '1.2', paddingRight: '40%' }}/> */}
+              </Button>
+            </Grid>
 
 
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
+      </Box>
     </>
   );
 }

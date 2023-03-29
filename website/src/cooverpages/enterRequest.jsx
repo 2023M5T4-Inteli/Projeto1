@@ -150,15 +150,13 @@ export default function CheckboxList() {
         <BackNavbarReq />
         <Box sx={{marginTop:8, marginLeft:-5, }}>
         <Grid style={{display:'flex', alignItems:'center', flexDirection:'column'}}>
-        <Box sx={{display:'flex', justifyContent:'center'}}>
-            <Paper
-            // onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
-            sx={{backgroundColor:
-            // isHover ? 'rgba(2, 222, 130, 0.8)' :
-            'rgba(2, 222, 130, 0.6)', width:'125px', marginTop:3, borderRadius:3,marginBottom:2,  }}>
-            <Typography style={{fontFamily: 'Rubik', fontSize:25,
+        <Box sx={{display:'flex', justifyContent:'center', marginBottom:3, }}>
+            <Paper sx={{backgroundColor: 
+            // isHover ? 'rgba(2, 222, 130, 0.8)' : 
+            'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:3,borderRadius:3 }}>
+            <Typography style={{fontFamily: 'Rubik', fontSize:25, 
             display:'flex', justifyContent:'center', fontWeight:500
-            }}>Grupo 1</Typography>
+            }}>Grupo 1</Typography> 
             </Paper>
             </Box>
             <Divider sx={{width: '100%'}}/>

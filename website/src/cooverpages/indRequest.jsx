@@ -17,9 +17,15 @@ import Box from "@mui/material/Box";
 const styleModal = {
   position:"relative",
   width: "40rem",
+  '@media (max-width: 800px)': {
+    width: "30rem", left:'15%',  height:'13rem'
+  },
+  '@media (max-width: 500px)': {
+    width: "23rem", left:'2%', height:'13rem'
+  },
   height: "12rem",
   left: "20%",
-  top: "20rem",
+  top: "15rem",
   boxSizing: "border-box",
   background: "#FFFFFF",
   border: "1px solid #C8C8C8",
@@ -143,21 +149,16 @@ export default function CheckboxList() {
         {/* Navbar da página */}
         <BackNavbarReq />
         <Box sx={{marginTop:8, marginLeft:-5, }}>
-        <Grid style={{display:'flex', alignItems:'center', flexDirection:'column'}}>
-        <Box sx={{display:'flex', justifyContent:'center'}}>
-            <Paper
-            // onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
-            sx={{backgroundColor:
-            // isHover ? 'rgba(2, 222, 130, 0.8)' :
-            'rgba(2, 222, 130, 0.6)', width:'125px', marginTop:3, borderRadius:3,marginBottom:2,  }}>
-            <Typography style={{fontFamily: 'Rubik', fontSize:25,
+        <Box sx={{display:'flex', justifyContent:'center', marginBottom:3}}>
+            <Paper sx={{backgroundColor: 
+            // isHover ? 'rgba(2, 222, 130, 0.8)' : 
+            'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:3,borderRadius:3 }}>
+            <Typography style={{fontFamily: 'Rubik', fontSize:25, 
             display:'flex', justifyContent:'center', fontWeight:500
-            }}>Grupo 1</Typography>
+            }}>Grupo 1</Typography> 
             </Paper>
             </Box>
-         <Divider sx={{width:'100%'}}/>
-          <p style={{fontSize: '150%', fontFamily: 'Rubik'}}> Solicitações de indenização </p>
-        </Grid>
+
         <Divider sx={{}}/>
 
         {wallet_List.map((wallet, index) => {
