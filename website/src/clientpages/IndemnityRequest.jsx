@@ -128,6 +128,12 @@ export const IndemnityForm = () => {
 
   },[]);
 
+  // Função que envia os dados do BD
+  const postData = () => {
+    Axios.post('http://localhost:3001/insert', 
+    {clientAddress : imei })
+  }
+
   return (
    <>
   <BackNavbarReqClient />
@@ -185,7 +191,7 @@ export const IndemnityForm = () => {
         </Grid>
       </Box>
    <Grid style={{display:'flex', justifyContent:'center', marginTop:10}}>
-  <Button variant="contained" color="primary" onClick={handleOpen}
+  <Button variant="contained" color="primary" onClick={postData}
   sx={button2}
   //  style={{ backgroundColor: '#02DE82', color: 'inherit', display:'flex', justifyContent:'center', marginTop:'20px' }}
    >

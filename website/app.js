@@ -24,7 +24,9 @@ app.listen(port, ()=> {
 app.post('/insert', async (req,res) => {
     // Ficar atento ao requisitar o objeto correto do frontend 
     const userFinalAdress = req.body.clientAddress
-    const testeInput = new clientModel({clientStruct : userFinalAdress })
+    const userIMEI = req.body.clientImei
+    const userCellValue = req.body.clientFundsValue
+    const testeInput = new clientModel({clientAdresss : userFinalAdress, clientImei : userIMEI, clientCellValue : userCellValue })
     try{
         await testeInput.save()
         res.send("Input worked")
