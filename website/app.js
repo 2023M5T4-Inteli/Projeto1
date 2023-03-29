@@ -22,7 +22,9 @@ app.listen(port, ()=> {
 // Rota para inserir algo no BD
 
 app.post('/insert', async (req,res) => {
-    const testeInput = new clientModel({clientStruct:"Teste novamente do input"})
+    // Ficar atento ao requisitar o objeto correto do frontend 
+    const userFinalAdress = req.body.clientAddress
+    const testeInput = new clientModel({clientStruct : userFinalAdress })
     try{
         await testeInput.save()
         res.send("Input worked")

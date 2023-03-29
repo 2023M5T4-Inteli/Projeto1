@@ -262,7 +262,7 @@ const GetWallet = () => {
   // Função que envia os dados do BD
   const postData = () => {
     Axios.post('http://localhost:3001/insert', 
-    {clientAddress : walletAddress }).then((response))
+    {clientAddress : walletAddress })
   }
 
   return(
