@@ -251,19 +251,19 @@ export const IndemnityForm = () => {
 const GetWallet = () => {
   const [walletAddress, setwalletAddress] = useState("")
 
-  const postData = () => {
-    Axios.post('http://localhost:3001/insertData', {
-      userWallet : walletAddress}
-      )
- 
-  }
-
+  // Função que pega todos os dados do BD
   const getData = () => {
     Axios.get("http://localhost:3001/getData").then((response) => {
       console.log(response)
     })
   }
 
+
+  // Função que envia os dados do BD
+  const postData = () => {
+    Axios.post('http://localhost:3001/insert', 
+    {clientAddress : walletAddress }).then((response))
+  }
 
   return(
     <>

@@ -20,19 +20,19 @@ app.listen(port, ()=> {
 })
 
 // Rota para inserir algo no BD
-app.post ('/insertData', async (req, res) => {
 
-    const walletUserAdress = req.body
-    const clientData = new clientModel ( walletUserAdress);
+app.post('/insert', async (req,res) => {
+    const testeInput = new clientModel({clientStruct:"Teste novamente do input"})
     try{
-        await clientData.save();
-        console.log(clientData)
-        res.send("Data inserted")
-    } catch(error){
-        console.log(error)
+        await testeInput.save()
+        res.send("Input worked")
+    } catch (err){
+        console.log(err)
     }
 })
 
+
+// Rota para pegar dados no BD
 
 app.get("/getData", async (req, res) => {
     try {
