@@ -26,7 +26,7 @@ contract Owner {
      que solicitaram pagamento de reembolso */
     address [] private userRequestingIndemnity;
 
-    Approve [] public approve;
+    address [] public approve;
 
         // Struct 
     /*(Struct é um tipo de dado personalizado 
@@ -39,8 +39,7 @@ contract Owner {
         string _imei;
          //Dinheiro do usuário
         uint cash;
-
-        uint pricePhone;
+        //uint pricePhone;
     }
     
     //Mapping 
@@ -94,6 +93,8 @@ contract Owner {
     fallback() external payable { 
     }
 
+    function deposit() external payable {}
+
     /*Função especial que é executada apenas uma vez 
     quando o contrato é implantado na rede ethereum*/
     // define que o administrador do contrato é quem fez deploy 
@@ -121,23 +122,25 @@ contract Owner {
         return address(this).balance;
     }
 
+    function getAmountContract() public view returns (uint){
+        return amountContract;
+    }
+
     // Função para ver quantas pessoas há na carteira 
     function getTotalWalletClients() public view returns (uint) {
         return userQuantity;
     }
 
-
 //Código retornando o hash do IMEI fornecido pelo cliente
 
-function hashImei(_imei) private returns (bytes32) {
-    return Crypto.sha256(abi.encodePacked(_imei));
-  }
-  
-function hashReturn() public pure returns (bytes32) {
-    return hashImei(_imei);
-  }
-}
 
+// function hashImei(string memory _imei) private returns (bytes32) {
+//     return Crypto.sha256(abi.encodePacked(_imei));
+//   }
+  
+// function hashReturn() public pure returns (bytes32) {
+//     return hashImei(_imei);
+//   }
 
     // Função que adiciona um membro a lista de membros do contrato
     // Essa função atende aos seguintes requisitos:
@@ -167,43 +170,36 @@ function hashReturn() public pure returns (bytes32) {
     }
 }
 
-    //função responsável pela cobrança da taxa administrativa
-    // Essa função ainda precisa ser terminada, NÃO está completa
-    function administrativePayment(uint32 fee) public payable{
-        fee = administrativeFee/100;  
-    }
-
-
     // Função para realizar o pagamento do contrato de seguro  
     // Essa função atende aos seguintes requisitos:
     // requisito 2: cobrança de uma taxa administrativa no momento da contratação do seguro
     // requisito 3: cobrança do valor referente ao pagamento do seguro mútuo.
-    function contractPayment(uint256 deposit) public payable{
-        uint256 payUser;
-        // Armazena o valor do depósito na variável "deposit".
-        require(msg.value == deposit, "Valor diferente do deposito");
-        require(deposit > 0, "Valor precisa ser maio que zero");
-        // Calcula o valor a ser pago pelo usuário, descontando a taxa administrativa.
-        payUser = deposit - (deposit * administrativeFee/100); 
-        payers.push(msg.sender);
-        // Adiciona o valor do depósito ao saldo do usuário.
-        //balances[msg.sender] += msg.value; 
+    // function contractPayment(uint256 deposit, uint256 payUser) public payable{
+    //     // Armazena o valor do depósito na variável "deposit".
+    //     require(msg.value == deposit, "Valor diferente do deposito");
+    //     require(deposit > 0, "Valor precisa ser maio que zero");
+    //     // Calcula o valor a ser pago pelo usuário, descontando a taxa administrativa.
+    //     payUser = deposit - (deposit * administrativeFee/100); 
+    //     payers.push(msg.sender);
+    //     // Adiciona o valor do depósito ao saldo do usuário.
+    //     //balances[msg.sender] += msg.value; 
 
-        emit Purchase(msg.sender, 1);  
-        // Emite o evento "PaymentReceived", indicando que o pagamento foi recebido
-        emit PaymentReceived(msg.sender, msg.value);
-        // Emite o evento indicando o valor final a ser pago pelo usuário.
-        emit FinalAmount (payUser); 
-    }
+    //     emit Purchase(msg.sender, 1);  
+    //     // Emite o evento "PaymentReceived", indicando que o pagamento foi recebido
+    //     emit PaymentReceived(msg.sender, msg.value);
+    //     // Emite o evento indicando o valor final a ser pago pelo usuário.
+    //     emit FinalAmount (payUser); 
+    // }
     
-    function initialPayment(string memory imeiValue, address userWallet, uint insuredValue) public{
+    function initialPayment(string memory imeiValue, address payable userWallet, uint insuredValue) public payable{
         Member memory members = Member(userWallet, imeiValue, insuredValue);
-        insuredValue = msg.value;
-        payUser = insuredValue + ((insuredValue * administrativeFee)/100);
+        uint256 depositUser = insuredValue + ((insuredValue * administrativeFee)/100);
+        balances[msg.sender] += msg.value;
+        userWallet.transfer(depositUser);
         payers.push(msg.sender);
         emit Purchase(msg.sender, insuredValue);
         emit PaymentReceived(msg.sender, msg.value);
-        emit FinalAmount(payUser);
+        emit FinalAmount(depositUser);
     }
 
     
@@ -222,18 +218,18 @@ function hashReturn() public pure returns (bytes32) {
     }
 
 
-    function ApproveIndemnity(pricePhone, _imei) public {
-    // Adiciona o usuário à lista de carteiras com seu saldo e valor do aparelho celular
+//     function ApproveIndemnity(uint memory pricePhone, string memory _imei) public {
+//     // Adiciona o usuário à lista de carteiras com seu saldo e valor do aparelho celular
 
-        approve.push(Approve(msg.sender, pricePhone, -imei));  
- }   
+//         approve.push(approve(msg.sender, pricePhone, _imei));  
+//  }   
 
 
 
     // Função voltada para o pagamento do reebolso solicitado 
     // essa função atende ao seguinte requisito: 
     // requisito 6: aprovação dos pedidos de indenização
-    function paymentOfIndemnity(address membersWallet, uint amount) public isOwner returns (bool){
+    function paymentOfIndemnity(address membersWallet, uint amount) public payable isOwner{
         require(amount < amountContract);
         // ******** Convem ver se há como fazer uma função que retorne um booleano ao invés de executar vários loops 
             for( uint i = 0; i < userRequestingIndemnity.length; i++){
@@ -243,6 +239,7 @@ function hashReturn() public pure returns (bytes32) {
                     userRequestingIndemnity.pop();
                     amountContract = amountContract - amount ;
                 }
+
         }
     }
 
