@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles'
 import Axios from 'axios'
 // import makeStyles from '@mui/system/style';
-
+import sha256 from 'crypto-js/sha256';
 import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Paper, Typography} from '@mui/material';
 import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
@@ -153,10 +153,14 @@ export default function GruposClient() {
 
     // Função que envia os dados do BD
     const postData = () => {
-      console.log(walletAdress)
+      // Aqui é feito o hash do imei por motivos de segurança
+      const imeiHash = sha256(imei).toString()
+      console.log(imeiHash)
+
+
       Axios.post('http://localhost:3001/insert', 
       {clientAddress : walletAdress,
-        clientImei : imei,
+        clientImei : imeiHash,
         clientFundsValue : reason
      })
     }
