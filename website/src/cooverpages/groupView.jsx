@@ -118,7 +118,7 @@ export default function Grupos() {
           '@media (max-width: 650px)': {
             flexDirection:'column'
           }, }}>
-              <Button sx={{ padding: 2, display: 'flex', alignItems: 'center', marginBottom: 5, marginLeft: 2, border: 1, borderRadius: 10,
+              <Button sx={{ padding: 2, display: 'flex', alignItems: 'center', marginBottom: 5, marginLeft: 2, border: 1, borderRadius: 10, backgroundColor: 'rgba(2, 222, 130, 0.35)',
             '@media (max-width: 650px)': {
               marginLeft:0, 
             }, }}>
@@ -128,7 +128,7 @@ export default function Grupos() {
                 {/* <Badge color="success" overlap="circular" badgeContent="1" sx={{ scale: '1.2', paddingRight: '40%' }}/> */}
               </Button>
 
-              <Button sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginBottom: 5, marginRight: 2, border: 1, borderRadius: 10, paddingRight: 2, paddingLeft: 2,
+              <Button sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginBottom: 5, marginRight: 2, border: 1, borderRadius: 10, paddingRight: 2, paddingLeft: 2, backgroundColor: 'rgba(2, 222, 130, 0.35)',
             '@media (max-width: 650px)': {
              padding:2, marginRight:0
             }, }}>

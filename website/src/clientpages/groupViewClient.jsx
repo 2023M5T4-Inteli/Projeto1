@@ -179,7 +179,7 @@ export default function GruposClient() {
         aria-describedby="modal-description"
       >
         {/* <div className={classes.paper}> */}
-        <Grid style={{background:'white', padding:30, paddingBottom:30, marginTop:'15%', display:'flex', justifyContent:'center', flexDirection:'column', marginLeft:'30px', marginRight:'30px'  }}>
+        <Grid style={{background:'white', padding:30, paddingBottom:30, marginTop:'15%', display:'flex', justifyContent:'center', flexDirection:'column', marginLeft:'30px', marginRight:'30px' }}>
           <Grid style={{display:'flex', justifyContent:'center'}}>
           <Typography sx={{fontWeight:700, fontSize:18, marginBottom:2}}>PEDIDO DE ENTRADA</Typography>
           </Grid>
@@ -216,6 +216,16 @@ export default function GruposClient() {
 
           </FormControl>
           <Grid style={{display:'flex', justifyContent:'center', marginTop:10}}>
+
+          <Button onClick={() => setOpenModal(true)} variant="contained" style={{button2, fontFamily: 'Rubik', backgroundColor: 'rgba(2, 222, 130, 0.35)'}}>
+                
+                  
+                    Realizar pedido
+           
+
+              </Button>
+
+
           <Button onClick={() => setOpenModal(true)} variant="contained" color="primary" style={{button2, fontFamily: 'Rubik'}}>
           Realizar pedido
           </Button>
