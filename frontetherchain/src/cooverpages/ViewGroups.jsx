@@ -19,8 +19,24 @@ export default function ViewGroups() {
     return (
         <>
 
+
+            {/* <Grid sx={{ marginLeft:-1,backgroundColor: 'rgba(9, 64, 180, 0.1)', width: '102.5%', paddingTop:10 }}>
+                <Typography style={{ fontFamily: 'Rubik' }} sx={{ marginBottom: 1, fontSize: 26, fontWeight: 600, color: 'rgba(9, 64, 180, 1)', marginLeft:3 }} color="black" gutterBottom>
+                    Interface do cliente
+                </Typography>
+                <Divider/>
+                <Typography style={{ fontFamily: 'Rubik' }} sx={{ marginBottom: 2, fontSize: 20, fontWeight: 600, color: 'black', marginLeft:3, paddingBottom:2, marginTop:2  }} color="black" gutterBottom>
+                    Selecione o grupo de seguro mútuo em que deseja participar.
+                </Typography>
+            </Grid> */}
+
+
+
             <Navbar />
             <Box sx={{ paddingTop: 10, display: 'flex', alignItems: 'flex-start', flexDirection: 'column', borderRadius:'24px', paddingLeft:2 }}>
+            <Typography style={{fontFamily: 'Rubik'}} sx={{ marginBottom:1, fontSize: 26, fontWeight:600, color:'grey' }} color="black" gutterBottom>
+                    Interface do administrador
+                </Typography>
             <Typography style={{fontFamily: 'Rubik'}} sx={{ marginBottom:1, fontSize: 20, fontWeight:600, color:'black' }} color="black" gutterBottom>
                     Selecione abaixo o grupo que deseja visualizar ou interagir.
                 </Typography>

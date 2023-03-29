@@ -73,7 +73,10 @@ function MetamaskPlugin() {
         
         // Output gerado antes da conexão
         <Box sx={{width:'30rem'}}>
-          
+           {/* <Grid container rowSpacing={2} sx={{ 
+            marginTop: 1, display:'flex', flexDirection:'row', justifyContent:'space-around', padding:'0 10% 0 10%'
+            }} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
+               */}
           <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 5 }}>
             <img src={CooverHome} alt="CooverLogo"  />
           </Grid>
@@ -91,6 +94,7 @@ function MetamaskPlugin() {
             </Button>
           </Grid>
           <br></br>
+          {/* </Grid> */}
         </Box>
 
       )}
