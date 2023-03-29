@@ -26,22 +26,24 @@ export default function ViewGroupsClient() {
             <Navbar />
 
 {/*  */}
-            <Accordion sx={{paddingTop:10, backgroundColor:'rgba(9, 64, 180, 0.1)'}}>
+            <Accordion sx={{paddingTop:10, backgroundColor:'rgba(9, 64, 180, 0.1)', paddingBottom:1,'@media (max-width: 400px)': {
+            minWidth:'115%'
+          }, }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography style={{ fontFamily: 'Rubik' }} sx={{ fontSize: 26, fontWeight: 600, 
+          <Typography style={{ fontFamily: 'Rubik' }} sx={{ fontSize: 30, fontWeight: 600, 
             // color: 'rgba(9, 64, 180, 0.8)',
             color:'black',  
-            marginBottom:-0.5, marginTop:-2 }} color="black" gutterBottom>
+            marginBottom:-0.5, marginTop:-1, marginLeft:'2%' }} color="black" gutterBottom>
                     Grupos disponíveis
                 </Typography>
         </AccordionSummary>
         <AccordionDetails>
             <Divider/>
-        <Typography style={{ fontFamily: 'Rubik' }} sx={{ marginTop:2,fontSize: 20, fontWeight: 600, color: '#06266A',    }} color="black" gutterBottom>
+        <Typography style={{ fontFamily: 'Rubik' }} sx={{ marginTop:2,fontSize: 20, fontWeight: 600, color: '#06266A', marginLeft:'2%'   }} color="black" gutterBottom>
                     Selecione o grupo de seguro mútuo em que deseja participar.
                 </Typography>
         </AccordionDetails>
@@ -53,7 +55,9 @@ export default function ViewGroupsClient() {
                 {/* <ComboBox/> */}
 
 
-                <Grid container rowSpacing={2} sx={{ marginTop: 1, display:'flex', flexDirection:'row', justifyContent:'space-around', padding:'0 10% 0 10%'}} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
+                <Grid container rowSpacing={2} sx={{ marginTop:2, display:'flex', flexDirection:'row', justifyContent:'flex-start', '@media (max-width: 500px)': {
+            justifyContent:'center', marginLeft:2
+          }, padding:'0 10% 0 5%'}} columnSpacing={{ xs: 2, sm: 2, md: 2 }} columnGap={5}>
 
                     <Card sx={{ minWidth: 275, marginTop: 2, borderRadius: '24px', width:'20rem', height:'15.5rem', }}>
                         <CardActionArea onClick={handleLink} sx={{width:'20rem', height:'20rem'}}>
