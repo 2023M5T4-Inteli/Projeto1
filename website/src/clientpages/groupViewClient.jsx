@@ -5,8 +5,9 @@ import Navbar from '../components/Navbar/FloatingAction';
 import BackNavbarClient from '../components/Navbar/BackNavbarClient';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles'
+import Axios from 'axios'
 // import makeStyles from '@mui/system/style';
-
+import sha256 from 'crypto-js/sha256';
 import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Paper, Typography} from '@mui/material';
 import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
@@ -107,7 +108,7 @@ export default function GruposClient() {
   const [numberUsers, setnumberUsers] = useState ()
   const [open, setOpen] = useState(false);
   const [imei, setImei] = useState('');
-  const [coverage, setCoverage] = useState('');
+  const [walletAdress, setWalletAdress] = useState('');
   const classes = useStyles();
   const [reason, setReason] = useState('');
 
@@ -124,13 +125,14 @@ export default function GruposClient() {
     setImei(event.target.value);
   };
 
-  const handleCoverageChange = (event) => {
-    setCoverage(event.target.value);
+  const handleWalletChange = (event) => {
+    setWalletAdress(event.target.value);
   };
 
   const handleReasonChange = (event) => {
     setReason(event.target.value);
   };
+
 
   useEffect(() =>{
     activeMembers().then(number => {
@@ -148,6 +150,21 @@ export default function GruposClient() {
   const handleMouseLeave = () => {
      setIsHover(false);
   };
+
+    // Função que envia os dados do BD
+    const postData = () => {
+      // Aqui é feito o hash do imei por motivos de segurança
+      const imeiHash = sha256(imei).toString()
+      console.log(imeiHash)
+
+
+      Axios.post('http://localhost:3001/insert', 
+      {clientAddress : walletAdress,
+        clientImei : imeiHash,
+        clientFundsValue : reason
+     })
+    }
+
   return (
     <>
       <Modal
@@ -173,29 +190,23 @@ export default function GruposClient() {
           <FormControl className={classes.formControl}>
             <InputLabel id="imei-label" shrink>ID da carteira</InputLabel>
             <TextField
-              id="imei"
-              labelId="imei-label"
-              value={imei}
-              onChange={handleImeiChange}
+              id="wallet"
+              labelId="wallet-label"
+              value={walletAdress}
+              onChange={handleWalletChange}
             />
           </FormControl>
           <FormControl className={classes.formControl}>
 
 
             <InputLabel id="coverage-label">IMEI</InputLabel>
-            <Select
-              labelId="coverage-label"
-              id="coverage"
-              value={coverage}
-              onChange={handleCoverageChange}
-            >
-              <MenuItem value="option1">5%</MenuItem>
-              <MenuItem value="option2">10%</MenuItem>
-              <MenuItem value="option3">15%</MenuItem>
-              <MenuItem value="option4">20%</MenuItem>
-
-
-            </Select>
+            <TextField
+              id="imei"
+              labelId="imei-label"
+              value={imei}
+              onChange={handleImeiChange}
+            />
+            
           </FormControl>
           <FormControl className={classes.formControl}>
           <InputLabel id="reason-label" shrink>Valor do celular</InputLabel>
@@ -203,6 +214,7 @@ export default function GruposClient() {
               id="reason"
               labelId="reason-label"
               value={reason}
+              type={Number}
               onChange={handleReasonChange}
             />
 
@@ -218,6 +230,10 @@ export default function GruposClient() {
               </Button>
 
 
+          <Button onClick={() => setOpenModal(true)} variant="contained" color="primary" style={{button2, fontFamily: 'Rubik'}}>
+          Realizar pedido
+          </Button>
+          <Button onClick={postData}> ola teste</Button>
           </Grid>
       
         </Grid>
