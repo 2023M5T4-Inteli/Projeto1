@@ -96,6 +96,22 @@ export const IndemnityForm = () => {
     return navigate('/gruposclient2');
  }
 
+  // Essa é a função que envia os dados de reembolso pro BD 
+  const sendRefundData = async (e) => {
+    const refundImeiHash = sha256(imei).toString()
+    e.preventDefault();
+    try {
+      await Axios.post('http://localhost:3001/insertRefund', { refundImei : refundImeiHash, refundPercentage : coverage, refundReason : reason });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  async function handleLinkAndSendData(e) {
+    await handleLink();
+    await sendRefundData(e);
+  }
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -137,17 +153,6 @@ export const IndemnityForm = () => {
     Axios.post('http://localhost:3001/insert', 
     {clientAddress : imei })
   }
-
-  // Essa é a função que envia os dados de reembolso pro BD 
-  const sendRefundData = async (e) => {
-    const refundImeiHash = sha256(imei).toString()
-    e.preventDefault();
-    try {
-      await Axios.post('http://localhost:3001/insertRefund', { refundImei : refundImeiHash, refundPercentage : coverage, refundReason : reason });
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   return (
    <>
@@ -267,10 +272,10 @@ export const IndemnityForm = () => {
 
           </FormControl>
           <Grid style={{display:'flex', justifyContent:'center'}}>
-          <Button onClick={handleLink} variant="contained" color="primary" style={button2}>
+          <Button onClick={handleLinkAndSendData} variant="contained" color="primary" style={button2}>
           Realizar pedido
           </Button>
-          <Button onClick={sendRefundData}> Enviar para o BD</Button>
+          {/* <Button onClick={sendRefundData}> Enviar para o BD</Button> */}
           </Grid>
       
         </Grid>
@@ -291,7 +296,6 @@ const GetWallet = () => {
     })
   }
 
-
   // Função que envia os dados do BD
   const postData = () => {
     Axios.post('http://localhost:3001/insert', 
@@ -310,9 +314,9 @@ const GetWallet = () => {
 
   return(
     <>
-    <Input onChange={(event) => {setwalletAddress(event.target.value)}} placeholder="Coloque a carteira" type="text" variant="solid" />
+    {/* <Input onChange={(event) => {setwalletAddress(event.target.value)}} placeholder="Coloque a carteira" type="text" variant="solid" />
     <Button onClick={sendRefundData} >Enviar dados </Button>
-    <Button onClick={getData} >Receber dados </Button>
+    <Button onClick={getData} >Receber dados </Button> */}
     </>
   )
 

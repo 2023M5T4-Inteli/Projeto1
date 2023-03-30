@@ -1,9 +1,10 @@
-import * as React from "react";
+import React, {useEffect} from "react";
 import { useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import Axios from 'axios'
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import styled from "@mui/system/styled";
@@ -17,6 +18,7 @@ import { Divider, Grid, Paper, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Web3 from "web3";
 import erc20ABI from "../erc20ABI.json"
+import { DataGrid } from '@mui/x-data-grid';
 import { values } from "lodash";
 import { any } from "bluebird";
 
@@ -82,6 +84,28 @@ const buttonRemove = {
 };
 
 export default function CheckboxList() {
+ 
+  const columns = [
+    { field: 'clientCellValue', headerName: 'Client Cell Value', flex: 1 },
+    { field: 'clientAdresss', headerName: 'Client Address', flex: 1 },
+    { field: 'clientImei', headerName: 'Client IMEI', flex: 1 }
+  ];
+
+  const [imei, setImei] = React.useState([]);
+  
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
+    Axios.get("http://localhost:3001/getData?_sort=_id&_order=desc&_limit=5").then((response) => {
+      setImei(response.data);
+      console.log(response.data)
+    });
+  }
+
+  const getRowId = (row) => row._id;
+
   const [checked, setChecked] = React.useState([0]);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -104,12 +128,12 @@ export default function CheckboxList() {
     setChecked(newChecked);
   };
 
-  const wallet_List = [
-    {
-      address: "0x5EaaAb0F75C41A4314FFa90fdadE8e2a33054544",
-      label_Adress: "1",
-    }
-  ];
+  // const wallet_List = [
+  //   {
+  //     address: "0x5EaaAb0F75C41A4314FFa90fdadE8e2a33054544",
+  //     label_Adress: "1",
+  //   }
+  // ];
 
   return (
     <>
@@ -151,6 +175,7 @@ export default function CheckboxList() {
         <Box sx={{marginTop:8, marginLeft:-5, }}>
         <Grid style={{display:'flex', alignItems:'center', flexDirection:'column'}}>
         <Box sx={{display:'flex', justifyContent:'center', marginBottom:3, }}>
+          
             <Paper sx={{backgroundColor: 
             // isHover ? 'rgba(2, 222, 130, 0.8)' : 
             'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:2,borderRadius:3 }}>
@@ -161,42 +186,16 @@ export default function CheckboxList() {
             </Box>
             <Divider sx={{width: '100%'}}/>
           <p style={{fontSize: '150%', fontFamily: 'Rubik' }}>  Solicitações de entrada </p>
+
         </Grid>
+       
         <Divider sx={{}}/>
 
-        {wallet_List.map((wallet, index) => {
-          const labelId = `checkbox-list-label-${index}`;
-          
-          return (
-            <div alignItems="center" display="flex">
-              <ListItem
-                key={index}
-                secondaryAction={<h6>{/* Data de solicitação */}</h6>}
-                disablePadding
-              >
-                <ListItemButton
-                  role={undefined}
-                  onClick={handleToggle(index)}
-                  dense
-                >
-                  <ListItemIcon sx={{marginLeft:-2.5}} style={{fontFamily: 'Rubik'}}>
-                    <Checkbox
-                      edge="start"
-                      checked={checked.indexOf(index) !== -1}
-                      tabIndex={-1}
-                      disableRipple
-                      inputProps={{ "aria-labelledby": labelId }}
-                    />
-                  </ListItemIcon>
-                  <ListItemText id={labelId} primary={wallet.address} />
-                </ListItemButton>
-              </ListItem>
-
-              {/* <ApproveDecline /> */}
-            </div>
-          );
-        })}
-
+        <div style={{ height: 400, width: '100%' }}>
+      <DataGrid rows={imei} columns={columns} pageSize={5} getRowId={getRowId} checkboxSelection
+        disableRowSelectionOnClick />
+    </div>
+    
         <div>
           {/* <Button onClick={doSave}>Teste input</Button> */}
           {/* <Button onClick={getWallets} >Teste Função view</Button> */}

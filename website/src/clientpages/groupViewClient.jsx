@@ -114,6 +114,27 @@ export default function GruposClient() {
   const classes = useStyles();
   const [reason, setReason] = useState('');
 
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+      // Função que envia os dados do BD
+      const postData = () => {
+        // Aqui é feito o hash do imei por motivos de segurança
+        const imeiHash = sha256(imei).toString()
+        Axios.post('http://localhost:3001/insert', 
+        {clientAddress : walletAdress,
+          clientImei : imeiHash,
+          clientFundsValue : reason
+       })
+       console.log('Data sent ->', 'wallet:', walletAdress, 'imei:',imeiHash,'reason:', reason )
+      }
+  
+
+   function handleLinkAndPostData() {
+     handleOpenModal();
+     postData();
+  }
 
   const handleOpen = () => {
     setOpen(true);
@@ -152,19 +173,6 @@ export default function GruposClient() {
   const handleMouseLeave = () => {
      setIsHover(false);
   };
-
-    // Função que envia os dados do BD
-    const postData = () => {
-      // Aqui é feito o hash do imei por motivos de segurança
-      const imeiHash = sha256(imei).toString()
-
-
-      Axios.post('http://localhost:3001/insert', 
-      {clientAddress : walletAdress,
-        clientImei : imeiHash,
-        clientFundsValue : reason
-     })
-    }
 
   return (
     <>
@@ -222,19 +230,15 @@ export default function GruposClient() {
           </FormControl>
           <Grid style={{display:'flex', justifyContent:'center', marginTop:10}}>
 
-          <Button onClick={() => setOpenModal(true)} variant="contained" style={{button2, fontFamily: 'Rubik', backgroundColor: 'rgba(2, 222, 130, 0.35)'}}>
+          <Button onClick={handleLinkAndPostData} variant="contained" style={{button2, fontFamily: 'Rubik', backgroundColor: 'rgba(2, 222, 130, 0.35)'}}>
                 
-                  
+                  <Typography sx={{color:"black", fontWeight:700}}>
                     Realizar pedido
-           
-
+                  </Typography>
+                    
+          
               </Button>
-
-
-          <Button onClick={() => setOpenModal(true)} variant="contained" color="primary" style={{button2, fontFamily: 'Rubik'}}>
-          Realizar pedido
-          </Button>
-          <Button onClick={postData}> ola teste</Button>
+          {/* <Button onClick={postData}> ola teste</Button> */}
           </Grid>
       
         </Grid>

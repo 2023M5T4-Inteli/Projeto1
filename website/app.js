@@ -11,7 +11,6 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-
 // Colocar essa string no .env 
 mongoose.connect("mongodb+srv://eduPorto:Am544Wms2dGxkqPr@cluster0.unk5tdj.mongodb.net/?retryWrites=true&w=majority", {
     useNewUrlParser: true,
@@ -49,6 +48,19 @@ app.get("/getData", async (req, res) => {
       console.log(err);
     }
   });
+
+  // Rota para pegar dados no BD da collection do reembolso 
+
+app.get("/getDataRefund", async (req, res) => {
+    try {
+      const dataRefund = await refundModel.find({ });
+      res.send(dataRefund);
+      console.log(dataRefund);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
 
 
 // Rota para inserir algo no BD na collection de reembolso  
