@@ -16,7 +16,8 @@ const button2 = {
   borderColor: 'rgba(2, 222, 130, 0.6)',
   backgroundColor: 'rgba(2, 222, 130, 0.1)',
   padding: 1.5,
-  marginTop:'10%',
+  marginTop:'5%',
+  height:'3rem',
   paddingLeft: 2,
   borderRadius: '40px',
   color:'black',
@@ -72,7 +73,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     marginTop: 5, // Espaçamento acima do componente
-    marginBottom: 20, // Espaçamento abaixo do componente
+    marginBottom: '3%', // Espaçamento abaixo do componente
     minWidth: 350,
     margin: '10px', // Espaçamento em todas as direções
   },
@@ -211,7 +212,7 @@ export const IndemnityForm = () => {
       >
         {/* #TO-DO Colocar os valores daqui no BANCO DE DADOS  */}
         {/* <div className={classes.paper}> */}
-        <Grid style={{background:'white', padding:10, paddingBottom:30, marginTop:'25%', display:'flex', justifyContent:'center', flexDirection:'column' }}>
+        <Grid style={{background:'white', padding:10, paddingBottom:30, marginTop:'10rem', display:'flex', justifyContent:'center', flexDirection:'column' }}>
           <Grid style={{display:'flex', justifyContent:'center'}}>
           <h2 id="modal-title">PEDIDO DE INDENIZAÇÃO</h2>
           </Grid>
