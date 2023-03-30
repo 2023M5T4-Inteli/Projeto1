@@ -212,7 +212,7 @@ export const IndemnityForm = () => {
       >
         {/* #TO-DO Colocar os valores daqui no BANCO DE DADOS  */}
         {/* <div className={classes.paper}> */}
-        <Grid style={{background:'white', padding:10, paddingBottom:30, marginTop:'10rem', display:'flex', justifyContent:'center', flexDirection:'column' }}>
+        <Grid style={{background:'white', padding:10, paddingBottom:30, marginTop:'10rem', marginLeft:'10%', display:'flex', justifyContent:'center', flexDirection:'column', maxWidth:'80%', minWidth:'400px' }}>
           <Grid style={{display:'flex', justifyContent:'center'}}>
           <h2 id="modal-title">PEDIDO DE INDENIZAÇÃO</h2>
           </Grid>
