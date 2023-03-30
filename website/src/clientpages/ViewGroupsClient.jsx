@@ -26,13 +26,17 @@ export default function ViewGroupsClient() {
             <Navbar />
 
 {/*  */}
-            <Accordion sx={{paddingTop:10, backgroundColor:'rgba(9, 64, 180, 0.1)', paddingBottom:1,'@media (max-width: 400px)': {
+            <Accordion sx={{paddingTop:10, backgroundColor:'rgba(9, 64, 180, 0.1)', paddingBottom:1,'@media (max-width: 500px)': {
             minWidth:'115%'
           }, }}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={
+            // <Box sx={{width:0.4, height:0.4, marginRight:'40%'}}>
+          <ExpandMoreIcon viewBox='0 0 24 24' sx={{ scale:'2', color:'rgba(0, 0, 0, 0.75)' }}/>
+        }
           aria-controls="panel1a-content"
           id="panel1a-header"
+          sx={{display:"flex", justifySelf:'flex-start'}}
         >
           <Typography style={{ fontFamily: 'Rubik' }} sx={{ fontSize: 30, fontWeight: 600, 
             // color: 'rgba(9, 64, 180, 0.8)',

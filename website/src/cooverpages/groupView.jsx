@@ -29,6 +29,7 @@ const Item = styled('div')(({ theme }) => ({
   borderColor: 'rgb(1, 1, 1, 0.5)',
   padding: theme.spacing(1.5),
   borderRadius: '24px',
+  marginTop:'1%',
   textAlign: 'left',
   '& h3': {
     marginBottom: theme.spacing(2),
@@ -70,7 +71,7 @@ export default function Grupos() {
           <Box sx={{display:'flex', justifyContent:'center', marginBottom:3, marginTop:1}}>
             <Paper sx={{backgroundColor: 
             // isHover ? 'rgba(2, 222, 130, 0.8)' : 
-            'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:3,borderRadius:3 }}>
+            'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:2,borderRadius:3 }}>
             <Typography style={{fontFamily: 'Rubik', fontSize:25, 
             display:'flex', justifyContent:'center', fontWeight:500
             }}>Grupo 1</Typography> 
@@ -114,26 +115,26 @@ export default function Grupos() {
             <br>
             </br>
 
-            <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: 2, padding: 2, 
+            <Grid sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: '10%', padding: 2, 
           '@media (max-width: 650px)': {
             flexDirection:'column'
           }, }}>
-              <Button sx={{ padding: 2, display: 'flex', alignItems: 'center', marginBottom: 5, marginLeft: 2, border: 1, borderRadius: 10, backgroundColor: 'rgba(2, 222, 130, 0.35)',
+              <Button sx={{ padding: 2, display: 'flex', alignItems: 'center', marginBottom: 5, marginLeft: 2, borderRadius: 10, backgroundColor: 'rgba(2, 222, 130, 0.35)',
             '@media (max-width: 650px)': {
               marginLeft:0, 
             }, }}>
                 <Link to='/requisicoes' style={{ textDecoration: 'none' }}>
-                  <Typography style={{ fontFamily: 'Rubik' }}>Solicitações de entrada</Typography>
+                  <Typography style={{ fontFamily: 'Rubik', color:'black' }}>Solicitações de entrada</Typography>
                 </Link>
                 {/* <Badge color="success" overlap="circular" badgeContent="1" sx={{ scale: '1.2', paddingRight: '40%' }}/> */}
               </Button>
 
-              <Button sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginBottom: 5, marginRight: 2, border: 1, borderRadius: 10, paddingRight: 2, paddingLeft: 2, backgroundColor: 'rgba(2, 222, 130, 0.35)',
+              <Button sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginBottom: 5, marginRight: 2, borderRadius: 10, paddingRight: 2, paddingLeft: 2, backgroundColor: 'rgba(2, 222, 130, 0.35)',
             '@media (max-width: 650px)': {
              padding:2, marginRight:0
             }, }}>
                 <Link to='/indrequest' style={{ textDecoration: 'none' }}>
-                  <Typography style={{ fontFamily: 'Rubik' }}>Solicitações de indenização</Typography>
+                  <Typography style={{ fontFamily: 'Rubik', color:'black' }}>Solicitações de indenização</Typography>
                 </Link>
                 {/* <Badge color="error" overlap="circular" badgeContent="5" sx={{ scale: '1.2', paddingRight: '40%' }}/> */}
               </Button>

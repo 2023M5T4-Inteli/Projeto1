@@ -38,6 +38,7 @@ const button2 = {
   backgroundColor: 'rgba(2, 222, 130, 0.1)',
   padding: 1.5,
   paddingLeft: 2,
+  marginTop:'10%',
   borderRadius: '40px',
   color:'black',
   fontWeight:'bold',
@@ -74,6 +75,7 @@ const Item = styled('div')(({ theme }) => ({
   border: '1px solid',
   borderColor: theme.palette.mode === 'dark' ? '#444d58' : '#ced7e0',
   padding: theme.spacing(2),
+  marginTop:'1%',
   borderRadius: '24px',
   textAlign: 'left',
   '& h3': {
@@ -248,7 +250,7 @@ export default function GruposClient() {
             <Box sx={{display:'flex', justifyContent:'center'}}>
             <Paper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} sx={{backgroundColor: 
             // isHover ? 'rgba(2, 222, 130, 0.8)' : 
-            'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:3,borderRadius:3 }}>
+            'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:2,borderRadius:3, marginBottom:1 }}>
             <Typography style={{fontFamily: 'Rubik', fontSize:25, 
             display:'flex', justifyContent:'center', fontWeight:500
             }}>Grupo 1</Typography> 

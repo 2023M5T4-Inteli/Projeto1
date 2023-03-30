@@ -77,9 +77,13 @@ function MetamaskPlugin() {
             marginTop: 1, display:'flex', flexDirection:'row', justifyContent:'space-around', padding:'0 10% 0 10%'
             }} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
                */}
-          <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 5 }}>
+          <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2,  '@media (min-width: 500px)': {
+          },}}>
             <img src={CooverHome} alt="CooverLogo"  />
           </Grid>
+
+          <Grid sx={{'@media (min-width: 400px)': {
+          },}}>
           <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 12, }}>
             <Button variant="contained" onClick={handleConnect} size='large' sx={{ borderRadius: '15px', backgroundColor: '#EAEAEA', color: 'black' }}>
               <strong style={{ fontFamily: 'Rubik' }} >Conecte sua carteira</strong>
@@ -92,6 +96,7 @@ function MetamaskPlugin() {
             <Button sx={{ borderRadius: '15px', backgroundColor: '#02DE82' }} variant="contained" size='large' >
               <strong style={{ fontFamily: 'Rubik' }} >Crie sua MetaMask</strong>
             </Button>
+          </Grid>
           </Grid>
           <br></br>
           {/* </Grid> */}

@@ -16,6 +16,7 @@ const button2 = {
   borderColor: 'rgba(2, 222, 130, 0.6)',
   backgroundColor: 'rgba(2, 222, 130, 0.1)',
   padding: 1.5,
+  marginTop:'10%',
   paddingLeft: 2,
   borderRadius: '40px',
   color:'black',
@@ -30,6 +31,7 @@ const Item = styled('div')(({ theme }) => ({
   borderColor: theme.palette.mode === 'dark' ? '#444d58' : '#ced7e0',
   padding: theme.spacing(2),
   borderRadius: '24px',
+  marginTop:'1%',
   textAlign: 'left',
   '& h3': {
     marginBottom: theme.spacing(2),
@@ -144,7 +146,7 @@ export const IndemnityForm = () => {
           <Box sx={{display:'flex', justifyContent:'center', marginBottom:3, marginTop:1}}>
             <Paper sx={{backgroundColor: 
             // isHover ? 'rgba(2, 222, 130, 0.8)' : 
-            'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:3,borderRadius:3 }}>
+            'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:2,borderRadius:3 }}>
             <Typography style={{fontFamily: 'Rubik', fontSize:25, 
             display:'flex', justifyContent:'center', fontWeight:500
             }}>Grupo 1</Typography> 
@@ -191,7 +193,8 @@ export const IndemnityForm = () => {
         </Grid>
       </Box>
    <Grid style={{display:'flex', justifyContent:'center', marginTop:10}}>
-  <Button variant="contained" color="primary" onClick={postData}
+  <Button variant="contained" color="primary"  onClick={handleOpen}
+  // onClick={postData}
   sx={button2}
   //  style={{ backgroundColor: '#02DE82', color: 'inherit', display:'flex', justifyContent:'center', marginTop:'20px' }}
    >

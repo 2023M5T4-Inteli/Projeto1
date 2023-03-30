@@ -9,7 +9,6 @@ export function MyContextProvider({children}) {
     <MyContext.Provider value={{
       showCards,
       setShowCards
-      
       }}>
       {children}
     </MyContext.Provider>
