@@ -2,6 +2,9 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 contract Owner {
+
+    address payable public beneficiary;
+
     // Variaveis de estado
     address public owner;
     // taxa administrativa que deve ser paga pelo usuário no momento da entrada em um grupo de seguro
@@ -16,6 +19,12 @@ contract Owner {
     uint public reposition;
     // valor da indenização solicitada;
     uint public indemnity;
+
+    uint public value;
+
+    bool public isClaimed;
+
+
     
     // array contendo as carteiras de todos os membros do contrato
     address [] public membersContract;
@@ -41,7 +50,7 @@ contract Owner {
         uint cash;
         //uint pricePhone;
     }
-    
+
     //Mapping 
     /*(Mapping é uma estrutura de
     dados que associa uma chave
@@ -58,6 +67,8 @@ contract Owner {
     /* esse mapping associa uma carteira ao valor 
     referente ao pagamento da taxa administrativa */
     mapping(address => uint256) public administrativeFees;
+
+    mapping(address => bool) public isAuthorized;
 
 
     // Eventos 
@@ -98,8 +109,11 @@ contract Owner {
     /*Função especial que é executada apenas uma vez 
     quando o contrato é implantado na rede ethereum*/
     // define que o administrador do contrato é quem fez deploy 
-    constructor() {
+    constructor(address payable _beneficiary, uint _value) {
         owner = msg.sender; 
+
+        beneficiary = _beneficiary;
+        value = _value;
     }   
 
     // Função que retorna a carteira do proprietário.
@@ -146,6 +160,8 @@ contract Owner {
     // Essa função atende aos seguintes requisitos:
     // requisito 1: criação de um grupo de seguro mútuo
     // requisito 4: gerenciamento do número de clientes na plataforma
+
+
     function addMember(address user) public isOwner { 
         membersContract.push(user); 
         activeMembers[user] = true;
@@ -174,6 +190,8 @@ contract Owner {
     // Essa função atende aos seguintes requisitos:
     // requisito 2: cobrança de uma taxa administrativa no momento da contratação do seguro
     // requisito 3: cobrança do valor referente ao pagamento do seguro mútuo.
+
+
     // function contractPayment(uint256 deposit, uint256 payUser) public payable{
     //     // Armazena o valor do depósito na variável "deposit".
     //     require(msg.value == deposit, "Valor diferente do deposito");
@@ -208,6 +226,8 @@ contract Owner {
     // **** Essa função demanda gás para ser executada
     //Essa função atende ao seguinte requisito:
     //Requisito 5: realização de um pedido de indenização
+
+//NÃO VAI SER USADA NO MOMENTO
     function RequestIndemnity (address userMakingRequest) public {
         for( uint i = 0; i < membersContract.length; i++){
             // essa parte verifica se quem pediu indenização está no contrato
@@ -216,7 +236,6 @@ contract Owner {
             }
         }
     }
-
 
 //     function ApproveIndemnity(uint memory pricePhone, string memory _imei) public {
 //     // Adiciona o usuário à lista de carteiras com seu saldo e valor do aparelho celular
@@ -259,6 +278,18 @@ contract Owner {
         if (payers.length == userQuantity) {
             statusIndemnity = false;
         }
+    }
+
+
+
+    function authorize(address _authorized) public {
+        require(msg.sender == beneficiary, "Only the beneficiary can authorize addresses");
+        isAuthorized[_authorized] = true;
+    }
+
+    function requestIndemnity(uint value) public {
+        require(isAuthorized[msg.sender], "You are not authorized to request indemnity");
+        beneficiary.transfer(value);
     }
 
 }
