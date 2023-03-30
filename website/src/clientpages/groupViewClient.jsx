@@ -157,7 +157,6 @@ export default function GruposClient() {
     const postData = () => {
       // Aqui é feito o hash do imei por motivos de segurança
       const imeiHash = sha256(imei).toString()
-      console.log(imeiHash)
 
 
       Axios.post('http://localhost:3001/insert', 

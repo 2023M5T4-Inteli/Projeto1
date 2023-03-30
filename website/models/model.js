@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 
-// Aqui é o que será inserido no DB em relação aos dados do cliente 
+// Estrutura de dados que sera recebida no bd para poder pedir um reembolso 
 const clientModel = new mongoose.Schema({
     clientAdresss :{
         type : String,
@@ -17,6 +17,9 @@ const clientModel = new mongoose.Schema({
     }
 })
 
+
+// Aqui é feito a requisão para criar uma nova collection no banco de dados 
 const client =  mongoose.model("Client", clientModel)
 
-module.exports = client;
+// Sempre que criar um model se atentar em exportar os mesmos separadamente 
+module.exports = client

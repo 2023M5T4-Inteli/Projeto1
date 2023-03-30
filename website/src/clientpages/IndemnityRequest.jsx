@@ -4,6 +4,7 @@ import Web3 from 'web3';
 import Axios from 'axios'
 import styled from '@mui/system/styled';
 import Input from '@mui/material/Input';
+import sha256 from 'crypto-js/sha256';
 import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Link, Paper, Typography} from '@mui/material';
 import {makeStyles} from '@mui/styles';
 import {  useNavigate } from 'react-router-dom';
@@ -137,6 +138,17 @@ export const IndemnityForm = () => {
     {clientAddress : imei })
   }
 
+  // Essa é a função que envia os dados de reembolso pro BD 
+  const sendRefundData = async (e) => {
+    const refundImeiHash = sha256(imei).toString()
+    e.preventDefault();
+    try {
+      await Axios.post('http://localhost:3001/insertRefund', { refundImei : refundImeiHash, refundPercentage : coverage, refundReason : reason });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
    <>
   <BackNavbarReqClient />
@@ -235,10 +247,11 @@ export const IndemnityForm = () => {
               value={coverage}
               onChange={handleCoverageChange}
             >
-              <MenuItem value="option1">5%</MenuItem>
-              <MenuItem value="option2">10%</MenuItem>
-              <MenuItem value="option3">15%</MenuItem>
-              <MenuItem value="option4">20%</MenuItem>
+              <MenuItem value={10}>10%</MenuItem>
+              <MenuItem value={25}>25%</MenuItem>
+              <MenuItem value={50}>50%</MenuItem>
+              <MenuItem value={75}>75%</MenuItem>
+              <MenuItem value={100}>100%</MenuItem>
 
 
             </Select>
@@ -257,6 +270,7 @@ export const IndemnityForm = () => {
           <Button onClick={handleLink} variant="contained" color="primary" style={button2}>
           Realizar pedido
           </Button>
+          <Button onClick={sendRefundData}> Enviar para o BD</Button>
           </Grid>
       
         </Grid>
@@ -284,10 +298,20 @@ const GetWallet = () => {
     {clientAddress : walletAddress })
   }
 
+
+  const sendRefundData = async (e) => {
+    e.preventDefault();
+    try {
+      await Axios.post('http://localhost:3001/insertRefund', { refundImei : walletAddress, refundPercentage : "10", refundReason : walletAddress });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return(
     <>
     <Input onChange={(event) => {setwalletAddress(event.target.value)}} placeholder="Coloque a carteira" type="text" variant="solid" />
-    <Button onClick={postData} >Enviar dados </Button>
+    <Button onClick={sendRefundData} >Enviar dados </Button>
     <Button onClick={getData} >Receber dados </Button>
     </>
   )

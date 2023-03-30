@@ -4,6 +4,8 @@ const cors = require("cors")
 const port =  3001
 
 const clientModel = require("./models/model")
+const refundModel = require("./models/refundModel")
+
 const app = express()
 
 app.use(express.json())
@@ -19,7 +21,7 @@ app.listen(port, ()=> {
     console.log("Server online at :", {port})
 })
 
-// Rota para inserir algo no BD
+// Rota para inserir algo no BD na collection de clientes 
 
 app.post('/insert', async (req,res) => {
     // Ficar atento ao requisitar o objeto correto do frontend 
@@ -36,7 +38,7 @@ app.post('/insert', async (req,res) => {
 })
 
 
-// Rota para pegar dados no BD
+// Rota para pegar dados no BD da collection de clientes 
 
 app.get("/getData", async (req, res) => {
     try {
@@ -47,3 +49,22 @@ app.get("/getData", async (req, res) => {
       console.log(err);
     }
   });
+
+
+// Rota para inserir algo no BD na collection de reembolso  
+app.post('/insertRefund', async (req,res) => {
+    const imeiToRefund = req.body.refundImei
+    const percentageToRefund = req.body.refundPercentage
+    const reasonToRefund = req.body.refundReason
+
+
+    const testeInput2 = new refundModel({refundImei : imeiToRefund, refundPercentage : percentageToRefund, refundReason : reasonToRefund })
+    try{
+        await testeInput2.save()
+        res.send("Input worked")
+    } catch (err){
+        console.log(err)
+    }
+})
+
+
