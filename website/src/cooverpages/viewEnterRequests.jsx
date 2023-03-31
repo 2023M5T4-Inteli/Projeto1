@@ -92,6 +92,7 @@ export default function CheckboxList() {
   ];
 
   const [imei, setImei] = React.useState([]);
+  const [selectedRows, setSelectedRows] = React.useState([]);
   
   useEffect(() => {
     getData();
@@ -105,6 +106,27 @@ export default function CheckboxList() {
   }
 
   const getRowId = (row) => row._id;
+
+// 
+
+const handleChange = (value) => () => {
+  const currentIndex = selectedRows.indexOf(value);
+  const newSelectedRows = [...selectedRows];
+
+  if (currentIndex === -1) {
+    newSelectedRows.push(value);
+  } else {
+    newSelectedRows.splice(currentIndex, 1);
+  }
+
+  setSelectedRows(newSelectedRows);
+};
+
+const handleExcludeRows = () => {
+  const filteredRows = imei.filter(row => !selectedRows.includes(getRowId(row)));
+  setImei(filteredRows);
+  setSelectedRows([]);
+}
 
   const [checked, setChecked] = React.useState([0]);
   const [open, setOpen] = React.useState(false);
@@ -193,16 +215,14 @@ export default function CheckboxList() {
 
         <div style={{ height: 400, width: '100%' }}>
       <DataGrid rows={imei} columns={columns} pageSize={5} getRowId={getRowId} checkboxSelection
-        disableRowSelectionOnClick />
+        disableRowSelectionOnClick 
+        onSelectionModelChange={(selection) => setSelectedRows(selection)} selectionModel={selectedRows}/>
     </div>
-    
-        <div>
-          {/* <Button onClick={doSave}>Teste input</Button> */}
-          {/* <Button onClick={getWallets} >Teste Função view</Button> */}
-          {/* <Button variant="contained" onClick={handleOpen} sx={buttonAccept}>
-            Aprovar
-          </Button> */}
-        </div>
+{/* 
+    <Button variant="contained" onClick={handleExcludeRows}>
+        Exclude selected rows
+      </Button> */}
+
         </Box>
 
       </List>

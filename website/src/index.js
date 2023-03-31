@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import CheckboxList from './cooverpages/enterRequest';
+import CheckboxList from './cooverpages/viewEnterRequests';
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import { MyContextProvider } from './Contextt';
 import MetamaskPlugin from './MetamaskPlugin'
 import Grupos from './cooverpages/groupView';
 import IndRequest from './cooverpages/indRequest';
 import ViewGroups from './cooverpages/ViewGroups';
-import GruposClient from './clientpages/groupViewClient';
+import GruposClient from './clientpages/enterRequest';
 import ViewGroupsClient from './clientpages/ViewGroupsClient';
-import IndRequestClient from './clientpages/indRequestClient';
 import ViewGroupsClient2 from './clientpages/ViewGroupsClient2';
 import IndemnityForm from './clientpages/IndemnityRequest';
 import ViewGroupsClient2Load from './clientpages/GroupsClient2Load';
@@ -57,11 +56,6 @@ const router = createBrowserRouter ([
     path: "/idemnityreq",
     element: <MyContextProvider><IndemnityForm/></MyContextProvider>,
   },
-  {
-    path: "/indrequestclient",
-    element: <MyContextProvider><IndRequestClient/></MyContextProvider>,
-  },
-
   {
     path:"/CellphoneInsurance",
     element: <CellphoneInsurance></CellphoneInsurance>,
