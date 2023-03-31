@@ -368,8 +368,8 @@ truffle-config
 - Quando tudo estava preparado para o deploy o grupo já havia preparado um “contrato core” para teste. 
 - Com o input ‘truffle deploy –network goerli’ é possível finalizar o deploy na testnet pública e se recebe um output com os dados do deploy, como o custo final e o hash da transação. 
 
- ```
+ `````
 truffle deploy –network goerli
-```
+`````
 
 ![6](https://user-images.githubusercontent.com/68927480/224572034-00bc5125-2952-48dd-8779-41131156bc30.jpeg)
