@@ -22,8 +22,6 @@ import { DataGrid } from '@mui/x-data-grid';
 import { values } from "lodash";
 import { any } from "bluebird";
 
-
-
 // Constantes que tem o estilo dos componentes utilizados no frontend 
 
 const styleModal = {
@@ -90,12 +88,33 @@ const buttonAccept = {
 
 // Função que permite aceitar ou não membros para fazerem parte do contrato 
 export default function CheckboxList() {
+
+  const [checkedValues, setCheckedValues] = useState([]);
  
   const columns = [
-    { field: 'clientCellValue', headerName: 'Client Cell Value', flex: 1 },
-    { field: 'clientAdresss', headerName: 'Client Address', flex: 1 },
-    { field: 'clientImei', headerName: 'Client IMEI', flex: 1 }
+    { field: 'refundImei', headerName: 'Client Cell Value', flex: 1 },
+    { field: 'refundPercentage', headerName: 'Client Address', flex: 1 },
+    { field: 'refundReason', headerName: 'Client IMEI', flex: 1 }
   ];
+  // { field: 'name', headerName: 'Name', width: 150 },
+  // {
+  //   field: 'age',
+  //   headerName: 'Age',
+  //   type: 'number',
+  //   width: 90,
+  // },
+  // {
+  //   field: 'checkbox',
+  //   headerName: 'Checkbox',
+  //   renderCell: (params) => (
+  //     <Checkbox
+  //       checked={checked.includes(params.row.id)}
+  //       onChange={() => handleToggle(params.row.id)}
+  //       inputProps={{ 'aria-label': 'controlled' }}
+  //     />
+  //   ),
+  // },
+// ];
 
   const [imei, setImei] = React.useState([]);
   const [selectedRows, setSelectedRows] = React.useState([]);
@@ -115,25 +134,6 @@ export default function CheckboxList() {
 
 // 
 
-const handleChange = (value) => () => {
-  const currentIndex = selectedRows.indexOf(value);
-  const newSelectedRows = [...selectedRows];
-
-  if (currentIndex === -1) {
-    newSelectedRows.push(value);
-  } else {
-    newSelectedRows.splice(currentIndex, 1);
-  }
-
-  setSelectedRows(newSelectedRows);
-};
-
-const handleExcludeRows = () => {
-  const filteredRows = imei.filter(row => !selectedRows.includes(getRowId(row)));
-  setImei(filteredRows);
-  setSelectedRows([]);
-}
-
   const [checked, setChecked] = React.useState([0]);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -142,27 +142,19 @@ const handleExcludeRows = () => {
   const handleClose = () => {
     setOpen(false);
   };
-
   const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+    const currentIndex = checkedValues.indexOf(value);
+    const newCheckedValues = [...checkedValues];
 
     if (currentIndex === -1) {
-      newChecked.push(value);
+      newCheckedValues.push(value);
     } else {
-      newChecked.splice(currentIndex, 1);
+      newCheckedValues.splice(currentIndex, 1);
     }
 
-    setChecked(newChecked);
+    setCheckedValues(newCheckedValues);
   };
-
-  // const wallet_List = [
-  //   {
-  //     address: "0x5EaaAb0F75C41A4314FFa90fdadE8e2a33054544",
-  //     label_Adress: "1",
-  //   }
-  // ];
-
+  
   return (
     <>
       {/* Modal para a confirmação da aprovação */}
@@ -222,18 +214,14 @@ const handleExcludeRows = () => {
         <div style={{ height: 400, width: '100%' }}>
       <DataGrid rows={imei} columns={columns} pageSize={5} getRowId={getRowId} checkboxSelection
         disableRowSelectionOnClick 
-        onSelectionModelChange={(selection) => setSelectedRows(selection)} selectionModel={selectedRows}/>
+        onSelectionModelChange={(selection) => setSelectedRows(selection)} 
+        selectionModel={selectedRows}/>
     </div>
-{/* 
-    <Button variant="contained" onClick={handleExcludeRows}>
-        Exclude selected rows
-      </Button> */}
 
         </Box>
-
       </List>
-      <Grid style={{display:'flex',  flexDirection:'column'}}>
       
+      <Grid style={{display:'flex',  flexDirection:'column'}}>
       <AddNewMembersByWallet></AddNewMembersByWallet>
       <RemoveMembersByWallet></RemoveMembersByWallet>
       </Grid>

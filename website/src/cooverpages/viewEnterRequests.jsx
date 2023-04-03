@@ -99,7 +99,7 @@ export default function CheckboxList() {
   }, []);
 
   const getData = () => {
-    Axios.get("http://localhost:3001/getData?_sort=_id&_order=desc&_limit=5").then((response) => {
+    Axios.get("http://localhost:3001/getData").then((response) => {
       setImei(response.data);
       console.log(response.data)
     });

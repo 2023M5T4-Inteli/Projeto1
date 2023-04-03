@@ -97,20 +97,40 @@ export const IndemnityForm = () => {
  }
 
   // Essa é a função que envia os dados de reembolso pro BD 
-  const sendRefundData = async (e) => {
-    const refundImeiHash = sha256(imei).toString()
-    e.preventDefault();
-    try {
-      await Axios.post('http://localhost:3001/insertRefund', { refundImei : refundImeiHash, refundPercentage : coverage, refundReason : reason });
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // const sendRefundData = async (e) => {
+  //   const refundImeiHash = sha256(imei).toString()
+  //   e.preventDefault();
+  //   try {
+  //     await Axios.post('http://localhost:3001/insertRefund', { refundImei : refundImeiHash, refundPercentage : coverage, refundReason : reason });
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
-  async function handleLinkAndSendData(e) {
-    await handleLink();
-    await sendRefundData(e);
-  }
+       // Função que envia os dados do BD
+       const sendRefundData = () => {
+        // Aqui é feito o hash do imei por motivos de segurança
+        const refundImeiHash = sha256(imei).toString()
+        Axios.post('http://localhost:3001/insertRefund', 
+        { refundImei : refundImeiHash, refundPercentage : coverage, refundReason : reason 
+       })
+       console.log('Data sent ->', 'wallet:', refundImeiHash, 'imei:',coverage,'reason:', reason )
+      }
+      const getData = () => {
+        Axios.get("http://localhost:3001/getDataRefund").then((response) => {
+          console.log(response.data)
+        });
+      }
+
+  // async function handleLinkAndSendData(e) {
+  //   await handleLink();
+  //   await sendRefundData();
+  // }
+
+  function handleLinkAndSendData() {
+    handleLink();
+    sendRefundData();
+ }
 
   const handleOpen = () => {
     setOpen(true);
