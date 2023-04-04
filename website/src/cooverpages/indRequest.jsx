@@ -261,7 +261,7 @@ async function getContract() {
 
   return new web3.eth.Contract(abi, contractAddress, { from: accounts[0] });
 }
-
+//funcao222
 
 async function doSearch() {
   try {
