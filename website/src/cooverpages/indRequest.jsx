@@ -227,10 +227,10 @@ export default function CheckboxList() {
         </Box>
       </List>
       
-      <Button variant="contained" onClick={postToBlockchain} sx={{ marginTop: 2 }}>
-        Print Selected IMEI
+      <Button variant="contained" onClick={payIndeminity} sx={{ marginTop: 2 }}>
+        POST FROM BLOCKCHAIN 
       </Button>
-
+      <Button onClick={getFromBlockchain}> GET FROM BLOCKCHAIN</Button>
 
     </>
   );
@@ -263,21 +263,47 @@ async function getContract() {
 async function getFromBlockchain() {
   try {
     const contract = await getContract();
-    const customer = await contract.methods.getTotalWalletClients().call();
+    const customer = await contract.methods.getBalance().call();
     alert(JSON.stringify(customer));
   } catch (err) {
     alert(err.message);
   }
 }
 
+
+
+// Input a member
+async function payIndeminity() {
+  var walletizinha = "0xFf27a22195b74b06Af498FC5E63f0A3b0F3Ed9Bd"
+  var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
+  var imeizinho = "testeMundo123456OLA"
+  var valorzinho = 10
+  try {
+    const contract = await getContract();
+    const payIndeminity = await contract.methods.initialPayment(imeizinho, fixAddress,valorzinho).send({from:"0xFf27a22195b74b06Af498FC5E63f0A3b0F3Ed9Bd", value: Web3.utils.toWei("0.0166")})
+    alert(JSON.stringify(payIndeminity));
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+// const fundit = await  mycontract.methods.fundIt().send({
+//   from: '0xbf443ed3b73159d5bf427568359c7de4103413c3', 
+//   value: 3 
+//  })
+// .then(res => 
+// console.log('Success', res))
+// .catch(err => console.log(err)) 
+
 // Input a member
 async function postToBlockchain() {
   var walletizinha = "0xFf27a22195b74b06Af498FC5E63f0A3b0F3Ed9Bd"
   var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
-
+  var imeizinho = "testeMundo123456OLA"
+  var valorzinho = 10
   try {
     const contract = await getContract();
-    const tx = await contract.methods.addMember(fixAddress).send();
+    const tx = await contract.methods.initialPayment(imeizinho, fixAddress,valorzinho).send({value:  0.03});
     console.log(fixAddress)
     alert(JSON.stringify(tx));
   } catch (err) {
