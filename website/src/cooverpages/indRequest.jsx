@@ -227,14 +227,11 @@ export default function CheckboxList() {
         </Box>
       </List>
 
-      <Button variant="contained" onClick={doSearch} sx={{ marginTop: 2 }}>
+      <Button variant="contained" onClick={postToBlockchain} sx={{ marginTop: 2 }}>
         Print Selected IMEI
       </Button>
 
-      {/* <Grid style={{display:'flex',  flexDirection:'column'}}>
-      <AddNewMembersByWallet></AddNewMembersByWallet>
-      <RemoveMembersByWallet></RemoveMembersByWallet>
-      </Grid> */}
+
     </>
   );
 }
@@ -247,7 +244,7 @@ export default function CheckboxList() {
 
 
 // Definindo o endereço do contrato 
-const contractAddress = "0x474A4f22d31e086c078A1DAa6a5E95B405Db8c8e"
+const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
 // Pegando o json com informações sobre o contrato 
 const abi = erc20ABI
 
@@ -263,11 +260,26 @@ async function getContract() {
 }
 //funcao222
 
-async function doSearch() {
+async function getFromBlockchain() {
   try {
     const contract = await getContract();
     const customer = await contract.methods.getTotalWalletClients().call();
     alert(JSON.stringify(customer));
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+// Input a member
+async function postToBlockchain() {
+  var walletizinha = "0xFf27a22195b74b06Af498FC5E63f0A3b0F3Ed9Bd"
+  var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
+
+  try {
+    const contract = await getContract();
+    const tx = await contract.methods.addMember(fixAddress).send();
+    console.log(fixAddress)
+    alert(JSON.stringify(tx));
   } catch (err) {
     alert(err.message);
   }
@@ -283,7 +295,7 @@ function AddNewMembersByWallet() {
   const [addressValue, setaddressValue] = useState('')
 
   async function doSave2() {
-    var walletizinha = addressValue
+    var walletizinha = "0xFf27a22195b74b06Af498FC5E63f0A3b0F3Ed9Bd"
     var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
 
     try {
