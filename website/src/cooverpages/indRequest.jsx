@@ -128,16 +128,6 @@ export default function CheckboxList() {
   const getRowId = (row) => row._id;
 
 
-  // const handlePrintSelectedImeis = () => {
-  //   const selectedImeis = selectedRows.map(rowId => {
-  //     const row = imei.find(row => row._id === rowId);
-  //     return row.refundImei;
-  //   });
-  //   console.log(selectedImeis);
-  // }
-
-  // 
-
   const [checked, setChecked] = React.useState([0]);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -237,7 +227,7 @@ export default function CheckboxList() {
         </Box>
       </List>
 
-      <Button variant="contained" onClick={handlePrintSelectedImeis} sx={{ marginTop: 2 }}>
+      <Button variant="contained" onClick={doSearch} sx={{ marginTop: 2 }}>
         Print Selected IMEI
       </Button>
 
@@ -257,7 +247,7 @@ export default function CheckboxList() {
 
 
 // Definindo o endereço do contrato 
-const contractAddress = "0x1B0b42d9c38C98C22377A622Cf3227a920E8CC7C"
+const contractAddress = "0x474A4f22d31e086c078A1DAa6a5E95B405Db8c8e"
 // Pegando o json com informações sobre o contrato 
 const abi = erc20ABI
 
@@ -271,6 +261,22 @@ async function getContract() {
 
   return new web3.eth.Contract(abi, contractAddress, { from: accounts[0] });
 }
+
+
+async function doSearch() {
+  try {
+    const contract = await getContract();
+    const customer = await contract.methods.getTotalWalletClients().call();
+    alert(JSON.stringify(customer));
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+
+
+
+
 
 
 function AddNewMembersByWallet() {
