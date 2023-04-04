@@ -1,27 +1,18 @@
 import React, {useEffect} from "react";
 import { useState } from "react";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import Axios from 'axios'
-import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
-import styled from "@mui/system/styled";
 import Button from "@mui/material/Button";
 import TextField from '@mui/material/TextField';
-import SearchIcon from "@mui/icons-material/Search";
-import Navbar from "../components/Navbar/FloatingAction";
 import BackNavbarReq from "../components/Navbar/BackNavbarReq";
 import Modal from "@mui/material/Modal";
-import { Divider, Grid, Paper, Typography } from "@mui/material";
+import { Divider, Grid, Paper, Typography, IconButton } from "@mui/material";
 import Box from "@mui/material/Box";
 import Web3 from "web3";
 import erc20ABI from "../erc20ABI.json"
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
 import { DataGrid } from '@mui/x-data-grid';
-import { values } from "lodash";
-import { any } from "bluebird";
-
 
 const styleModal = {
   transform: "translate(50%, 50%)",
@@ -86,9 +77,35 @@ const buttonRemove = {
 export default function CheckboxList() {
  
   const columns = [
-    { field: 'clientCellValue', headerName: 'Client Cell Value', flex: 1 },
-    { field: 'clientAdresss', headerName: 'Client Address', flex: 1 },
-    { field: 'clientImei', headerName: 'Client IMEI', flex: 1 }
+    { field: 'clientCellValue', headerName: 'Client Cell Value', flex: 0.2 },
+    { field: 'clientAdresss', headerName: 'Client Address', flex: 0.4 },
+    { field: 'clientImei', headerName: 'Client IMEI', flex: 1 },
+    {
+      field: 'icon',
+      headerName: '',
+      width: 80,
+      renderCell: (params) => (
+        <IconButton
+          onClick={() => console.log(params.row.clientImei)}
+          sx={{ color: 'green' }}
+        >
+          <CheckIcon />
+        </IconButton>
+      )
+    },
+    {
+      field: 'icon2',
+      headerName: '',
+      width: 80,
+      renderCell: (params) => (
+        <IconButton
+          onClick={() => console.log(params.row.clientImei)}
+          sx={{ color: 'red' }}
+        >
+          <ClearIcon />
+        </IconButton>
+      )
+    },
   ];
 
   const [imei, setImei] = React.useState([]);
@@ -150,13 +167,6 @@ const handleExcludeRows = () => {
     setChecked(newChecked);
   };
 
-  // const wallet_List = [
-  //   {
-  //     address: "0x5EaaAb0F75C41A4314FFa90fdadE8e2a33054544",
-  //     label_Adress: "1",
-  //   }
-  // ];
-
   return (
     <>
       {/* Modal para a confirmação da aprovação */}
@@ -207,30 +217,21 @@ const handleExcludeRows = () => {
             </Paper>
             </Box>
             <Divider sx={{width: '100%'}}/>
-          <p style={{fontSize: '150%', fontFamily: 'Rubik' }}>  Solicitações de entrada </p>
+          <p style={{fontSize: '150%', fontFamily: 'Rubik', fontWeight:500 }}>  Solicitações de entrada </p>
 
         </Grid>
        
         <Divider sx={{}}/>
 
         <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={imei} columns={columns} pageSize={5} getRowId={getRowId} checkboxSelection
+      <DataGrid rows={imei} columns={columns} pageSize={5} getRowId={getRowId}
         disableRowSelectionOnClick 
         onSelectionModelChange={(selection) => setSelectedRows(selection)} selectionModel={selectedRows}/>
     </div>
-{/* 
-    <Button variant="contained" onClick={handleExcludeRows}>
-        Exclude selected rows
-      </Button> */}
 
         </Box>
 
       </List>
-      <Grid style={{display:'flex',  flexDirection:'column'}}>
-      
-      <AddNewMembersByWallet></AddNewMembersByWallet>
-      <RemoveMembersByWallet></RemoveMembersByWallet>
-      </Grid>
     </>
   );
 }

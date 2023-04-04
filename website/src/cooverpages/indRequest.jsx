@@ -1,17 +1,9 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import Axios from 'axios'
-import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
-import styled from "@mui/system/styled";
 import Button from "@mui/material/Button";
 import TextField from '@mui/material/TextField';
-import SearchIcon from "@mui/icons-material/Search";
-import Navbar from "../components/Navbar/FloatingAction";
 import BackNavbarReq from "../components/Navbar/BackNavbarReq";
 import Modal from "@mui/material/Modal";
 import { Divider, Grid, Paper, Typography, IconButton } from "@mui/material";
@@ -20,80 +12,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Web3 from "web3";
 import erc20ABI from "../erc20ABI.json"
 import { DataGrid } from '@mui/x-data-grid';
-import { values } from "lodash";
-import { any } from "bluebird";
-
-// Constantes que tem o estilo dos componentes utilizados no frontend 
-
-const styleModal = {
-  position: "relative",
-  width: "40rem",
-  '@media (max-width: 800px)': {
-    width: "30rem", left: '15%', height: '13rem'
-  },
-  '@media (max-width: 500px)': {
-    width: "23rem", left: '2%', height: '13rem'
-  },
-  height: "12rem",
-  left: "20%",
-  top: "15rem",
-  boxSizing: "border-box",
-  background: "#FFFFFF",
-  border: "1px solid #C8C8C8",
-  borderRadius: "20px",
-  padding: "5px",
-  fontSize: "100%",
-  fontFamily: 'Rubik'
-};
-
-const buttonModalNo = {
-  width: "50px",
-  height: "30px",
-  background: "rgba(255, 0, 0, 0.35)",
-  borderRadius: "22px",
-  marginRight: 5,
-  color: "black",
-  fontFamily: 'Rubik',
-};
-
-const buttonRemove = {
-  width: "150px",
-  height: "30px",
-  marginTop: 2,
-  background: "rgba(255, 0, 0, 0.35)",
-  borderRadius: "22px",
-  color: "black",
-  fontFamily: 'Rubik',
-};
-
-const buttonModalYes = {
-  marginLeft: 5,
-  background: "rgba(2, 222, 130, 0.35)",
-  width: "50px",
-  height: "30px",
-  borderRadius: "22px",
-  color: "black",
-  fontFamily: 'Rubik',
-};
-
-const buttonAccept = {
-  width: "100px",
-  height: "40px",
-  top: "100px",
-  background: "rgba(133, 251, 202, 0.88)",
-  borderRadius: "22px",
-  color: "black",
-  fontFamily: 'Rubik'
-};
-
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
+import { difference } from "lodash";
+import { styleModal, buttonAccept, buttonModalNo, buttonModalYes, buttonRemove } from '../clientpages/styles/indRequest.styles'
 
 // Função que permite aceitar ou não membros para fazerem parte do contrato 
 export default function CheckboxList() {
 
   const columns = [
-    { field: 'refundImei', headerName: 'Client Cell Value', flex: 1 },
-    { field: 'refundPercentage', headerName: 'Client Address', flex: 1 },
-    { field: 'refundReason', headerName: 'Client IMEI', flex: 1 },
+    { field: 'refundImei', headerName: 'Client IMEI', flex: 0.6 },
+    { field: 'refundPercentage', headerName: 'Refund Percentage', flex: 0.2 },
+    { field: 'refundReason', headerName: 'Refund Reason', flex: 1 },
     {
       field: 'icon',
       headerName: '',
@@ -101,9 +31,22 @@ export default function CheckboxList() {
       renderCell: (params) => (
         <IconButton
           onClick={() => console.log(params.row.refundImei)}
-          sx={{color:'grey'}}
+          sx={{ color: 'green' }}
         >
-          <DeleteIcon>phone</DeleteIcon>
+          <CheckIcon />
+        </IconButton>
+      )
+    },
+    {
+      field: 'icon2',
+      headerName: '',
+      width: 80,
+      renderCell: (params) => (
+        <IconButton
+          onClick={() => console.log(params.row.refundImei)}
+          sx={{ color: 'red' }}
+        >
+          <ClearIcon />
         </IconButton>
       )
     },
@@ -111,8 +54,6 @@ export default function CheckboxList() {
 
   const [imei, setImei] = React.useState([]);
   const [selectedRows, setSelectedRows] = React.useState([]);
-
-  const [checkedValues, setCheckedValues] = useState([]);
 
   useEffect(() => {
     getData();
@@ -125,47 +66,25 @@ export default function CheckboxList() {
     });
   }
 
+  const newSelectionModel = () => (selection) => setSelectedRows(selection);
+  const handleRowSelection = newSelectionModel();
   const getRowId = (row) => row._id;
 
+  const selectedIds = difference(newSelectionModel, selectedRows)
+  const selectedImei = imei.filter((row) => selectedIds.includes(row._id));
 
-  // const handlePrintSelectedImeis = () => {
-  //   const selectedImeis = selectedRows.map(rowId => {
-  //     const row = imei.find(row => row._id === rowId);
-  //     return row.refundImei;
-  //   });
-  //   console.log(selectedImeis);
-  // }
+  const handlePrintSelectedIds = () => {
+    handleRowSelection([1, 2, 3]);
+    console.log(selectedImei);
+  };
 
-  // 
-
-  const [checked, setChecked] = React.useState([0]);
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handlePrintSelectedImeis = () => {
-    const selectedImeis = selectedRows.map(rowId => {
-      const row = imei.find(row => row._id === rowId);
-      return row.refundImei;
-    });
-    console.log(selectedImeis);
-  }
-
-  const handleToggle = (value) => () => {
-    const currentIndex = checkedValues.indexOf(value);
-    const newCheckedValues = [...checkedValues];
-
-    if (currentIndex === -1) {
-      newCheckedValues.push(value);
-    } else {
-      newCheckedValues.splice(currentIndex, 1);
-    }
-
-    setCheckedValues(newCheckedValues);
   };
 
   return (
@@ -203,7 +122,7 @@ export default function CheckboxList() {
           padding: "20px 0 0 50px",
         }}
       >
-        {/* Navbar da página */}
+
         <BackNavbarReq />
         <Box sx={{ marginTop: 8, marginLeft: -5, }}>
           <Grid style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
@@ -211,7 +130,6 @@ export default function CheckboxList() {
 
               <Paper sx={{
                 backgroundColor:
-                  // isHover ? 'rgba(2, 222, 130, 0.8)' : 
                   'rgba(9, 64, 180, 0.1)', width: '125px', marginTop: 2, borderRadius: 3
               }}>
                 <Typography style={{
@@ -221,38 +139,25 @@ export default function CheckboxList() {
               </Paper>
             </Box>
             <Divider sx={{ width: '100%' }} />
-            <p style={{ fontSize: '150%', fontFamily: 'Rubik' }}>  Solicitações de indenização </p>
+            <p style={{ fontSize: '150%', fontFamily: 'Rubik', fontWeight:500 }}>  Solicitações de indenização </p>
 
           </Grid>
 
           <Divider sx={{}} />
 
           <div style={{ height: 400, width: '100%' }}>
-            <DataGrid rows={imei} columns={columns} pageSize={5} getRowId={getRowId} checkboxSelection
+            <DataGrid rows={imei} columns={columns} pageSize={5} getRowId={getRowId}
               disableRowSelectionOnClick
-              onSelectionModelChange={(selection) => setSelectedRows(selection)}
+              onSelectionModelChange={handleRowSelection}
               selectionModel={selectedRows} />
           </div>
 
         </Box>
       </List>
 
-      <Button variant="contained" onClick={handlePrintSelectedImeis} sx={{ marginTop: 2 }}>
-        Print Selected IMEI
-      </Button>
-
-      {/* <Grid style={{display:'flex',  flexDirection:'column'}}>
-      <AddNewMembersByWallet></AddNewMembersByWallet>
-      <RemoveMembersByWallet></RemoveMembersByWallet>
-      </Grid> */}
     </>
   );
 }
-
-
-
-
-
 
 
 
@@ -271,7 +176,6 @@ async function getContract() {
 
   return new web3.eth.Contract(abi, contractAddress, { from: accounts[0] });
 }
-
 
 function AddNewMembersByWallet() {
   const [addressValue, setaddressValue] = useState('')
@@ -308,8 +212,6 @@ function AddNewMembersByWallet() {
     </>
   )
 }
-
-
 
 function RemoveMembersByWallet() {
   const [addressValue, setaddressValue] = useState('')
