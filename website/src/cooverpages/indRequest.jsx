@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -14,8 +14,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import Navbar from "../components/Navbar/FloatingAction";
 import BackNavbarReq from "../components/Navbar/BackNavbarReq";
 import Modal from "@mui/material/Modal";
-import { Divider, Grid, Paper, Typography } from "@mui/material";
+import { Divider, Grid, Paper, Typography, IconButton } from "@mui/material";
 import Box from "@mui/material/Box";
+import DeleteIcon from '@mui/icons-material/Delete';
 import Web3 from "web3";
 import erc20ABI from "../erc20ABI.json"
 import { DataGrid } from '@mui/x-data-grid';
@@ -25,13 +26,13 @@ import { any } from "bluebird";
 // Constantes que tem o estilo dos componentes utilizados no frontend 
 
 const styleModal = {
-  position:"relative",
+  position: "relative",
   width: "40rem",
   '@media (max-width: 800px)': {
-    width: "30rem", left:'15%',  height:'13rem'
+    width: "30rem", left: '15%', height: '13rem'
   },
   '@media (max-width: 500px)': {
-    width: "23rem", left:'2%', height:'13rem'
+    width: "23rem", left: '2%', height: '13rem'
   },
   height: "12rem",
   left: "20%",
@@ -50,7 +51,7 @@ const buttonModalNo = {
   height: "30px",
   background: "rgba(255, 0, 0, 0.35)",
   borderRadius: "22px",
-  marginRight:5,
+  marginRight: 5,
   color: "black",
   fontFamily: 'Rubik',
 };
@@ -58,7 +59,7 @@ const buttonModalNo = {
 const buttonRemove = {
   width: "150px",
   height: "30px",
-  marginTop:2,
+  marginTop: 2,
   background: "rgba(255, 0, 0, 0.35)",
   borderRadius: "22px",
   color: "black",
@@ -66,7 +67,7 @@ const buttonRemove = {
 };
 
 const buttonModalYes = {
-  marginLeft:5,
+  marginLeft: 5,
   background: "rgba(2, 222, 130, 0.35)",
   width: "50px",
   height: "30px",
@@ -89,36 +90,30 @@ const buttonAccept = {
 // Função que permite aceitar ou não membros para fazerem parte do contrato 
 export default function CheckboxList() {
 
-  const [checkedValues, setCheckedValues] = useState([]);
- 
   const columns = [
     { field: 'refundImei', headerName: 'Client Cell Value', flex: 1 },
     { field: 'refundPercentage', headerName: 'Client Address', flex: 1 },
-    { field: 'refundReason', headerName: 'Client IMEI', flex: 1 }
+    { field: 'refundReason', headerName: 'Client IMEI', flex: 1 },
+    {
+      field: 'icon',
+      headerName: '',
+      width: 80,
+      renderCell: (params) => (
+        <IconButton
+          onClick={() => console.log(params.row.refundImei)}
+          sx={{color:'grey'}}
+        >
+          <DeleteIcon>phone</DeleteIcon>
+        </IconButton>
+      )
+    },
   ];
-  // { field: 'name', headerName: 'Name', width: 150 },
-  // {
-  //   field: 'age',
-  //   headerName: 'Age',
-  //   type: 'number',
-  //   width: 90,
-  // },
-  // {
-  //   field: 'checkbox',
-  //   headerName: 'Checkbox',
-  //   renderCell: (params) => (
-  //     <Checkbox
-  //       checked={checked.includes(params.row.id)}
-  //       onChange={() => handleToggle(params.row.id)}
-  //       inputProps={{ 'aria-label': 'controlled' }}
-  //     />
-  //   ),
-  // },
-// ];
 
   const [imei, setImei] = React.useState([]);
   const [selectedRows, setSelectedRows] = React.useState([]);
-  
+
+  const [checkedValues, setCheckedValues] = useState([]);
+
   useEffect(() => {
     getData();
   }, []);
@@ -132,7 +127,16 @@ export default function CheckboxList() {
 
   const getRowId = (row) => row._id;
 
-// 
+
+  // const handlePrintSelectedImeis = () => {
+  //   const selectedImeis = selectedRows.map(rowId => {
+  //     const row = imei.find(row => row._id === rowId);
+  //     return row.refundImei;
+  //   });
+  //   console.log(selectedImeis);
+  // }
+
+  // 
 
   const [checked, setChecked] = React.useState([0]);
   const [open, setOpen] = React.useState(false);
@@ -142,6 +146,15 @@ export default function CheckboxList() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handlePrintSelectedImeis = () => {
+    const selectedImeis = selectedRows.map(rowId => {
+      const row = imei.find(row => row._id === rowId);
+      return row.refundImei;
+    });
+    console.log(selectedImeis);
+  }
+
   const handleToggle = (value) => () => {
     const currentIndex = checkedValues.indexOf(value);
     const newCheckedValues = [...checkedValues];
@@ -154,7 +167,7 @@ export default function CheckboxList() {
 
     setCheckedValues(newCheckedValues);
   };
-  
+
   return (
     <>
       {/* Modal para a confirmação da aprovação */}
@@ -185,49 +198,61 @@ export default function CheckboxList() {
       <List
         sx={{
           width: "100%",
-          maxWidth:2000,
+          maxWidth: 2000,
           bgcolor: "background.paper",
           padding: "20px 0 0 50px",
         }}
       >
         {/* Navbar da página */}
         <BackNavbarReq />
-        <Box sx={{marginTop:8, marginLeft:-5, }}>
-        <Grid style={{display:'flex', alignItems:'center', flexDirection:'column'}}>
-        <Box sx={{display:'flex', justifyContent:'center', marginBottom:3, }}>
-          
-            <Paper sx={{backgroundColor: 
-            // isHover ? 'rgba(2, 222, 130, 0.8)' : 
-            'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:2,borderRadius:3 }}>
-            <Typography style={{fontFamily: 'Rubik', fontSize:25, 
-            display:'flex', justifyContent:'center', fontWeight:500
-            }}>Grupo 1</Typography> 
-            </Paper>
+        <Box sx={{ marginTop: 8, marginLeft: -5, }}>
+          <Grid style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: 3, }}>
+
+              <Paper sx={{
+                backgroundColor:
+                  // isHover ? 'rgba(2, 222, 130, 0.8)' : 
+                  'rgba(9, 64, 180, 0.1)', width: '125px', marginTop: 2, borderRadius: 3
+              }}>
+                <Typography style={{
+                  fontFamily: 'Rubik', fontSize: 25,
+                  display: 'flex', justifyContent: 'center', fontWeight: 500
+                }}>Grupo 1</Typography>
+              </Paper>
             </Box>
-            <Divider sx={{width: '100%'}}/>
-          <p style={{fontSize: '150%', fontFamily: 'Rubik' }}>  Solicitações de indenização </p>
+            <Divider sx={{ width: '100%' }} />
+            <p style={{ fontSize: '150%', fontFamily: 'Rubik' }}>  Solicitações de indenização </p>
 
-        </Grid>
-       
-        <Divider sx={{}}/>
+          </Grid>
 
-        <div style={{ height: 400, width: '100%' }}>
-      <DataGrid rows={imei} columns={columns} pageSize={5} getRowId={getRowId} checkboxSelection
-        disableRowSelectionOnClick 
-        onSelectionModelChange={(selection) => setSelectedRows(selection)} 
-        selectionModel={selectedRows}/>
-    </div>
+          <Divider sx={{}} />
+
+          <div style={{ height: 400, width: '100%' }}>
+            <DataGrid rows={imei} columns={columns} pageSize={5} getRowId={getRowId} checkboxSelection
+              disableRowSelectionOnClick
+              onSelectionModelChange={(selection) => setSelectedRows(selection)}
+              selectionModel={selectedRows} />
+          </div>
 
         </Box>
       </List>
-      
-      <Grid style={{display:'flex',  flexDirection:'column'}}>
+
+      <Button variant="contained" onClick={handlePrintSelectedImeis} sx={{ marginTop: 2 }}>
+        Print Selected IMEI
+      </Button>
+
+      {/* <Grid style={{display:'flex',  flexDirection:'column'}}>
       <AddNewMembersByWallet></AddNewMembersByWallet>
       <RemoveMembersByWallet></RemoveMembersByWallet>
-      </Grid>
+      </Grid> */}
     </>
   );
 }
+
+
+
+
+
 
 
 
@@ -239,17 +264,17 @@ const abi = erc20ABI
 
 async function getContract() {
   if (!window.ethereum) return console.log(`No MetaMask found!`);
- 
+
   const web3 = new Web3(window.ethereum);
   const accounts = await web3.eth.requestAccounts();
   if (!accounts || !accounts.length) return console.log('Wallet not found/allowed!');
- 
+
   return new web3.eth.Contract(abi, contractAddress, { from: accounts[0] });
 }
- 
+
 
 function AddNewMembersByWallet() {
-  const[addressValue, setaddressValue] = useState('')
+  const [addressValue, setaddressValue] = useState('')
 
   async function doSave2() {
     var walletizinha = addressValue
@@ -265,29 +290,29 @@ function AddNewMembersByWallet() {
     }
   }
 
-  function handleInputChange(event){
+  function handleInputChange(event) {
     setaddressValue(event.target.value)
   }
 
-  return(
+  return (
     <>
-    <div>
+      <div>
 
-    <TextField fullWidth label="Adicionar uma carteira" id="fullWidth"  value={addressValue} onChange={handleInputChange}/>
-    <Grid sx={{display:"flex", justifyContent:"center"}}>
-    <Button variant="contained" onClick={doSave2} sx={buttonAccept} style={{fontFamily: 'Rubik'}}>
-    Adicionar
-    </Button>
-    </Grid>
-    </div>  
-  </>
+        <TextField fullWidth label="Adicionar uma carteira" id="fullWidth" value={addressValue} onChange={handleInputChange} />
+        <Grid sx={{ display: "flex", justifyContent: "center" }}>
+          <Button variant="contained" onClick={doSave2} sx={buttonAccept} style={{ fontFamily: 'Rubik' }}>
+            Adicionar
+          </Button>
+        </Grid>
+      </div>
+    </>
   )
 }
 
 
 
 function RemoveMembersByWallet() {
-  const[addressValue, setaddressValue] = useState('')
+  const [addressValue, setaddressValue] = useState('')
 
   async function doRemove() {
     var walletizinha = addressValue
@@ -303,51 +328,22 @@ function RemoveMembersByWallet() {
     }
   }
 
-  function handleInputChange(event){
+  function handleInputChange(event) {
     setaddressValue(event.target.value)
   }
 
-  return(
+  return (
     <>
-    <div>
-    <Box sx={{ marginTop: '2rem' }}>
-  <TextField fullWidth label="Remover uma carteira" id="fullWidth" value={addressValue} onChange={handleInputChange} />
-</Box>
-<Grid sx={{display:"flex", justifyContent:"center"}}>
-    <Button variant="contained" onClick={doRemove} sx={buttonRemove} style={{fontFamily: 'Rubik'}}>
-    Remover
-    </Button>
-    </Grid>
-    </div>  
-  </>
+      <div>
+        <Box sx={{ marginTop: '2rem' }}>
+          <TextField fullWidth label="Remover uma carteira" id="fullWidth" value={addressValue} onChange={handleInputChange} />
+        </Box>
+        <Grid sx={{ display: "flex", justifyContent: "center" }}>
+          <Button variant="contained" onClick={doRemove} sx={buttonRemove} style={{ fontFamily: 'Rubik' }}>
+            Remover
+          </Button>
+        </Grid>
+      </div>
+    </>
   )
 }
-
-
-//   {/* Modal para a confirmação da aprovação */}
-//   <Modal
-//   open={open}
-//   onClose={handleClose}
-//   aria-labelledby="modal-modal-title"
-//   aria-describedby="modal-modal-description"
-//   sx={{}}
-// >
-//   <Box sx={styleModal}>
-//     <Box sx={{marginLeft:3}}>
-//     <h2 style={{ fontFamily: 'Rubik' }} id="child-modal-title">Solicitação de indenização</h2>
-//     <p style={{ fontFamily: 'Rubik' }} id="child-modal-description">
-//       Deseja mesmo permitir o pagamento de indenização a estes participantes?
-//     </p>
-//     </Box>
-//     {/*Conectar a esse botão uma função que adiciona integrantes no grupo */}
-//     <Grid sx={{display:'flex', justifyContent:'space-between', marginTop:4}}>
-//     <Button style={{ fontFamily: 'Rubik' }} variant="contained" onClick={handleClose} sx={buttonModalYes}>
-//       Sim
-//     </Button>
-//     {/* Conectar a esse botão uma função que apaga a solicitação e envia uma notificação ao respectivo integrante negado */}
-//     <Button style={{ fontFamily: 'Rubik' }} variant="contained" onClick={handleClose} sx={buttonModalNo}>
-//       Não
-//     </Button>
-//     </Grid>
-//   </Box>
-// </Modal>
