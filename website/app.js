@@ -49,8 +49,7 @@ app.get("/getData", async (req, res) => {
     }
   });
 
-  // Rota para pegar dados no BD da collection do reembolso 
-
+// Rota para pegar dados no BD da collection do reembolso 
 app.get("/getDataRefund", async (req, res) => {
     try {
       const dataRefund = await refundModel.find({ });
@@ -80,3 +79,9 @@ app.post('/insertRefund', async (req,res) => {
 })
 
 
+// Rota para deletar as requisições de entrada
+app.delete("/deleteEnterRequest/:id", async (req, res) => {
+  const idRequDel = req.params.id;
+  await clientModel.findByIdAndRemove(idRequDel).exec()
+  // res.send("Deleted :", idRequDel)
+})

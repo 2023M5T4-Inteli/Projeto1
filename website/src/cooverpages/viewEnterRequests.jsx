@@ -115,7 +115,14 @@ export default function CheckboxList() {
       renderCell: (params) => (
         // Botão que deleta a requisição para fazer parte do grupo
         <IconButton
-          onClick={() => console.log(params.row._id)}
+          onClick={async () =>{
+            const id = params.row._id
+            try {
+              Axios.delete(`http://localhost:3001/deleteEnterRequest/${id}`)
+            } catch (err) {
+              alert(err.message);
+            }
+          }} 
           sx={{ color: 'red' }}
         >
           <ClearIcon />
