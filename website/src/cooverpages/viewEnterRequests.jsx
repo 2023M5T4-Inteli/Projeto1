@@ -240,21 +240,28 @@ const handleExcludeRows = () => {
             </Paper>
             </Box>
             <Divider sx={{width: '100%'}}/>
-          <p style={{fontSize: '150%', fontFamily: 'Rubik', fontWeight:500 }}>  Solicitações de entrada </p>
+          <p style={{fontSize: '150%', fontFamily: 'Rubik', fontWeight:500 }}>  Gestão de membros </p>
 
         </Grid>
        
         <Divider sx={{}}/>
 
         <div style={{ height: 400, width: '100%' }}>
+        <h6>Aqui estão os membros que desejam participar do grupo</h6>
       <DataGrid rows={imei} columns={columns} pageSize={5} getRowId={getRowId}
         disableRowSelectionOnClick 
         onSelectionModelChange={(selection) => setSelectedRows(selection)} selectionModel={selectedRows}/>
     </div>
 
         </Box>
-
       </List>
+      <div style={{ height: 400, width: '100%' }}>
+      <h4>Aqui você também pode adicionar e remover membros </h4>
+        <AddNewMembersByWallet></AddNewMembersByWallet>
+        <RemoveMembersByWallet></RemoveMembersByWallet>
+      </div>
+      <h4>Aqui você também pode checar dados sobre quais são os atuais membros </h4>
+        <DataGridActiveMembers></DataGridActiveMembers>
     </>
   );
 }
@@ -279,19 +286,69 @@ async function getContract() {
 }
 
 
-async function getFromBlockchain() {
+async function getActualMembers() {
   try {
     const contract = await getContract();
-    const customer = await contract.methods.getBalance().call();
+    const customer = await contract.methods.showAllMembers().call();
     alert(JSON.stringify(customer));
   } catch (err) {
     alert(err.message);
   }
 }
 
+const columnsActiveUsers = [
+  {
+    field: 'firstName',
+    headerName: 'First name',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'lastName',
+    headerName: 'Last name',
+    width: 150,
+    editable: true,
+  },
+  {
+    field: 'fullName',
+    headerName: 'Full name',
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    width: 160,
+    valueGetter: (params) =>
+      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+  },
+];
+
+const rows = [
+  { id: 1, lastName: 'de Tal', firstName: 'Fulano', age: 35 },
+];
+
+export  function DataGridActiveMembers() {
+  return (
+    <Box sx={{ height: 400, width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columnsActiveUsers}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 5,
+            },
+          },
+        }}
+        pageSizeOptions={[5]}
+        checkboxSelection
+        disableRowSelectionOnClick
+      />
+      <Button onClick={getActualMembers}>Clique aqui e veja os atuais membros ( Colocar esses valores igual foi feito acima pfvrrr) </Button>
+    </Box>
+  );
+}
 
 
-// Input a member
+
+// Pagar a indenização 
 async function payIndeminity() {
   var walletizinha = "0xFf27a22195b74b06Af498FC5E63f0A3b0F3Ed9Bd"
   var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
@@ -307,41 +364,41 @@ async function payIndeminity() {
 }
  
 
-// function AddNewMembersByWallet() {
-//   const[addressValue, setaddressValue] = useState('')
+function AddNewMembersByWallet() {
+  const[addressValue, setaddressValue] = useState('')
 
-//   async function addMemberByWallet() {
-//     var walletizinha = addressValue
-//     var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
+  async function addMemberByWallet() {
+    var walletizinha = addressValue
+    var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
 
-//     try {
-//       const contract = await getContract();
-//       const tx = await contract.methods.addMember(fixAddress).send();
-//       console.log(fixAddress)
-//       alert(JSON.stringify(tx));
-//     } catch (err) {
-//       alert(err.message);
-//     }
-//   }
+    try {
+      const contract = await getContract();
+      const tx = await contract.methods.addMember(fixAddress).send();
+      console.log(fixAddress)
+      alert(JSON.stringify(tx));
+    } catch (err) {
+      alert(err.message);
+    }
+  }
 
-//   function handleInputChange(event){
-//     setaddressValue(event.target.value)
-//   }
+  function handleInputChange(event){
+    setaddressValue(event.target.value)
+  }
 
-//   return(
-//     <>
-//     <div>
+  return(
+    <>
+    <div>
 
-//     <TextField fullWidth label="Adicionar uma carteira" id="fullWidth"  value={addressValue} onChange={handleInputChange}/>
-//     <Grid sx={{display:"flex", justifyContent:"center"}}>
-//     <Button variant="contained" onClick={doSave2} sx={buttonAccept} style={{fontFamily: 'Rubik'}}>
-//     Adicionar
-//     </Button>
-//     </Grid>
-//     </div>  
-//   </>
-//   )
-// }
+    <TextField fullWidth label="Adicionar uma carteira" id="fullWidth"  value={addressValue} onChange={handleInputChange}/>
+    <Grid sx={{display:"flex", justifyContent:"center"}}>
+    <Button variant="contained" onClick={addMemberByWallet()} sx={buttonAccept} style={{fontFamily: 'Rubik'}}>
+    Adicionar
+    </Button>
+    </Grid>
+    </div>  
+  </>
+  )
+}
 
 
 
@@ -373,7 +430,7 @@ function RemoveMembersByWallet() {
   <TextField fullWidth label="Remover uma carteira" id="fullWidth" value={addressValue} onChange={handleInputChange} />
 </Box>
 <Grid sx={{display:"flex", justifyContent:"center"}}>
-    <Button variant="contained" onClick={doRemove} sx={buttonRemove} style={{fontFamily: 'Rubik'}}>
+    <Button variant="contained" onClick={doRemove()} sx={buttonRemove} style={{fontFamily: 'Rubik'}}>
     Remover
     </Button>
     </Grid>

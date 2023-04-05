@@ -88,6 +88,7 @@ export const IndemnityForm = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [imei, setImei] = useState('');
+  const [walletReq, setWalletReq] = useState('');
   const [coverage, setCoverage] = useState('');
   const [reason, setReason] = useState('');
   const [openModal, setOpenModal] = React.useState(false);
@@ -95,17 +96,6 @@ export const IndemnityForm = () => {
   function handleLink() {
     return navigate('/gruposclient2');
  }
-
-  // Essa é a função que envia os dados de reembolso pro BD 
-  // const sendRefundData = async (e) => {
-  //   const refundImeiHash = sha256(imei).toString()
-  //   e.preventDefault();
-  //   try {
-  //     await Axios.post('http://localhost:3001/insertRefund', { refundImei : refundImeiHash, refundPercentage : coverage, refundReason : reason });
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
        // Função que envia os dados do BD
        const sendRefundData = () => {
@@ -122,14 +112,11 @@ export const IndemnityForm = () => {
         });
       }
 
-  // async function handleLinkAndSendData(e) {
-  //   await handleLink();
-  //   await sendRefundData();
-  // }
-
+  // Função que executa multiplas funções 
   function handleLinkAndSendData() {
     handleLink();
     sendRefundData();
+    addMemberByWallet();
  }
 
   const handleOpen = () => {
@@ -144,6 +131,9 @@ export const IndemnityForm = () => {
     setImei(event.target.value);
   };
 
+  const handleWalletChange = (event) => {
+    setWalletReq(event.target.value);
+  };
   const handleCoverageChange = (event) => {
     setCoverage(event.target.value);
   };
@@ -173,6 +163,40 @@ export const IndemnityForm = () => {
     Axios.post('http://localhost:3001/insert', 
     {clientAddress : imei })
   }
+
+
+// Definindo o endereço do contrato 
+const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
+// Pegando o json com informações sobre o contrato 
+const abi = erc20ABI
+
+// Sempre é necessário instanciar o contrato para poder enviar dados 
+async function getContract() {
+  if (!window.ethereum) return console.log(`No MetaMask found!`);
+
+  const web3 = new Web3(window.ethereum);
+  const accounts = await web3.eth.requestAccounts();
+  if (!accounts || !accounts.length) return console.log('Wallet not found/allowed!');
+
+  return new web3.eth.Contract(abi, contractAddress, { from: accounts[0] });
+}
+
+
+  //Função que vai permitir enviar direto a carteira para requisitar uma indenização
+  async function addMemberByWallet() {
+    var walletClientIndem = walletReq
+    var fixAddress = Web3.utils.toChecksumAddress(walletClientIndem)
+
+    try {
+      const contract = await getContract();
+      const tx = await contract.methods.requestIndemnity(fixAddress).send();
+      console.log(fixAddress)
+      alert(JSON.stringify(tx));
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
 
   return (
    <>
@@ -232,9 +256,7 @@ export const IndemnityForm = () => {
       </Box>
    <Grid style={{display:'flex', justifyContent:'center', marginTop:10}}>
   <Button variant="contained" color="primary"  onClick={handleOpen}
-  // onClick={postData}
   sx={button2}
-  //  style={{ backgroundColor: '#02DE82', color: 'inherit', display:'flex', justifyContent:'center', marginTop:'20px' }}
    >
     Solicitar Indenização
   </Button>
@@ -248,7 +270,6 @@ export const IndemnityForm = () => {
         aria-describedby="modal-description"
       >
         {/* #TO-DO Colocar os valores daqui no BANCO DE DADOS  */}
-        {/* <div className={classes.paper}> */}
         <Grid style={{background:'white', padding:10, paddingBottom:30, marginTop:'10rem', marginLeft:'10%', display:'flex', justifyContent:'center', flexDirection:'column', maxWidth:'80%', minWidth:'400px' }}>
           <Grid style={{display:'flex', justifyContent:'center'}}>
           <h2 id="modal-title">PEDIDO DE INDENIZAÇÃO</h2>
@@ -263,7 +284,15 @@ export const IndemnityForm = () => {
             />
           </FormControl>
           <FormControl className={classes.formControl}>
-
+            <InputLabel id="adress-label" shrink>Endereço da carteira</InputLabel>
+            <TextField
+              id="adress"
+              labelId="imei-label"
+              value={walletReq}
+              onChange={handleWalletChange}
+            />
+          </FormControl>
+          <FormControl className={classes.formControl}>
 
             <InputLabel id="coverage-label">Cobertura desejada</InputLabel>
             <Select
@@ -291,11 +320,11 @@ export const IndemnityForm = () => {
             />
 
           </FormControl>
+          
           <Grid style={{display:'flex', justifyContent:'center'}}>
           <Button onClick={handleLinkAndSendData} variant="contained" color="primary" style={button2}>
           Realizar pedido
           </Button>
-          {/* <Button onClick={sendRefundData}> Enviar para o BD</Button> */}
           </Grid>
       
         </Grid>
@@ -334,9 +363,7 @@ const GetWallet = () => {
 
   return(
     <>
-    {/* <Input onChange={(event) => {setwalletAddress(event.target.value)}} placeholder="Coloque a carteira" type="text" variant="solid" />
-    <Button onClick={sendRefundData} >Enviar dados </Button>
-    <Button onClick={getData} >Receber dados </Button> */}
+
     </>
   )
 
@@ -347,7 +374,7 @@ const GetWallet = () => {
 
 
 // Definindo o endereço do contrato 
-const contractAddress = "0x1B0b42d9c38C98C22377A622Cf3227a920E8CC7C"
+const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
 // Pegando o json com informações sobre o contrato 
 const abi = erc20ABI
 
@@ -357,13 +384,15 @@ async function activeMembers() {
   try {
     const contract = new web3.eth.Contract(abi, contractAddress);
     // Aqui é onde está sendo executada a função definida no contrato
-    const numberMembers = await contract.methods.showAllMembers().call();
+    const numberMembers = await contract.methods.getTotalWalletClients().call();
     var totalUsers = Object.keys(numberMembers).length
+    // console.log(totalUsers)
   } catch (err) {
     console.log(err.message);
   }
   return (totalUsers)
 }
+
 
 
 export default IndemnityForm;

@@ -124,7 +124,7 @@ export default function Grupos() {
               marginLeft:0, 
             }, }}>
                 <Link to='/requisicoes' style={{ textDecoration: 'none' }}>
-                  <Typography style={{ fontFamily: 'Rubik', color:'black' }}>Solicitações de entrada</Typography>
+                  <Typography style={{ fontFamily: 'Rubik', color:'black' }}>Gestão de membros</Typography>
                 </Link>
                 {/* <Badge color="success" overlap="circular" badgeContent="1" sx={{ scale: '1.2', paddingRight: '40%' }}/> */}
               </Button>
@@ -148,8 +148,14 @@ export default function Grupos() {
   );
 }
 
+
+
+
+
+
+
 // Definindo o endereço do contrato 
-const contractAddress = "0x1B0b42d9c38C98C22377A622Cf3227a920E8CC7C"
+const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
 // Pegando o json com informações sobre o contrato 
 const abi = erc20ABI
 
@@ -159,9 +165,9 @@ async function activeMembers() {
   try {
     const contract = new web3.eth.Contract(abi, contractAddress);
     // Aqui é onde está sendo executada a função definida no contrato
-    const numberMembers = await contract.methods.showAllMembers().call();
+    const numberMembers = await contract.methods.getTotalWalletClients().call();
     var totalUsers = Object.keys(numberMembers).length
-    console.log(totalUsers)
+    // console.log(totalUsers)
   } catch (err) {
     console.log(err.message);
   }
