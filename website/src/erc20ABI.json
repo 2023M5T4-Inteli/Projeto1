@@ -76,19 +76,6 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "userMakingRequest",
-				"type": "address"
-			}
-		],
-		"name": "RequestIndemnity",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
 				"name": "",
 				"type": "address"
 			}
@@ -119,7 +106,26 @@
 	},
 	{
 		"inputs": [],
-		"name": "amountContract",
+		"name": "administrativeFee",
+		"outputs": [
+			{
+				"internalType": "uint32",
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "administrativeFees",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -128,6 +134,38 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "approve",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address payable",
+				"name": "memberRequesting",
+				"type": "address"
+			}
+		],
+		"name": "approveIndemnity",
+		"outputs": [],
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -151,7 +189,20 @@
 	},
 	{
 		"inputs": [],
-		"name": "contractPayment",
+		"name": "beneficiary",
+		"outputs": [
+			{
+				"internalType": "address payable",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "deposit",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
@@ -177,19 +228,6 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getPendingIndemnities",
-		"outputs": [
-			{
-				"internalType": "address[]",
-				"name": "",
-				"type": "address[]"
 			}
 		],
 		"stateMutability": "view",
@@ -224,22 +262,53 @@
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "imeiValue",
+				"type": "string"
+			},
+			{
+				"internalType": "address payable",
+				"name": "userWallet",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "insuredValue",
+				"type": "uint256"
+			}
+		],
+		"name": "initialPayment",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
 			}
 		],
-		"name": "members",
+		"name": "isAuthorized",
 		"outputs": [
 			{
-				"internalType": "uint256",
-				"name": "cash",
-				"type": "uint256"
-			},
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "isClaimed",
+		"outputs": [
 			{
-				"internalType": "address",
-				"name": "client",
-				"type": "address"
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -300,24 +369,6 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "membersWallet",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "paymentOfIndemnity",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
 				"name": "userWallet",
 				"type": "address"
 			}
@@ -341,10 +392,16 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "riskReserveRefund",
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_value",
+				"type": "uint256"
+			}
+		],
+		"name": "requestIndemnity",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -376,6 +433,38 @@
 	{
 		"inputs": [],
 		"name": "userQuantity",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "userRequestingIndemnity",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "value",
 		"outputs": [
 			{
 				"internalType": "uint256",

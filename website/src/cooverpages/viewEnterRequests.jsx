@@ -85,8 +85,23 @@ export default function CheckboxList() {
       headerName: '',
       width: 80,
       renderCell: (params) => (
+        // Botão de adicionar membros com a função que já adiciona a carteira ao contrato
         <IconButton
-          onClick={() => console.log(params.row.clientImei)}
+          onClick={ async () =>{
+              var walletizinha = params.row.clientAdresss
+              var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
+              console.log(fixAddress)
+              try {
+                const contract = await getContract();
+                const tx = await contract.methods.addMember(fixAddress).send();
+                console.log(fixAddress)
+                alert(JSON.stringify(tx));
+              } catch (err) {
+                alert(err.message);
+              }
+            
+            console.log(params.row.clientAdresss)}}
+
           sx={{ color: 'green' }}
         >
           <CheckIcon />
@@ -98,8 +113,9 @@ export default function CheckboxList() {
       headerName: '',
       width: 80,
       renderCell: (params) => (
+        // Botão que deleta a requisição para fazer parte do grupo
         <IconButton
-          onClick={() => console.log(params.row.clientImei)}
+          onClick={() => console.log(params.row._id)}
           sx={{ color: 'red' }}
         >
           <ClearIcon />
@@ -110,7 +126,6 @@ export default function CheckboxList() {
 
   const [imei, setImei] = React.useState([]);
   const [selectedRows, setSelectedRows] = React.useState([]);
-  
   useEffect(() => {
     getData();
   }, []);
@@ -238,58 +253,87 @@ const handleExcludeRows = () => {
 
 
 
+
 // Definindo o endereço do contrato 
-const contractAddress = "0x1B0b42d9c38C98C22377A622Cf3227a920E8CC7C"
+const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
 // Pegando o json com informações sobre o contrato 
 const abi = erc20ABI
 
 
 async function getContract() {
   if (!window.ethereum) return console.log(`No MetaMask found!`);
- 
+
   const web3 = new Web3(window.ethereum);
   const accounts = await web3.eth.requestAccounts();
   if (!accounts || !accounts.length) return console.log('Wallet not found/allowed!');
- 
+
   return new web3.eth.Contract(abi, contractAddress, { from: accounts[0] });
 }
+
+
+async function getFromBlockchain() {
+  try {
+    const contract = await getContract();
+    const customer = await contract.methods.getBalance().call();
+    alert(JSON.stringify(customer));
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+
+
+// Input a member
+async function payIndeminity() {
+  var walletizinha = "0xFf27a22195b74b06Af498FC5E63f0A3b0F3Ed9Bd"
+  var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
+  var imeizinho = "testeMundo123456OLA"
+  var valorzinho = 10
+  try {
+    const contract = await getContract();
+    const payIndeminity = await contract.methods.initialPayment(imeizinho, fixAddress,valorzinho).send({from:"0xFf27a22195b74b06Af498FC5E63f0A3b0F3Ed9Bd", value: Web3.utils.toWei("0.0166")})
+    alert(JSON.stringify(payIndeminity));
+  } catch (err) {
+    alert(err.message);
+  }
+}
  
 
-function AddNewMembersByWallet() {
-  const[addressValue, setaddressValue] = useState('')
+// function AddNewMembersByWallet() {
+//   const[addressValue, setaddressValue] = useState('')
 
-  async function doSave2() {
-    var walletizinha = addressValue
-    var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
+//   async function addMemberByWallet() {
+//     var walletizinha = addressValue
+//     var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
 
-    try {
-      const contract = await getContract();
-      const tx = await contract.methods.addMember(fixAddress).send();
-      console.log(fixAddress)
-      alert(JSON.stringify(tx));
-    } catch (err) {
-      alert(err.message);
-    }
-  }
+//     try {
+//       const contract = await getContract();
+//       const tx = await contract.methods.addMember(fixAddress).send();
+//       console.log(fixAddress)
+//       alert(JSON.stringify(tx));
+//     } catch (err) {
+//       alert(err.message);
+//     }
+//   }
 
-  function handleInputChange(event){
-    setaddressValue(event.target.value)
-  }
+//   function handleInputChange(event){
+//     setaddressValue(event.target.value)
+//   }
 
-  return(
-    <>
-    <div>
+//   return(
+//     <>
+//     <div>
 
-    <TextField fullWidth label="Adicionar uma carteira" id="fullWidth"  value={addressValue} onChange={handleInputChange}/>
-    <Grid sx={{display:"flex", justifyContent:"center"}}>
-    <Button variant="contained" onClick={doSave2} sx={buttonAccept} style={{fontFamily: 'Rubik'}}>
-    Adicionar
-    </Button>
-    </Grid>
-    </div>  
-  </>
-  )
-}
+//     <TextField fullWidth label="Adicionar uma carteira" id="fullWidth"  value={addressValue} onChange={handleInputChange}/>
+//     <Grid sx={{display:"flex", justifyContent:"center"}}>
+//     <Button variant="contained" onClick={doSave2} sx={buttonAccept} style={{fontFamily: 'Rubik'}}>
+//     Adicionar
+//     </Button>
+//     </Grid>
+//     </div>  
+//   </>
+//   )
+// }
 
 
 
