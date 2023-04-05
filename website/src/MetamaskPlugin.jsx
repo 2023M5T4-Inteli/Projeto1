@@ -17,7 +17,7 @@ function MetamaskPlugin() {
   
   /* Definindo a carteira do administrador.
   Se atentar que na hora de colocar o endereço tudo tem de estar minusculo */
-  const cooverWalletAdrress = "0xff27a2219bhdsabhbadsbui5b7a3b0f3ed9bd"
+  const cooverWalletAdrress = "0x474a4f22d31e086c078a1daa6a5e95b405db8c8e"
 
   function handleDisplayChange(account) {
     if (account === cooverWalletAdrress) {
