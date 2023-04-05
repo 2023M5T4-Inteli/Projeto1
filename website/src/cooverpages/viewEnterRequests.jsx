@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import List from "@mui/material/List";
 import Axios from 'axios'
 import Button from "@mui/material/Button";
@@ -13,6 +13,7 @@ import erc20ABI from "../erc20ABI.json"
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import { DataGrid } from '@mui/x-data-grid';
+import { MyContext } from "../Contextt";
 
 const styleModal = {
   transform: "translate(50%, 50%)",
@@ -74,8 +75,10 @@ const buttonRemove = {
   fontFamily: 'Rubik',
 };
 
+
+
 export default function CheckboxList() {
- 
+  const value = useContext(MyContext)
   const columns = [
     { field: 'clientCellValue', headerName: 'Client Cell Value', flex: 0.2 },
     { field: 'clientAdresss', headerName: 'Client Address', flex: 0.4 },
@@ -87,21 +90,20 @@ export default function CheckboxList() {
       renderCell: (params) => (
         // Botão de adicionar membros com a função que já adiciona a carteira ao contrato
         <IconButton
-          onClick={ async () =>{
-              var walletClient = params.row.clientAdresss
-              var fixAddress = Web3.utils.toChecksumAddress(walletClient)
-              console.log(fixAddress)
-              try {
-                const contract = await getContract();
-                const tx = await contract.methods.addMember(fixAddress).send();
-                console.log(fixAddress)
-              } catch (err) {
-                alert(err.message);
-              }
-              // Caso a função rode é feito o delete do bd NICE TO HAVE 
-
-            }}
-
+        onClick={async () => {
+          var walletClient = params.row.clientAdresss;
+          var fixAddress = Web3.utils.toChecksumAddress(walletClient);
+          console.log('fixAddress: ', fixAddress, 'walletClient: ', walletClient);
+          
+          try {
+            const contract = await getContract();
+            const tx = await contract.methods.addMember(walletClient).send();
+            value.setShowCards(true);
+          } catch (err) {
+            alert(err.message);
+          }
+          // Caso a função rode é feito o delete do bd NICE TO HAVE
+        } }
           sx={{ color: 'green' }}
         >
           <CheckIcon />
@@ -265,8 +267,6 @@ const handleExcludeRows = () => {
     </>
   );
 }
-
-
 
 
 // Definindo o endereço do contrato 

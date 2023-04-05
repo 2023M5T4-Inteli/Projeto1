@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import ComboBox from "../components/SearchBar";
 import Navbar from "../components/Navbar/FloatingAction";
 import { Box } from "@mui/system";
@@ -6,6 +6,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from "react-router-dom";
+import Web3 from "web3";
+import erc20ABI from "../erc20ABI.json"
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -15,10 +17,85 @@ import { MyContext } from "../Contextt";
 import { CardActionArea, Grid } from '@mui/material';
 
 
+// Definindo o endereço do contrato 
+const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
+// Pegando o json com informações sobre o contrato 
+const abi = erc20ABI
+
+async function getContract() {
+  if (!window.ethereum) return console.log(`No MetaMask found!`);
+
+  const web3 = new Web3(window.ethereum);
+  const accounts = await web3.eth.requestAccounts();
+  if (!accounts || !accounts.length) return console.log('Wallet not found/allowed!');
+
+  return new web3.eth.Contract(abi, contractAddress, { from: accounts[0] });
+}
+
+
+async function getActualMembers() {
+  try {
+    const contract = await getContract();
+    const customer = await contract.methods.showAllMembers().call();
+    alert(JSON.stringify(customer));
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
 // Tela que permite ao usuário visualizar mais detalhes sobre seu atual grupo
 
 export default function ViewGroupsClient2() {
-    const {showCard} = useContext(MyContext)
+    const [web3, setWeb3] = useState(null);
+    const [account, setAccount] = useState(null);
+    const [isMember, setIsMember] = useState(false);
+    
+    const [showCards, setShowCards] = useState(false);
+    
+    
+  useEffect(() => {
+    const connectToWallet = async () => {
+        try {
+            // Detecta se há uma instância da Metamask na janela do navegador
+            if (window.ethereum) {
+                // Cria uma nova instância do Web3 usando o provedor da Metamask
+                const web3 = new Web3(window.ethereum);
+                setWeb3(web3);
+                
+
+                // Solicita ao usuário que autorize o acesso à conta
+                const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+                // Define a conta atual
+                setAccount(accounts[0]);
+                
+
+                // Verifica se o endereço da carteira é um membro do contrato
+                const contract = await getContract();
+                const members = await contract.methods.showAllMembers().call();
+                if (members.includes(accounts[0])) {
+                    setIsMember(true);
+                    setShowCards(true);
+                    console.log(showCards)
+                } else {
+                    setIsMember(false);
+                    setShowCards(false);
+                    console.log(showCards);
+                    console.log(accounts[0])
+                }
+            } else {
+                console.log("Metamask não detectado");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };  
+
+    
+    connectToWallet();
+  }, []);
+
+    // const value = useContext(MyContext)
+    // console.log(value.showCards)
     const navigate = useNavigate();
     function handleLink() {
         return navigate('/idemnityreq');
@@ -68,7 +145,7 @@ export default function ViewGroupsClient2() {
                     }, padding: '0 10% 0 5%'
                 }} columnSpacing={{ xs: 2, sm: 2, md: 2 }} columnGap={5}>
 
-{/* {showCard && ( */}
+{showCards && (
                     <Card sx={{ minWidth: 275, marginTop: 2, borderRadius: '24px', width: '20rem', height: '15.5rem', }}>
                         <CardActionArea onClick={handleLink} sx={{ width: '20rem', height: '20rem' }}>
                             <CardContent sx={{ height: '20rem' }}>
@@ -91,10 +168,20 @@ export default function ViewGroupsClient2() {
                             </CardContent>
                         </CardActionArea>
                     </Card>
-                    {/* )} */}
+                 )} 
+
+{!showCards && (
+                     <Typography style={{ fontFamily: 'Rubik' }} sx={{ fontSize: 20, fontWeight: 500, color: 'grey', marginLeft:'-10px' }} color="black" gutterBottom>
+                     Aguarde o aceite da sua solicitação. Assim que ocorrer, o grupo será mostrado aqui para que você visualize e interaja.
+                  </Typography>
+                 
+                 )} 
+                 
+
                 </Grid>
 
             </Box>
+            
         </>
     )
 }
