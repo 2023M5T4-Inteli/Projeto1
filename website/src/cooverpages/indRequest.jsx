@@ -42,8 +42,17 @@ export default function CheckboxList() {
       headerName: '',
       width: 80,
       renderCell: (params) => (
+        // Botão que deleta a requisição de indenização
         <IconButton
-          onClick={() => console.log(params.row.refundImei)}
+          onClick={ async () =>{
+            const id = params.row._id
+            try {
+              Axios.delete(`http://localhost:3001/deleteIndemRequest/${id}`)
+              alert("Deletado com sucesso, recarregue a página e confira o resultado  ")
+            } catch (err) {
+              alert(err.message);
+            }
+          }}
           sx={{ color: 'red' }}
         >
           <ClearIcon />

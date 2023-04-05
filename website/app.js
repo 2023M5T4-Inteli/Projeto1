@@ -83,5 +83,11 @@ app.post('/insertRefund', async (req,res) => {
 app.delete("/deleteEnterRequest/:id", async (req, res) => {
   const idRequDel = req.params.id;
   await clientModel.findByIdAndRemove(idRequDel).exec()
-  // res.send("Deleted :", idRequDel)
+})
+
+
+// Rota para deletar as requisições de indenização
+app.delete("/deleteIndemRequest/:id", async (req, res) => {
+  const idReqIndemDel = req.params.id;
+  await refundModel.findByIdAndRemove(idReqIndemDel).exec()
 })

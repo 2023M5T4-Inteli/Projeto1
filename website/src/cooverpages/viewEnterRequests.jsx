@@ -119,6 +119,7 @@ export default function CheckboxList() {
             const id = params.row._id
             try {
               Axios.delete(`http://localhost:3001/deleteEnterRequest/${id}`)
+              alert("Deletado com sucesso, recarregue a página e confira o resultado  ")
             } catch (err) {
               alert(err.message);
             }
