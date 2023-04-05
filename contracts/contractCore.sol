@@ -8,7 +8,7 @@ contract Owner {
     // taxa administrativa que deve ser paga pelo usuário no momento da entrada em um grupo de seguro
     uint32 public administrativeFee = 5;
     // status da indenização. False = não solicitada, true = solicitada
-    bool public statusIndemnity = false;
+    bool public statusIndemnity = true;
     // quantidade de usuários
     uint public userQuantity; 
     // valor a ser reposto da reserva de risco
@@ -16,7 +16,6 @@ contract Owner {
     // valor da indenização solicitada;
     uint public indemnity;
     uint public value;
-    bool public isClaimed;
     // array contendo as carteiras de todos os membros do contrato
     address [] public membersContract;
     /* array contendo as carteiras dos membros
@@ -55,7 +54,6 @@ contract Owner {
     /* esse mapping associa uma carteira ao valor 
     referente ao pagamento da taxa administrativa */
     mapping(address => uint256) public administrativeFees;
-    mapping(address => bool) public isAuthorized;
 
     // Eventos 
     /*(Eventos são notificações emitidas durante
@@ -152,7 +150,6 @@ contract Owner {
         Member memory members = Member(userWallet, imeiValue, insuredValue);
         uint256 depositUser = insuredValue - ((insuredValue * administrativeFee)/100);
         balances[msg.sender] += msg.value;
-        //.transfer(((insuredValue * administrativeFee)/100));
         payers.push(msg.sender);
         emit Purchase(msg.sender, insuredValue);
         emit PaymentReceived(msg.sender, msg.value);
@@ -178,15 +175,21 @@ contract Owner {
     // essa função atende ao seguint256e requisito: 
     // requisito 6: aprovação dos pedidos de indenização
     // Função para aprovação de indenização
-    function approveIndemnity(address payable memberRequesting) external payable isOwner{
+    function approveIndemnity(address payable _memberRequesting, uint _amount) public isOwner{
         require(statusIndemnity == true, "Indemnity not requested");
-        require(getBalance() >= indemnityRequests[userRequestingIndemnity[0]], "Insufficient funds");
-        if (statusIndemnity == true){
-            memberRequesting.transfer(indemnityRequests[userRequestingIndemnity[0]]);
-            balances[userRequestingIndemnity[0]] -= indemnityRequests[userRequestingIndemnity[0]];
-        }
+        (bool success, ) = _memberRequesting.call{value: _amount}("");
+        require(success, "Failed to send Ether");
         statusIndemnity = false;
     }
+
+    // // Function to transfer Ether from this contract to address from input
+    // function transfer(address payable _to, uint _amount) public {
+    //     require(1 == 1, "Indemnity not requested");
+    //     // require(getBalance() >= indemnityRequests[userRequestingIndemnity[0]], "Insufficient funds");
+    //     (bool success, ) = _to.call{value: _amount}("");
+    //     require(success, "Failed to send Ether");
+    //     // statusIndemnity = false;
+    // }
 
     /*Função que verifica a integridade da reserva de risco e
     em caso de comprometimento dessa, solicita sua reposição aos 
