@@ -13,6 +13,7 @@ import erc20ABI from "../erc20ABI.json"
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import { DataGrid } from '@mui/x-data-grid';
+import { delay } from "lodash";
 
 const styleModal = {
   transform: "translate(50%, 50%)",
@@ -286,45 +287,43 @@ async function getContract() {
 }
 
 
-async function getActualMembers() {
-  try {
-    const contract = await getContract();
-    const customer = await contract.methods.showAllMembers().call();
-    alert(JSON.stringify(customer));
-  } catch (err) {
-    alert(err.message);
-  }
-}
 
 const columnsActiveUsers = [
   {
-    field: 'firstName',
-    headerName: 'First name',
-    width: 150,
-    editable: true,
+    field: 'id',
+    headerName: 'Número'
   },
   {
-    field: 'lastName',
-    headerName: 'Last name',
-    width: 150,
+    field: 'address',
+    headerName: 'Carteira',
+    width: 500,
     editable: true,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
+  }
 ];
 
-const rows = [
-  { id: 1, lastName: 'de Tal', firstName: 'Fulano', age: 35 },
-];
 
 export  function DataGridActiveMembers() {
+  const [rows, setRows] = React.useState([]);
+
+  useEffect(() => {
+    getActualMembers();
+  }, []);
+
+  async function getActualMembers() {
+    try {
+      const contract = await getContract();
+      const customer = await contract.methods.showAllMembers().call();
+      const jsonString = customer.map((wallet, index) => ({id: index, address: wallet}))
+      console.log(jsonString)
+      setRows(jsonString)
+    } catch (err) {
+      alert(err.message, 'oi');
+    }
+  }
+
+
+
+
   return (
     <Box sx={{ height: 400, width: '100%' }}>
       <DataGrid
@@ -341,7 +340,7 @@ export  function DataGridActiveMembers() {
         checkboxSelection
         disableRowSelectionOnClick
       />
-      <Button onClick={getActualMembers}>Clique aqui e veja os atuais membros ( Colocar esses valores igual foi feito acima pfvrrr) </Button>
+      
     </Box>
   );
 }

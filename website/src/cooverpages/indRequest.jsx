@@ -167,15 +167,6 @@ export default function CheckboxList() {
           </div>
 
         </Box>
-        <div style={{ height: 100, width: '100%' }}>
-        <Typography style={{
-                  fontFamily: 'Rubik', fontSize: 18,
-                  display: 'flex', justifyContent: 'center', fontWeight: 500
-                }}>Checar quais membros ainda não foram pagos</Typography>
-          <Typography style={{textAlign: 'center'}}>TO-DO</Typography>
-          </div>
-          
-
           <div style={{ height: 150, width: '100%' }}>
         <Typography style={{
                   fontFamily: 'Rubik', fontSize: 18,
