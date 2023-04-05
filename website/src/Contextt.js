@@ -1,16 +1,18 @@
-import { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
+// const Context = createContext(['', () => {}]);
 export const MyContext = createContext(null);
 
-export function MyContextProvider({children}) {
-  const [showCards, setShowCards] = useState(false);
+// useState
 
-  return (
-    <MyContext.Provider value={{
-      showCards,
-      setShowCards
-      }}>
-      {children}
+export function MyContextProvider({children}) {
+// const [state,setState] = useState([])
+const [showCards, setShowCards] = useState(false);
+
+return (
+    <MyContext.Provider value={{showCards,setShowCards}}>
+        {children}
     </MyContext.Provider>
-  );
+)
 }
+
