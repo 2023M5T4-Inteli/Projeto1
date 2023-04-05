@@ -134,6 +134,8 @@ export default function GruposClient() {
    function handleLinkAndPostData() {
      handleOpenModal();
      postData();
+     payToEnter();
+
   }
 
   const handleOpen = () => {
@@ -174,6 +176,39 @@ export default function GruposClient() {
      setIsHover(false);
   };
 
+      // Definindo o endereço do contrato 
+      const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
+      // Pegando o json com informações sobre o contrato 
+      const abi = erc20ABI
+
+
+      async function getContract() {
+        if (!window.ethereum) return console.log(`No MetaMask found!`);
+
+        const web3 = new Web3(window.ethereum);
+        const accounts = await web3.eth.requestAccounts();
+        if (!accounts || !accounts.length) return console.log('Wallet not found/allowed!');
+
+        return new web3.eth.Contract(abi, contractAddress, { from: accounts[0] });
+      }
+
+
+      // Pagar a para entrar no grupo TODO
+      async function payToEnter() {
+        var walletizinha = walletAdress
+        var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
+        var imeizinho = imei
+        var valorzinho = reason
+        try {
+          const contract = await getContract();
+          // Defini um valor arbitrario para pagar e entrar ao grupo
+          const payIndeminity = await contract.methods.initialPayment(imeizinho, fixAddress,valorzinho).send({from: fixAddress, value: Web3.utils.toWei("0.015")})
+          alert(JSON.stringify(payIndeminity));
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+
   return (
     <>
       <Modal
@@ -197,7 +232,7 @@ export default function GruposClient() {
           <Typography sx={{fontWeight:700, fontSize:18, marginBottom:2}}>PEDIDO DE ENTRADA</Typography>
           </Grid>
           <FormControl className={classes.formControl}>
-            <InputLabel id="imei-label" shrink>ID da carteira</InputLabel>
+            <InputLabel id="imei-label" shrink>Endereço da carteira</InputLabel>
             <TextField
               id="wallet"
               labelId="wallet-label"
@@ -314,9 +349,9 @@ export default function GruposClient() {
 
 
 // Definindo o endereço do contrato 
-const contractAddress = "0x1B0b42d9c38C98C22377A622Cf3227a920E8CC7C"
+  const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
 // Pegando o json com informações sobre o contrato 
-const abi = erc20ABI
+  const abi = erc20ABI
 
 // Essa função conecta ao contrato e executa a função de checar quantos usuarios tem no contrato 
 async function activeMembers() {

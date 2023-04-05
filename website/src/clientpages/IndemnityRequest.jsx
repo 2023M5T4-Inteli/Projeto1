@@ -102,7 +102,7 @@ export const IndemnityForm = () => {
         // Aqui é feito o hash do imei por motivos de segurança
         const refundImeiHash = sha256(imei).toString()
         Axios.post('http://localhost:3001/insertRefund', 
-        { refundImei : refundImeiHash, refundPercentage : coverage, refundReason : reason 
+        { refundImei : refundImeiHash, refundPercentage : coverage, refundReason : reason , refundAdress : walletReq
        })
        console.log('Data sent ->', 'wallet:', refundImeiHash, 'imei:',coverage,'reason:', reason )
       }
@@ -116,7 +116,7 @@ export const IndemnityForm = () => {
   function handleLinkAndSendData() {
     handleLink();
     sendRefundData();
-    addMemberByWallet();
+    //addMemberByWallet();
  }
 
   const handleOpen = () => {
@@ -142,13 +142,7 @@ export const IndemnityForm = () => {
     setReason(event.target.value);
   };
 
-  const handleSubmit = () => {
-    // Submit the form data
-    console.log('IMEI:', imei);
-    console.log('Coverage:', coverage);
-    console.log('Reason:', reason);
-    handleClose();
-  };
+
 
   const [numberUsers, setnumberUsers] = useState ()
   useEffect(() =>{

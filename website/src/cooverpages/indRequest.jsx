@@ -22,8 +22,10 @@ export default function CheckboxList() {
 
   const columns = [
     { field: 'refundImei', headerName: 'Client IMEI', flex: 0.6 },
+    { field: 'refundAdress', headerName: 'Refund wallet', flex: 0.7 },
     { field: 'refundPercentage', headerName: 'Refund Percentage', flex: 0.2 },
     { field: 'refundReason', headerName: 'Refund Reason', flex: 1 },
+
     {
       field: 'icon',
       headerName: '',
@@ -162,18 +164,33 @@ export default function CheckboxList() {
           </div>
 
         </Box>
+        <div style={{ height: 100, width: '100%' }}>
+        <Typography style={{
+                  fontFamily: 'Rubik', fontSize: 18,
+                  display: 'flex', justifyContent: 'center', fontWeight: 500
+                }}>Checar quais membros ainda não foram pagos</Typography>
+          <Typography style={{textAlign: 'center'}}>TO-DO</Typography>
+          </div>
+          
+
+          <div style={{ height: 150, width: '100%' }}>
+        <Typography style={{
+                  fontFamily: 'Rubik', fontSize: 18,
+                  display: 'flex', justifyContent: 'center', fontWeight: 500
+                }}>Pagar uma requisição</Typography>
+          </div>
+          <PayRefundRequest></PayRefundRequest>
       </List>
 
     </>
   );
 }
 
-
-
 // Definindo o endereço do contrato 
-const contractAddress = "0x1B0b42d9c38C98C22377A622Cf3227a920E8CC7C"
+const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
 // Pegando o json com informações sobre o contrato 
 const abi = erc20ABI
+
 
 
 async function getContract() {
@@ -186,75 +203,49 @@ async function getContract() {
   return new web3.eth.Contract(abi, contractAddress, { from: accounts[0] });
 }
 
-function AddNewMembersByWallet() {
-  const [addressValue, setaddressValue] = useState('')
+// Função que permite pagar a requisição de indenização 
+function PayRefundRequest() {
+  const[addressValue, setaddressValue] = useState('')
+  const[valueToPay, setValuePayment] = useState('')
 
-  async function doSave2() {
-    var walletizinha = addressValue
-    var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
-
+// Pagar a indenização 
+  async function payIndeminity() {
+    var walletToPay = addressValue
+    var fixAddress = Web3.utils.toChecksumAddress(walletToPay)
+    var totalPayment = valueToPay
     try {
       const contract = await getContract();
-      const tx = await contract.methods.addMember(fixAddress).send();
-      console.log(fixAddress)
-      alert(JSON.stringify(tx));
+      /// Aqui tem que colocar a carteira do admin ou o contrato 
+      const payIndeminity = await contract.methods.approveIndemnity(fixAddress).send({from:contractAddress, value: Web3.utils.toWei(totalPayment)})
+      alert(JSON.stringify(payIndeminity));
     } catch (err) {
       alert(err.message);
     }
   }
 
-  function handleInputChange(event) {
-    setaddressValue(event.target.value)
-  }
+  const handleWalletChange = (event) => {
+    setaddressValue(event.target.value);
+  };
 
-  return (
+  const handleValueChange = (event) => {
+    setValuePayment(event.target.value);
+  };
+
+
+  return(
     <>
-      <div>
+    <div>
 
-        <TextField fullWidth label="Adicionar uma carteira" id="fullWidth" value={addressValue} onChange={handleInputChange} />
-        <Grid sx={{ display: "flex", justifyContent: "center" }}>
-          <Button variant="contained" onClick={doSave2} sx={buttonAccept} style={{ fontFamily: 'Rubik' }}>
-            Adicionar
-          </Button>
-        </Grid>
-      </div>
-    </>
+    <TextField fullWidth label="Definir a  carteira" id="wallet"  value={addressValue} onChange={handleWalletChange}/>
+    <TextField fullWidth label="Definir valor indenização " id="value"  value={valueToPay} onChange={handleValueChange}/>
+    <Grid sx={{display:"flex", justifyContent:"center"}}>
+    <Button variant="contained" onClick={payIndeminity} sx={buttonAccept} style={{fontFamily: 'Rubik'}}>
+    Pagar cliente
+    </Button>
+    </Grid>
+    </div>  
+  </>
   )
 }
 
-function RemoveMembersByWallet() {
-  const [addressValue, setaddressValue] = useState('')
 
-  async function doRemove() {
-    var walletizinha = addressValue
-    var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
-
-    try {
-      const contract = await getContract();
-      const tx = await contract.methods.removeMember(fixAddress).send();
-      console.log(fixAddress)
-      alert(JSON.stringify(tx));
-    } catch (err) {
-      alert(err.message);
-    }
-  }
-
-  function handleInputChange(event) {
-    setaddressValue(event.target.value)
-  }
-
-  return (
-    <>
-      <div>
-        <Box sx={{ marginTop: '2rem' }}>
-          <TextField fullWidth label="Remover uma carteira" id="fullWidth" value={addressValue} onChange={handleInputChange} />
-        </Box>
-        <Grid sx={{ display: "flex", justifyContent: "center" }}>
-          <Button variant="contained" onClick={doRemove} sx={buttonRemove} style={{ fontFamily: 'Rubik' }}>
-            Remover
-          </Button>
-        </Grid>
-      </div>
-    </>
-  )
-}

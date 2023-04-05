@@ -14,6 +14,10 @@ const refundModel = new mongoose.Schema({
     refundReason : {
         type : String,
         required : true
+    }, 
+    refundAdress:{
+        type : String,
+        required : true
     }
 })
 

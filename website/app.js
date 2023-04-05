@@ -67,9 +67,10 @@ app.post('/insertRefund', async (req,res) => {
     const imeiToRefund = req.body.refundImei
     const percentageToRefund = req.body.refundPercentage
     const reasonToRefund = req.body.refundReason
+    const adressToRefund = req.body.refundAdress
 
 
-    const testeInput2 = new refundModel({refundImei : imeiToRefund, refundPercentage : percentageToRefund, refundReason : reasonToRefund })
+    const testeInput2 = new refundModel({refundImei : imeiToRefund, refundPercentage : percentageToRefund, refundReason : reasonToRefund, refundAdress : adressToRefund })
     try{
         await testeInput2.save()
         res.send("Input worked")

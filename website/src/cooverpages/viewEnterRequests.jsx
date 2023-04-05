@@ -348,6 +348,8 @@ export  function DataGridActiveMembers() {
 
 
 
+
+
 // Pagar a indenização 
 async function payIndeminity() {
   var walletizinha = "0xFf27a22195b74b06Af498FC5E63f0A3b0F3Ed9Bd"
@@ -363,7 +365,6 @@ async function payIndeminity() {
   }
 }
  
-
 function AddNewMembersByWallet() {
   const[addressValue, setaddressValue] = useState('')
 
