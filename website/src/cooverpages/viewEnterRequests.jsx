@@ -88,19 +88,19 @@ export default function CheckboxList() {
         // Botão de adicionar membros com a função que já adiciona a carteira ao contrato
         <IconButton
           onClick={ async () =>{
-              var walletizinha = params.row.clientAdresss
-              var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
+              var walletClient = params.row.clientAdresss
+              var fixAddress = Web3.utils.toChecksumAddress(walletClient)
               console.log(fixAddress)
               try {
                 const contract = await getContract();
                 const tx = await contract.methods.addMember(fixAddress).send();
                 console.log(fixAddress)
-                alert(JSON.stringify(tx));
               } catch (err) {
                 alert(err.message);
               }
-            
-            console.log(params.row.clientAdresss)}}
+              // Caso a função rode é feito o delete do bd NICE TO HAVE 
+
+            }}
 
           sx={{ color: 'green' }}
         >
