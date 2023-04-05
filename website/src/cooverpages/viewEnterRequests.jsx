@@ -78,7 +78,7 @@ const buttonRemove = {
 
 
 export default function CheckboxList() {
-  const value = useContext(MyContext)
+  // const value = useContext(MyContext)
   const columns = [
     { field: 'clientCellValue', headerName: 'Client Cell Value', flex: 0.2 },
     { field: 'clientAdresss', headerName: 'Client Address', flex: 0.4 },
@@ -97,8 +97,8 @@ export default function CheckboxList() {
           
           try {
             const contract = await getContract();
-            const tx = await contract.methods.addMember(walletClient).send();
-            value.setShowCards(true);
+            const tx = await contract.methods.addMember(fixAddress).send();
+            // value.setShowCards(true);
           } catch (err) {
             alert(err.message);
           }
@@ -297,27 +297,9 @@ async function getActualMembers() {
 }
 
 const columnsActiveUsers = [
-  {
-    field: 'firstName',
-    headerName: 'First name',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'lastName',
-    headerName: 'Last name',
-    width: 150,
-    editable: true,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
+  { field: 'clientCellValue', headerName: 'Client Cell Value', flex: 0.2 },
+  { field: 'clientAdresss', headerName: 'Client Address', flex: 0.4 },
+  { field: 'clientImei', headerName: 'Client IMEI', flex: 1 },
 ];
 
 const rows = [
@@ -338,7 +320,6 @@ export  function DataGridActiveMembers() {
           },
         }}
         pageSizeOptions={[5]}
-        checkboxSelection
         disableRowSelectionOnClick
       />
       <Button onClick={getActualMembers}>Clique aqui e veja os atuais membros ( Colocar esses valores igual foi feito acima pfvrrr) </Button>

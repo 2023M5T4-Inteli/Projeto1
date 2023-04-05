@@ -61,26 +61,22 @@ export default function ViewGroupsClient2() {
                 // Cria uma nova instância do Web3 usando o provedor da Metamask
                 const web3 = new Web3(window.ethereum);
                 setWeb3(web3);
-                
-
                 // Solicita ao usuário que autorize o acesso à conta
                 const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+                var fixAddress = Web3.utils.toChecksumAddress(accounts[0]);
+
                 // Define a conta atual
-                setAccount(accounts[0]);
-                
+                setAccount(fixAddress);
 
                 // Verifica se o endereço da carteira é um membro do contrato
                 const contract = await getContract();
                 const members = await contract.methods.showAllMembers().call();
-                if (members.includes(accounts[0])) {
+                if (members.includes(fixAddress)) {
                     setIsMember(true);
                     setShowCards(true);
-                    console.log(showCards)
                 } else {
                     setIsMember(false);
                     setShowCards(false);
-                    console.log(showCards);
-                    console.log(accounts[0])
                 }
             } else {
                 console.log("Metamask não detectado");
