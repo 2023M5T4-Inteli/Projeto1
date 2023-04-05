@@ -23,11 +23,11 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
 
 
 ## 📁 Estrutura de pastas
-|--> contrato<br>
+|--> Contrato<br>
   &emsp;|--> caseTests.sol<br>
   &emsp;|--> contractCore.sol<br>
 
-|--> documentação<br>
+|--> Cocumentação<br>
   &emsp;|--> Etherchain Documentação - Grupo 1 - Módulo 5.pdf<br>
 
 |--> Apresentações<br>
@@ -35,10 +35,10 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
   &emsp;|--> Apresentação Etherchain - Grupo 1 - Sprint 2.pdf<br>
   &emsp;|--> Apresentação Etherchain - Grupo 1 - Sprint 3.pdf<br>
   
-|--> imagens<br>
+|--> Imagens<br>
   &emsp;|--> Diagrama de implantação.png<br>
   
-|--> website <br>
+|--> Website <br>
   &emsp;| --> public <br>
   &emsp;|--> src<br>
     &emsp; &emsp;|--> clientpages<br>
@@ -50,10 +50,10 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
   &emsp;|--> MetamaskPlugin.jsx<br>
 
 
-| readme.md<br>
+| Readme.md<br>
 
 
-<b>Dentre os arquivos presentes na raiz do projeto, definem-se:</b>
+## <b>Dentre os arquivos presentes na raiz do projeto, definem-se:</b>
 
 <b>contrato:</b> pasta que contêm os smart contracts e também arquivo para teste automatizado.
 
@@ -90,13 +90,13 @@ De acordo com a estruturação de nosso código, os smart contracts podem ser us
 Além disso, os smart contracts verificam automaticamente as informações de sinistros, tais como a quantidade de solicitação de indenização pedidas, se a perda está dentro do escopo da cobertura do seguro mútuo, e se as regras de elegibilidade foram cumpridas pelos participantes. Isso pode ajudar a reduzir o tempo e os custos associados à resolução de sinistros.
 
 ### Histórico de Lançamento 
-0.2.1 - 07/04/2023
+- 0.2.1 - 07/04/2023
   Quinta entrega - Entrega Final
-0.2.0 - 24/03/2023
+- 0.2.0 - 24/03/2023
   Quarta entrega -
-0.1.1 - 10/03/2023
+- 0.1.1 - 10/03/2023
     Terceira entrega - Deploy do Smart contract, finalizar a criação das funções do contrato e integração inicial do contrato com o front-end
-0.1.0 - 24/02/2023
+- 0.1.0 - 24/02/2023
   Segunda entrega - Diagrama de blocos, primeira versão smart contract, wireframe das telas
-0.0.1 - 10/02/2023
+- 0.0.1 - 10/02/2023
   Primeira entrega - Análise de negócios, arquitetura da solução e estruturação de documentos
