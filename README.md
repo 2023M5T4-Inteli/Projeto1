@@ -90,13 +90,13 @@ De acordo com a estruturação de nosso código, os smart contracts podem ser us
 Além disso, os smart contracts verificam automaticamente as informações de sinistros, tais como a quantidade de solicitação de indenização pedidas, se a perda está dentro do escopo da cobertura do seguro mútuo, e se as regras de elegibilidade foram cumpridas pelos participantes. Isso pode ajudar a reduzir o tempo e os custos associados à resolução de sinistros.
 
 ### Histórico de Lançamento 
-* 0.2.1 - 07/04/2023
- * Quinta entrega - Entrega Final
-* 0.2.0 - 24/03/2023
-  * Quarta entrega -
-* 0.1.1 - 10/03/2023
-    * Terceira entrega - Deploy do Smart contract, Funções novas no contrato e inicio de integração com front-end
-* 0.1.0 - 24/02/2023
+* <b> 0.2.1 - 07/04/2023 <b>
+  * Quinta entrega - Entrega Final
+* <b> 0.2.0 - 24/03/2023 <b>
+  * Quarta entrega - Integração com frontend
+* <b> 0.1.1 - 10/03/2023 <b>
+  * Terceira entrega - Deploy do Smart contract, Funções novas no contrato e inicio de integração com frontend
+* <b> 0.1.0 - 24/02/2023 <b> 
   * Segunda entrega - Diagrama de blocos, primeira versão smart contract, wireframe das telas
-* 0.0.1 - 10/02/2023
+* <b> 0.0.1 - 10/02/2023 <b>
   * Primeira entrega - Análise de negócios, arquitetura da solução e estruturação de documentos
