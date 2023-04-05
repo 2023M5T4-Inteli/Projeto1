@@ -151,7 +151,10 @@ export default function CheckboxList() {
             </Box>
             <Divider sx={{ width: '100%' }} />
             <p style={{ fontSize: '150%', fontFamily: 'Rubik', fontWeight:500 }}>  Solicitações de indenização </p>
-
+            <Typography>Aqui nessa caixa é pego a solicitação que o cliente fez na pagina dele. 
+              Infelizmente não deu pra integrar essa caixa, então o objetivo dela é meio que ser um local onde o cara veja quem tá pedindo indenização e o pq.
+              Podendo indenizar no botão lá embaixo que funciona 
+            </Typography>
           </Grid>
 
           <Divider sx={{}} />
