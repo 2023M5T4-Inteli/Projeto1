@@ -2,27 +2,71 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 contract Owner {
+    address payable public beneficiary;
     // Variaveis de estado
     address public owner;
+    // taxa administrativa que deve ser paga pelo usuário no momento da entrada em um grupo de seguro
+    uint32 public administrativeFee = 5;
     // status da indenização. False = não solicitada, true = solicitada
-    bool public statusIndemnity = false;
-    // valor a ser reposto da reserva de risco
-    uint public reposition;
+    bool public statusIndemnity = true;
     // quantidade de usuários
     uint public userQuantity;
+    // valor a ser reposto da reserva de risco
+    uint public reposition;
     // valor da indenização solicitada;
     uint public indemnity;
-    //Valor que está presente no Contrato (isso é respectivo de cada grupo)
-    uint public amountContract = getBalance();
+    uint public value;
     // array contendo as carteiras de todos os membros do contrato
     address[] public membersContract;
     /* array contendo as carteiras dos membros
-     do contrato que realizaram o pagamento da reserva de risco */
+     do contrato que realizaram o pagamento */
     address[] public payers;
     /*array contendo as carteiras dos membros
      que solicitaram pagamento de reembolso */
-    address[] private userRequestingIndemnity;
+    address[] public userRequestingIndemnity;
+    address[] public approve;
+    // Struct
+    /*(Struct é um tipo de dado personalizado 
+    que permite definir uma estrutura de dados
+    com várias propriedades e usá-la em funções e contratos).*/
+    struct Member {
+        // carteira do cliente do contrato
+        address client;
+        //Imei do usuário tratado por hash
+        string _imei;
+        //Dinheiro do usuário
+        uint cash;
+        //uint pricePhone;
+    }
+    //Mapping
+    /*(Mapping é uma estrutura de
+    dados que associa uma chave
+    única a um valor). */
+    /*esse maping associa uma carteira a um valor
+     inteiro e representa o saldo de cada carteira*/
+    mapping(address => uint256) public balances;
+    /*esse mamping associa uma carteira a um valor
+    inteiro e representa o valor solicitado em uma indenização*/
+    mapping(address => uint256) private indemnityRequests;
+    /* esse mapping associa uma carteira a um valor booleano 
+    e representa os membros ativos do contrato */
+    mapping(address => bool) public activeMembers;
+    /* esse mapping associa uma carteira ao valor 
+    referente ao pagamento da taxa administrativa */
+    mapping(address => uint256) public administrativeFees;
 
+    // Eventos
+    /*(Eventos são notificações emitidas durante
+     a execução de um contrato para informar a 
+     ocorrência de uma determinada ação).*/
+    // Evento que registra quando o usuário fizer uma compra.
+    event Purchase(address _buyer, uint _amount);
+    // Evento que registra a adição de um novo membro no contrato.
+    event AddMember(address member);
+    // Evento que registra o recebimento de um pagamento.
+    event PaymentReceived(address member, uint amount);
+    // Evento que registra quando todos os pagamentos foram feitos.
+    event FinalAmount(uint finalValue);
     // Modificador para verificar se quem chamou é o proprietário
     modifier isOwner() {
         require(msg.sender == owner, "Caller is not owner");
@@ -38,48 +82,7 @@ contract Owner {
      invocada não existe ou se não for válida. */
     fallback() external payable {}
 
-    // Eventos
-    /*(Eventos são notificações emitidas durante
-     a execução de um contrato para informar a 
-     ocorrência de uma determinada ação).*/
-    // Evento que registra quando o usuário fizer uma compra.
-    event Purchase(address _buyer, uint _amount);
-    // Evento que registra a adição de um novo membro no contrato.
-
-    event AddMember(address member);
-
-    // Evento que registra o recebimento de um pagamento.
-    event PaymentReceived(address member, uint amount);
-
-    // Evento que registra quando todos os pagamentos foram feitos.
-    event FinalAmount(uint finalValue);
-
-    // Struct
-    /*(Struct é um tipo de dado personalizado 
-    que permite definir uma estrutura de dados
-    com várias propriedades e usá-la em funções e contratos).*/
-    struct Member {
-        //Dinheiro do usuário
-        uint cash;
-        //Cliente do contrato
-        address client;
-    }
-
-    //Mapping
-    /*(Mapping é uma estrutura de
-    dados que associa uma chave
-    única a um valor). */
-    //Nenhum valor esta sendo adicionado nesse mapping.
-    mapping(address => Member) public members;
-    /*esse maping associa uma carteira a um valor
-     inteiro e representa o saldo de cada carteira*/
-    mapping(address => uint256) public balances;
-    /*esse mamping associa uma carteira a um valor
-    inteiro e representa o valor solicitado em uma indenização*/
-    mapping(address => uint256) private indemnityRequests;
-    /* esse mapping associa uma carteira a um valor booleano 
-    e representa os membros ativos do contrato */
-    mapping(address => bool) public activeMembers;
+    function deposit() external payable {}
 
     /*Função especial que é executada apenas uma vez 
     quando o contrato é implantado na rede ethereum*/
@@ -98,15 +101,10 @@ contract Owner {
         return membersContract;
     }
 
-    // Função para obter os reembolsos pendentes de usuários.
-    function getPendingIndemnities()
-        public
-        view
-        isOwner
-        returns (address[] memory)
-    {
-        return userRequestingIndemnity;
-    }
+    // // Função para obter os reembolsos pendentes de usuários.
+    // function getPendingIndemnities() public isOwner view returns (address [] memory){
+    //     return userRequestingIndemnity;
+    // }
 
     // Função que retorna o valor do fundo
     function getBalance() public view returns (uint) {
@@ -115,8 +113,7 @@ contract Owner {
 
     // Função para ver quantas pessoas há na carteira
     function getTotalWalletClients() public view returns (uint) {
-        uint usersAmount = membersContract.length;
-        return usersAmount;
+        return userQuantity;
     }
 
     // Função que adiciona um membro a lista de membros do contrato
@@ -126,6 +123,7 @@ contract Owner {
     function addMember(address user) public isOwner {
         membersContract.push(user);
         activeMembers[user] = true;
+        userQuantity = userQuantity + 1;
         emit AddMember(msg.sender);
     }
 
@@ -133,39 +131,40 @@ contract Owner {
     // essa função atende ao seguinte requisito:
     // requisito 4: gerenciamento do número de clientes na plataforma
     function removeMember(address userWallet) public isOwner {
-        for (uint i = 0; i < membersContract.length - 1; i++) {
+        for (uint i = 0; i < membersContract.length; i++) {
             if (membersContract[i] == userWallet) {
-                for (uint index = i; i < membersContract.length - 1; index++) {
+                for (
+                    uint index = i;
+                    index < membersContract.length - 1;
+                    index++
+                ) {
                     membersContract[index] = membersContract[index + 1];
                 }
+                membersContract.pop();
+                userQuantity = userQuantity - 1;
+                activeMembers[userWallet] = false;
+                return;
             }
         }
-        // Caso o usuario seja removido ele é retirado da lista de pendencias a pagar
-        // userRequestingIndemnity.pop();
-        activeMembers[userWallet] = false;
-        membersContract.pop();
-        return;
     }
 
     // Função para realizar o pagamento do contrato de seguro
     // Essa função atende aos seguintes requisitos:
     // requisito 2: cobrança de uma taxa administrativa no momento da contratação do seguro
     // requisito 3: cobrança do valor referente ao pagamento do seguro mútuo.
-    function contractPayment() public payable {
-        // Define a taxa administrativa como 5%.
-        uint admTax = 5;
-        // Armazena o valor do depósito na variável "deposit".
-        uint deposit = msg.value;
-        // Calcula o valor a ser pago pelo usuário, descontando a taxa administrativa.
-        uint payUser = deposit - ((deposit * admTax) / 100);
-        // Adiciona o valor do depósito ao saldo do usuário.
+    function initialPayment(
+        string memory imeiValue,
+        address payable userWallet,
+        uint insuredValue
+    ) external payable {
+        Member memory members = Member(userWallet, imeiValue, insuredValue);
+        uint256 depositUser = insuredValue -
+            ((insuredValue * administrativeFee) / 100);
         balances[msg.sender] += msg.value;
-
-        emit Purchase(msg.sender, 1);
-        // Emite o evento "PaymentReceived", indicando que o pagamento foi recebido
+        payers.push(msg.sender);
+        emit Purchase(msg.sender, insuredValue);
         emit PaymentReceived(msg.sender, msg.value);
-        // Emite o evento indicando o valor final a ser pago pelo usuário.
-        emit FinalAmount(payUser);
+        emit FinalAmount(depositUser);
     }
 
     /* Essa função verifica de quem solicitou a indenização está no contrato
@@ -173,47 +172,52 @@ contract Owner {
     // **** Essa função demanda gás para ser executada
     //Essa função atende ao seguinte requisito:
     //Requisito 5: realização de um pedido de indenização
-    function RequestIndemnity(address userMakingRequest) public {
-        for (uint i = 0; i < membersContract.length; i++) {
-            // essa parte verifica se quem pediu indenização está no contrato
-            if (membersContract[i] == userMakingRequest) {
-                userRequestingIndemnity.push(userMakingRequest);
-            }
-        }
+    function requestIndemnity(uint256 _value) external {
+        require(activeMembers[msg.sender], "Member is not active");
+        // require(balances[msg.sender] >= _value, "Insufficient funds");
+        require(!statusIndemnity, "Indemnity already requested");
+        indemnityRequests[msg.sender] = _value;
+        statusIndemnity = true;
+        userRequestingIndemnity.push(msg.sender);
     }
 
-    // Função voltada para o pagamento do reebolso solicitado
-    // essa função atende ao seguinte requisito:
+    // Função voltada para o pagamento da indenização solicitada
+    // essa função atende ao seguint256e requisito:
     // requisito 6: aprovação dos pedidos de indenização
-    function paymentOfIndemnity(
-        address membersWallet,
-        uint amount
+    // Função para aprovação de indenização
+    function approveIndemnity(
+        address payable _memberRequesting,
+        uint _amount
     ) public isOwner {
-        require(amount < amountContract);
-        for (uint i = 0; i < userRequestingIndemnity.length; i++) {
-            // Condicional para verificar se o input que requiriu o pagamento já está na lista de usuarios que pediram um reembolso
-            if (userRequestingIndemnity[i] == membersWallet) {
-                payable(membersWallet).transfer(amount);
-                userRequestingIndemnity.pop();
-                amountContract = amountContract - amount;
-            }
-        }
+        require(statusIndemnity == true, "Indemnity not requested");
+        (bool success, ) = _memberRequesting.call{value: _amount}("");
+        require(success, "Failed to send Ether");
+        statusIndemnity = false;
     }
+
+    // // Function to transfer Ether from this contract to address from input
+    // function transfer(address payable _to, uint _amount) public {
+    //     require(1 == 1, "Indemnity not requested");
+    //     // require(getBalance() >= indemnityRequests[userRequestingIndemnity[0]], "Insufficient funds");
+    //     (bool success, ) = _to.call{value: _amount}("");
+    //     require(success, "Failed to send Ether");
+    //     // statusIndemnity = false;
+    // }
 
     /*Função que verifica a integridade da reserva de risco e
     em caso de comprometimento dessa, solicita sua reposição aos 
     membros do contrato */
     // essa função atende ao seguinte requisito
     // requisito 7: reposição da reserva de risco
-    function riskReserveRefund() public payable {
-        reposition = indemnity / userQuantity;
-        //função que permite a reposição da reserva de risco e garante que todos os membros a paguem
-        require(msg.value == reposition, "Valor devido incorreto.");
-        // adiciona as carteiras dos membros que pagaram a um array de pagantes
-        payers.push(msg.sender);
-        // verifica se todos pagaram e muda o status da variavel de solicitação da indenização em caso positivo
-        if (payers.length == userQuantity) {
-            statusIndemnity = false;
-        }
-    }
+    // function riskReserveRefund() public payable{
+    //     reposition = indemnity/userQuantity;
+    //     //função que permite a reposição da reserva de risco e garante que todos os membros a paguem
+    //     require(msg.value == reposition, "Valor devido incorreto.");
+    //     // adiciona as carteiras dos membros que pagaram a um array de pagantes
+    //     payers.push(msg.sender);
+    //     // verifica se todos pagaram e muda o status da variavel de solicitação da indenização em caso positivo
+    //     if (payers.length == userQuantity) {
+    //         statusIndemnity = false;
+    //     }
+    // }
 }
