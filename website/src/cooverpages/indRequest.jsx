@@ -1,118 +1,103 @@
-import * as React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
+import Axios from 'axios'
 import Button from "@mui/material/Button";
+import TextField from '@mui/material/TextField';
 import BackNavbarReq from "../components/Navbar/BackNavbarReq";
 import Modal from "@mui/material/Modal";
-import { Divider, Grid } from "@mui/material";
+import { Divider, Grid, Paper, Typography, IconButton } from "@mui/material";
 import Box from "@mui/material/Box";
-
-
-// Constantes que tem o estilo dos componentes utilizados no frontend 
-
-const styleModal = {
-  transform: "translate(50%, 50%)",
-  position: "flex",
-  width: "50%",
-  height: "50%",
-  left: "50%",
-  top: "50%",
-  boxSizing: "border-box",
-  background: "#FFFFFF",
-  border: "1px solid #C8C8C8",
-  borderRadius: "20px",
-  padding: "5%",
-  fontSize: "100%",
-  fontFamily: 'Rubik'
-};
-
-const buttonModalNo = {
-  position: "flex",
-  width: "50%",
-  height: "13.5%",
-  left: "5%",
-  top: "35%",
-  background: "rgba(255, 0, 0, 0.35)",
-  borderRadius: "22px",
-  fontSize: "100%",
-  padding: "5%",
-  color: "black",
-  fontFamily: 'Rubik',
-};
-
-const buttonModalYes = {
-  position: "flex",
-  width: "50%",
-  height: "13.5%",
-  left: "-5%",
-  top: "35%",
-  background: "rgba(2, 222, 130, 0.35)",
-  borderRadius: "22px",
-  fontSize: "100%",
-  padding: "5%",
-  color: "black",
-  fontFamily: 'Rubik',
-};
-
-const buttonAccept = {
-  position: "flex",
-  width: "50%",
-  height: "40%",
-  left:'25%',
-  top: "100%",
-  background: "rgba(133, 251, 202, 0.88)",
-  borderRadius: "22px",
-  color: "black",
-  marginTop: "10%",
-  fontFamily: 'Rubik'
-};
-
+import styled from '@mui/system/styled';
+import Web3 from "web3";
+import erc20ABI from "../erc20ABI.json"
+import { DataGrid } from '@mui/x-data-grid';
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
+import { difference } from "lodash";
+import { styleModal, buttonAccept, buttonModalNo, buttonModalYes, buttonRemove } from '../clientpages/styles/indRequest.styles'
 
 // Função que permite aceitar ou não membros para fazerem parte do contrato 
 export default function CheckboxList() {
-  const [checked, setChecked] = React.useState([0]);
+
+  const columns = [
+    { field: 'refundImei', headerName: 'Client IMEI', flex: 0.6 },
+    { field: 'refundAdress', headerName: 'Refund wallet', flex: 0.7 },
+    { field: 'refundPercentage', headerName: 'Refund Percentage', flex: 0.2 },
+    { field: 'refundCellValue', headerName: 'Cell Value', flex: 0.2 },
+    { field: 'refundReason', headerName: 'Refund Reason', flex: 1 },
+
+    {
+      field: 'icon',
+      headerName: '',
+      width: 80,
+      renderCell: (params) => (
+        <IconButton
+          onClick={() => console.log(params.row.refundImei)}
+          sx={{ color: 'green' }}
+        >
+          <CheckIcon />
+        </IconButton>
+      )
+    },
+    {
+      field: 'icon2',
+      headerName: '',
+      width: 80,
+      renderCell: (params) => (
+        // Botão que deleta a requisição de indenização
+        <IconButton
+          onClick={ async () =>{
+            const id = params.row._id
+            try {
+              Axios.delete(`http://localhost:3001/deleteIndemRequest/${id}`)
+              alert("Deletado com sucesso, recarregue a página e confira o resultado  ")
+            } catch (err) {
+              alert(err.message);
+            }
+          }}
+          sx={{ color: 'red' }}
+        >
+          <ClearIcon />
+        </IconButton>
+      )
+    },
+  ];
+
+  const [imei, setImei] = React.useState([]);
+  const [selectedRows, setSelectedRows] = React.useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
+    Axios.get("http://localhost:3001/getDataRefund").then((response) => {
+      setImei(response.data);
+      console.log(response.data)
+    });
+  }
+
+  const newSelectionModel = () => (selection) => setSelectedRows(selection);
+  const handleRowSelection = newSelectionModel();
+  const getRowId = (row) => row._id;
+
+  const selectedIds = difference(newSelectionModel, selectedRows)
+  const selectedImei = imei.filter((row) => selectedIds.includes(row._id));
+
+  const handlePrintSelectedIds = () => {
+    handleRowSelection([1, 2, 3]);
+    console.log(selectedImei);
+  };
+
   const [open, setOpen] = React.useState(false);
+
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-  };
-
-  // Aqui sera a array com os dados enviados pelo backend
-  const wallet_List = [
-    {
-      address: "0x5EaaAb0F75C41A4314FFa90fdadE8e2a33054544",
-      label_Adress: "IMEI: 356133312444796",
-    },
-
-    {
-      address: "0xFf27a22195b74b06Af498FC5E63f0A3b0F3Ed9Bd",
-      label_Adress: "IMEI: 356133313214867",
-    },
-
-    {
-      address: "0xf8094b52b1Bad1361aBC90993EAe757FFc91C5e3",
-      label_Adress: "IMEI: 356133317784378",
-    },
-  ];
 
   return (
     <>
@@ -125,16 +110,17 @@ export default function CheckboxList() {
         sx={{}}
       >
         <Box sx={styleModal}>
-          <h2 style={{ fontFamily: 'Rubik' }} id="child-modal-title">Solicitação de indenização</h2>
+          <h2 id="child-modal-title">Solicitação de entrada</h2>
           <p style={{ fontFamily: 'Rubik' }} id="child-modal-description">
-            Deseja mesmo permitir o pagamento de indenização a estes participantes?
+            Deseja mesmo permitir a entrada desses integrantes no grupo em
+            questão?
           </p>
           {/*Conectar a esse botão uma função que adiciona integrantes no grupo */}
           <Button style={{ fontFamily: 'Rubik' }} variant="contained" onClick={handleClose} sx={buttonModalYes}>
             Sim
           </Button>
           {/* Conectar a esse botão uma função que apaga a solicitação e envia uma notificação ao respectivo integrante negado */}
-          <Button style={{ fontFamily: 'Rubik' }} variant="contained" onClick={handleClose} sx={buttonModalNo}>
+          <Button variant="contained" onClick={handleClose} sx={buttonModalNo}>
             Não
           </Button>
         </Box>
@@ -148,56 +134,120 @@ export default function CheckboxList() {
           padding: "20px 0 0 50px",
         }}
       >
-        {/* Navbar da página */}
+
         <BackNavbarReq />
-        <Box sx={{marginTop:8, marginLeft:-5, }}>
-        <Grid style={{display:'flex', alignItems:'center', flexDirection:'column'}}>
-          <h1 style={{marginBottom:-1, fontFamily: 'Rubik'}}>Grupo 1</h1>
-          _____________________________________________
-          <p style={{fontSize: '150%', fontFamily: 'Rubik'}}> Solicitações de indenização </p>
-        </Grid>
-        <Divider sx={{}}/>
+        <Box sx={{ marginTop: 8, marginLeft: -5, }}>
+          <Grid style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: 3, }}>
 
-        {wallet_List.map((wallet, index) => {
-          const labelId = `checkbox-list-label-${index}`;
-          
-          return (
-            <div alignItems="center" display="flex">
-              <ListItem
-                key={index}
-                secondaryAction={<h6>{/* Data de solicitação */}</h6>}
-                disablePadding
-              >
-                <ListItemButton
-                  role={undefined}
-                  onClick={handleToggle(index)}
-                  dense
-                >
-                  <ListItemIcon sx={{marginLeft:-2.5}}>
-                    <Checkbox
-                      edge="start"
-                      checked={checked.indexOf(index) !== -1}
-                      tabIndex={-1}
-                      disableRipple
-                      inputProps={{ "aria-labelledby": labelId }}
-                    />
-                  </ListItemIcon>
-                  <ListItemText id={labelId} primary={wallet.address} secondary={wallet.label_Adress}
-                  />
-                </ListItemButton>
-              </ListItem>
+              <Paper sx={{
+                backgroundColor:
+                  'rgba(9, 64, 180, 0.1)', width: '125px', marginTop: 2, borderRadius: 3
+              }}>
+                <Typography style={{
+                  fontFamily: 'Rubik', fontSize: 25,
+                  display: 'flex', justifyContent: 'center', fontWeight: 500
+                }}>Grupo 1</Typography>
+              </Paper>
+            </Box>
+            <Divider sx={{ width: '100%' }} />
+            <p style={{ fontSize: '150%', fontFamily: 'Rubik', fontWeight:500 }}>  Solicitações de indenização </p>
+            <Divider sx={{ width: '100%' }} />
+              <Typography sx={{fontFamily: 'Rubik', fontWeight:500, fontSize:20, marginTop:5, marginBottom:2}}>
+              Pedidos de indenização pendentes
+            </Typography>
+          </Grid>
 
-            </div>
-          );
-        })}
-        <Divider sx={{}}/>
-        <div>
-          <Button variant="contained" onClick={handleOpen} sx={buttonAccept}>
-            Aprovar
-          </Button>
-        </div>
+
+          <div style={{ height: 400, width: '100%' }}>
+            <DataGrid rows={imei} columns={columns} pageSize={5} getRowId={getRowId}
+              disableRowSelectionOnClick
+              onSelectionModelChange={handleRowSelection}
+              selectionModel={selectedRows} />
+          </div>
+
         </Box>
+          <div style={{ height: 150, width: '100%' }}>
+        <Typography style={{
+                  fontFamily: 'Rubik', fontSize: 18,
+                  display: 'flex', justifyContent: 'center', fontWeight: 500, marginTop:20
+                }}>Pagar uma requisição</Typography>
+          </div>
+          <Grid sx={{marginTop:-10}}>
+          <PayRefundRequest />
+          </Grid>
       </List>
+
     </>
   );
 }
+
+// Definindo o endereço do contrato 
+const contractAddress = "0x6776743D36549408dBd47f1f061401BcD5e83208"
+// Pegando o json com informações sobre o contrato 
+const abi = erc20ABI
+
+
+
+async function getContract() {
+  if (!window.ethereum) return console.log(`No MetaMask found!`);
+
+  const web3 = new Web3(window.ethereum);
+  const accounts = await web3.eth.requestAccounts();
+  if (!accounts || !accounts.length) return console.log('Wallet not found/allowed!');
+
+  return new web3.eth.Contract(abi, contractAddress, { from: accounts[0] });
+}
+
+// Função que permite pagar a requisição de indenização 
+function PayRefundRequest() {
+  const[addressValue, setaddressValue] = useState('')
+  const[valueToPay, setValuePayment] = useState('')
+
+// Pagar a indenização 
+  async function payIndeminity() {
+    var walletToPay = addressValue
+    var fixAddress = Web3.utils.toChecksumAddress(walletToPay)
+    const initialPaymentUser = String(valueToPay * 0.00001)
+    // Para enviar o pagamento é preciso converter para WEI que é a moeda fatorada 
+    var totalPayment = Web3.utils.toWei(initialPaymentUser)
+
+    alert("Sera pago : " + initialPaymentUser)
+
+    try {
+      const contract = await getContract();
+      const payIndeminity = await contract.methods.approveIndemnity(fixAddress, totalPayment).send()
+      alert(JSON.stringify(payIndeminity));
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
+  const handleWalletChange = (event) => {
+    setaddressValue(event.target.value);
+  };
+
+  const handleValueChange = (event) => {
+    setValuePayment(event.target.value);
+  };
+
+ 
+
+
+  return(
+    <>
+    <div>
+
+    <TextField fullWidth label="Definir a  carteira" id="wallet"  value={addressValue} onChange={handleWalletChange} sx={{marginBottom:3, marginTop:-2}}/>
+    <TextField fullWidth label="Definir valor indenização " id="value"  value={valueToPay} onChange={handleValueChange}/>
+    <Grid sx={{display:"flex", justifyContent:"center"}}>
+    <Button variant="contained" onClick={payIndeminity} sx={buttonAccept} style={{fontFamily: 'Rubik', marginTop:-40, width:'10rem', '&:hover': {backgroundColor:'black'}}}>
+    Pagar cliente
+    </Button>
+    </Grid>
+    </div>  
+  </>
+  )
+}
+
+

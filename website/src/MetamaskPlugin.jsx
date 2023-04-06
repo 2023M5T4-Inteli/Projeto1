@@ -17,7 +17,7 @@ function MetamaskPlugin() {
   
   /* Definindo a carteira do administrador.
   Se atentar que na hora de colocar o endereço tudo tem de estar minusculo */
-  const cooverWalletAdrress = "0x5038C990be642DB89B590DA8Ae938e1738d73E15"
+  const cooverWalletAdrress = "0x474a4f22d31e086c078a1daa6a5e95b405db8c8e"
 
   function handleDisplayChange(account) {
     if (account === cooverWalletAdrress) {
@@ -73,10 +73,17 @@ function MetamaskPlugin() {
         
         // Output gerado antes da conexão
         <Box sx={{width:'30rem'}}>
-          
-          <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 5 }}>
+           {/* <Grid container rowSpacing={2} sx={{ 
+            marginTop: 1, display:'flex', flexDirection:'row', justifyContent:'space-around', padding:'0 10% 0 10%'
+            }} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
+               */}
+          <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 2,  '@media (min-width: 500px)': {
+          },}}>
             <img src={CooverHome} alt="CooverLogo"  />
           </Grid>
+
+          <Grid sx={{'@media (min-width: 400px)': {
+          },}}>
           <Grid sx={{ display: 'flex', justifyContent: 'center', paddingTop: 12, }}>
             <Button variant="contained" onClick={handleConnect} size='large' sx={{ borderRadius: '15px', backgroundColor: '#EAEAEA', color: 'black' }}>
               <strong style={{ fontFamily: 'Rubik' }} >Conecte sua carteira</strong>
@@ -90,7 +97,9 @@ function MetamaskPlugin() {
               <strong style={{ fontFamily: 'Rubik' }} >Crie sua MetaMask</strong>
             </Button>
           </Grid>
+          </Grid>
           <br></br>
+          {/* </Grid> */}
         </Box>
 
       )}

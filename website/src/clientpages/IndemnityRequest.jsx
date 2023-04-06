@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import erc20ABI from "../erc20ABI.json"
 import Web3 from 'web3';
+import Axios from 'axios'
 import styled from '@mui/system/styled';
-import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Link} from '@mui/material';
+import Input from '@mui/material/Input';
+import sha256 from 'crypto-js/sha256';
+import {  Button, Modal, TextField, FormControl, InputLabel, Select,MenuItem, Box, Grid, Divider, Link, Paper, Typography} from '@mui/material';
 import {makeStyles} from '@mui/styles';
 import {  useNavigate } from 'react-router-dom';
 import BackNavbarReqClient from '../components/Navbar/BackNavbarReqClient';
@@ -14,6 +17,8 @@ const button2 = {
   borderColor: 'rgba(2, 222, 130, 0.6)',
   backgroundColor: 'rgba(2, 222, 130, 0.1)',
   padding: 1.5,
+  marginTop:'5%',
+  height:'3rem',
   paddingLeft: 2,
   borderRadius: '40px',
   color:'black',
@@ -28,6 +33,7 @@ const Item = styled('div')(({ theme }) => ({
   borderColor: theme.palette.mode === 'dark' ? '#444d58' : '#ced7e0',
   padding: theme.spacing(2),
   borderRadius: '24px',
+  marginTop:'1%',
   textAlign: 'left',
   '& h3': {
     marginBottom: theme.spacing(2),
@@ -68,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     marginTop: 5, // Espaçamento acima do componente
-    marginBottom: 20, // Espaçamento abaixo do componente
+    marginBottom: '3%', // Espaçamento abaixo do componente
     minWidth: 350,
     margin: '10px', // Espaçamento em todas as direções
   },
@@ -82,12 +88,37 @@ export const IndemnityForm = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [imei, setImei] = useState('');
+  const [walletReq, setWalletReq] = useState('');
+  const [cellValue, setCellValue] = useState('');
   const [coverage, setCoverage] = useState('');
   const [reason, setReason] = useState('');
   const [openModal, setOpenModal] = React.useState(false);
 
   function handleLink() {
     return navigate('/gruposclient2');
+ }
+
+       // Função que envia os dados do BD
+       const sendRefundData = () => {
+        // Aqui é feito o hash do imei por motivos de segurança
+        const refundImeiHash = sha256(imei).toString()
+
+        Axios.post('http://localhost:3001/insertRefund', 
+        { refundImei : refundImeiHash, 
+          refundPercentage : coverage, 
+          refundValue : cellValue,
+          refundReason : reason ,
+          refundAdress : walletReq,
+       })
+       console.log('Data sent ->', 'wallet:', refundImeiHash, 'imei:',coverage,'reason:', reason,"Cell", cellValue )
+      }
+
+
+  // Função que executa multiplas funções 
+  function handleLinkAndSendData() {
+    handleLink();
+    sendRefundData();
+    makeIndemRequest();
  }
 
   const handleOpen = () => {
@@ -102,6 +133,14 @@ export const IndemnityForm = () => {
     setImei(event.target.value);
   };
 
+  const handleWalletChange = (event) => {
+    setWalletReq(event.target.value);
+  };
+
+  const handleCellChange = (event) => {
+    setCellValue(event.target.value);
+  };
+
   const handleCoverageChange = (event) => {
     setCoverage(event.target.value);
   };
@@ -110,21 +149,63 @@ export const IndemnityForm = () => {
     setReason(event.target.value);
   };
 
-  const handleSubmit = () => {
-    // Submit the form data
-    console.log('IMEI:', imei);
-    console.log('Coverage:', coverage);
-    console.log('Reason:', reason);
-    handleClose();
-  };
 
-  const [numberUsers, setnumberUsers] = useState ()
+
+  const [numberUsers, setnumberUsers] = useState ();
+  const [totalFunds, setTotalFunds] = useState()
+
   useEffect(() =>{
     activeMembers().then(number => {
       setnumberUsers(number);
     });
 
   },[]);
+
+  useEffect(() => {
+    avaibleFunds().then(cash => {
+      setTotalFunds(cash);
+    });
+
+  },  
+  []);
+
+
+
+// Definindo o endereço do contrato 
+const contractAddress = "0x6776743D36549408dBd47f1f061401BcD5e83208"
+// Pegando o json com informações sobre o contrato 
+const abi = erc20ABI
+
+// Sempre é necessário instanciar o contrato para poder enviar dados 
+async function getContract() {
+  if (!window.ethereum) return console.log(`No MetaMask found!`);
+
+  const web3 = new Web3(window.ethereum);
+  const accounts = await web3.eth.requestAccounts();
+  if (!accounts || !accounts.length) return console.log('Wallet not found/allowed!');
+
+  return new web3.eth.Contract(abi, contractAddress, { from: accounts[0] });
+}
+
+
+  //Função que vai permitir enviar direto a carteira para requisitar uma indenização
+  async function makeIndemRequest() {
+    var walletClientIndem = 1
+    var fixAddress = Web3.utils.toChecksumAddress("0xff27a22195b74b06af498fc5e63f0a3b0f3ed9bd")
+
+
+    try {
+      const contract = await getContract();
+      // const accounts = await Web3.eth.getAccounts();
+      // {from:contractAddress, value: Web3.utils.toWei(totalPayment)}
+      const tx = await contract.methods.requestIndemnity(10).send();
+      //console.log(fixAddress)
+      alert(JSON.stringify(tx));
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
 
   return (
    <>
@@ -133,11 +214,19 @@ export const IndemnityForm = () => {
         <Grid container rowSpacing={2} columnSpacing={{ xs: 2, sm: 2, md: 2 }}>
           
           <Grid item xs={12} md={12} >
-            <h1 style={{ justifyContent: 'center', display: 'flex', zIndex: 1, position: 'relative', marginTop:'3rem' }}>Grupo 1</h1>
+          <Box sx={{display:'flex', justifyContent:'center', marginBottom:3, marginTop:1}}>
+            <Paper sx={{backgroundColor: 
+            // isHover ? 'rgba(2, 222, 130, 0.8)' : 
+            'rgba(9, 64, 180, 0.1)', width:'125px', marginTop:2,borderRadius:3 }}>
+            <Typography style={{fontFamily: 'Rubik', fontSize:25, 
+            display:'flex', justifyContent:'center', fontWeight:500
+            }}>Grupo 1</Typography> 
+            </Paper>
+            </Box>
             <Divider sx={{  }} />
             <Item sx={{marginTop:2}}>
               <p>
-                Mínimo de membros: 35
+              Valor disponível : {totalFunds} ETH
               </p>
             </Item>
             <br>
@@ -175,12 +264,12 @@ export const IndemnityForm = () => {
         </Grid>
       </Box>
    <Grid style={{display:'flex', justifyContent:'center', marginTop:10}}>
-  <Button variant="contained" color="primary" onClick={handleOpen}
+  <Button variant="contained" color="primary"  onClick={handleOpen}
   sx={button2}
-  //  style={{ backgroundColor: '#02DE82', color: 'inherit', display:'flex', justifyContent:'center', marginTop:'20px' }}
    >
     Solicitar Indenização
   </Button>
+  <GetWallet></GetWallet>
   </Grid>
 
       <Modal
@@ -189,8 +278,8 @@ export const IndemnityForm = () => {
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
       >
-        {/* <div className={classes.paper}> */}
-        <Grid style={{background:'white', padding:10, paddingBottom:30, marginTop:'25%', display:'flex', justifyContent:'center', flexDirection:'column' }}>
+        {/* #TO-DO Colocar os valores daqui no BANCO DE DADOS  */}
+        <Grid style={{background:'white', padding:10, paddingBottom:30, marginTop:'10rem', marginLeft:'10%', display:'flex', justifyContent:'center', flexDirection:'column', maxWidth:'80%', minWidth:'400px' }}>
           <Grid style={{display:'flex', justifyContent:'center'}}>
           <h2 id="modal-title">PEDIDO DE INDENIZAÇÃO</h2>
           </Grid>
@@ -204,7 +293,24 @@ export const IndemnityForm = () => {
             />
           </FormControl>
           <FormControl className={classes.formControl}>
-
+            <InputLabel id="adress-label" shrink>Valor do aparelho</InputLabel>
+            <TextField
+              id="valueCell"
+              labelId="value-label"
+              value={cellValue}
+              onChange={handleCellChange}
+            />
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="adress-label" shrink>Endereço da carteira</InputLabel>
+            <TextField
+              id="adress"
+              labelId="imei-label"
+              value={walletReq}
+              onChange={handleWalletChange}
+            />
+          </FormControl>
+          <FormControl className={classes.formControl}>
 
             <InputLabel id="coverage-label">Cobertura desejada</InputLabel>
             <Select
@@ -213,10 +319,11 @@ export const IndemnityForm = () => {
               value={coverage}
               onChange={handleCoverageChange}
             >
-              <MenuItem value="option1">5%</MenuItem>
-              <MenuItem value="option2">10%</MenuItem>
-              <MenuItem value="option3">15%</MenuItem>
-              <MenuItem value="option4">20%</MenuItem>
+              <MenuItem value={10}>10%</MenuItem>
+              <MenuItem value={25}>25%</MenuItem>
+              <MenuItem value={50}>50%</MenuItem>
+              <MenuItem value={75}>75%</MenuItem>
+              <MenuItem value={100}>100%</MenuItem>
 
 
             </Select>
@@ -231,9 +338,10 @@ export const IndemnityForm = () => {
             />
 
           </FormControl>
+          
           <Grid style={{display:'flex', justifyContent:'center'}}>
-          <Button onClick={handleLink} variant="contained" color="primary" style={button2}>
-          Realizar pedido
+          <Button onClick={handleLinkAndSendData} variant="contained" color="primary" style={button2}>
+          Realizar pedido OI
           </Button>
           </Grid>
       
@@ -243,8 +351,39 @@ export const IndemnityForm = () => {
   );
 };
 
+// Componente para criar um input no BD
+
+const GetWallet = () => {
+  const [walletAddress, setwalletAddress] = useState("")
+
+  // Função que pega todos os dados do BD
+  const getData = () => {
+    Axios.get("http://localhost:3001/getData").then((response) => {
+      console.log(response)
+    })
+  }
+
+  // Função que envia os dados do BD
+  const postData = () => {
+    Axios.post('http://localhost:3001/insert', 
+    {clientAddress : walletAddress })
+  }
+
+
+  return(
+    <>
+
+    </>
+  )
+
+}
+
+
+
+
+
 // Definindo o endereço do contrato 
-const contractAddress = "0x1B0b42d9c38C98C22377A622Cf3227a920E8CC7C"
+const contractAddress = "0x6776743D36549408dBd47f1f061401BcD5e83208"
 // Pegando o json com informações sobre o contrato 
 const abi = erc20ABI
 
@@ -254,12 +393,29 @@ async function activeMembers() {
   try {
     const contract = new web3.eth.Contract(abi, contractAddress);
     // Aqui é onde está sendo executada a função definida no contrato
-    const numberMembers = await contract.methods.showAllMembers().call();
+    const numberMembers = await contract.methods.getTotalWalletClients().call();
     var totalUsers = Object.keys(numberMembers).length
+    // console.log(totalUsers)
   } catch (err) {
     console.log(err.message);
   }
   return (totalUsers)
+}
+
+// Essa função conecta ao contrato e executa a função de checar o valor disponível no contrato
+async function avaibleFunds() {
+  const web3 = new Web3(window.ethereum);
+  try {
+    const contract = new web3.eth.Contract(abi, contractAddress);
+    // Aqui é onde está sendo executada a função definida no contrato
+    const numberMembers = await contract.methods.getBalance().call();
+    // Convertendo o valor disponível no contrato para um valor legivel
+    const totalFinally = numberMembers/(Math.pow (10,18))
+    var finalValue = totalFinally
+  } catch (err) {
+    console.log(err.message);
+  }
+  return (finalValue)
 }
 
 

@@ -4,7 +4,6 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { createTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
-import CheckboxList from '../cooverpages/enterRequest';
 
 // Constantes que tem o estilo dos componentes utilizados no frontend 
 
