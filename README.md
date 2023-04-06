@@ -76,6 +76,19 @@ Também existem os arquivos
 
 <b>readme:</b> arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
 
+
+<h2> :dart:	 Como utilizar </h2>
+<ol>
+  <li>Com a sua IDE de preferência clone o projeto</li>
+	<li>Acesse o diretório raiz do site utilizando o comando <code>cd website </code></li>
+	<li>Iniciar o servidor local utilizando o comando <code>npm start</code></li>
+	<li>Abrir outra guia do terminal na IDE e novamente acessar o diretório raiz do site utilizando o comando <code>cd website </code></li>
+  <li>Iniciar o backend utilizando o comando <code>node app.js</code></li>
+  <li>Pronto o site está funcionando basta acessar no navegador <code>http://localhost:3000/</code> </li>
+
+</ol>
+
+
 ## :jigsaw: Descrição do objetivo do Smart Contract
 
 Este contrato tem como objetivo gerenciar um grupo de membros que contribuem com dinheiro para um fundo comum. Ele contém funções para adicionar dinheiro ao fundo, adicionar novos membros, remover membros, solicitar reembolsos e pagar reembolsos aos membros. O contrato também tem variáveis para armazenar informações sobre os membros, incluindo seus saldos e status de ativação. O evento "Purchase" é emitido quando um novo pagamento é recebido, o evento "AddMember" é emitido quando um novo membro é adicionado e o evento "PaymentReceived" é emitido quando um pagamento é recebido de um membro.
