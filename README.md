@@ -21,6 +21,10 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
 - [Rafael Lupovici Moritz](https://www.linkedin.com/in/rafael-moritz/)
 - [Vinicius Oliveira Fernandes](https://www.linkedin.com/in/vinicius-oliveira-fernandes-627b68168/)
 
+## :video_camera: Funcionamento do projeto 
+- Link do youtube <a>https://youtu.be/UWHRfNqpct8</a>
+- Link Google Drive <a href=https://drive.google.com/file/d/1-Vlg4WkeKsNYKJW6_0vqXCOREYleTW5E/view?usp=sharing </a>
+
 
 ## 📁 Estrutura de pastas
 |--> contrato<br>
