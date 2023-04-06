@@ -151,13 +151,12 @@ export default function CheckboxList() {
             </Box>
             <Divider sx={{ width: '100%' }} />
             <p style={{ fontSize: '150%', fontFamily: 'Rubik', fontWeight:500 }}>  Solicitações de indenização </p>
-            <Typography>Aqui nessa caixa é pego a solicitação que o cliente fez na pagina dele. 
-              Infelizmente não deu pra integrar essa caixa, então o objetivo dela é meio que ser um local onde o cara veja quem tá pedindo indenização e o pq.
-              Podendo indenizar no botão lá embaixo que funciona 
+            <Divider sx={{ width: '100%' }} />
+              <Typography sx={{fontFamily: 'Rubik', fontWeight:500, fontSize:20, marginTop:5, marginBottom:2}}>
+              Pedidos de indenização pendentes
             </Typography>
           </Grid>
 
-          <Divider sx={{}} />
 
           <div style={{ height: 400, width: '100%' }}>
             <DataGrid rows={imei} columns={columns} pageSize={5} getRowId={getRowId}
@@ -170,10 +169,12 @@ export default function CheckboxList() {
           <div style={{ height: 150, width: '100%' }}>
         <Typography style={{
                   fontFamily: 'Rubik', fontSize: 18,
-                  display: 'flex', justifyContent: 'center', fontWeight: 500
+                  display: 'flex', justifyContent: 'center', fontWeight: 500, marginTop:20
                 }}>Pagar uma requisição</Typography>
           </div>
-          <PayRefundRequest></PayRefundRequest>
+          <Grid sx={{marginTop:-10}}>
+          <PayRefundRequest />
+          </Grid>
       </List>
 
     </>
@@ -230,10 +231,10 @@ function PayRefundRequest() {
     <>
     <div>
 
-    <TextField fullWidth label="Definir a  carteira" id="wallet"  value={addressValue} onChange={handleWalletChange}/>
+    <TextField fullWidth label="Definir a  carteira" id="wallet"  value={addressValue} onChange={handleWalletChange} sx={{marginBottom:3, marginTop:-2}}/>
     <TextField fullWidth label="Definir valor indenização " id="value"  value={valueToPay} onChange={handleValueChange}/>
     <Grid sx={{display:"flex", justifyContent:"center"}}>
-    <Button variant="contained" onClick={payIndeminity} sx={buttonAccept} style={{fontFamily: 'Rubik'}}>
+    <Button variant="contained" onClick={payIndeminity} sx={buttonAccept} style={{fontFamily: 'Rubik', marginTop:-40, width:'10rem', '&:hover': {backgroundColor:'black'}}}>
     Pagar cliente
     </Button>
     </Grid>

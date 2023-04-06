@@ -114,22 +114,29 @@ export default function ViewGroupsClient2() {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                 >
+                    <Box sx={{display:'flex',flexDirection:'column'}}>
                     <Typography style={{ fontFamily: 'Rubik' }} sx={{
                         fontSize: 30, fontWeight: 600,
                         // color: 'rgba(9, 64, 180, 0.8)',
                         color: 'black',
-                        marginBottom: -0.5, marginTop: -1, marginLeft: '2%'
+                        marginBottom: 1, marginTop: -1, marginLeft: '2%'
                     }} color="black" gutterBottom>
                         Grupos mútuos
                     </Typography>
+                    <Divider />
+                    <Typography style={{ fontFamily: 'Rubik' }} sx={{ marginTop: 1, fontSize: 20, fontWeight: 600, color: '#06266A', marginLeft: '2%' }} color="black" gutterBottom>
+                        Selecione o grupo de seguro mútuo que deseja visualizar ou interagir.
+
+                    </Typography>
+                    </Box>
                 </AccordionSummary>
                 <AccordionDetails>
 
 
                     <Divider />
-                    <Typography style={{ fontFamily: 'Rubik' }} sx={{ marginTop: 2, fontSize: 20, fontWeight: 600, color: '#06266A', marginLeft: '2%' }} color="black" gutterBottom>
-                        Selecione o grupo de seguro mútuo que deseja visualizar ou interagir.
-
+                    <Typography style={{ fontFamily: 'Rubik' }} sx={{ marginTop: 2, fontSize: 20, fontWeight: 600, color: 'rgba(0, 0, 0, 0.8)', marginLeft: '2%' }} color="black" gutterBottom>
+                        Aqui, é feita uma comparação entre o endereço da sua Metamask e os endereços presentes no grupo de seguro mútuo. 
+Se você já participa de um grupo, faça um reload na página ou cheque sua Metamask.
                     </Typography>
                 </AccordionDetails>
             </Accordion>

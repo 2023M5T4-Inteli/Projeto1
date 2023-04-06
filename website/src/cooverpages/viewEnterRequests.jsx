@@ -241,15 +241,22 @@ const handleExcludeRows = () => {
             }}>Grupo 1</Typography> 
             </Paper>
             </Box>
+         
             <Divider sx={{width: '100%'}}/>
           <p style={{fontSize: '150%', fontFamily: 'Rubik', fontWeight:500 }}>  Gestão de membros </p>
 
         </Grid>
        
         <Divider sx={{}}/>
+        <Grid sx={{display:'flex', justifyContent:'center', }}>
+        <Typography sx={{fontFamily: 'Rubik', fontWeight:700, fontSize:20, marginTop:2, marginBottom:2}}>Membros do grupo</Typography>
+        </Grid>
+        <DataGridActiveMembers></DataGridActiveMembers>
 
         <div style={{ height: 400, width: '100%' }}>
-        <h6>Aqui estão os membros que desejam participar do grupo</h6>
+        <Grid sx={{display:'flex', justifyContent:'center', }}>
+        <Typography sx={{fontFamily: 'Rubik', fontSize:20, marginTop:2, marginBottom:2, fontWeight:500,}}>Pedidos pendentes de participação neste grupo </Typography>
+        </Grid>
       <DataGrid rows={imei} columns={columns} pageSize={5} getRowId={getRowId}
         disableRowSelectionOnClick 
         onSelectionModelChange={(selection) => setSelectedRows(selection)} selectionModel={selectedRows}/>
@@ -257,13 +264,16 @@ const handleExcludeRows = () => {
 
         </Box>
       </List>
+    
       <div style={{ height: 400, width: '100%' }}>
-      <h4>Aqui você também pode adicionar e remover membros </h4>
+      <Grid sx={{display:'flex', justifyContent:'center', }}>
+      <Typography sx={{fontFamily: 'Rubik', fontSize:20, marginTop:10, marginBottom:3, fontWeight:500, }}>Adição e remoção de membros</Typography>
+      </Grid>
         <AddNewMembersByWallet></AddNewMembersByWallet>
         <RemoveMembersByWallet></RemoveMembersByWallet>
       </div>
-      <h4>Aqui você também pode checar dados sobre quais são os atuais membros </h4>
-        <DataGridActiveMembers></DataGridActiveMembers>
+ 
+      
     </>
   );
 }
