@@ -70,7 +70,8 @@ Também existem os arquivos
    - index.js : arquivo que contem todas as rotas do site e utiliza o react DOM
    - MetamaskPlugin.jsx : tela inicial onde contém o login e define se é administrador ou
  cliente
-    - app.js : arquivo que contem todas as rotas do backend e conecta com o o banco de dados online 
+ 
+   - app.js : arquivo que contem todas as rotas do backend e conecta com o o banco de dados online 
 
 
 <b>readme:</b> arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
