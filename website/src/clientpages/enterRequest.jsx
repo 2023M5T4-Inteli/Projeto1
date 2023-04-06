@@ -177,7 +177,7 @@ export default function GruposClient() {
   };
 
       // Definindo o endereço do contrato 
-      const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
+      const contractAddress = "0x6776743D36549408dBd47f1f061401BcD5e83208"
       // Pegando o json com informações sobre o contrato 
       const abi = erc20ABI
 
@@ -195,14 +195,16 @@ export default function GruposClient() {
 
       // Pagar a para entrar no grupo TODO
       async function payToEnter() {
-        var walletizinha = walletAdress
-        var fixAddress = Web3.utils.toChecksumAddress(walletizinha)
-        var imeizinho = imei
-        var valorzinho = reason
+        var lilWallet = walletAdress
+        var fixAddress = Web3.utils.toChecksumAddress(lilWallet)
+        var imeiUser = imei
+        var valueUser = reason
+        const initialPaymentUser = String(valueUser * 0.00001)
+
         try {
           const contract = await getContract();
           // Defini um valor arbitrario para pagar e entrar ao grupo
-          const payIndeminity = await contract.methods.initialPayment(imeizinho, fixAddress,valorzinho).send({from: fixAddress, value: Web3.utils.toWei("0.015")})
+          const payIndeminity = await contract.methods.initialPayment(imeiUser, fixAddress,valueUser).send({from: fixAddress, value: Web3.utils.toWei(initialPaymentUser)})
           alert(JSON.stringify(payIndeminity));
         } catch (err) {
           alert(err.message);
@@ -349,7 +351,7 @@ export default function GruposClient() {
 
 
 // Definindo o endereço do contrato 
-  const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
+  const contractAddress = "0x6776743D36549408dBd47f1f061401BcD5e83208"
 // Pegando o json com informações sobre o contrato 
   const abi = erc20ABI
 

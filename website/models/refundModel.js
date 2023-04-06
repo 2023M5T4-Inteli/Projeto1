@@ -18,7 +18,12 @@ const refundModel = new mongoose.Schema({
     refundAdress:{
         type : String,
         required : true
-    }
+    },
+    refundCellValue : {
+        type : Number,
+        required : true
+    },
+
 })
 
 

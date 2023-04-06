@@ -280,7 +280,7 @@ const handleExcludeRows = () => {
 
 
 // Definindo o endereço do contrato 
-const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
+const contractAddress = "0x6776743D36549408dBd47f1f061401BcD5e83208"
 // Pegando o json com informações sobre o contrato 
 const abi = erc20ABI
 
@@ -399,7 +399,7 @@ function AddNewMembersByWallet() {
 
     <TextField fullWidth label="Adicionar uma carteira" id="fullWidth"  value={addressValue} onChange={handleInputChange}/>
     <Grid sx={{display:"flex", justifyContent:"center"}}>
-    <Button variant="contained" onClick={addMemberByWallet()} sx={buttonAccept} style={{fontFamily: 'Rubik'}}>
+    <Button variant="contained" onClick={addMemberByWallet} sx={buttonAccept} style={{fontFamily: 'Rubik'}}>
     Adicionar
     </Button>
     </Grid>
@@ -438,7 +438,7 @@ function RemoveMembersByWallet() {
   <TextField fullWidth label="Remover uma carteira" id="fullWidth" value={addressValue} onChange={handleInputChange} />
 </Box>
 <Grid sx={{display:"flex", justifyContent:"center"}}>
-    <Button variant="contained" onClick={doRemove()} sx={buttonRemove} style={{fontFamily: 'Rubik'}}>
+    <Button variant="contained" onClick={doRemove} sx={buttonRemove} style={{fontFamily: 'Rubik'}}>
     Remover
     </Button>
     </Grid>

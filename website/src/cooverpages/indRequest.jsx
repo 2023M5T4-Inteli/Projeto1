@@ -8,7 +8,7 @@ import BackNavbarReq from "../components/Navbar/BackNavbarReq";
 import Modal from "@mui/material/Modal";
 import { Divider, Grid, Paper, Typography, IconButton } from "@mui/material";
 import Box from "@mui/material/Box";
-import DeleteIcon from '@mui/icons-material/Delete';
+import styled from '@mui/system/styled';
 import Web3 from "web3";
 import erc20ABI from "../erc20ABI.json"
 import { DataGrid } from '@mui/x-data-grid';
@@ -24,6 +24,7 @@ export default function CheckboxList() {
     { field: 'refundImei', headerName: 'Client IMEI', flex: 0.6 },
     { field: 'refundAdress', headerName: 'Refund wallet', flex: 0.7 },
     { field: 'refundPercentage', headerName: 'Refund Percentage', flex: 0.2 },
+    { field: 'refundCellValue', headerName: 'Cell Value', flex: 0.2 },
     { field: 'refundReason', headerName: 'Refund Reason', flex: 1 },
 
     {
@@ -182,7 +183,7 @@ export default function CheckboxList() {
 }
 
 // Definindo o endereço do contrato 
-const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
+const contractAddress = "0x6776743D36549408dBd47f1f061401BcD5e83208"
 // Pegando o json com informações sobre o contrato 
 const abi = erc20ABI
 
@@ -207,11 +208,15 @@ function PayRefundRequest() {
   async function payIndeminity() {
     var walletToPay = addressValue
     var fixAddress = Web3.utils.toChecksumAddress(walletToPay)
-    var totalPayment = valueToPay
+    const initialPaymentUser = String(valueToPay * 0.00001)
+    // Para enviar o pagamento é preciso converter para WEI que é a moeda fatorada 
+    var totalPayment = Web3.utils.toWei(initialPaymentUser)
+
+    alert("Sera pago : " + initialPaymentUser)
+
     try {
       const contract = await getContract();
-      /// Aqui tem que colocar a carteira do admin ou o contrato 
-      const payIndeminity = await contract.methods.approveIndemnity(fixAddress).send({from:contractAddress, value: Web3.utils.toWei(totalPayment)})
+      const payIndeminity = await contract.methods.approveIndemnity(fixAddress, totalPayment).send()
       alert(JSON.stringify(payIndeminity));
     } catch (err) {
       alert(err.message);
@@ -225,6 +230,8 @@ function PayRefundRequest() {
   const handleValueChange = (event) => {
     setValuePayment(event.target.value);
   };
+
+ 
 
 
   return(

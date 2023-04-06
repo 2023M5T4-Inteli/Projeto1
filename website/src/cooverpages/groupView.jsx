@@ -54,13 +54,23 @@ const Item = styled('div')(({ theme }) => ({
 // Tela que permite com que o administrador veja dados sobre o grupo e permite aceitar ou não membros para esse contrato 
 export default function Grupos() {
   const [numberUsers, setnumberUsers] = useState()
+  const [totalFunds, setTotalFunds] = useState()
+
   useEffect(() => {
     activeMembers().then(number => {
       setnumberUsers(number);
     });
 
-  }, []);
+  },  
+  []);
 
+  useEffect(() => {
+    avaibleFunds().then(cash => {
+      setTotalFunds(cash);
+    });
+
+  },  
+  []);
 
   return (
     <>
@@ -80,7 +90,7 @@ export default function Grupos() {
             <Divider sx={{ mb: '15px' }} />
             <Item>
               <p style={{ fontFamily: 'Rubik' }}>
-                Mínimo de membros: 35
+                Valor disponível : {totalFunds} ETH
               </p>
             </Item>
             <br>
@@ -155,7 +165,7 @@ export default function Grupos() {
 
 
 // Definindo o endereço do contrato 
-const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
+const contractAddress = "0x6776743D36549408dBd47f1f061401BcD5e83208"
 // Pegando o json com informações sobre o contrato 
 const abi = erc20ABI
 
@@ -173,3 +183,20 @@ async function activeMembers() {
   }
   return (totalUsers)
 }
+
+// Essa função conecta ao contrato e executa a função de checar o valor disponível no contrato
+async function avaibleFunds() {
+  const web3 = new Web3(window.ethereum);
+  try {
+    const contract = new web3.eth.Contract(abi, contractAddress);
+    // Aqui é onde está sendo executada a função definida no contrato
+    const numberMembers = await contract.methods.getBalance().call();
+    // Convertendo o valor disponível no contrato para um valor legivel
+    const totalFinally = numberMembers/(Math.pow (10,18))
+    var finalValue = totalFinally
+  } catch (err) {
+    console.log(err.message);
+  }
+  return (finalValue)
+}
+

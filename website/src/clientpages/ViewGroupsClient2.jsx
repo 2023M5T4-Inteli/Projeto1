@@ -18,7 +18,7 @@ import { CardActionArea, Grid } from '@mui/material';
 
 
 // Definindo o endereço do contrato 
-const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
+const contractAddress = "0x6776743D36549408dBd47f1f061401BcD5e83208"
 // Pegando o json com informações sobre o contrato 
 const abi = erc20ABI
 

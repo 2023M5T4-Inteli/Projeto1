@@ -89,6 +89,7 @@ export const IndemnityForm = () => {
   const [open, setOpen] = useState(false);
   const [imei, setImei] = useState('');
   const [walletReq, setWalletReq] = useState('');
+  const [cellValue, setCellValue] = useState('');
   const [coverage, setCoverage] = useState('');
   const [reason, setReason] = useState('');
   const [openModal, setOpenModal] = React.useState(false);
@@ -101,22 +102,23 @@ export const IndemnityForm = () => {
        const sendRefundData = () => {
         // Aqui é feito o hash do imei por motivos de segurança
         const refundImeiHash = sha256(imei).toString()
+
         Axios.post('http://localhost:3001/insertRefund', 
-        { refundImei : refundImeiHash, refundPercentage : coverage, refundReason : reason , refundAdress : walletReq
+        { refundImei : refundImeiHash, 
+          refundPercentage : coverage, 
+          refundValue : cellValue,
+          refundReason : reason ,
+          refundAdress : walletReq,
        })
-       console.log('Data sent ->', 'wallet:', refundImeiHash, 'imei:',coverage,'reason:', reason )
+       console.log('Data sent ->', 'wallet:', refundImeiHash, 'imei:',coverage,'reason:', reason,"Cell", cellValue )
       }
-      const getData = () => {
-        Axios.get("http://localhost:3001/getDataRefund").then((response) => {
-          console.log(response.data)
-        });
-      }
+
 
   // Função que executa multiplas funções 
   function handleLinkAndSendData() {
     handleLink();
     sendRefundData();
-    //addMemberByWallet();
+    makeIndemRequest();
  }
 
   const handleOpen = () => {
@@ -134,6 +136,11 @@ export const IndemnityForm = () => {
   const handleWalletChange = (event) => {
     setWalletReq(event.target.value);
   };
+
+  const handleCellChange = (event) => {
+    setCellValue(event.target.value);
+  };
+
   const handleCoverageChange = (event) => {
     setCoverage(event.target.value);
   };
@@ -144,7 +151,9 @@ export const IndemnityForm = () => {
 
 
 
-  const [numberUsers, setnumberUsers] = useState ()
+  const [numberUsers, setnumberUsers] = useState ();
+  const [totalFunds, setTotalFunds] = useState()
+
   useEffect(() =>{
     activeMembers().then(number => {
       setnumberUsers(number);
@@ -152,15 +161,18 @@ export const IndemnityForm = () => {
 
   },[]);
 
-  // Função que envia os dados do BD
-  const postData = () => {
-    Axios.post('http://localhost:3001/insert', 
-    {clientAddress : imei })
-  }
+  useEffect(() => {
+    avaibleFunds().then(cash => {
+      setTotalFunds(cash);
+    });
+
+  },  
+  []);
+
 
 
 // Definindo o endereço do contrato 
-const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
+const contractAddress = "0x6776743D36549408dBd47f1f061401BcD5e83208"
 // Pegando o json com informações sobre o contrato 
 const abi = erc20ABI
 
@@ -177,14 +189,17 @@ async function getContract() {
 
 
   //Função que vai permitir enviar direto a carteira para requisitar uma indenização
-  async function addMemberByWallet() {
-    var walletClientIndem = walletReq
-    var fixAddress = Web3.utils.toChecksumAddress(walletClientIndem)
+  async function makeIndemRequest() {
+    var walletClientIndem = 1
+    var fixAddress = Web3.utils.toChecksumAddress("0xff27a22195b74b06af498fc5e63f0a3b0f3ed9bd")
+
 
     try {
       const contract = await getContract();
-      const tx = await contract.methods.requestIndemnity(fixAddress).send();
-      console.log(fixAddress)
+      // const accounts = await Web3.eth.getAccounts();
+      // {from:contractAddress, value: Web3.utils.toWei(totalPayment)}
+      const tx = await contract.methods.requestIndemnity(10).send();
+      //console.log(fixAddress)
       alert(JSON.stringify(tx));
     } catch (err) {
       alert(err.message);
@@ -211,7 +226,7 @@ async function getContract() {
             <Divider sx={{  }} />
             <Item sx={{marginTop:2}}>
               <p>
-                Mínimo de membros: 3
+              Valor disponível : {totalFunds} ETH
               </p>
             </Item>
             <br>
@@ -278,6 +293,15 @@ async function getContract() {
             />
           </FormControl>
           <FormControl className={classes.formControl}>
+            <InputLabel id="adress-label" shrink>Valor do aparelho</InputLabel>
+            <TextField
+              id="valueCell"
+              labelId="value-label"
+              value={cellValue}
+              onChange={handleCellChange}
+            />
+          </FormControl>
+          <FormControl className={classes.formControl}>
             <InputLabel id="adress-label" shrink>Endereço da carteira</InputLabel>
             <TextField
               id="adress"
@@ -317,7 +341,7 @@ async function getContract() {
           
           <Grid style={{display:'flex', justifyContent:'center'}}>
           <Button onClick={handleLinkAndSendData} variant="contained" color="primary" style={button2}>
-          Realizar pedido
+          Realizar pedido OI
           </Button>
           </Grid>
       
@@ -346,15 +370,6 @@ const GetWallet = () => {
   }
 
 
-  const sendRefundData = async (e) => {
-    e.preventDefault();
-    try {
-      await Axios.post('http://localhost:3001/insertRefund', { refundImei : walletAddress, refundPercentage : "10", refundReason : walletAddress });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   return(
     <>
 
@@ -368,7 +383,7 @@ const GetWallet = () => {
 
 
 // Definindo o endereço do contrato 
-const contractAddress = "0x1a329C1596cFa1190E695C45f55F31d79cbcb4D7"
+const contractAddress = "0x6776743D36549408dBd47f1f061401BcD5e83208"
 // Pegando o json com informações sobre o contrato 
 const abi = erc20ABI
 
@@ -387,6 +402,21 @@ async function activeMembers() {
   return (totalUsers)
 }
 
+// Essa função conecta ao contrato e executa a função de checar o valor disponível no contrato
+async function avaibleFunds() {
+  const web3 = new Web3(window.ethereum);
+  try {
+    const contract = new web3.eth.Contract(abi, contractAddress);
+    // Aqui é onde está sendo executada a função definida no contrato
+    const numberMembers = await contract.methods.getBalance().call();
+    // Convertendo o valor disponível no contrato para um valor legivel
+    const totalFinally = numberMembers/(Math.pow (10,18))
+    var finalValue = totalFinally
+  } catch (err) {
+    console.log(err.message);
+  }
+  return (finalValue)
+}
 
 
 export default IndemnityForm;
