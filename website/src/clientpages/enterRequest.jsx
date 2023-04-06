@@ -231,7 +231,7 @@ export default function GruposClient() {
           <Grid style={{display:'flex', justifyContent:'center'}}>
           <Typography sx={{fontWeight:700, fontSize:18, marginBottom:2}}>PEDIDO DE ENTRADA</Typography>
           </Grid>
-          <FormControl className={classes.formControl}>
+          <FormControl className={classes.formControl} sx={{marginBottom:3}}>
             <InputLabel id="imei-label" shrink>Endereço da carteira</InputLabel>
             <TextField
               id="wallet"
@@ -240,7 +240,7 @@ export default function GruposClient() {
               onChange={handleWalletChange}
             />
           </FormControl>
-          <FormControl className={classes.formControl}>
+          <FormControl className={classes.formControl} sx={{marginBottom:3}}>
 
 
             <InputLabel id="coverage-label">IMEI</InputLabel>
@@ -252,7 +252,7 @@ export default function GruposClient() {
             />
             
           </FormControl>
-          <FormControl className={classes.formControl}>
+          <FormControl className={classes.formControl} sx={{marginBottom:3}}>
           <InputLabel id="reason-label" shrink>Valor do celular</InputLabel>
             <TextField
               id="reason"
