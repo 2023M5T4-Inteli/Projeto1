@@ -49,6 +49,12 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
   &emsp;|--> app.js<br>
   &emsp;|--> MetamaskPlugin.jsx<br>
 
+|--> apresentações <br>
+  &emsp;|--> Apresentação Sprint 1.pdf<br>
+  &emsp;|--> Apresentação Sprint 2.pdf<br>
+  &emsp;|--> Apresentação Sprint 3.pdf<br>
+  &emsp;|--> Apresentação Sprint 4.pdf<br>
+
 
 | readme.md<br>
 
@@ -150,289 +156,26 @@ A estrutura do nosso contrato é diretamente relacionada aos requisitos de negó
 ## :white_check_mark:	 Casos de Teste:
 Os casos de teste realizados se referem ao contrato ["contractCore"](https://github.com/2023M5T4-Inteli/Projeto1/blob/main/contrato/contractCore.sol), e podem ser acessados por meio [deste link](https://github.com/2023M5T4-Inteli/Projeto1/blob/main/contrato/caseTests). Foram realizados testes em três funções do smart contract, a saber: "addMembers", "OnlyOwnerCanRemoveMember" e "GetTotalWalletClients". Para cada função, foram descritos a pré-condição, o procedimento de teste, o resultado esperado e a pós-condição, como segue:
 
-#### Teste de função "addMember":
-- **Pré-condição:** O proprietário do contrato está autenticado no sistema administrativo da Coover.
-- **Procedimento de teste:** A função "addMember" é executada com o endereço de um usuário a ser adicionado como parâmetro.
-- **Resultado esperado:** O endereço do usuário é adicionado ao array "membersContract". O valor booleano correspondente ao endereço do usuário no mapping "activeMembers" é definido como verdadeiro. O evento "AddMember" é emitido com o endereço do chamador como parâmetro.
-- **Pós-condição:** O endereço do usuário é adicionado à lista de membros do smart contract.
+### Aplicação e desenvolvimento do projeto em blockchain
 
-#### Teste de função "OnlyOwnerCanRemoveMember":
-- **Pré-condição:** O proprietário do contrato está autenticado no sistema administrativo da Coover e há um usuário ativo existente no contrato.
-- **1° Procedimento de teste:** Chamar a função "removeMember" com o endereço do usuário a ser removido como parâmetro, usando uma conta que não seja do proprietário do contrato.
-- **1° Resultado esperado:** A transação falha com a mensagem "Caller is not owner".
-- **2° Procedimento de teste:** Chamar a função "removeMember" com o endereço do usuário como parâmetro, usando a conta do proprietário do contrato.
-- **2° Resultado esperado:** O endereço do usuário é removido do array "membersContract". O valor booleano correspondente ao endereço do usuário no mapping "activeMembers" é definido como falso.
-- **Pós-condição:** O endereço do usuário é removido da lista de membros do contrato.
+Os smart contracts são programas de computador que são executados em blockchain, uma espécie de registro digital descentralizado que permite o armazenamento e a transferência de informações de forma segura e confiável. Desta forma, os contratos são escritos em solidity (linguagem de programação) e são capazes de automatizar processos e garantir que as transações sejam executadas automaticamente e de acordo com regras pré-estabelecidas.
 
-#### Teste de função "GetTotalWalletClients":
-- **Pré-condição:** Um contrato com pelo menos um membro ativo.
-- **Procedimento de teste:** Chamar a função "getTotalWalletClients".
-- **Resultado esperado:** O número de membros atualmente no array "membersContract" é retornado.
-- **Pós-condição:** O número de membros no contrato é exibido.
+Nos requisitos de negócios definidos pelo parceiro do projeto, a empresa de seguros "Coover", os smart contracts são aplicados em um ambiente de seguro mútuo, que são acordos entre os participantes de um grupo de seguros para se protegerem mutuamente contra perdas financeiras. A longo prazo, a intenção é que de acordo com a aplicação, os smart contracts possam ajudar a simplificar e automatizar a administração desses contratos, reduzindo o risco de erros e fraudes.
 
+#### Smart Contracts mais afundo nas Regras de Negócio
 
-## :chart_with_upwards_trend:	 Requisitos de negócio:
-#### Requisito 1: Criação de um grupo de seguro mútuo.
+De acordo com a estruturação de nosso código, os smart contracts podem ser usados para gerenciar a distribuição de fundos do seguro mútuo. Isso ocorre de acordo com as definições de saldo, membros e a partir de verificações em cada solicitação feita pelo usuário.
 
-A empresa Coover, como parte interessada na criação desse smart contract, é responsável pelo controle, escolha e execução dos requisitos aqui presentes . Diante disso, a seguradora terá a possibilidade de definir, previamente, as regras que serão seguidas no processo de criação de um grupo de seguro mútuo. Portanto, características como número mínimo e máximo de participantes, tempo de duração de um contrato e momento de cobrança de taxas administrativas, devem ser definidos pela instituição no momento de confecção desse contrato inteligente. 
+Além disso, os smart contracts verificam automaticamente as informações de sinistros, tais como a quantidade de solicitação de indenização pedidas, se a perda está dentro do escopo da cobertura do seguro mútuo, e se as regras de elegibilidade foram cumpridas pelos participantes. Isso pode ajudar a reduzir o tempo e os custos associados à resolução de sinistros.
 
-#### Requisito 2: Cobrança de uma taxa administrativa no momento da contratação do seguro.
-
-Segundo o que foi dito no processo do entendimento do negócio, para garantia do lucro, a empresa Coover realiza a cobrança de um percentual referente à taxa administrativa. Essa cobrança é feita sobre o pagamento referente à contratação do seguro realizada pelos clientes da seguradora. Como se trata de um requisito do empreendimento em questão, é necessário que o contrato seja capaz de efetuar essa cobrança a partir do momento em que o pagamento do seguro foi concluído por parte dos clientes. 
-
-#### Requisito 3: Cobrança do valor referente ao pagamento do seguro mútuo.
-
-Para que possam ser assistidos pelo seguro, é preciso que os clientes da Coover paguem uma quantia referente à cobrança mensal ou anual do plano contratado. Por isso, é necessário que o contrato em questão seja capaz de realizar a cobrança única dessa taxa após sua publicação, tendo em vista que os desenvolvedores do projeto decidiram adotar a cobrança anual para fins de facilitação de processos. 
-
-#### Requisito 4: Gerenciamento do número de clientes na plataforma.
-
-É necessário que o contrato inteligente seja capaz de permitir a administração da quantidade de usuários em um determinado grupo de seguros. Dessa forma, é preciso que haja uma função que possibilite a exclusão de determinado cliente, que só ocorrerá mediante pedido de cancelamento do contrato, por parte do usuário, ou detecção de fraude, por parte da Coover.
-
-#### Requisito 5: Realização do pedido de indenização.
-O contrato deve ser capaz de permitir que os participantes do grupo de seguro mútuo realizem o pedido de indenização em caso de ocorrência de um sinistro. Para isso, é necessário que exista uma função que permita que o segurado notifique a Coover sobre a ocorrência do sinistro e solicite a indenização devida. Essa solicitação deve ser verificada automaticamente pelo contrato, que verificará se o segurado tem direito à indenização com base nas regras estabelecidas por ele.
-
-
-#### Requisito 6: Aprovação dos pedidos de indenização.
-
-Após a solicitação de indenização realizada pelo cliente, a empresa precisa ter a opção de aprová-la ou recusá-la, de acordo com regras pré estabelecidas no escopo do contrato. É preciso esclarecer que essa decisão será tomada de forma automática, a partir do que a empresa definiu como sendo os critérios necessários para a tomada de decisão acerca de determinado pedido.  
- 
-#### Requisito 7: Reposição da reserva de risco.
-
-Após a aprovação de determinado pedido de indenização, é necessário que os participantes de um grupo se responsabilizem pela reposição da reserva de risco que foi comprometida após o pagamento em questão. Com isso, é necessário que, a cada pedido de indenização aprovado, haja a cobrança proporcional à porcentagem construída por cada membro do grupo. Logo, contribuintes responsáveis por parcelas diferentes da reserva, devem ser cobrados de modo distinto no momento da ativação dessa função.
-
-## Diagrama de blocos
-
-O usuário (cliente ou admnistrador) acessa a aplicação pelo browser com o plugin da metamask. 
-Na aplicação do administrador, pode ser feita a criação de grupos de seguro mútuo (smart contracts) em uma relação direta com a Testnet. 
-O deploy destes contratos é feito no github por administradores da Coover, para que sejam open source.
-Por fim, na aplicação dos clientes, é possível interagir e realizar transações com esses smart contracts. 
-Dados sensíveis dos clientes são armazenados em um banco de dados, uma vez que a disponibilização destes na blockchain seria algo perigoso. 
-
-![Diagrama de Blocos](https://user-images.githubusercontent.com/68927480/224556813-8265128f-83fe-4c46-aad9-ca0556fab7b6.png)
-
-#### Detalhamento do Diagrama de Blocos:
-
-- <b>Cliente</b>: É a pessoa física que deseja contratar um seguro peer-to-peer para o seu smartphone. Ele se conecta ao sistema da Coover através do navegador.
-
-- <b>Adm da Coover:</b> A Coover é a empresa que oferece o seguro peer-to-peer para smartphones usando blockchain. Ela se comunica com o browser e  com sua carteira Metamask, bem como com a sua própria aplicação. A aplicação da Coover se comunica com o banco de dados que se comunica com a testnet.
-
-- <b>Metamask:</b> É uma carteira digital que permite que o cliente interaja com aplicativos descentralizados baseados em Ethereum. No caso da Coover, o Metamask é utilizado para realizar transações com a criptomoeda Ether, que é usada como meio de pagamento do seguro.
-
-- <b>Aplicação do Cliente:</b> É a interface do sistema da Coover que o cliente utiliza para verificar a porcentagem a ser paga pelo seguro, realizar o pagamento e acessar informações sobre o seu seguro. Essa plataforma se comunica com a testnet.
-
-- <b>Aplicação da Coover:</b> A aplicação da Coover gerencia e executa os contratos. Algumas das funções a ela concebidas são: Cadastro de clientes, comunicação com o smart contract, gerenciamento de pagamentos e de sinistros.
-
-- <b>Banco de Dados:</b> O banco de dados é responsável por armazenar as informações dos clientes e das apólices de seguro, como o nome do cliente, o modelo do smartphone, o valor do prêmio do seguro, entre outros dados. Quando o cliente adquire uma apólice de seguro, as informações são registradas no banco de dados e, posteriormente, no smart contract que gerencia as transações na blockchain.
-
-- <b>Testnet:</b> É uma rede de blockchain de teste que é usada para verificar a funcionalidade do sistema antes de ser lançada na rede principal. No caso da Coover, a plataforma do cliente se comunica com a testnet para realizar transações e validar os dados do seguro.
-
-- <b>Smart Contract:</b> É executado na rede blockchain e é responsável por automatizar as transações e manter o registro das informações do seguro. No caso da Coover, o smart contract é responsável por verificar se o cliente tem direito ao seguro, validar o pagamento de acordo com a porcentagem estabelecida e se poderá receber a indenização, caso algo ocorra com o smartphone.
-
-- <b>Deploy:</b> É o processo de disponibilizar o smart contract na rede blockchain. No caso da Coover, o deploy inclui o GitHub, que é um repositório de código-fonte, e a administração da Coover, que é responsável por gerenciar o sistema.
-
-
-## Diagrama de sequência UML
-
-                                +--------------+
-                                     Usuário    
-                                +--------------+
-                                      |
-                                      |  Acessa a aplicação
-                                      v
-                                +--------------+
-                                  Front-End   
-                                +--------------+
-                                      |
-                                      |  Faz a solicitação
-                                      v
-                                +--------------+
-                                   Back-End   
-                                +--------------+
-                                      |
-                                      |  Verifica a identidade do usuário
-                                      v
-                                +--------------+
-                                  Banco de Dados 
-                                +--------------+
-                                      |
-                                      |  Retorna a resposta ao Back-End
-                                      v
-                                +--------------+
-                                 Back-End    
-                                +--------------+
-                                      |
-                                      |  Gera o smart contract do seguro
-                                      v
-                                +--------------+
-                                  Blockchain  
-                                +--------------+
-                                      |
-                                      |  Armazena o smart contract
-                                      v
-                                +--------------+
-                                  Banco de Dados 
-                                +--------------+
-                                      |
-                                      |  Armazena dados sensíveis do usuário
-                                     
-<img src="https://user-images.githubusercontent.com/99282359/224573690-d7ca21d7-3b98-44a4-a55f-2fa627710e73.png" width="475" height="500" />
-
-<img src="https://user-images.githubusercontent.com/99282359/224573714-3645c83d-a2c6-472b-a023-6932f7839bf5.png" width="475" height="500" />
-
-<img src="https://user-images.githubusercontent.com/99282359/224573717-a5975ed3-bde3-4496-9f4e-7840f46e9df1.png" width="475" height="500" />
-
-<img src="https://user-images.githubusercontent.com/99282359/224573726-85bfe458-d736-49ea-ad3c-f130bd596bf7.png" width="475" height="500" />
-
-<img src="https://user-images.githubusercontent.com/99282359/224573729-834eaa0c-6072-44d9-8c17-782669705bcf.png" width="475" height="500" />
-
-<img src="https://user-images.githubusercontent.com/99282359/224573732-73960c0f-7f15-4b86-91ce-d117c9a57a5b.png" width="475" height="500" />
-
-## Diagrama de implantação UML
-Um diagrama de implantação é uma representação visual da arquitetura de implantação de um sistema de software.
-
-O objetivo principal do diagrama de implantação é fornecer uma visão geral da infraestrutura de hardware em que o sistema é implantado, identificando os nós de hardware, as conexões de rede e os componentes de software implantados em cada nó. Com o diagrama de implantação, é possível visualizar como o sistema é distribuído em diferentes servidores, dispositivos de armazenamento, entre outros, e como os componentes de software se comunicam através da rede.
-
-O diagrama de implantação é usado para ilustrar como os componentes de um sistema são implantados em diferentes nós de hardware, como servidores, desktops ou dispositivos móveis. Ele mostra as conexões de rede entre esses nós e como os componentes de software se comunicam por meio dessas conexões.
-
-<img src="https://github.com/2023M5T4-Inteli/Projeto1/blob/main/imagens/Diagrama%20de%20implanta%C3%A7%C3%A3o.png"/>
-
-O diagrama apresenta as relações entre os módulos da solução criada. Na parte de Hardware, estão representados os elementos físicos necessários para utilizar o programa, além dos softwares que precisam estar presentes nas máquinas para garantir o funcionamento adequado. Já na parte de software, é essencial ter a aplicação web2 para hospedar a interface da solução. Por meio dessa interface, todas as etapas descritas no diagrama de sequência (requisitos 1 a 6) podem ser realizadas, sem que os usuários finais tenham interação direta com o smart contract.
-
-Para estabelecer a comunicação entre a solução e a testnet pública, na qual o smart contract foi desenvolvido, é preciso utilizar uma API para web 3. Dessa forma, a partir da interface web, a solução pode se conectar à testnet pública e ao smart contract desenvolvido pelo time.
-
-## Comportamento esperado do smart contract 
-O smart contract em questão é uma aplicação que roda na blockchain e tem como objetivo fornecer seguros para celulares.Seu funcionamento ocorre de maneira simples e eficiente: quando um cliente adquire um seguro, ele envia uma transação para o endereço do contrato com as informações do celular e o valor do prêmio de seguro. O contrato então registra a apólice e envia de volta uma confirmação da transação.
-
-Caso o celular sofra algum dano coberto pela apólice, o cliente pode solicitar o reembolso ao enviar uma nova solicitação para o contrato com as informações do dano e as evidências necessárias. O contrato verifica se o dano está coberto pela apólice e, se estiver, realiza o pagamento do valor acordado em criptomoedas para o cliente.
-
-Para garantir a transparência e a segurança das operações, todas as transações e informações do seguro são registradas na blockchain, tornando o processo totalmente rastreável e à prova de fraudes. Da mesma forma, o contrato contém restrições de atuação, dando acesso exclusivo ao administrador (dono do contrato) a partir de modifier "isOwner".
-
-A transação, após modificações pontuais, agora também cobra a taxa administrada (que pode ser modificada de acordo com a porcentagem escolhida) diretamente no pagamento feito pelo usuário. Além disso, após as atualizações, a Coover possui o controle dos grupos, com a adição e remoção de usuários, o pagamento da indenização e os registros das atividades por meio de eventos personalizados, que posicionaram melhor os clientes sobre cada uma das novas transações ocorridas.
-
-O smart contract também tem um conjunto de regras claras e transparentes que definem os termos e condições do seguro, garantindo que os clientes tenham uma compreensão clara do contrato e do que é coberto por ele.
-
-Por meio dessas funções, o contrato espera fornecer seguros para celulares de maneira certeira, eficiente e transparente. Assim, proporcionará aos clientes uma opção inovadora e confiável de proteção para seus dispositivos móveis.
-
-## Processo de deploy
-
-O processo de deploy de um contrato inteligente na testnet pública envolve algumas etapas importantes. Em primeiro lugar, é necessário escolher uma testnet adequada, que neste caso foi o Goerli e configurar as ferramentas necessárias, como uma carteira criptográfica, neste caso a Metamask, e um ambiente de desenvolvimento integrado, que para testes e finalização, foi o Remix. Em seguida, o contrato inteligente deve ser desenvolvido e testado em um ambiente de teste local (ganache) antes de ser implantado na testnet pública.
-
-Ao implantar o contrato inteligente na testnet pública, é importante lembrar-se de configurar as propriedades corretamente.
-
-### Processo de desenvolvimento pelo grupo
-
-Ao levar em conta os requisitos e funcionalidades, podemos descrever um pouco do processo de desenvolvimento do grupo.
-
-Um dos primeiros impedimentos foi que o Goerli não ficou disponível por um certo período durante a sprint, fazendo com que tentássemos o deploy no Ganache como alternativa. 
-
-O deploy no Ganache foi feito com sucesso (na rede local) com o uso da plataforma Remix.
-
-![1](https://user-images.githubusercontent.com/68927480/224571970-2ec67c2d-38f3-41a4-8855-8b80efda5448.jpeg)
-![2](https://user-images.githubusercontent.com/68927480/224571981-306fe2ef-42bb-4931-ad05-abb18fc5d879.jpeg)
-
-Apesar disso, uma colega compartilhou um falset do Goerli com a turma. A partir daí, seguimos o passo a passo presente no Github “InteliBlockchain” para realizar o deploy na testnet pública. Depois de um tempo o Goerli ficou novamente disponível para uso, passando a ser nossa principal alternativa para o deploy. 
-Os passos que seguimos, de forma resumida, foram:
-<hr>
-
-### 1. **Instalação do Truffle e preparação do código nos arquivos**
-
-- Deve-se, primeiramente, definir uma pasta para digitar, no terminal, o comando ‘npm install -g truffle’.
-
- ```
-  npm install -g truffle
- ```
-
-- Abaixo está o output printado após o comando “Truffle –version” no nosso projeto. 
-
-![3](https://user-images.githubusercontent.com/68927480/224571994-b0c62444-3716-4bed-a599-e270fda9d12b.jpeg)
-<hr>
-
-- Outro comando que deve ser digitado no terminal é o ‘truffle init’, que inicializa o truffle no repositório. 
-
- ```
-truffle init
-```
-
-- Posteriormente, inserimos os seguintes comandos para preparar a pasta e seus arquivos: ‘npm init -y’ e ‘npm install @openzeppelin/contracts’. 
-
- ```
-npm init -y
-npm install @openzeppelin/contracts
-```
-
-- Após esta preparação, deve-se inserir o comando ‘truffle compile’ e informar qual o contrato no arquivo da pasta ‘migrations’ e a rede na pasta ‘truffle-config’ (o tutorial completo festá disponível na documentação do truffle).
-
- ```
-truffle compile
-truffle-config
-```
-
-### 2. **Cadastro no Infura e uso da API Key no arquivo .env**
-
-- O arquivo .env deve ser criado para guardar a ‘Seed phrase’ da Meta mask e a ‘API Key’ do Infura, site no qual deve ser feita a conta para se realizar um deploy.
-
-![4](https://user-images.githubusercontent.com/68927480/224572007-1513eda7-35eb-4ebc-b459-818514cca14a.jpeg)
-<hr>
-
-
-### 3. **Preparação da Meta Mask**
-
-- Wallet do MetaMask com GoerliETH proveniente do falset citado anteriormente. Após a mineração no falset e a adição do Goerli na carteira, é assim que ela ficou.
-
-
-![5](https://user-images.githubusercontent.com/68927480/224572023-173a0c3b-b7c2-4ddd-bbf7-2d02ebf0d2df.jpeg)
-<hr>
-
-
-### 4. **Deploy do “contrato Core” feito pelo grupo**
-
-- Quando tudo estava preparado para o deploy o grupo já havia preparado um “contrato core” para teste. 
-- Com o input ‘truffle deploy –network goerli’ é possível finalizar o deploy na testnet pública e se recebe um output com os dados do deploy, como o custo final e o hash da transação. 
-
- `````
-truffle deploy –network goerli
-`````
-
-![6](https://user-images.githubusercontent.com/68927480/224572034-00bc5125-2952-48dd-8779-41131156bc30.jpeg)
-
-## Documentação Front-end
-
-- Home 
-
-<img src="">
-
-### Páginas Coover
-
-- ### CreateGroup
-
-Essa página permite ao Administrador Coover criar grupos com informações agregadas como nome do grupo, quantidade mínima de membros, taxa administrativa, porcentagem do celular e cobertura. A página tem um botão que, quando clicado, abre um modal que permite a criação do grupo em questão.
-
-- ### enterRequest
-
-Essa página permite que o Administrador possa adicionar ou remover carteiras em algum respectivo grupo, que será diretamente relacionado a um contato. A visualização deste contrato é automaticamente adicionada acima para facilitar adição pelo Administrador
-
-- ### groupView
-      
- Nesta página possuímos a visualização bruta de um contrato (grupo) ativo em nossa plataforma. É importante salientar que as informações, como taxa administrativa, total de membros e entre outras, serão visíveis para o Administrador da Coover, para facilitar sua navegação.
-
-- ### indRequest
-
-Nesta página é possível visualizar todas as solicitções de indenização feitas. Há priorização das informações descritivas de cada uma dessas solicitações, como neste exemplo, a carteira e o IMEI do dispositivo em questão. 
-
-- ### ViewGroups
-
-Nesta página possuímos a visualização de grupos ativos em nossa plataforma.
-
-### Páginas do Cliente
-
-- infoPage
-
-Página com um guia completo de funcionamento do seguro mútuo para Celular. A ideia, é transmitir o maior nível possível de transparência ao cliente, conforme a utiização da nossa plataforma, e contratação do Seguro.
-
-- ### groupViewClient
-      
-Nesta página possuímos a visualização de um contrato (grupo) ativo em nossa plataforma. É importante salientar que as informações, como taxa administrativa, total de membros e entre outras, também serão visíveis para o usuário. Além disso, o usuário pode fazer a solicitação de entrada no grupo, em questão, a partir de um clique.
-
-- ### ViewGroupsClient
-
-Esta página permite a visualização dos grupos que poderão receber solicitação de entrada pelo cliente. A intenção é que ele possua ver, também, informações pontuais sobre o grupo para facilitar sua usabilidade.
+### Histórico de Lançamento 
+* <b> 0.2.1 - 07/04/2023 <b>
+  * Quinta entrega - Entrega Final
+* <b> 0.2.0 - 24/03/2023 <b>
+  * Quarta entrega - Integração com frontend
+* <b> 0.1.1 - 10/03/2023 <b>
+  * Terceira entrega - Deploy do Smart contract, Funções novas no contrato e inicio de integração com frontend
+* <b> 0.1.0 - 24/02/2023 <b> 
+  * Segunda entrega - Diagrama de blocos, primeira versão smart contract, wireframe das telas
+* <b> 0.0.1 - 10/02/2023 <b>
+  * Primeira entrega - Análise de negócios, arquitetura da solução e estruturação de documentos
