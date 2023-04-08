@@ -7,7 +7,7 @@
 <a href= "https://coover.me/"><img src="https://theme.zdassets.com/theme_assets/10391010/252b3a482d39b630006805aa33f3768c9631e75a.png" alt="Coover" width="250px" height="70px" ></a>
 
 ## Etherchain
-Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros.
+<img src="https://theme.zdassets.com/theme_assets/10391010/252b3a482d39b630006805aa33f3768c9631e75a.png" alt="Coover" width="250px" height="70px" ></a>
 
 <!-- #### adicionar a imagem do grupo -->
 
@@ -22,41 +22,45 @@ Grupo criado para o desenvolvimento do projeto com o parceiro Coover, de seguros
 - [Vinicius Oliveira Fernandes](https://www.linkedin.com/in/vinicius-oliveira-fernandes-627b68168/)
 
 ## :video_camera: Funcionamento do projeto 
-- Link do youtube <a>https://youtu.be/UWHRfNqpct8</a>
-- Link Google Drive <a href=https://drive.google.com/file/d/1-Vlg4WkeKsNYKJW6_0vqXCOREYleTW5E/view?usp=sharing </a>
-
+- <a href = https://youtu.be/UWHRfNqpct8 > Vídeo no youtube</a>
+- [Vídeo no google drive](https://drive.google.com/file/d/1-Vlg4WkeKsNYKJW6_0vqXCOREYleTW5E/view?usp=sharing)
 
 ## 📁 Estrutura de pastas
-|--> contrato<br>
-  &emsp;|--> caseTests.sol<br>
-  &emsp;|--> contractCore.sol<br>
-
-|--> documentação<br>
-  &emsp;|--> Etherchain Documentação - Grupo 1 - Módulo 5.pdf<br>
+- 📁 <a href=https://github.com/2023M5T4-Inteli/Projeto1/tree/main/apresentacoes> __apresentações__ </a> 
+	- <img src="https://user-images.githubusercontent.com/99209356/174968401-abc5cae1-7a1e-4f06-aca6-c859c993c038.svg" width="18px" height="18px"> <a href=https://github.com/2023M5T4-Inteli/Projeto1/blob/main/apresentacoes/apresentacao-sprint1.pdf >Apresentação Sprint 1.pdf </a>
+	- <img src="https://user-images.githubusercontent.com/99209356/174968401-abc5cae1-7a1e-4f06-aca6-c859c993c038.svg" width="18px" height="18px">  <a href=https://github.com/2023M5T4-Inteli/Projeto1/blob/main/apresentacoes/apresentacao-sprint2.pdf> Apresentação Sprint 2.pdf </a>
+	- <img src="https://user-images.githubusercontent.com/99209356/174968401-abc5cae1-7a1e-4f06-aca6-c859c993c038.svg" width="18px" height="18px"> <a href=https://github.com/2023M5T4-Inteli/Projeto1/blob/main/apresentacoes/apresentacao-sprint3.pdf> Apresentação Sprint 3.pdf  </a>
+	- <img src="https://user-images.githubusercontent.com/99209356/174968401-abc5cae1-7a1e-4f06-aca6-c859c993c038.svg" width="18px" height="18px">  <a href=https://github.com/2023M5T4-Inteli/Projeto1/blob/main/apresentacoes/apresentacao-sprint4.pdf > Apresentação Sprint 4.pdf</a>
+	- <img src="https://user-images.githubusercontent.com/99209356/174968401-abc5cae1-7a1e-4f06-aca6-c859c993c038.svg" width="18px" height="18px"> <a href=https://github.com/2023M5T4-Inteli/Projeto1/blob/main/apresentacoes/apresentacao-final-sprint2.pdf>  Apresentação sprint 5.pdf </a>
+- 📁 <a href=https://github.com/2023M5T4-Inteli/Projeto1/tree/main/build/contracts> build/contracts </a>
+- 📁  <a href=https://github.com/2023M5T4-Inteli/Projeto1/tree/main/contracts> contracts </a>
+	- 📄  <a href= https://github.com/2023M5T4-Inteli/Projeto1/blob/main/contracts/README.md> readme.md</a>
+	- <img src="https://github.com/devicons/devicon/blob/master/icons/solidity/solidity-original.svg" width="18px" height="18px">  <a href= https://github.com/2023M5T4-Inteli/Projeto1/blob/main/contracts/contractCore.sol> contractCore.sol</a>
+- 📁  <a href=https://github.com/2023M5T4-Inteli/Projeto1/tree/main/contrat> contrato </a>
+	- <img src="https://github.com/devicons/devicon/blob/master/icons/solidity/solidity-original.svg" width="18px" height="18px">  <a href=https://github.com/2023M5T4-Inteli/Projeto1/blob/main/contrato/caseTests.sol>caseTests.sol </a>
+	- <img src="https://github.com/devicons/devicon/blob/master/icons/solidity/solidity-original.svg" width="18px" height="18px"><a href= https://github.com/2023M5T4-Inteli/Projeto1/blob/main/contrato/contractCore.sol>  contractCore.sol </a>
+- 📁  <a href= https://github.com/2023M5T4-Inteli/Projeto1/tree/main/documenta%C3%A7%C3%A3o>documentação </a>
+	- 📁  <a href=https://github.com/2023M5T4-Inteli/Projeto1/blob/main/apresentacoes/apresentacao-sprint2.pdf> antigas </a>
+	-  <img src="https://user-images.githubusercontent.com/99209356/174968401-abc5cae1-7a1e-4f06-aca6-c859c993c038.svg" width="18px" height="18px"><a href= https://github.com/2023M5T4-Inteli/Projeto1/blob/main/documenta%C3%A7%C3%A3o/Etherchain%20Documenta%C3%A7%C3%A3o%20-%20Grupo%201%20-%20M%C3%B3dulo%205.pdf> Etherchain Documentação - Grupo 1 - Módulo 5.pdf  </a>
   
-|--> imagens<br>
-  &emsp;|--> Diagrama de implantação.png<br>
-  
-|--> website <br>
-  &emsp;| --> public <br>
-  &emsp;|--> src<br>
-    &emsp; &emsp;|--> clientpages<br>
-    &emsp; &emsp;|--> components<br>
-    &emsp; &emsp;|--> cooverpages<br>
-    &emsp; &emsp;|--> font<br>
-    &emsp; &emsp;|--> img<br>
-  &emsp;|--> index.js<br>
-  &emsp;|--> app.js<br>
-  &emsp;|--> MetamaskPlugin.jsx<br>
+- 📁  <a href= https://github.com/2023M5T4-Inteli/Projeto1/tree/main/imagens>imagens </a>
+	- 📄 <a href= https://github.com/2023M5T4-Inteli/Projeto1/blob/main/imagens/Diagrama%20de%20implanta%C3%A7%C3%A3o.png>  Diagrama de implantação.png </a>
+- 📁  <a href=https://github.com/2023M5T4-Inteli/Projeto1/tree/main/migrations>migrations </a>
+- 📁 <a href=https://github.com/2023M5T4-Inteli/Projeto1/tree/main/test> test</a>
+- 📁<a href= https://github.com/2023M5T4-Inteli/Projeto1/tree/main/website> website </a>
+ 	- 📁 <a href= https://github.com/2023M5T4-Inteli/Projeto1/tree/main/website/public> public </a>
+ 	- 📁 <a href=https://github.com/2023M5T4-Inteli/Projeto1/tree/main/website/src> src </a>
+ 	 	- 📁 <a href=https://github.com/2023M5T4-Inteli/Projeto1/tree/main/website/src/clientpages> clientpages </a>
+ 	 	- 📁 <a href=https://github.com/2023M5T4-Inteli/Projeto1/tree/main/website/src/components> components </a>
+ 	 	- 📁  <a href=https://github.com/2023M5T4-Inteli/Projeto1/tree/main/website/src/cooverpages> cooverpage </a>
+ 	 	- 📁  <a href= https://github.com/2023M5T4-Inteli/Projeto1/tree/main/website/src/font/Rubik> font </a>
+ 	 	- 📁  <a href= https://github.com/2023M5T4-Inteli/Projeto1/tree/main/website/src/img> img </a>
+ 	 	-  <img src="https://github.com/devicons/devicon/blob/master/icons/react/react-original.svg" width="18px" height="18px">  <a href=https://github.com/2023M5T4-Inteli/Projeto1/blob/main/website/src/MetamaskPlugin.jsx> MetamaskPlugin.jsx </a>
+ 	 	- <img src="https://cdn3.emoji.gg/emojis/8009-java-js.png" width="16px" height="16px" alt="Java_Js"><a href=https://github.com/2023M5T4-Inteli/Projeto1/blob/main/website/src/index.js> index.js </a>
+ 	 - <img src="https://cdn3.emoji.gg/emojis/8009-java-js.png" width="16px" height="16px" alt="Java_Js"> <a href=https://github.com/2023M5T4-Inteli/Projeto1/blob/main/website/app.js> app.js  </a>
+ 	 
 
-|--> apresentações <br>
-  &emsp;|--> Apresentação Sprint 1.pdf<br>
-  &emsp;|--> Apresentação Sprint 2.pdf<br>
-  &emsp;|--> Apresentação Sprint 3.pdf<br>
-  &emsp;|--> Apresentação Sprint 4.pdf<br>
-
-
-| readme.md<br>
+- 📄  <a href=https://github.com/2023M5T4-Inteli/Projeto1/blob/main/README.md> readme.md  </a> 
 
 
 <b>Dentre os arquivos presentes na raiz do projeto, definem-se:</b>
