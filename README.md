@@ -65,6 +65,8 @@
 
 <b>Dentre os arquivos presentes na raiz do projeto, definem-se:</b>
 
+<b>apresentacoes:</b> aqui estão todas as apresentações feitas pelo grupo.
+
 <b>contrato:</b> pasta que contêm os smart contracts e também arquivo para teste automatizado.
 
 <b>documentação:</b> aqui estarão todos os documentos do projeto.
@@ -80,12 +82,19 @@ Há a seguinte estrutura de pastas dentro desse projeto
    - font : fonte customizado do site
    - img : imagens utilizadas no site 
 
-Também existem os arquivos 
+Também existem os arquivos :
    - index.js : arquivo que contem todas as rotas do site e utiliza o react DOM
    - MetamaskPlugin.jsx : tela inicial onde contém o login e define se é administrador ou
  cliente
  
    - app.js : arquivo que contem todas as rotas do backend e conecta com o o banco de dados online 
+ 
+Algumas pastas são necessárias para realizar o deploy do contrato na rede blockchain: 
+  - build\contracts : aqui está salvo o arquivo Owner.json que contém as estruturas para comunicar o frontend com o contrato 
+  - contracts : pasta que contém o contrato e utilizada pela biblioteca truffle para realizar o deploy do mesmo 
+  - migrations : contém um arquivo .js para realizar a sequência do deploy
+	
+
 
 
 <b>readme:</b> arquivo que serve como guia e explicação geral sobre o projeto (o mesmo que você está lendo agora).
