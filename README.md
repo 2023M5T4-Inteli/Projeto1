@@ -4,13 +4,7 @@
 <a href= "https://www.inteli.edu.br/"><img src="https://www.inteli.edu.br/wp-content/uploads/2021/08/20172028/marca_1-2.png" alt="Inteli - Instituto de Tecnologia e Liderança" width="250px" height="100px"></a>
 
 ## Coover 
-<a href= "https://coover.me/"><img src="https://theme.zdassets.com/theme_assets/10391010/252b3a482d39b630006805aa33f3768c9631e75a.png" alt="Coover" width="250px" height="70px" ></a>
-
 ## Etherchain
-<img src="https://theme.zdassets.com/theme_assets/10391010/252b3a482d39b630006805aa33f3768c9631e75a.png" alt="Coover" width="250px" height="70px" ></a>
-
-<!-- #### adicionar a imagem do grupo -->
-
 ### Integrantes 
 
 - [Camila Fernanda de Lima Anacleto](https://www.linkedin.com/in/camilaanacleto/)
